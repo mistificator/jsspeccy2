@@ -102,8 +102,9 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		var memory = opts.memory;
 		var ioBus = opts.ioBus;
 		var display = opts.display;
-    
-    var tmp_addr;
+		var controller = opts.controller;
+		
+		var tmp_addr;
 
 		var registerBuffer = new ArrayBuffer(26);
 		/* Expose registerBuffer as both register pairs and individual registers */
