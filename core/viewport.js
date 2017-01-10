@@ -1,4 +1,5 @@
 JSSpeccy.Viewport = function(opts) {
+	var self = {};
 	var container = opts.container;
 	var scaleFactor = opts.scaleFactor || 2;
 
@@ -8,7 +9,6 @@ JSSpeccy.Viewport = function(opts) {
 
 	self.canvas = document.createElement('canvas');
 	positioner.appendChild(self.canvas);
-	self.canvas.style.imageRendering = '-webkit-optimize-contrast';
 
 	var statusIcon = document.createElement('div');
 	positioner.appendChild(statusIcon);

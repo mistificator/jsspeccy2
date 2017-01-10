@@ -86,6 +86,26 @@ JSSpeccy.UI = function(opts) {
 
 	var autoloadTapes = $('input.autoload-tapes');
 
+
+	var checkerboardFilterCheckbox = $('input.checkerboard-filter');
+	function reflectCheckerboardFilter(val) {
+		if (val) {
+			checkerboardFilterCheckbox.attr('checked', true);
+			$(container).addClass('hard-edged-pixels');
+		} else {
+			checkerboardFilterCheckbox.removeAttr('checked');
+			$(container).removeClass('hard-edged-pixels');
+		}
+	}
+	reflectCheckerboardFilter(controller.settings.checkerboardFilter.get());
+	controller.settings.checkerboardFilter.onChange.bind(reflectCheckerboardFilter);
+	checkerboardFilterCheckbox.change(function() {
+		controller.settings.checkerboardFilter.set(
+			checkerboardFilterCheckbox.is(':checked')
+		);
+	});
+
+
 	/* Set up panels */
 	var panels = [];
 

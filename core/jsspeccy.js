@@ -26,6 +26,8 @@ function JSSpeccy(container, opts) {
 		opts = {};
 	}
 
+	var originalDocumentTitle = document.title;
+
 
 	/* == Z80 core == */
 	/* define a list of rules to be triggered when the Z80 executes an opcode at a specified address;
@@ -70,6 +72,27 @@ function JSSpeccy(container, opts) {
 		return self;
 	}
 
+	function Setting(initialValue) {
+		var self = {};
+
+		var value = initialValue;
+
+		self.onChange = Event();
+
+		self.get = function() {
+			return value;
+		};
+		self.set = function(newValue) {
+			if (newValue == value) return;
+			value = newValue;
+			self.onChange.trigger(newValue);
+		};
+		return self;
+	}
+
+	self.settings = {
+		'checkerboardFilter': Setting(opts.checkerboardFilter || false)
+	};
 
 	/* == Execution state == */
 	self.isDownloading = false;
@@ -192,7 +215,7 @@ function JSSpeccy(container, opts) {
 			var signature = String.fromCharCode.apply(null, signatureBytes);
 			if (signature == "ZXTape!\x1A") {
 				fileType = 'tzx';
-			} else if (data.byteLength == 49179) {
+			} else if (data.byteLength === 49179 || data.byteLength === 131103 || data.byteLength === 147487) {
 				fileType = 'sna';
 			} else if (JSSpeccy.TapFile.isValid(data)) {
 				fileType = 'tap';
@@ -249,7 +272,8 @@ function JSSpeccy(container, opts) {
 				keyboard: keyboard,
 				model: newModel,
 				soundBackend: soundBackend,
-				controller: self
+				controller: self,
+				borderEnabled: ('border' in opts) ? opts.border : true
 			});
 			currentModel = newModel;
 			initReferenceTime();
@@ -259,12 +283,19 @@ function JSSpeccy(container, opts) {
 
 
 	/* == Timing / main execution loop == */
-	var referenceTime = null;
-	var cyclesExecutedSinceReferenceTime = 0;
+	var msPerFrame;
+	var remainingMs = 0; /* number of milliseconds that have passed that have not yet been
+	'consumed' by running a frame of emulation */
+
 	function initReferenceTime() {
-		referenceTime = Date.now();
-		cyclesExecutedSinceReferenceTime = 0;
+		msPerFrame = (currentModel.frameLength * 1000) / currentModel.clockSpeed;
+		remainingMs = 0;
+		lastFrameStamp = performance.now();
 	}
+
+	var PERFORMANCE_FRAME_COUNT = 10;  /* average over this many frames when measuring performance */
+	var performanceTotalMilliseconds = 0;
+	var performanceFrameNum = 0;
 
 	var requestAnimationFrame = (
 		window.requestAnimationFrame || window.msRequestAnimationFrame ||
@@ -272,7 +303,7 @@ function JSSpeccy(container, opts) {
 		window.oRequestAnimationFrame ||
 		function(callback) {
 			setTimeout(function() {
-				callback(Date.now());
+				callback(performance.now());
 			}, 10);
 		}
 	);
@@ -280,27 +311,37 @@ function JSSpeccy(container, opts) {
 	function tick() {
 		if (!self.isRunning) return;
 
-		var timeElapsed = Date.now() - referenceTime;
-		var cyclesElapsed = timeElapsed * currentModel.clockSpeed / 1000;
-
-		var framesRun = 0;
-		while (cyclesExecutedSinceReferenceTime < cyclesElapsed) {
+		stampBefore = performance.now();
+		var timeElapsed = stampBefore - lastFrameStamp;
+		remainingMs += stampBefore - lastFrameStamp;
+		if (remainingMs > msPerFrame) {
+			/* run a frame of emulation */
 			spectrum.runFrame();
-			cyclesExecutedSinceReferenceTime += currentModel.frameLength;
-			framesRun++;
-			if (framesRun > 2) {
-				/* if we're having to run more than two frames on this iteration, the emulation
-					must be running slow - bail out to avoid creating a backlog of frames */
-				initReferenceTime();
-				break;
-			}
-		}
+			var stampAfter = performance.now();
 
-		/* bump referenceTime forward periodically so that cyclesElapsed doesn't overflow */
-		while (cyclesExecutedSinceReferenceTime > 10000000) {
-			referenceTime += 1000;
-			cyclesExecutedSinceReferenceTime -= currentModel.clockSpeed;
+			if (opts.measurePerformance) {
+				performanceTotalMilliseconds += (stampAfter - stampBefore);
+				performanceFrameNum = (performanceFrameNum + 1) % PERFORMANCE_FRAME_COUNT;
+				if (performanceFrameNum === 0) {
+					document.title = originalDocumentTitle + ' ' + (performanceTotalMilliseconds / PERFORMANCE_FRAME_COUNT).toFixed(1) + " ms/frame; elapsed: " + timeElapsed;
+					performanceTotalMilliseconds = 0;
+				}
+			}
+
+			remainingMs -= msPerFrame;
+
+			/* As long as requestAnimationFrame runs more frequently than the Spectrum's frame rate -
+			which should normally be the case for a focused browser window (approx 60Hz vs 50Hz) -
+			there should be either zero or one emulation frames run per call to tick(). If there's more
+			than one emulation frame to run (i.e. remainingMs > msPerFrame at this point), we have
+			insufficient performance to run at full speed (either the frame is taking more than 20ms to
+			execute, or requestAnimationFrame is being called too infrequently). If so, clear
+			remainingMs so that it doesn't grow indefinitely
+			*/
+			if (remainingMs > msPerFrame) remainingMs = 0;
 		}
+		lastFrameStamp = stampBefore;
+
 		requestAnimationFrame(tick);
 	}
 

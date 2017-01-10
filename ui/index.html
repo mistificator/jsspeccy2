@@ -35,6 +35,22 @@
 				float: left;
 			}
 
+			.hard-edged-pixels {
+				/*
+				Enable these rules if you want hard-edged pixels
+				(which is not at all what a Spectrum looked like back in the day,
+				but hey, the kids seem to like it or something)
+				*/
+				
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -o-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: crisp-edges;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor;
+			}
+
 			.commentary {
 				float: left;
 				width: 350px;
@@ -59,7 +75,10 @@
 		</style>
 		<script>
 			$(function() {
-				var jsspeccy = JSSpeccy('jsspeccy-viewport', {'autostart': true});
+				var jsspeccy = JSSpeccy('jsspeccy-viewport', {
+					'autostart': true,
+					'measurePerformance': true
+				});
 				JSSpeccy.UI({
 					container: 'jsspeccy',
 					controller: jsspeccy
@@ -91,6 +110,9 @@
 					</div>
 					<div>
 						<label><input type="checkbox" class="autoload-tapes" checked="checked"> Autoload tapes</label>
+					</div>
+					<div>
+						<label><input type="checkbox" class="checkerboard-filter"> Checkerboard filter</label>
 					</div>
 				</li>
 			</ul>

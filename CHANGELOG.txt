@@ -1,0 +1,30 @@
+2.3 (xxxx-xx-xx)
+================
+
+* 128K .SNA file support (Martin Bórik)
+* Updated timing logic, including use of performance.now in place of Date.now (Peter Marťák, Matt Westcott)
+* Added configuration option to disable the border (Peter Marťák)
+* Use a less saturated colour palette (Peter Marťák)
+* Added postprocessing filter to convert checkerboard patterns into midtones (Peter Marťák)
+
+
+2.2 (2013-06-02)
+================
+
+* Sound support (Darren Coles)
+
+
+2.1 (2012-07-16)
+================
+
+* Game selection menu
+* .Z80 file support
+* Auto-loading of tape files
+* More accurate multicolour
+* Embedding API
+
+
+2.0 (2012-07-08)
+================
+
+* Initial public release
