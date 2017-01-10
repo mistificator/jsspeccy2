@@ -47,3 +47,19 @@ way.
 
 Matt Westcott
 <matt@west.co.tt> - http://matt.west.co.tt/ - @gasmanic
+
+=====================
+plirof : try to install with npm :
+npm install -g coffee-script     -ok
+npm install makefile             -ok
+activated apt2sfs "make"       (installed from debian)
+perl already existed
+npm install --save-dev gulp-closure-compiler
+npm -g install closurecompiler
+npm install --save google-closure-compiler
+
+
+
+
+
+make
