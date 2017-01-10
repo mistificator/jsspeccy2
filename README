@@ -57,7 +57,8 @@ perl already existed
 npm install --save-dev gulp-closure-compiler
 npm -g install closurecompiler
 npm install --save google-closure-compiler
-
+npm install make -g   (maybe ...)
+ 
 
 
 
