@@ -4,9 +4,6 @@ DIST_FILES=\
 	build\jsspeccy-core.min.js \
 	lib\jdataview.js \
 	lib\jquery-1.7.2.min.js \
-	ui\index.html \
-	ui\ui.js \
-	ui\jsspeccy.css \
 	README \
 	Embedding.txt \
 	COPYING
@@ -17,14 +14,12 @@ DIST_FILES=\
 
 MKDIR=-mkdir  
 COPY_DST=for %I in ($(DIST_FILES)) do xcopy /y %I dist
-COPY_IMG=xcopy /y ui\images\* dist\images
 CLEAN=del /s /q
 NPX=call npx
     
 all: $(DIST_FILES) ui/images/*
 	$(MKDIR) dist
 	$(COPY_DST)
-	$(COPY_IMG)
 
 build/roms.js: bin2js.pl roms/*
 	$(MKDIR) build
