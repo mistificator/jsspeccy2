@@ -1,12 +1,22 @@
 .jsspeccy {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 11pt;
-	position: relative;
-	width: 640px;
+	position: absolute;
+	width: 100%;
 }
+
+.jsspeccy #jsspeccy-viewport {
+	position: absolute;
+	margin-left: 16%;
+	width: 100%;	
+}
+
 .jsspeccy canvas {
 	padding: 0;
 	margin: 0;
+}
+.jsspeccy .toolbar-div {
+	margin-top: 960px;
 }
 .jsspeccy .toolbar {
 	margin: 0;
@@ -62,7 +72,7 @@
 	margin-left: -300px;
 	padding-left: 10px;
 	padding-right: 10px;
-	width: 580px;
+	width: 600px;
 	height: 400px;
 	background-color: white;
 	color: black;
@@ -104,4 +114,31 @@
 }
 .jsspeccy .about .licence {
 	font-size: 9pt;
+}
+
+#jsspeccy {
+	margin: 10px;
+	padding-right: 10px;
+	float: left;
+}
+
+.jsspeccy .commentary {
+	margin-top: -80px;
+	margin-left: 500px;
+	width: 350px;
+	position: absolute;
+}
+.jsspeccy .commentary h1 {
+	padding-left: 138px;
+	background-repeat: no-repeat;
+}
+.jsspeccy .commentary .version {
+	font-size: 0.4em;
+}
+.jsspeccy .commentary h2 {
+	font-size: 12pt;
+}
+.jsspeccy .commentary small {
+	font-size: 0.8em;
+	color: #ccc;
 }

@@ -1,0 +1,10 @@
+{
+    "vendor": "Matt Westcott, Mist Poryvaev",
+    "largeIcon": "largeIcon.png",
+    "icon": "icon.png",
+    "main": "index.html",
+    "id": "com.jsspeccy.app",
+    "title": "JS Speccy",
+    "type": "web",
+    "version": "1.0.0"
+}

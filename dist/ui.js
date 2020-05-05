@@ -86,26 +86,6 @@ JSSpeccy.UI = function(opts) {
 
 	var autoloadTapes = $('input.autoload-tapes');
 
-
-	var checkerboardFilterCheckbox = $('input.checkerboard-filter');
-	function reflectCheckerboardFilter(val) {
-		if (val) {
-			checkerboardFilterCheckbox.attr('checked', true);
-			$(container).addClass('hard-edged-pixels');
-		} else {
-			checkerboardFilterCheckbox.removeAttr('checked');
-			$(container).removeClass('hard-edged-pixels');
-		}
-	}
-	reflectCheckerboardFilter(controller.settings.checkerboardFilter.get());
-	controller.settings.checkerboardFilter.onChange.bind(reflectCheckerboardFilter);
-	checkerboardFilterCheckbox.change(function() {
-		controller.settings.checkerboardFilter.set(
-			checkerboardFilterCheckbox.is(':checked')
-		);
-	});
-
-
 	/* Set up panels */
 	var panels = [];
 
@@ -158,7 +138,7 @@ JSSpeccy.UI = function(opts) {
 	wosSearch.submit(function() {
 		var query = wosSearchField.val();
 		if (query !== '') {
-			$.getJSON('http://www.worldofspectrum.org/api/infoseek_search_json.cgi?callback=?',
+			$.getJSON('http://www.worldofspectrum.org/infoseek/api?X-API-KEY=test&format=json&callback=?',
 				{title: query},
 				function(results) {
 					wosMatches.empty();
