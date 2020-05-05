@@ -59,7 +59,9 @@ JSSpeccy.Display = function(opts) {
 	var CANVAS_WIDTH = 256 + (border ? ((LEFT_BORDER_CHARS + RIGHT_BORDER_CHARS) * 8) : 0);
 	var CANVAS_HEIGHT = 192 + (border ? (TOP_BORDER_LINES + BOTTOM_BORDER_LINES) : 0);
 	
-	viewport.setResolution(CANVAS_WIDTH, CANVAS_HEIGHT);
+  viewport.setResolution(Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_HEIGHT);
+  viewport.canvas.width = CANVAS_WIDTH;
+  viewport.canvas.height = CANVAS_HEIGHT;
 	var ctx = viewport.canvas.getContext('2d');
 	var imageData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	var pixels = new Int32Array(imageData.data.buffer);

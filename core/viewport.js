@@ -1,7 +1,7 @@
 JSSpeccy.Viewport = function(opts) {
 	var self = {};
 	var container = opts.container;
-	var scaleFactor = opts.scaleFactor || 2;
+	var scaleFactor = 1; //opts.scaleFactor || 2;
 
 	var positioner = document.createElement('div');
 	container.appendChild(positioner);

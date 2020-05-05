@@ -2,6 +2,9 @@
  * @license JSSpeccy v2.2.1 - http://jsspeccy.zxdemo.org/
  * Copyright 2014 Matt Westcott <matt@west.co.tt> and contributors
  *
+ * webOS JSSpeccy v. 1.0
+ * Copyright 2020 Mist Poryvaev <mist.poryvaev@gmail.com>
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of
  * the GNU General Public License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
@@ -104,7 +107,7 @@ function JSSpeccy(container, opts) {
 	/* == Set up viewport == */
 	var viewport = JSSpeccy.Viewport({
 		container: container,
-		scaleFactor: opts.scaleFactor || 2,
+		scaleFactor: 1, //opts.scaleFactor || 2,
 		onClickIcon: function() {self.start();}
 	});
 
