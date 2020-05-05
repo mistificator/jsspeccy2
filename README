@@ -53,13 +53,20 @@ Matt Westcott
 mistificator
 
 Windows build instructions:
+
 1. Install some make system (MSVS or GCC or whatever), cause we need to build via Makefile.
-1. Install Perl.
-2. Install npm.
-3. At project folder call:
+
+2. Install Perl.
+
+3. Install npm.
+
+4. Run compile.cmd
+  OR
+4.1 At project folder call:
 npm install coffee-script --save-dev
 npm install google-closure-compiler --save-dev 
-4. Build Makefile:
+4.2. Build Makefile:
 nmake build all
 (or what maker you have)
+
 5. Output in "dist" folder, open index.html. Enjoy.
