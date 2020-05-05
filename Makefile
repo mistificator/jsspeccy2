@@ -17,7 +17,7 @@ COPY_DST=for %I in ($(DIST_FILES)) do xcopy /y %I dist
 CLEAN=del /s /q
 NPX=call npx
     
-all: $(DIST_FILES) ui/images/*
+all: $(DIST_FILES) 
 	$(MKDIR) dist
 	$(COPY_DST)
 

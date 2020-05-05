@@ -307,7 +307,7 @@ function JSSpeccy(container, opts) {
 		function(callback) {
 			setTimeout(function() {
 				callback(performance.now());
-			}, 10);
+			}, 40);
 		}
 	);
 

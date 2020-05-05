@@ -53,15 +53,26 @@ JSSpeccy.Display = function(opts) {
 	var TSTATES_PER_SCANLINE = model.tstatesPerScanline;
 	self.frameLength = model.frameLength;
 	
-	var BEAM_X_MAX = 32 + (border ? RIGHT_BORDER_CHARS : 0);
-	var BEAM_Y_MAX = 192 + (border ? BOTTOM_BORDER_LINES : 0);
+  var Y_COUNT = 192, X_COUNT = 32, X_COUNT_8 = X_COUNT * 8;
+  
+	var BEAM_X_MAX = X_COUNT + (border ? RIGHT_BORDER_CHARS : 0);
+	var BEAM_Y_MAX = Y_COUNT + (border ? BOTTOM_BORDER_LINES : 0);
 	
-	var CANVAS_WIDTH = 256 + (border ? ((LEFT_BORDER_CHARS + RIGHT_BORDER_CHARS) * 8) : 0);
-	var CANVAS_HEIGHT = 192 + (border ? (TOP_BORDER_LINES + BOTTOM_BORDER_LINES) : 0);
-	
+	var CANVAS_WIDTH = X_COUNT_8 + (border ? ((LEFT_BORDER_CHARS + RIGHT_BORDER_CHARS) * 8) : 0);
+	var CANVAS_HEIGHT = Y_COUNT + (border ? (TOP_BORDER_LINES + BOTTOM_BORDER_LINES) : 0);
+
+  var
+    vborder_cache = -1,
+    vborder_fill_count = 0,
+    vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT),
+    vattr_cache = new Uint8Array(X_COUNT * Y_COUNT),
+    frame_count = 0,
+    frame_skip = 2;  
+
   viewport.setResolution(Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_HEIGHT);
   viewport.canvas.width = CANVAS_WIDTH;
   viewport.canvas.height = CANVAS_HEIGHT;
+  
 	var ctx = viewport.canvas.getContext('2d');
 	var imageData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	var pixels = new Int32Array(imageData.data.buffer);
@@ -96,40 +107,63 @@ JSSpeccy.Display = function(opts) {
 	};
 	
 	self.doEvent = function() {
-		if (beamY < 0 | beamY >= 192 | beamX < 0 | beamX >= 32) {
+		if (beamY < 0 | beamY >= Y_COUNT | beamX < 0 | beamX >= X_COUNT) {
 			/* border */
-			var color = palette[borderColour];
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
-			pixels[imageDataPos++] = color;
+      if (vborder_cache != borderColour) {
+        var color = palette[borderColour];
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        pixels[imageDataPos++] = color;
+        if (vborder_fill_count == 2 * CANVAS_WIDTH * CANVAS_HEIGHT / 8) { // wait for multiple border draw before use cache
+          vborder_fill_count = 0;
+          vborder_cache = borderColour;  
+        }
+        else
+        {
+            vborder_fill_count++;            		
+        }        
+      }
+      else {
+        imageDataPos += 8; // skip border fill
+      }
 		} else {
 			/* main screen area */
 			var pixelByte = memory.readScreen( pixelLineAddress | beamX );
 			var attributeByte = memory.readScreen( attributeLineAddress | beamX );
 			
-			var inkColor, paperColor;
-			if ( (attributeByte & 0x80) && (flashPhase & 0x10) ) {
-				/* FLASH: invert ink / paper */
-				inkColor = palette[(attributeByte & 0x78) >> 3];
-				paperColor = palette[(attributeByte & 0x07) | ((attributeByte & 0x40) >> 3)];
-			} else {
-				inkColor = palette[(attributeByte & 0x07) | ((attributeByte & 0x40) >> 3)];
-				paperColor = palette[(attributeByte & 0x78) >> 3];
-			}
-			
-			pixels[imageDataPos++] = (pixelByte & 0x80) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x40) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x20) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x10) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x08) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x04) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x02) ? inkColor : paperColor;
-			pixels[imageDataPos++] = (pixelByte & 0x01) ? inkColor : paperColor;
+      var cache_offs = beamX + beamY * X_COUNT;
+      if (vbitmap_cache[cache_offs] != pixelByte || vattr_cache[cache_offs] != attributeByte) { 
+        vbitmap_cache[cache_offs] = pixelByte;
+        vattr_cache[cache_offs] = attributeByte;
+        
+        var inkColor, paperColor;
+        if ( (attributeByte & 0x80) && (flashPhase & 0x10) ) {
+          /* FLASH: invert ink / paper */
+          inkColor = palette[(attributeByte & 0x78) >> 3];
+          paperColor = palette[(attributeByte & 0x07) | ((attributeByte & 0x40) >> 3)];
+        } else {
+          inkColor = palette[(attributeByte & 0x07) | ((attributeByte & 0x40) >> 3)];
+          paperColor = palette[(attributeByte & 0x78) >> 3];
+        }
+        
+        pixels[imageDataPos++] = (pixelByte & 0x80) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x40) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x20) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x10) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x08) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x04) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x02) ? inkColor : paperColor;
+        pixels[imageDataPos++] = (pixelByte & 0x01) ? inkColor : paperColor;
+      }
+      else
+      {
+        imageDataPos += 8; // skip repaint
+      }
 		}
 		
 		/* increment beam / nextEventTime for next event */
@@ -157,11 +191,14 @@ JSSpeccy.Display = function(opts) {
 	};
 	
 	self.endFrame = function() {
-		if (checkerboardFilterEnabled) {
-			self.postProcess();
-		} else {
-			ctx.putImageData(imageData, 0, 0);
-		}
+    frame_count++;
+    if (frame_count % (frame_skip + 1) == 0) {  
+      if (checkerboardFilterEnabled) {
+        self.postProcess();
+      } else {
+        ctx.putImageData(imageData, 0, 0);
+      }
+    }
 	};
 
 	self.drawFullScreen = function() {
