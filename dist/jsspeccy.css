@@ -120,12 +120,26 @@
 	margin: 10px;
 	padding-right: 10px;
 	float: left;
+
+    /*
+    Uncomment these rules if you want hard-edged pixels
+    (which is not at all what a Spectrum looked like back in the day,
+    but hey, the kids seem to like it or something)
+    */
+    
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;    
 }
 
 .jsspeccy .commentary {
 	margin-top: -80px;
 	margin-left: 500px;
-	width: 350px;
+	width: 500px;
 	position: absolute;
 }
 .jsspeccy .commentary h1 {
@@ -137,6 +151,7 @@
 }
 .jsspeccy .commentary h2 {
 	font-size: 12pt;
+	padding-left: 100px;
 }
 .jsspeccy .commentary small {
 	font-size: 0.8em;
