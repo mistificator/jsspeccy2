@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>JS Speccy</title>
+		<title>webOS JSSpeccy</title>
 		<link rel="stylesheet" href="jsspeccy.css">
 		<script src="jsspeccy-core.min.js"></script>
 <!--		<script src="jsspeccy.js"></script> -->
@@ -47,7 +47,10 @@
 		</style>
 		<script>
 			$(function() {
-				var jsspeccy = JSSpeccy('jsspeccy-viewport', {'autostart': true});
+				var jsspeccy = JSSpeccy('jsspeccy-viewport', {
+					'autostart': true,
+					'measurePerformance': true
+				});
 				JSSpeccy.UI({
 					container: 'jsspeccy',
 					controller: jsspeccy
@@ -86,7 +89,7 @@
 				<div class="panel open-file">
 					<button class="close">close</button>
 	
-					<h2>Load from disk: <span class="note">.tap, .tzx, .sna, .z80 files supported</span></h2><input type="file">
+	<!-- 			<h2>Load from disk: <span class="note">.tap, .tzx, .sna, .z80 files supported</span></h2><input type="file">  -->	
 	
 					<h2>Load from web:</h2><input type="url"><button class="open-url">Open URL</button>
 	<!-- 
@@ -103,20 +106,20 @@
 				<div class="panel about">
 					<button class="close">close</button>
 	
-					<h1>JS Speccy</h1>
-					<h2>a ZX Spectrum emulator in Javascript</h2>
+					<h1>webOS JSSpeccy</h1>
+					<h2>a webOS ZX Spectrum emulator in Javascript</h2>
 					<p>By <a href="http://matt.west.co.tt/">Matt Westcott</a></p>
 					<p>Sound routines by Darren Coles</p>	
 					<p>Ported to LG webOS by Mist Poryvaev </p>	
-					<p><a href="http://matt.west.co.tt/category/javascript/jsspeccy/">JS Speccy homepage</a> (including downloads and source code)</p>
-					<p>Based on <a href="http://fuse-emulator.sourceforge.net/">Fuse</a> by Philip Kendall et al. Icons from <a href="http://www.icon-king.com/projects/nuvola/">Nuvola</a> by David Vignoni.</p>
+					<p><a href="https://jsspeccy.zxdemo.org/" target="_blank">JSSpeccy homepage</a> (including downloads and source code)</p>
+					<p>Based on <a href="http://fuse-emulator.sourceforge.net/" target="_blank">Fuse</a> by Philip Kendall et al. Icons from <a href="http://www.icon-king.com/projects/nuvola/" target="_blank">Nuvola</a> by David Vignoni.</p>
 					<div class="licence">
-						<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+						<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>&gt;.</p>
 					</div>
 				</div>
 				<div class="commentary">
-					<h1>JS Speccy <span class="version">v2.2.1</span></h1>
-					<h2>A ZX Spectrum emulator in Javascript</h2>
+					<h1>webOS JSSpeccy <span class="version">v. 1.0</span></h1>
+					<h2>a webOS ZX Spectrum emulator in Javascript</h2>
 				<select id="example-games" style="width: 100%">
 					<option value="">Select sample game to quick test...</option>
 					<option value="AIRWOLF2.TAP">Air Wolf 2</option>
