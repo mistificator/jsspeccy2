@@ -49,18 +49,17 @@ Matt Westcott
 <matt@west.co.tt> - http://matt.west.co.tt/ - @gasmanic
 
 =====================
-plirof : try to install with npm :
-npm install -g coffee-script     -ok
-npm install makefile             -ok
-activated apt2sfs "make"       (installed from debian)
-perl already existed
-npm install --save-dev gulp-closure-compiler
-npm -g install closurecompiler
-npm install --save google-closure-compiler
-npm install make -g   (maybe ...)
- 
 
+mistificator
 
-
-
-make
+Windows build instructions:
+1. Install some make system (MSVS or GCC or whatever), cause we need to build via Makefile.
+1. Install Perl.
+2. Install npm.
+3. At project folder call:
+npm install coffee-script --save-dev
+npm install google-closure-compiler --save-dev 
+4. Build Makefile:
+nmake build all
+(or what maker you have)
+5. Output in "dist" folder, open index.html. Enjoy.
