@@ -71,7 +71,8 @@ JSSpeccy.Display = function(opts) {
     fps_frame_count = 0,
     prev_timestamp = performance.now();
     
-  viewport.setResolution(Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_HEIGHT);
+  var deviceHeight = window.screen.height;  
+  viewport.setResolution(Math.floor(deviceHeight / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(deviceHeight / CANVAS_HEIGHT) * CANVAS_HEIGHT);
   viewport.canvas.width = CANVAS_WIDTH;
   viewport.canvas.height = CANVAS_HEIGHT;
   

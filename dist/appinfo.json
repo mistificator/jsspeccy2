@@ -6,5 +6,7 @@
     "id": "com.jsspeccy.app",
     "title": "JS Speccy",
     "type": "web",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "resolution": "1920x1080",
+    "requiredMemory": 100
 }
