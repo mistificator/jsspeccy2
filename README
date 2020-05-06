@@ -66,7 +66,7 @@ Windows build instructions:
 npm install coffee-script --save-dev
 npm install google-closure-compiler --save-dev 
 4.2. Build Makefile:
-nmake build all
+nmake all
 (or what maker you have)
 
 5. Output in "dist" folder, open index.html. Enjoy.
