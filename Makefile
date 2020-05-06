@@ -16,8 +16,10 @@ MKDIR=-mkdir
 COPY_DST=for %I in ($(DIST_FILES)) do xcopy /y %I dist
 CLEAN=del /s /q
 NPX=call npx
-    
-all: $(DIST_FILES) 
+ARES_PACK=call $(LG_WEBOS_TV_SDK_HOME)\CLI\bin\ares-package
+   
+all: $(DIST_FILES) .\dist\OutputIPK\*.*
+    $(MKDIR) build
 	$(MKDIR) dist
 	$(COPY_DST)
 
@@ -58,7 +60,10 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js=core/tap_file.js --js=core/tzx_file.js --js=core/viewport.js --js=build/z80.js \
 		--js=core/z80_file.js \
 		--js_output_file=build/jsspeccy-core.min.js
+    $(CLEAN) .\dist\OutputIPK\*.*
+    $(ARES_PACK) -o .\dist\OutputIPK .\dist
 
 .PHONY: clean
 clean:
-	$(CLEAN) build dist
+	$(CLEAN) build
+    $(CLEAN) .\dist\OutputIPK\

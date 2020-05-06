@@ -55,11 +55,16 @@ JSSpeccy.Spectrum = function(opts) {
 		processor.setTstates(processor.getTstates() - model.frameLength);
 		startNextFrameWithInterrupt = true;
 	};
+  
 	self.reset = function() {
 		processor.reset();
 		memory.reset();
 		sound.reset();
 	};
+  
+  self.getFps = function() {
+    return display.getFps();
+  };
 
 	self.loadSnapshot = function(snapshot) {
 		memory.loadFromSnapshot(snapshot.memoryPages);

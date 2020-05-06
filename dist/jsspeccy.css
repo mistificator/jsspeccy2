@@ -157,3 +157,10 @@
 	font-size: 0.8em;
 	color: #ccc;
 }
+
+.jsspeccy #jsspeccy-fps {
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 0px;
+    width: 120px;
+}

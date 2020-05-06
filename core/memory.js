@@ -52,8 +52,13 @@ JSSpeccy.Memory = function(opts) {
 		return (contentionBySlot[addr >> 14] == contentionTable);
 	};
 
+  var prev_addr_14 = 0, prev_slot = contentionBySlot[0];
 	self.contend = function(addr, tstate) {
-		return contentionBySlot[addr >> 14][tstate % contentionTableLength];
+    var addr_14 = addr >> 14;
+    if (addr_14 != prev_addr_14) {
+      prev_slot = contentionBySlot[prev_addr_14 = addr_14];
+    }
+  	return prev_slot[tstate < contentionTableLength ? tstate : tstate % contentionTableLength];
 	};
 
 	self.read = function(addr) {

@@ -279,74 +279,41 @@ function JSSpeccy(container, opts) {
 				borderEnabled: ('border' in opts) ? opts.border : true
 			});
 			currentModel = newModel;
-			initReferenceTime();
 			self.onChangeModel.trigger(newModel);
 		}
 	};
 
+  var
+    cpu_frame_count = 0,
+    prev_timestamp = performance.now(),
+    prev_interval_stamp = prev_timestamp;  
 
-	/* == Timing / main execution loop == */
-	var msPerFrame;
-	var remainingMs = 0; /* number of milliseconds that have passed that have not yet been
-	'consumed' by running a frame of emulation */
+  var cfps = 0;
+  self.getCfps = function() {
+    return cfps;
+  };
 
-	function initReferenceTime() {
-		msPerFrame = (currentModel.frameLength * 1000) / currentModel.clockSpeed;
-		remainingMs = 0;
-		lastFrameStamp = performance.now();
-	}
-
-	var PERFORMANCE_FRAME_COUNT = 10;  /* average over this many frames when measuring performance */
-	var performanceTotalMilliseconds = 0;
-	var performanceFrameNum = 0;
-
-	var requestAnimationFrame = (
-		window.requestAnimationFrame || window.msRequestAnimationFrame ||
-		window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
-		window.oRequestAnimationFrame ||
-		function(callback) {
-			setTimeout(function() {
-				callback(performance.now());
-			}, 40);
-		}
-	);
-
-	function tick() {
-		if (!self.isRunning) return;
-
-		stampBefore = performance.now();
-		var timeElapsed = stampBefore - lastFrameStamp;
-		remainingMs += stampBefore - lastFrameStamp;
-		if (remainingMs > msPerFrame) {
-			/* run a frame of emulation */
-			spectrum.runFrame();
-			var stampAfter = performance.now();
-
-			if (opts.measurePerformance) {
-				performanceTotalMilliseconds += (stampAfter - stampBefore);
-				performanceFrameNum = (performanceFrameNum + 1) % PERFORMANCE_FRAME_COUNT;
-				if (performanceFrameNum === 0) {
-					document.title = originalDocumentTitle + ' ' + (performanceTotalMilliseconds / PERFORMANCE_FRAME_COUNT).toFixed(1) + " ms/frame; elapsed: " + timeElapsed;
-					performanceTotalMilliseconds = 0;
-				}
-			}
-
-			remainingMs -= msPerFrame;
-
-			/* As long as requestAnimationFrame runs more frequently than the Spectrum's frame rate -
-			which should normally be the case for a focused browser window (approx 60Hz vs 50Hz) -
-			there should be either zero or one emulation frames run per call to tick(). If there's more
-			than one emulation frame to run (i.e. remainingMs > msPerFrame at this point), we have
-			insufficient performance to run at full speed (either the frame is taking more than 20ms to
-			execute, or requestAnimationFrame is being called too infrequently). If so, clear
-			remainingMs so that it doesn't grow indefinitely
-			*/
-			if (remainingMs > msPerFrame) remainingMs = 0;
-		}
-		lastFrameStamp = stampBefore;
-
-		requestAnimationFrame(tick);
-	}
+//  var nativeRequestAnimationFrame = window.requestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
+  var timer_id = setInterval(
+    function() {
+      if (!self.isRunning) return;
+      
+      var timestamp = performance.now();
+      if (cfps <= 50) {
+        cpu_frame_count++;
+        if (timestamp - prev_timestamp > 1000 && cpu_frame_count > 0){
+          cfps = 1000.0 * cpu_frame_count / (timestamp - prev_timestamp);
+          prev_timestamp = timestamp;
+          cpu_frame_count = 0;
+        }
+        spectrum.runFrame();
+        prev_interval_stamp = timestamp;
+      }
+      else {
+        cfps--;
+      }
+    }
+   , 10);  
 
 	self.onStart = Event();
 	self.start = function() {
@@ -354,10 +321,6 @@ function JSSpeccy(container, opts) {
 		self.isRunning = true;
 		updateViewportIcon();
 		self.onStart.trigger();
-
-		initReferenceTime();
-
-		requestAnimationFrame(tick);
 	};
 	self.onStop = Event();
 	self.stop = function() {
@@ -369,6 +332,9 @@ function JSSpeccy(container, opts) {
 		spectrum.reset();
 	};
 
+  self.getFps = function() {
+    return spectrum.getFps();
+  };
 
 	/* == Startup conditions == */
 	self.setModel(JSSpeccy.Spectrum.MODEL_128K);

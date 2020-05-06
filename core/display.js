@@ -67,8 +67,10 @@ JSSpeccy.Display = function(opts) {
     vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT),
     vattr_cache = new Uint8Array(X_COUNT * Y_COUNT),
     frame_count = 0,
-    frame_skip = 2;  
-
+    frame_skip = 1,  
+    fps_frame_count = 0,
+    prev_timestamp = performance.now();
+    
   viewport.setResolution(Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(window.screen.height / CANVAS_HEIGHT) * CANVAS_HEIGHT);
   viewport.canvas.width = CANVAS_WIDTH;
   viewport.canvas.height = CANVAS_HEIGHT;
@@ -190,9 +192,21 @@ JSSpeccy.Display = function(opts) {
 		}
 	};
 	
+  var fps = 0;
+  self.getFps = function() {
+    return fps;
+  };
+  
 	self.endFrame = function() {
     frame_count++;
-    if (frame_count % (frame_skip + 1) == 0) {  
+    if (frame_count % (frame_skip + 1) == 0) { 
+      fps_frame_count++;
+      var timestamp = performance.now();
+      if (timestamp - prev_timestamp > 1000 && fps_frame_count > 0){
+        fps = 1000.0 * fps_frame_count / (timestamp - prev_timestamp);
+        prev_timestamp = timestamp;
+        fps_frame_count = 0;
+      }      
       if (checkerboardFilterEnabled) {
         self.postProcess();
       } else {
