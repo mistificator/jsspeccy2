@@ -43,7 +43,7 @@ function JSSpeccy(container, opts) {
 
 	JSSpeccy.buildZ80({
 		traps: z80Traps,
-		applyContention: true
+		applyContention: false // slightly faster on webOS without contention
 	});
 
 
@@ -285,8 +285,7 @@ function JSSpeccy(container, opts) {
 
   var
     cpu_frame_count = 0,
-    prev_timestamp = performance.now(),
-    prev_interval_stamp = prev_timestamp;  
+    prev_timestamp = performance.now();  
 
   var cfps = 0;
   self.getCfps = function() {
@@ -301,13 +300,12 @@ function JSSpeccy(container, opts) {
       var timestamp = performance.now();
       if (cfps <= 50) {
         cpu_frame_count++;
-        if (timestamp - prev_timestamp > 1000 && cpu_frame_count > 0){
+        if (timestamp - prev_timestamp > 1000){
           cfps = 1000.0 * cpu_frame_count / (timestamp - prev_timestamp);
           prev_timestamp = timestamp;
           cpu_frame_count = 0;
         }
         spectrum.runFrame();
-        prev_interval_stamp = timestamp;
       }
       else {
         cfps--;

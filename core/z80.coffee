@@ -207,11 +207,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 				getter = """
 					var offset = READMEM(regPairs[#{rpPC}]);
 					if (offset & 0x80) offset -= 0x100;
-					CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-					CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-					CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-					CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-					CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+					CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 5);
 					regPairs[#{rpPC}]++;
 				"""
 			getter += """
@@ -270,13 +266,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 				halfcarryAddTable[lookup & 0x07] |
 				(regPairs[#{rpHL}] ? 0 : #{FLAG_Z})
 			);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 7);
 		"""
 
 	ADD_A = (param) ->
@@ -296,13 +286,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			var lookup = ( (regPairs[#{rp1}] & 0x0800) >> 11 ) | ( (regPairs[#{rp2}] & 0x0800) >> 10 ) | ( (add16temp & 0x0800) >>  9 );
 			regPairs[#{rp1}] = add16temp;
 			regs[#{rF}] = ( regs[#{rF}] & ( #{FLAG_V | FLAG_Z | FLAG_S} ) ) | ( add16temp & 0x10000 ? #{FLAG_C} : 0 ) | ( ( add16temp >> 8 ) & ( #{FLAG_3 | FLAG_5} ) ) | halfcarryAddTable[lookup];
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 7);
 		"""
 
 	AND_A = (param) ->
@@ -407,11 +391,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			var bytetemp = (regs[#{rA}] - value) & 0xff;
 			var lookup = ((regs[#{rA}] & 0x08) >> 3) | ((value & 0x08) >> 2) | ((bytetemp & 0x08) >> 1);
 			var originalHL = regPairs[#{rpHL}];
-			CONTEND_READ_NO_MREQ(originalHL, 1);
-			CONTEND_READ_NO_MREQ(originalHL, 1);
-			CONTEND_READ_NO_MREQ(originalHL, 1);
-			CONTEND_READ_NO_MREQ(originalHL, 1);
-			CONTEND_READ_NO_MREQ(originalHL, 1);
+			CONTEND_READ_NO_MREQ(originalHL, 5);
 			regPairs[#{rpHL}]#{modifier}; regPairs[#{rpBC}]--;
 			regs[#{rF}] = (regs[#{rF}] & #{FLAG_C}) | (regPairs[#{rpBC}] ? #{FLAG_V | FLAG_N} : #{FLAG_N}) | halfcarrySubTable[lookup] | (bytetemp ? 0 : #{FLAG_Z}) | (bytetemp & #{FLAG_S});
 			if (regs[#{rF}] & #{FLAG_H}) bytetemp--;
@@ -423,11 +403,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			#{CPI_CPD(modifier)}
 			if ((regs[#{rF}] & #{FLAG_V | FLAG_Z}) == #{FLAG_V}) {
 				regPairs[#{rpPC}] -= 2;
-				CONTEND_READ_NO_MREQ(originalHL, 1);
-				CONTEND_READ_NO_MREQ(originalHL, 1);
-				CONTEND_READ_NO_MREQ(originalHL, 1);
-				CONTEND_READ_NO_MREQ(originalHL, 1);
-				CONTEND_READ_NO_MREQ(originalHL, 1);
+				CONTEND_READ_NO_MREQ(originalHL, 5);
 			}
 		"""
 
@@ -482,8 +458,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	DEC_RR = (rp) ->
 		"""
 			regPairs[#{rp}]--;
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 2);
 		"""
 
 	DI = () ->
@@ -498,11 +473,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			if (regs[#{rB}]) {
 				/* take branch */
 				var offset = READMEM(regPairs[#{rpPC}]);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 5);
 				regPairs[#{rpPC}]++;
 				regPairs[#{rpPC}] += (offset & 0x80 ? offset - 0x100 : offset);
 			} else {
@@ -600,8 +571,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	INC_RR = (rp) ->
 		"""
 			regPairs[#{rp}]++;
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 2);
 		"""
 
 	INI_IND = (modifier) -> 
@@ -678,11 +648,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"""
 			if (#{condition}) {
 				var offset = READMEM(regPairs[#{rpPC}]);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+				CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 5);
 				regPairs[#{rpPC}]++;
 				regPairs[#{rpPC}] += (offset & 0x80 ? offset - 0x100 : offset);
 			} else {
@@ -694,11 +660,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	JR_N = () ->
 		"""
 			var offset = READMEM(regPairs[#{rpPC}]);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 5);
 			regPairs[#{rpPC}]++;
 			regPairs[#{rpPC}] += (offset & 0x80 ? offset - 0x100 : offset);
 		"""
@@ -747,8 +709,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			var addr = (regPairs[#{rp}] + offset) & 0xffff;
 			
 			var val = READMEM(regPairs[#{rpPC}]);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 2);
 			regPairs[#{rpPC}]++;
 			WRITEMEM(addr, val);
 		"""
@@ -756,11 +717,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	LD_iRRpNNi_R = (rp, r) ->
 		"""
 			var offset = READMEM(regPairs[#{rpPC}]);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 5);
 			regPairs[#{rpPC}]++;
 			if (offset & 0x80) offset -= 0x100;
 			var addr = (regPairs[#{rp}] + offset) & 0xffff;
@@ -776,11 +733,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	LD_R_iRRpNNi = (r, rp) ->
 		"""
 			var offset = READMEM(regPairs[#{rpPC}]);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 5);
 			regPairs[#{rpPC}]++;
 			if (offset & 0x80) offset -= 0x100;
 			var addr = (regPairs[#{rp}] + offset) & 0xffff;
@@ -831,8 +784,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		# only used for LD SP,HL/IX/IY
 		"""
 			regPairs[#{rp1}] = regPairs[#{rp2}];
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 2);
 		"""
 
 	LDBITOP = (regName, opcode, bit, rp) ->
@@ -855,8 +807,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			regPairs[#{rpDE}]#{modifier}; regPairs[#{rpHL}]#{modifier};
 			bytetemp = (bytetemp + regs[#{rA}]) & 0xff;
 			regs[#{rF}] = (regs[#{rF}] & #{FLAG_C | FLAG_Z | FLAG_S}) | (regPairs[#{rpBC}] ? #{FLAG_V} : 0) | (bytetemp & #{FLAG_3}) | ((bytetemp & 0x02) ? #{FLAG_5} : 0);
-			CONTEND_READ_NO_MREQ(originalDE, 1);
-			CONTEND_READ_NO_MREQ(originalDE, 1);
+			CONTEND_READ_NO_MREQ(originalDE, 2);
 		"""
 
 	LDIR_LDDR = (modifier) ->
@@ -864,11 +815,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			#{LDI_LDD(modifier)}
 			if (regPairs[#{rpBC}]) {
 				regPairs[#{rpPC}]-=2;
-				CONTEND_READ_NO_MREQ(originalDE, 1);
-				CONTEND_READ_NO_MREQ(originalDE, 1);
-				CONTEND_READ_NO_MREQ(originalDE, 1);
-				CONTEND_READ_NO_MREQ(originalDE, 1);
-				CONTEND_READ_NO_MREQ(originalDE, 1);
+				CONTEND_READ_NO_MREQ(originalDE, 5);
 			}
 		"""
 
@@ -958,11 +905,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			#{OUTI_OUTD(modifier)}
 			if (regs[#{rB}]) {
 				regPairs[#{rpPC}]-=2;
-				CONTEND_READ_NO_MREQ(regPairs[#{rpBC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpBC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpBC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpBC}], 1);
-				CONTEND_READ_NO_MREQ(regPairs[#{rpBC}], 1);
+				CONTEND_READ_NO_MREQ(regPairs[#{rpBC}], 5);
 			}
 		"""
 
@@ -1055,10 +998,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	RLD = () ->
 		"""
 			var bytetemp =  READMEM(regPairs[#{rpHL}]);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 4);
 			var val = (bytetemp << 4) | (regs[#{rA}] & 0x0f);
 			WRITEMEM(regPairs[#{rpHL}], val);
 			regs[#{rA}] = (regs[#{rA}] & 0xf0) | (bytetemp >> 4);
@@ -1108,10 +1048,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 	RRD = () ->
 		"""
 			var bytetemp = READMEM(regPairs[#{rpHL}]);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpHL}], 4);
 			var val = (regs[#{rA}] << 4) | (bytetemp >> 4);
 			WRITEMEM(regPairs[#{rpHL}], val);
 			regs[#{rA}] = (regs[#{rA}] & 0xf0) | (bytetemp & 0x0f);
@@ -1142,13 +1079,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			var lookup = ( (regPairs[#{rpHL}] & 0x8800) >> 11 ) | ( (regPairs[#{rp}] & 0x8800) >> 10 ) | ( (sub16temp & 0x8800) >>  9 );
 			regPairs[#{rpHL}] = sub16temp;
 			regs[#{rF}] = ( sub16temp & 0x10000 ? #{FLAG_C} : 0 ) | #{FLAG_N} | overflowSubTable[lookup >> 4] | (regs[#{rH}] & #{FLAG_3 | FLAG_5 | FLAG_S}) | halfcarrySubTable[lookup&0x07] | (regPairs[#{rpHL}] ? 0 : #{FLAG_Z});
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
-			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
+			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 7);
 		"""
 
 	SCF = () ->
@@ -2349,10 +2280,17 @@ window.JSSpeccy.buildZ80 = (opts) ->
 				}
 			};
 
+      /*
+      var opcodes = [];
+      self.getOpcodeStatistics = function() {
+        return opcodes;
+      };
+      */
 			self.runFrame = function(frameLength) {
 				var lastOpcodePrefix, offset, opcode;
-
-				while (tstates < frameLength || opcodePrefix) {
+//        var opcodes_raw = [];
+        
+				while (tstates < frameLength /*|| opcodePrefix*/) {
 					if (interruptible && interruptPending) {
 						z80Interrupt();
 						interruptPending = false;
@@ -2360,62 +2298,55 @@ window.JSSpeccy.buildZ80 = (opts) ->
 					interruptible = true; /* unless overridden by opcode */
 					lastOpcodePrefix = opcodePrefix;
 					opcodePrefix = '';
-					switch (lastOpcodePrefix) {
-						case '':
-							CONTEND_READ(regPairs[#{rpPC}], 4);
-							opcode = memory.read(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
-							#{opcodeSwitch(OPCODE_RUN_STRINGS, null, opts.traps)}
-							break;
-						case 'CB':
-							CONTEND_READ(regPairs[#{rpPC}], 4);
-							opcode = memory.read(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
-							#{opcodeSwitch(OPCODE_RUN_STRINGS_CB)}
-							break;
-						case 'DD':
-							CONTEND_READ(regPairs[#{rpPC}], 4);
-							opcode = memory.read(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
-							#{opcodeSwitch(OPCODE_RUN_STRINGS_DD, OPCODE_RUN_STRINGS)}
-							break;
-						case 'DDCB':
-							offset = READMEM(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							if (offset & 0x80) offset -= 0x100;
-							CONTEND_READ(regPairs[#{rpPC}], 3);
-							opcode = memory.read(regPairs[#{rpPC}]);
-							CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-							CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-							regPairs[#{rpPC}]++;
-							#{opcodeSwitch(OPCODE_RUN_STRINGS_DDCB)}
-							break;
-						case 'ED':
-							CONTEND_READ(regPairs[#{rpPC}], 4);
-							opcode = memory.read(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
-							#{opcodeSwitch(OPCODE_RUN_STRINGS_ED)}
-							break;
-						case 'FD':
-							CONTEND_READ(regPairs[#{rpPC}], 4);
-							opcode = memory.read(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
-							#{opcodeSwitch(OPCODE_RUN_STRINGS_FD, OPCODE_RUN_STRINGS)}
-							break;
-						case 'FDCB':
-							offset = READMEM(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
-							if (offset & 0x80) offset -= 0x100;
-							CONTEND_READ(regPairs[#{rpPC}], 3);
-							opcode = memory.read(regPairs[#{rpPC}]);
-							CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-							CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 1);
-							regPairs[#{rpPC}]++;
-							#{opcodeSwitch(OPCODE_RUN_STRINGS_FDCB)}
-							break;
-						default:
-							throw("Unknown opcode prefix: " + lastOpcodePrefix);
-					}
+          if (lastOpcodePrefix != 'DDCB' && lastOpcodePrefix != 'FDCB') {
+            CONTEND_READ(regPairs[#{rpPC}], 4);
+            opcode = memory.read(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
+            regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
+            switch (lastOpcodePrefix) {
+              case '':
+                #{opcodeSwitch(OPCODE_RUN_STRINGS, null, opts.traps)}
+                break;
+              case 'CB':
+                #{opcodeSwitch(OPCODE_RUN_STRINGS_CB)}
+                break;
+              case 'DD':
+                #{opcodeSwitch(OPCODE_RUN_STRINGS_DD, OPCODE_RUN_STRINGS)}
+                break;
+              case 'ED':
+                #{opcodeSwitch(OPCODE_RUN_STRINGS_ED)}
+                break;
+              case 'FD':
+                #{opcodeSwitch(OPCODE_RUN_STRINGS_FD, OPCODE_RUN_STRINGS)}
+                break;
+              default:
+                throw("Unknown opcode prefix: " + lastOpcodePrefix);
+            }            
+          }
+          else {
+            offset = READMEM(regPairs[#{rpPC}]); regPairs[#{rpPC}]++;
+            if (offset & 0x80) offset -= 0x100;
+            CONTEND_READ(regPairs[#{rpPC}], 3);
+            opcode = memory.read(regPairs[#{rpPC}]);
+            CONTEND_READ_NO_MREQ(regPairs[#{rpPC}], 2);
+            regPairs[#{rpPC}]++;
+            if (lastOpcodePrefix == 'DDCB')
+              #{opcodeSwitch(OPCODE_RUN_STRINGS_DDCB)}
+            else
+              #{opcodeSwitch(OPCODE_RUN_STRINGS_FDCB)}
+          }
+//          opcodes_raw.push(lastOpcodePrefix + opcode.toString(16).toUpperCase());
 				}
-				while (display.nextEventTime != null && display.nextEventTime <= tstates) display.doEvent();
+				while (display.nextEventTime != null && display.nextEventTime < tstates) display.doEvent();
+        /*
+        var map = opcodes_raw.reduce(function (p, c) {
+            p[c] = (p[c] || 0) + 1;
+            return p;
+        }, {});
+        opcodes = Object.keys(map).sort(function (a, b) {
+            return map[a] < map[b];
+        });        
+        console.log(opcodes);
+        */
 			};
 
 			self.reset = function() {

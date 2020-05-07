@@ -66,10 +66,9 @@ JSSpeccy.Display = function(opts) {
     vborder_fill_count = 0,
     vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT),
     vattr_cache = new Uint8Array(X_COUNT * Y_COUNT),
-    frame_count = 0,
-    frame_skip = 1,  
-    fps_frame_count = 0,
-    prev_timestamp = performance.now();
+    video_frame_count = 0,
+    prev_timestamp = performance.now(),
+    skipped_frames = 0;
     
   var deviceHeight = window.screen.height;  
   viewport.setResolution(Math.floor(deviceHeight / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(deviceHeight / CANVAS_HEIGHT) * CANVAS_HEIGHT);
@@ -110,10 +109,13 @@ JSSpeccy.Display = function(opts) {
 	};
 	
 	self.doEvent = function() {
-		if (beamY < 0 | beamY >= Y_COUNT | beamX < 0 | beamX >= X_COUNT) {
-			/* border */
-      if (vborder_cache != borderColour) {
-        var color = palette[borderColour];
+    if (beamY < 0 | beamY >= Y_COUNT | beamX < 0 | beamX >= X_COUNT) {
+      /* border */
+      var color = palette[borderColour];
+      if (vborder_cache == color) {
+        imageDataPos += 8; // skip border fill
+      }
+      else {
         pixels[imageDataPos++] = color;
         pixels[imageDataPos++] = color;
         pixels[imageDataPos++] = color;
@@ -122,25 +124,26 @@ JSSpeccy.Display = function(opts) {
         pixels[imageDataPos++] = color;
         pixels[imageDataPos++] = color;
         pixels[imageDataPos++] = color;
-        if (vborder_fill_count == 2 * CANVAS_WIDTH * CANVAS_HEIGHT / 8) { // wait for multiple border draw before use cache
+        if (vborder_fill_count > 4 * CANVAS_WIDTH * CANVAS_HEIGHT / 8) { // wait for multiple border draw before use cache
           vborder_fill_count = 0;
-          vborder_cache = borderColour;  
+          vborder_cache = color;  
         }
         else
         {
             vborder_fill_count++;            		
         }        
       }
-      else {
-        imageDataPos += 8; // skip border fill
-      }
-		} else {
-			/* main screen area */
-			var pixelByte = memory.readScreen( pixelLineAddress | beamX );
-			var attributeByte = memory.readScreen( attributeLineAddress | beamX );
-			
+    } else {
+      /* main screen area */
+      var pixelByte = memory.readScreen( pixelLineAddress | beamX );
+      var attributeByte = memory.readScreen( attributeLineAddress | beamX );
+      
       var cache_offs = beamX + beamY * X_COUNT;
-      if (vbitmap_cache[cache_offs] != pixelByte || vattr_cache[cache_offs] != attributeByte) { 
+      if (vbitmap_cache[cache_offs] == pixelByte && vattr_cache[cache_offs] == attributeByte) { 
+        imageDataPos += 8; // skip repaint
+      }
+      else
+      {
         vbitmap_cache[cache_offs] = pixelByte;
         vattr_cache[cache_offs] = attributeByte;
         
@@ -163,12 +166,8 @@ JSSpeccy.Display = function(opts) {
         pixels[imageDataPos++] = (pixelByte & 0x02) ? inkColor : paperColor;
         pixels[imageDataPos++] = (pixelByte & 0x01) ? inkColor : paperColor;
       }
-      else
-      {
-        imageDataPos += 8; // skip repaint
-      }
-		}
-		
+    }
+    
 		/* increment beam / nextEventTime for next event */
 		beamX++;
 		if (beamX < BEAM_X_MAX) {
@@ -198,21 +197,33 @@ JSSpeccy.Display = function(opts) {
     return fps;
   };
   
+  var updateFps = function(timestamp) {
+    video_frame_count++;
+    if (timestamp - prev_timestamp > 1000){
+      fps = 1000.0 * video_frame_count / (timestamp - prev_timestamp);
+      prev_timestamp = timestamp;
+      video_frame_count = 0;
+    }      
+  };
+  
+  var putImageData = function() {
+    if (checkerboardFilterEnabled) {
+      self.postProcess();
+    } else {
+      ctx.putImageData(imageData, 0, 0);
+    }      
+  };
+  
 	self.endFrame = function() {
-    frame_count++;
-    if (frame_count % (frame_skip + 1) == 0) { 
-      fps_frame_count++;
-      var timestamp = performance.now();
-      if (timestamp - prev_timestamp > 1000 && fps_frame_count > 0){
-        fps = 1000.0 * fps_frame_count / (timestamp - prev_timestamp);
-        prev_timestamp = timestamp;
-        fps_frame_count = 0;
-      }      
-      if (checkerboardFilterEnabled) {
-        self.postProcess();
-      } else {
-        ctx.putImageData(imageData, 0, 0);
-      }
+    var timestamp = performance.now();
+    if (fps <= 25 || skipped_frames > 1) {
+      skipped_frames = 0;
+      updateFps(timestamp);
+      putImageData();
+    }
+    else {
+      fps--;
+      skipped_frames++;
     }
 	};
 

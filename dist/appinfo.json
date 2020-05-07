@@ -4,9 +4,8 @@
     "icon": "icon.png",
     "main": "index.html",
     "id": "com.jsspeccy.app",
-    "title": "JS Speccy",
+    "title": "webOS JSSpeccy",
     "type": "web",
     "version": "1.0.0",
-    "resolution": "1920x1080",
-    "requiredMemory": 100
+    "requiredMemory": 200
 }
