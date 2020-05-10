@@ -1,5 +1,17 @@
+@font-face {
+  font-family: 'PressStart2P';
+  src: URL('PressStart2P-Regular.ttf') format('truetype');
+}
+
+html {
+	background-color: #222; /* for fullscreen mode */	
+}
+
+* {
+	font-family: PressStart2P;	
+}
+
 .jsspeccy {
-	font-family: Helvetica, Arial, sans-serif;
 	font-size: 11pt;
 	position: absolute;
 	width: 98%;
@@ -64,6 +76,9 @@
 }
 .jsspeccy .toolbar .about {
 	background-image: url(images/48x48_messagebox_info.png);
+}
+.jsspeccy .toolbar .fullscreen {
+	background-image: url(images/48x48_fullscreen.png);
 }
 
 .jsspeccy .panel {
@@ -137,21 +152,15 @@
 }
 
 .jsspeccy .commentary {
-	margin-top: -80px;
-	margin-left: 500px;
-	width: 500px;
-	position: absolute;
 }
 .jsspeccy .commentary h1 {
-	padding-left: 138px;
 	background-repeat: no-repeat;
 }
 .jsspeccy .commentary .version {
-	font-size: 0.4em;
+	font-size: 0.5em;
 }
 .jsspeccy .commentary h2 {
 	font-size: 12pt;
-	padding-left: 100px;
 }
 .jsspeccy .commentary small {
 	font-size: 0.8em;
@@ -159,8 +168,11 @@
 }
 
 .jsspeccy #jsspeccy-fps {
-	position: absolute;
-	margin-left: 0px;
-	margin-top: 0px;
-    width: 120px;
+    width: 250px;
+    float: right;
+    text-align: right;
+}
+
+.jsspeccy #preinstalled-games {
+	font-size: 32px;
 }

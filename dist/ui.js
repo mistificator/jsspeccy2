@@ -45,6 +45,7 @@ JSSpeccy.UI = function(opts) {
 
 	$('button.reset', toolbar).click(function() {
 		controller.reset();
+		controller.baseKeyCodes();
 	});
 
 	var audioButton = $('button.audio', toolbar);
@@ -64,8 +65,30 @@ JSSpeccy.UI = function(opts) {
 	$('button.about', toolbar).click(function() {
 		showPanel('.about');
 	});
-
+	
+	var isFullscreen = false;
+	var disableFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.msExitFullscreen || function() {};
+	var fullscreenContext = document.documentElement;
+	var enableFullscreen = fullscreenContext.requestFullscreen || fullscreenContext.webkitRequestFullscreen || fullscreenContext.mozRequestFullscreen || fullscreenContext.msRequestFullscreen || function() {};	
+	var isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled;
+	if (isFullscreenAvailable) {
+		$('button.fullscreen', toolbar).click(function() {
+			console.log(isFullscreenAvailable);
+			if (!isFullscreen) {
+				enableFullscreen.call(fullscreenContext);
+				isFullscreen = true;
+			  } else {
+				disableFullscreen.call(document); 
+				isFullscreen = false;
+			  }
+		});		
+	}
+	else {
+		$('button.fullscreen', toolbar).hide();
+	}
+	
 	var selectModel = $('select.select-model', toolbar);
+	$('select.select-model', toolbar).hide();
 	var modelsById = {};
 	for (var i = 0; i < JSSpeccy.Spectrum.MODELS.length; i++) {
 		var model = JSSpeccy.Spectrum.MODELS[i];
@@ -85,6 +108,7 @@ JSSpeccy.UI = function(opts) {
 	controller.onChangeModel.bind(refreshModel);
 
 	var autoloadTapes = $('input.autoload-tapes');
+	$('input.autoload-tapes').parent().hide();
 
 	/* Set up panels */
 	var panels = [];
