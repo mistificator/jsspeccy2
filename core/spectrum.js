@@ -62,6 +62,7 @@ JSSpeccy.Spectrum = function(opts) {
 		processor.reset();
 		memory.reset();
 		sound.reset();
+    display.reset();
 	};
   
   self.getFps = function() {

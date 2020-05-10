@@ -192,6 +192,11 @@ JSSpeccy.Display = function(opts) {
 			}
 		}
 	};
+  
+  self.reset = function() {
+    vborder_cache = -1;
+    vborder_fill_count = 0;
+  };
 	
   var fps_limit = 25;
   var skipped_frames_limit = Math.ceil(cpuFpsLimit / fps_limit);
