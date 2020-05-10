@@ -181,7 +181,9 @@ function JSSpeccy(container, opts) {
 		var request = new XMLHttpRequest();
 
 		request.addEventListener('error', function(e) {
-			alert('Error loading from URL:' + url);
+			alert('Error loading from URL: ' + url);
+      self.isDownloading = false;
+		  updateViewportIcon();
 		});
 
 		request.addEventListener('load', function(e) {
@@ -242,6 +244,8 @@ function JSSpeccy(container, opts) {
 			case 'tzx':
 				loadTape(JSSpeccy.TzxFile(data), opts);
 				break;
+      default:
+        alert('Unknown type of file ' + name);
 		}
 	};
 
