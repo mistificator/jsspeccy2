@@ -17,6 +17,7 @@ JSSpeccy.Spectrum = function(opts) {
 		memory: memory,
 		model: model,
 		borderEnabled: opts.borderEnabled,
+    cpuFpsLimit: opts.cpuFpsLimit,
 		settings: {
 			'checkerboardFilter': controller.settings.checkerboardFilter
 		}

@@ -281,7 +281,8 @@ function JSSpeccy(container, opts) {
 				soundBackend: soundBackend,
 				controller: self,
 				borderEnabled: ('border' in opts) ? opts.border : true,
-        collectOpcodesStats: opts.collectOpcodesStats
+        collectOpcodesStats: opts.collectOpcodesStats,
+        cpuFpsLimit: opts.cpuFpsLimit
 			});
 			currentModel = newModel;
 			self.onChangeModel.trigger(newModel);
@@ -316,7 +317,7 @@ function JSSpeccy(container, opts) {
         cfps--;
       }
     }
-   , 10);  
+   , Math.ceil(1000.0 / opts.cpuFpsLimit));  
 
 	self.onStart = Event();
 	self.start = function() {

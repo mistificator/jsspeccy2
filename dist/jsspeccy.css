@@ -16,7 +16,7 @@
 	margin: 0;
 }
 .jsspeccy .toolbar-div {
-	margin-top: 960px;
+	clear:both;   
 }
 .jsspeccy .toolbar {
 	margin: 0;

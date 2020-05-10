@@ -2306,6 +2306,34 @@ window.JSSpeccy.buildZ80 = (opts) ->
         return opcodes;
       };
       
+      var runNoPrefixOpcode = function(opcode) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS, null, opts.traps)}
+      }
+      
+      var runCbPrefixOpcode = function(opcode) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS_CB)}
+      }      
+      
+      var runDdPrefixOpcode = function(opcode) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS_DD, OPCODE_RUN_STRINGS)}
+      } 
+      
+      var runEdPrefixOpcode = function(opcode) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS_ED)}
+      } 
+
+      var runFdPrefixOpcode = function(opcode) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS_FD, OPCODE_RUN_STRINGS)}
+      }    
+
+      var runDdCbPrefixOpcode = function(opcode, offset) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS_DDCB)}
+      } 
+
+      var runFdCbPrefixOpcode = function(opcode, offset) {
+        #{opcodeSwitch(OPCODE_RUN_STRINGS_FDCB)}
+      }      
+      
 			self.runFrame = function(frameLength) {
 				var lastOpcodePrefix, offset, opcode;       
 				while (tstates < frameLength /*|| opcodePrefix*/) {
@@ -2322,19 +2350,19 @@ window.JSSpeccy.buildZ80 = (opts) ->
             regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
             switch (lastOpcodePrefix) {
               case '':
-                #{opcodeSwitch(OPCODE_RUN_STRINGS, null, opts.traps)}
+                runNoPrefixOpcode(opcode);
                 break;
               case 'CB':
-                #{opcodeSwitch(OPCODE_RUN_STRINGS_CB)}
+                runCbPrefixOpcode(opcode);
                 break;
               case 'DD':
-                #{opcodeSwitch(OPCODE_RUN_STRINGS_DD, OPCODE_RUN_STRINGS)}
+                runDdPrefixOpcode(opcode);
                 break;
               case 'ED':
-                #{opcodeSwitch(OPCODE_RUN_STRINGS_ED)}
+                runEdPrefixOpcode(opcode);
                 break;
               case 'FD':
-                #{opcodeSwitch(OPCODE_RUN_STRINGS_FD, OPCODE_RUN_STRINGS)}
+                runFdPrefixOpcode(opcode);
                 break;
               default:
                 throw("Unknown opcode prefix: " + lastOpcodePrefix);
@@ -2347,9 +2375,9 @@ window.JSSpeccy.buildZ80 = (opts) ->
             opcode = memory.read(regPairs[#{rpPC}]);
             CONTEND_READ_NO_MREQ(regPairs[#{rpPC}]++, 2);
             if (lastOpcodePrefix == 'DDCB')
-              #{opcodeSwitch(OPCODE_RUN_STRINGS_DDCB)}
+              runDdCbPrefixOpcode(opcode, offset)
             else
-              #{opcodeSwitch(OPCODE_RUN_STRINGS_FDCB)}
+              runFdCbPrefixOpcode(opcode, offset);
           }
           if (opts.collectOpcodesStats && !opcodePrefix) {
             opcodes_raw.push(lastOpcodePrefix + opcode.toString(16).toUpperCase());

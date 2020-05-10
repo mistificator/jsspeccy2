@@ -5,6 +5,7 @@ JSSpeccy.Display = function(opts) {
 	var memory = opts.memory;
 	var model = opts.model || JSSpeccy.Spectrum.MODEL_128K;
 	var border = opts.borderEnabled;
+  var cpuFpsLimit = opts.cpuFpsLimit;
 
 	var checkerboardFilterEnabled = opts.settings.checkerboardFilter.get();
 	opts.settings.checkerboardFilter.onChange.bind(function(newValue) {
@@ -192,17 +193,19 @@ JSSpeccy.Display = function(opts) {
 		}
 	};
 	
+  var fps_limit = 25;
+  var skipped_frames_limit = Math.ceil(cpuFpsLimit / fps_limit);
   var fps = 0;
   self.getFps = function() {
     return fps;
   };
   
   var updateFps = function(timestamp) {
-    video_frame_count++;
     if (timestamp - prev_timestamp > 1000){
-      fps = 1000.0 * video_frame_count / (timestamp - prev_timestamp);
+      fps = 1000.0 * (video_frame_count - skipped_frames) / (timestamp - prev_timestamp);
       prev_timestamp = timestamp;
       video_frame_count = 0;
+      skipped_frames = 0;
     }      
   };
   
@@ -215,14 +218,14 @@ JSSpeccy.Display = function(opts) {
   };
   
 	self.endFrame = function() {
-    var timestamp = performance.now();
-    if (fps <= 25 || skipped_frames > 1) {
-      skipped_frames = 0;
+    var timestamp = performance.now();   
+    video_frame_count++;
+    
+    if ((video_frame_count % skipped_frames_limit) == 0) {
       updateFps(timestamp);
       putImageData();
     }
     else {
-      fps--;
       skipped_frames++;
     }
 	};
