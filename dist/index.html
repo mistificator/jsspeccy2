@@ -50,7 +50,10 @@
 			$(function() {
 				var jsspeccy = JSSpeccy('jsspeccy-viewport', {
 					'autostart': true,
-					'measurePerformance': true
+					'measurePerformance': true,
+                    'applyContention': false,
+                    'collectOpcodesStats': false,                   
+                    'cpuFpsLimit': 50
 				});
 				JSSpeccy.UI({
 					container: 'jsspeccy',

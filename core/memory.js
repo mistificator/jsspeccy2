@@ -49,12 +49,12 @@ JSSpeccy.Memory = function(opts) {
 	];
 
 	self.isContended = function(addr) {
-		return (contentionBySlot[addr >> 14] == contentionTable);
+		return (contentionBySlot[(addr >> 14) & 0x3] == contentionTable);
 	};
 
   var prev_addr_14 = 0, prev_slot = contentionBySlot[0];
 	self.contend = function(addr, tstate) {
-    var addr_14 = addr >> 14;
+    var addr_14 = (addr >> 14) & 0x3;
     if (addr_14 != prev_addr_14) {
       prev_slot = contentionBySlot[prev_addr_14 = addr_14];
     }
@@ -62,11 +62,11 @@ JSSpeccy.Memory = function(opts) {
 	};
 
 	self.read = function(addr) {
-		var page = readSlots[addr >> 14];
+		var page = readSlots[(addr >> 14) & 0x3];
 		return page[addr & 0x3fff];
 	};
 	self.write = function(addr, val) {
-		var page = writeSlots[addr >> 14];
+		var page = writeSlots[(addr >> 14) & 0x3];
 		page[addr & 0x3fff] = val;
 	};
 	

@@ -29,6 +29,10 @@ function JSSpeccy(container, opts) {
 		opts = {};
 	}
 
+  if (!opts.cpuFpsLimit) {
+    opts.cpuFpsLimit = 50;
+  }
+  
 	var originalDocumentTitle = document.title;
 
 
@@ -43,7 +47,7 @@ function JSSpeccy(container, opts) {
 
 	JSSpeccy.buildZ80({
 		traps: z80Traps,
-		applyContention: false // slightly faster on webOS without contention
+		applyContention: opts.applyContention // slightly faster on webOS without contention
 	});
 
 
@@ -276,7 +280,8 @@ function JSSpeccy(container, opts) {
 				model: newModel,
 				soundBackend: soundBackend,
 				controller: self,
-				borderEnabled: ('border' in opts) ? opts.border : true
+				borderEnabled: ('border' in opts) ? opts.border : true,
+        collectOpcodesStats: opts.collectOpcodesStats
 			});
 			currentModel = newModel;
 			self.onChangeModel.trigger(newModel);
@@ -298,7 +303,7 @@ function JSSpeccy(container, opts) {
       if (!self.isRunning) return;
       
       var timestamp = performance.now();
-      if (cfps <= 50) {
+      if (cfps <= opts.cpuFpsLimit) {
         cpu_frame_count++;
         if (timestamp - prev_timestamp > 1000){
           cfps = 1000.0 * cpu_frame_count / (timestamp - prev_timestamp);

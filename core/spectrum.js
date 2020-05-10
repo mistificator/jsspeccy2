@@ -38,7 +38,8 @@ JSSpeccy.Spectrum = function(opts) {
 	var processor = JSSpeccy.Z80({
 		memory: memory,
 		ioBus: ioBus,
-		display: display
+		display: display,
+    collectOpcodesStats: opts.collectOpcodesStats
 	});
 
 	/* internal state to allow picking up mid-frame (e.g. when loading from a snapshot) */
