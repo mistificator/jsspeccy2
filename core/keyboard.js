@@ -33,7 +33,7 @@ JSSpeccy.Keyboard = function() {
 		if (self.active && !evt.metaKey) return false;
 	}
 	
-	var keyCodes = {
+  self.baseKeyCodes = function() { keyCodes = {
 		49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
@@ -87,7 +87,69 @@ JSSpeccy.Keyboard = function() {
 		40: {row: 4, mask: 0x10, caps: true}, /* down arrow => caps + 6 */
 		
 		999: null
-	};
+	};}; 
+  self.baseKeyCodes();
+  
+  self.qaopKeyCodes = function() { keyCodes =  {
+    49: {row: 3, mask: 0x01}, /* 1 */
+		50: {row: 3, mask: 0x02}, /* 2 */
+		51: {row: 3, mask: 0x04}, /* 3 */
+		52: {row: 3, mask: 0x08}, /* 4 */
+		53: {row: 3, mask: 0x10}, /* 5 */
+		54: {row: 4, mask: 0x10}, /* 6 */
+		55: {row: 4, mask: 0x08}, /* 7 */
+		56: {row: 4, mask: 0x04}, /* 8 */
+		57: {row: 4, mask: 0x02}, /* 9 */
+		48: {row: 4, mask: 0x01}, /* 0 */
+    
+    38: {row: 2, mask: 0x01}, /* up as Q */
+    40: {row: 1, mask: 0x01}, /* down as A */
+    37: {row: 5, mask: 0x02}, /* left as O */
+    39: {row: 5, mask: 0x01}, /* right as P */
+    13: {row: 7, mask: 0x01}, /* enter as M */
+    
+    999: null
+  };};
+
+  self.okzxKeyCodes = function() { keyCodes =  {
+    49: {row: 3, mask: 0x01}, /* 1 */
+		50: {row: 3, mask: 0x02}, /* 2 */
+		51: {row: 3, mask: 0x04}, /* 3 */
+		52: {row: 3, mask: 0x08}, /* 4 */
+		53: {row: 3, mask: 0x10}, /* 5 */
+		54: {row: 4, mask: 0x10}, /* 6 */
+		55: {row: 4, mask: 0x08}, /* 7 */
+		56: {row: 4, mask: 0x04}, /* 8 */
+		57: {row: 4, mask: 0x02}, /* 9 */
+		48: {row: 4, mask: 0x01}, /* 0 */
+    
+    38: {row: 5, mask: 0x02}, /* up as O */
+    40: {row: 6, mask: 0x04}, /* down as K */
+    37: {row: 0, mask: 0x02}, /* left as Z */
+    39: {row: 0, mask: 0x04}, /* right as X */
+    13: {row: 7, mask: 0x01}, /* enter as space */
+    
+    999: null
+  };};
+  
+  self.arkanoidKeyCodes = function() { keyCodes =  {
+    49: {row: 3, mask: 0x01}, /* 1 */
+		50: {row: 3, mask: 0x02}, /* 2 */
+		51: {row: 3, mask: 0x04}, /* 3 */
+		52: {row: 3, mask: 0x08}, /* 4 */
+		53: {row: 3, mask: 0x10}, /* 5 */
+		54: {row: 4, mask: 0x10}, /* 6 */
+		55: {row: 4, mask: 0x08}, /* 7 */
+		56: {row: 4, mask: 0x04}, /* 8 */
+		57: {row: 4, mask: 0x02}, /* 9 */
+		48: {row: 4, mask: 0x01}, /* 0 */
+    
+    37: {row: 3, mask: 0x01}, /* left as 1 */
+    39: {row: 3, mask: 0x02}, /* right as 2 */
+    13: {row: 3, mask: 0x10}, /* enter as 5 */
+    
+    999: null
+  };};  
 	
 	self.poll = function(addr) {
 		var result = 0xff;

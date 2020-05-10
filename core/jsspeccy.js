@@ -152,7 +152,22 @@ function JSSpeccy(container, opts) {
 		keyboard.active = true;
 	};
 
+  self.baseKeyCodes = function() {
+    keyboard.baseKeyCodes();
+  };
+  
+  self.qaopKeyCodes = function() {
+    keyboard.qaopKeyCodes();
+  };
 
+  self.okzxKeyCodes = function() {
+    keyboard.okzxKeyCodes();
+  };
+  
+  self.arkanoidKeyCodes = function() {
+    keyboard.arkanoidKeyCodes();
+  };
+  
 	/* == Audio == */
 	var soundBackend = JSSpeccy.SoundBackend();
 	self.onChangeAudioState = Event();
