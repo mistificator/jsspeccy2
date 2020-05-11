@@ -3,10 +3,7 @@
 DIST_FILES=\
 	build\jsspeccy-core.min.js \
 	lib\jdataview.js \
-	lib\jquery-1.7.2.min.js \
-	README \
-	Embedding.txt \
-	COPYING
+	lib\jquery-1.7.2.min.js
 
 #MKDIR=mkdir -p  
 #COPY=cp -r 

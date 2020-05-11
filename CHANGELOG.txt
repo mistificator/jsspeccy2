@@ -1,3 +1,13 @@
+webOS JSSpeccy
+
+1.0 (2020-05-xx)
+================
+* Emulated Z80 performance has been heavily increased at a cost of timing accuracy. Got ~250Hz CPU frame rate on PC, so now it's hard limited to 50Hz.
+* Video rendering performance also increased, now it's cached and has a half rate of CPU frame rate, (so every second frame is skipped and FPS limited to 25 Hz).
+* Don't cry, guys, it's all just for fun.
+
+JSSpeccy
+
 2.3 (xxxx-xx-xx)
 ================
 

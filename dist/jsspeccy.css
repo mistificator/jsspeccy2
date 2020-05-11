@@ -101,6 +101,7 @@ html {
 	display: none;
 	position: absolute;
 	border: 1px solid #444;
+	word-wrap: break-word;
 }
 
 .jsspeccy .panel .close {
@@ -182,7 +183,7 @@ html {
 
 .jsspeccy #preinstalled-games {
 	height: 64px;
-	font-size: 32px;
+	font-size: 24px;
 	padding-left: 48px;
 	background-image: url(images/48x48_package_games_arcade.png);
 	background-repeat: no-repeat;

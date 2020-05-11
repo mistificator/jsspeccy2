@@ -69,11 +69,21 @@ JSSpeccy.UI = function(opts) {
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
 	$(".jsspeccy #jsspeccy-fps").html(fps_html);
 	
-	var deviceAgent = navigator.userAgent.toLowerCase();
-	var deviceMatch = deviceAgent.match(/(smarttv)/);
-	var isSmartTV = deviceMatch && Array.isArray(deviceMatch) && deviceMatch.length > 0;
+	var checkUserAgent = function(what) {
+		var deviceAgent = navigator.userAgent.toLowerCase();
+		var deviceMatch = deviceAgent.match("(" + what + ")");
+		return deviceMatch && Array.isArray(deviceMatch) && deviceMatch.length > 0;
+	}
+	
+	var isSmartTV = checkUserAgent("webos");
+	var isMobile = checkUserAgent("android|ios");
 	$('button.deviceinfo', toolbar).click(function() {
-		$('.panel.information #content').html("<br/>Device information<p>User agent: " + navigator.userAgent + "</p><p>" + fps_html + "</p>");
+		$('.panel.information #content').html(
+				"<br/>Device information" + 
+				"<p>User agent: " + navigator.userAgent + "</p>" +
+				"<p>" + fps_html + "</p>" +
+				"<p>Screen size: " + window.screen.width + "x" + window.screen.height + "</p>" +
+				"<p>URL: " + document.URL + "</p>");
 		showPanel('.information');
 	});
 	
@@ -84,7 +94,6 @@ JSSpeccy.UI = function(opts) {
 	var isFullscreenAvailable = !isSmartTV && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
 	if (isFullscreenAvailable) {
 		$('button.fullscreen', toolbar).click(function() {
-			console.log(isFullscreenAvailable);
 			if (!isFullscreen) {
 				enableFullscreen.call(fullscreenContext);
 				isFullscreen = true;
@@ -162,7 +171,8 @@ JSSpeccy.UI = function(opts) {
 	
 	const app_url = new URL(document.URL);
 	const path_url = app_url.protocol + "//" + (app_url.host.length > 0 ? app_url.host + "/" : "") + app_url.pathname.substring(0, app_url.pathname.lastIndexOf('/'));
-	const usb_path = "file:///tmp/usb/sda/sda1/"; // first usb
+//	const downloads_path = "file:///media/internal/downloads"; 
+	const usb_path = "file://usb:0/"; // first usb
 	if (isSmartTV) {
 		urlField.val(usb_path);	
 	}
