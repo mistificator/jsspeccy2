@@ -33,7 +33,8 @@ JSSpeccy.Keyboard = function() {
 		if (self.active && !evt.metaKey) return false;
 	}
 	
-  self.baseKeyCodes = function() { keyCodes = {
+  var allKeyCodes = {
+  "": {
 		49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
@@ -87,10 +88,8 @@ JSSpeccy.Keyboard = function() {
 		40: {row: 4, mask: 0x10, caps: true}, /* down arrow => caps + 6 */
 		
 		999: null
-	};}; 
-  self.baseKeyCodes();
-  
-  self.qaopKeyCodes = function() { keyCodes =  {
+	},
+  "QAOP": {
     49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
@@ -106,12 +105,11 @@ JSSpeccy.Keyboard = function() {
     40: {row: 1, mask: 0x01}, /* down as A */
     37: {row: 5, mask: 0x02}, /* left as O */
     39: {row: 5, mask: 0x01}, /* right as P */
-    13: {row: 7, mask: 0x01}, /* enter as M */
+    13: {row: 7, mask: 0x04}, /* enter as M */
     
     999: null
-  };};
-
-  self.okzxKeyCodes = function() { keyCodes =  {
+  },
+  "OKZX": {
     49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
@@ -130,9 +128,8 @@ JSSpeccy.Keyboard = function() {
     13: {row: 7, mask: 0x01}, /* enter as space */
     
     999: null
-  };};
-  
-  self.arkanoidKeyCodes = function() { keyCodes =  {
+  },
+  "1250": {
     49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
@@ -149,7 +146,12 @@ JSSpeccy.Keyboard = function() {
     13: {row: 3, mask: 0x10}, /* enter as 5 */
     
     999: null
-  };};  
+  }}; 
+  var keyCodes = {};
+  self.setKeymap = function(keymap_name) {
+    keyCodes = allKeyCodes[keymap_name];
+  };
+  self.setKeymap("");
 	
 	self.poll = function(addr) {
 		var result = 0xff;

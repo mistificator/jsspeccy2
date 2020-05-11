@@ -19,7 +19,9 @@ html {
 
 .jsspeccy #jsspeccy-viewport {
 	position: absolute;
-	margin-left: 16%;
+/*	margin-left: -640px; */ /* set by script */
+	left: 50%;
+	top: 50%;
 	width: 100%;	
 }
 
@@ -81,14 +83,19 @@ html {
 	background-image: url(images/48x48_fullscreen.png);
 }
 
+.jsspeccy .toolbar .deviceinfo {
+	background-image: url(images/48x48_device_info.png);
+}
+
 .jsspeccy .panel {
-	top: 30px;
+	top: 50%;
 	left: 50%;
-	margin-left: -300px;
+	margin-top: 250px;
+	margin-left: -250px;
 	padding-left: 10px;
 	padding-right: 10px;
-	width: 600px;
-	height: 400px;
+	width: 500px;
+	height: 500px;
 	background-color: white;
 	color: black;
 	display: none;
@@ -112,7 +119,7 @@ html {
 	font-size: 10pt;
 }
 
-.jsspeccy .about {
+.jsspeccy .about, .jsspeccy .information {
 	text-align: center;
 }
 
@@ -174,5 +181,11 @@ html {
 }
 
 .jsspeccy #preinstalled-games {
+	height: 64px;
 	font-size: 32px;
+	padding-left: 48px;
+	background-image: url(images/48x48_package_games_arcade.png);
+	background-repeat: no-repeat;
+	background-position: left center;	
 }
+

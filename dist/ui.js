@@ -20,7 +20,6 @@ JSSpeccy.UI = function(opts) {
 
 	$(container).addClass('jsspeccy');
 
-
 	/* Set up toolbar */
 	var toolbar = $('.toolbar', container);
 
@@ -45,7 +44,8 @@ JSSpeccy.UI = function(opts) {
 
 	$('button.reset', toolbar).click(function() {
 		controller.reset();
-		controller.baseKeyCodes();
+		controller.setKeymap("");
+		$("#preinstalled-games").prop("selectedIndex", 0);
 	});
 
 	var audioButton = $('button.audio', toolbar);
@@ -66,11 +66,22 @@ JSSpeccy.UI = function(opts) {
 		showPanel('.about');
 	});
 	
+	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
+	$(".jsspeccy #jsspeccy-fps").html(fps_html);
+	
+	var deviceAgent = navigator.userAgent.toLowerCase();
+	var deviceMatch = deviceAgent.match(/(smarttv)/);
+	var isSmartTV = deviceMatch && Array.isArray(deviceMatch) && deviceMatch.length > 0;
+	$('button.deviceinfo', toolbar).click(function() {
+		$('.panel.information #content').html("<br/>Device information<p>User agent: " + navigator.userAgent + "</p><p>" + fps_html + "</p>");
+		showPanel('.information');
+	});
+	
 	var isFullscreen = false;
 	var disableFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.msExitFullscreen || function() {};
 	var fullscreenContext = document.documentElement;
 	var enableFullscreen = fullscreenContext.requestFullscreen || fullscreenContext.webkitRequestFullscreen || fullscreenContext.mozRequestFullscreen || fullscreenContext.msRequestFullscreen || function() {};	
-	var isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled;
+	var isFullscreenAvailable = !isSmartTV && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
 	if (isFullscreenAvailable) {
 		$('button.fullscreen', toolbar).click(function() {
 			console.log(isFullscreenAvailable);
@@ -136,7 +147,10 @@ JSSpeccy.UI = function(opts) {
 		fileSelect.val('');
 		hidePanels();
 	});
-
+	if (isSmartTV) {
+		$(".jsspeccy #load_file").hide();
+	}
+	
 	var urlField = openFilePanel.find('input[type="url"]');
 	openFilePanel.find('button.open-url').click(function() {
 		var url = urlField.val();
@@ -145,103 +159,49 @@ JSSpeccy.UI = function(opts) {
 			hidePanels();
 		}
 	});
-
-
-	/* World Of Spectrum search interface */
-
-	var wosSearch = openFilePanel.find('form.search-wos');
-	var wosSearchField = wosSearch.find('input[type="search"]');
-	var wosSearchBtn = wosSearch.find('input[type="submit"]');
-
-	var wosMatches = openFilePanel.find('select.wos-matches');
-	var wosDownloads = openFilePanel.find('select.wos-downloads');
-	var wosOpen = openFilePanel.find('button.open-from-wos');
-
-	wosOpen.attr('disabled', 'disabled');
-
-	wosSearch.submit(function() {
-		var query = wosSearchField.val();
-		if (query !== '') {
-			$.getJSON('http://www.worldofspectrum.org/infoseek/api?X-API-KEY=test&format=json&callback=?',
-				{title: query},
-				function(results) {
-					wosMatches.empty();
-					wosDownloads.empty();
-					wosOpen.attr('disabled', 'disabled');
-					if (results.matches) {
-						for (var i = 0; i < results.matches.length; i++) {
-							var result = results.matches[i];
-							var optionText = result.title;
-							if (result.publisher) {
-								optionText += " (" + result.publisher + ")";
-							}
-							var option = $('<option></option>').text(optionText).attr('value', result.id);
-							wosMatches.append(option);
-						}
-						wosMatches.removeAttr('disabled');
-					} else {
-						wosMatches.append('<option>(no matches found)</option>');
-						wosMatches.attr('disabled', 'disabled');
-					}
-				}
-			);
-		}
-		return false;
-	});
-
-	wosMatches.change(function() {
-		wosDownloads.empty();
-		wosOpen.attr('disabled', 'disabled');
-		var id = $(this).val();
-		if (id) {
-			$.getJSON('http://www.worldofspectrum.org/api/infoseek_select_json.cgi?callback=?',
-				{id: id},
-				function(response) {
-					wosDownloads.empty();
-					if (response.downloads) {
-						for (var i = 0; i < response.downloads.length; i++) {
-							var download = response.downloads[i];
-							var optionText;
-							if (download.origin !== '') {
-								optionText = download.origin + " - " + download.type;
-							} else {
-								optionText = download.type;
-							}
-							var option = $('<option></option>').text(optionText).attr('value', download.link);
-							wosDownloads.append(option);
-						}
-						wosDownloads.removeAttr('disabled');
-					} else {
-						wosDownloads.append('<option>(no downloads available)</option>');
-						wosDownloads.attr('disabled', 'disabled');
-					}
-				}
-			);
-		}
-	});
-
-	wosDownloads.change(function() {
-		var url = $(this).val();
-		if (url) {
-			wosOpen.removeAttr('disabled');
-		} else {
-			wosOpen.attr('disabled', 'disabled');
-		}
-	});
-
-	function loadSelectedFile() {
-		var url = wosDownloads.val();
-		if (url) {
-			controller.loadFromUrl(
-				url.replace('ftp://ftp.worldofspectrum.org/pub/sinclair/', 'http://wosproxy.zxdemo.org/unzip/'),
-				{'autoload': autoloadTapes.is(':checked')}
-			);
-			hidePanels();
-		}
+	
+	const app_url = new URL(document.URL);
+	const path_url = app_url.protocol + "//" + (app_url.host.length > 0 ? app_url.host + "/" : "") + app_url.pathname.substring(0, app_url.pathname.lastIndexOf('/'));
+	const usb_path = "file:///tmp/usb/sda/sda1/"; // first usb
+	if (isSmartTV) {
+		urlField.val(usb_path);	
+	}
+	else {
+		urlField.val(path_url);	
+	}
+	
+	var loadScript = function (url, callback) {
+		var request = new XMLHttpRequest();
+		request.addEventListener('load', function(e) {
+			callback(request.response);
+		});
+		request.open('GET', url);
+		request.send();
 	}
 
-	wosOpen.click(loadSelectedFile);
-	wosDownloads.dblclick(loadSelectedFile);
-
+	var addSelectEntry = function(data) {		
+		var tapes = eval("(function() { return " + data + ";})()");
+		for (var [key, value] of Object.entries(tapes)) {
+			$("#preinstalled-games")
+					.append($("<option></option>")
+                    .attr("value", Object.keys(value)[0])
+                    .attr("id", Object.values(value)[0])
+                    .text(key)); 
+		}	
+	};
+	
+	self.loadPreinstalledGames = function() {
+		(function() {
+			$("#preinstalled-games")
+			.empty()
+			.append($("<option></option>")
+	        .text("PLAY NOW")); 				
+		})();
+		loadScript("tapes.js?" + performance.now(), addSelectEntry);
+		if (isSmartTV) {
+			loadScript(usb_path + "tapes.js", addSelectEntry);
+		}		
+	};
+	
 	return self;
 };

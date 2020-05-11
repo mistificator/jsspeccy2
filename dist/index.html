@@ -9,11 +9,11 @@
 		<script src="ui.js"></script>
 <!-- 	<script src="js-unzip.min.js"></script>  -->
 	
-		<script src="webOSTVjs-1.2.0/webOSTV.js" charset="utf-8"></script>
-<!-- 		<script src="webOSTVjs-1.2.0/webOSTV-dev.js" charset="utf-8"></script>  -->
+<!--		<script src="webOSTVjs-1.2.0/webOSTV.js" charset="utf-8"></script>
+ 		<script src="webOSTVjs-1.2.0/webOSTV-dev.js" charset="utf-8"></script>  
 		<script type="text/javascript">
 		   //sample code for calling LS2 API
-	       var lunaReq= webOS.service.request("luna://com.palm.systemservice",
+	       var lunaReq = webOS.service.request("luna://com.palm.systemservice",
 	        {
 	            method:"clock/getTime",
 	            parameters:{},
@@ -23,7 +23,7 @@
 	            onFailure: function (args) {
 	            }
 	        });
-		</script>
+		</script> -->
 	
 		<style>
 			body {
@@ -48,47 +48,39 @@
 		</style>
 		<script>
 			$(function() {
-				var jsspeccy = JSSpeccy('jsspeccy-viewport', {
-					'autostart': true,
-					'measurePerformance': true,
-                    'applyContention': false,
-                    'collectOpcodesStats': false,                   
-                    'cpuFpsLimit': 50
+				var jsspeccy = JSSpeccy("jsspeccy-viewport", {
+					"autostart": true,
+					"measurePerformance": true,
+                    "applyContention": false,
+                    "collectOpcodesStats": false,                   
+                    "cpuFpsLimit": 50
 				});
-				JSSpeccy.UI({
-					container: 'jsspeccy',
+				var ui = JSSpeccy.UI({
+					container: "jsspeccy",
 					controller: jsspeccy
 				});
-				$('#preinstalled-games').change(function() {
+				ui.loadPreinstalledGames();
+				$("#preinstalled-games").change(function() {
 					var filename = $(this).val();
 					if (filename) {
 						jsspeccy.loadFromUrl(
-							'./games/' + filename,
-							{'autoload': true}
+							filename,
+							{"autoload": true}
 						);
 					}
-                    jsspeccy.baseKeyCodes();
-                    var opt_id = $(this).children(":selected").attr('id');
-					if (opt_id == "QAOP") {
-						jsspeccy.qaopKeyCodes();
-					}
-					else if (opt_id == "OKZX") {
-						jsspeccy.okzxKeyCodes();
-					}
-					else if (opt_id == "ARKANOID") {
-						jsspeccy.arkanoidKeyCodes();
-					}
+                    jsspeccy.setKeymap($(this).children(":selected").attr("id") || "");
 				});
+				$("#jsspeccy-viewport").css("margin-left", (- (Math.floor(window.screen.height / 240) * 320) / 2).toString() + "px");
 				setInterval(function() {
-					$('#fps').text(jsspeccy.getFps().toFixed(1));
-                    $('#cfps').text(jsspeccy.getCfps().toFixed(1));	                    
+					$(".fps").text(jsspeccy.getFps().toFixed(1));
+                    $(".cfps").text(jsspeccy.getCfps().toFixed(1));	                    
 				}, 1000);
 			});
 		</script>
 	</head>
 	<body>
 		<div class="jsspeccy" id="jsspeccy">
-            <div id="jsspeccy-fps"><div>Video FPS: <span id="fps">0.0</span></div><div>CPU FPS: <span id="cfps">0.0</span></div></div>
+            <div id="jsspeccy-fps"></div>
 			<div id="jsspeccy-viewport">
 				<div class= "toolbar-div">
 					<ul class="toolbar">
@@ -97,6 +89,7 @@
 						<li><button class="audio" title="Audio on/off">audio on/off</button></li>
 						<li><button class="open" title="Open file">open file</button></li>
 						<li><button class="fullscreen" title="Toggle fullscreen">fullscreen</button></li>
+						<li><button class="deviceinfo" title="Show device info">device info</button></li>
 						<li><button class="about" title="About webOS JSSpeccy">about</button></li>
 						<li>
 							<div>
@@ -106,18 +99,7 @@
 								<select class="select-model"></select>
 							</div>
 							<div>
-			                    <select id="preinstalled-games" style="width: 100%">
-			                        <option value="">SELECT GAME</option>
-			                        <option value="AIRWOLF2.TAP" id="QAOP">Air Wolf 2</option>
-			                        <option value="ARKANOID.TAP" id="ARKANOID">Arkanoid</option>
-			                        <option value="KRAKOUT.TAP">Krakout</option>
-			                        <option value="KRAKOUT2.TAP">Krakout 2</option>
-			                        <option value="LODERUN.TAP">Lode Runner</option>
-		                            <option value="NETHEREA.TAP">Nether Earth</option>
-		                            <option value="PACMANIA.TAP" id="OKZX">Pac-Mania</option>
-		                            <option value="SPACRAID.TAP">Space Raiders</option>
-			                        <option value="VALLEY.TAP">Valley of Rains</option>
-			                    </select>
+			                    <select id="preinstalled-games" style="width: 100%"></select>
 	                    	</div>
 						</li>
 					</ul>			
@@ -125,24 +107,15 @@
 			</div>
 			<div class="panel open-file">
 				<button class="close">close</button>
-
-                <h2>Load from disk: <span class="note">.tap, .tzx, .sna, .z80 files supported</span></h2><input type="file">  	
-
-				<h2>Load from web:</h2><input type="url"><button class="open-url">Open URL</button>
-<!-- 
-				<h2>Search World Of Spectrum:</h2>
-				<form class="search-wos">
-					<input type="search">
-					<input type="submit" value="Search title">
-				</form>
-				<select style="width: 250px" size="8" class="wos-matches"></select>
-				<select style="width: 250px" size="8" class="wos-downloads"></select>
-				<button class="open-from-wos">Open file</button>
- -->
+				<div id="load_file">
+	                <h2>Load from disk: <span class="note">.tap, .tzx, .sna, .z80 files supported</span></h2><input type="file"> 
+                </div> 	
+				<div id="load_url">
+					<h2>Load from web:</h2><input type="url"><button class="open-url">Open URL</button>
+				</div>
 			</div>
 			<div class="panel about">
 				<button class="close">close</button>
-
 				<h1 class="commentary">webOS JSSpeccy <span class="version">v. 1.0</span></h1>
 				<h2 class="commentary">a webOS ZX Spectrum emulator</h2>
 				<p>Ported to LG webOS and optimized by <a href="https://twitter.com/mistificator" target="_blank">Mist Poryvaev</a></p>					
@@ -151,7 +124,10 @@
 					<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>&gt;.</p>
 				</div>
 			</div>
-			
+			<div class="panel information">
+				<button class="close">close</button>
+				<span id="content"></span>
+			</div>
 		</div>
 	</body>
 </html>

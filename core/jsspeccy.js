@@ -152,21 +152,9 @@ function JSSpeccy(container, opts) {
 		keyboard.active = true;
 	};
 
-  self.baseKeyCodes = function() {
-    keyboard.baseKeyCodes();
-  };
-  
-  self.qaopKeyCodes = function() {
-    keyboard.qaopKeyCodes();
-  };
-
-  self.okzxKeyCodes = function() {
-    keyboard.okzxKeyCodes();
-  };
-  
-  self.arkanoidKeyCodes = function() {
-    keyboard.arkanoidKeyCodes();
-  };
+  self.setKeymap = function(keymap_name) {
+    keyboard.setKeymap(keymap_name);
+  }; 
   
 	/* == Audio == */
 	var soundBackend = JSSpeccy.SoundBackend();

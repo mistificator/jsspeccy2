@@ -61,7 +61,7 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js=core/z80_file.js \
 		--js_output_file=build/jsspeccy-core.min.js
     $(CLEAN) .\dist\OutputIPK\*.*
-    $(ARES_PACK) -o .\dist\OutputIPK .\dist
+    $(ARES_PACK) -o .\dist\OutputIPK -n .\dist
 
 .PHONY: clean
 clean:
