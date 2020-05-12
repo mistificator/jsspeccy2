@@ -54,6 +54,67 @@
 					$(".fps").text(jsspeccy.getFps().toFixed(1));
                     $(".cfps").text(jsspeccy.getCfps().toFixed(1));	                    
 				}, 1000);
+                function addKeySelect(id, code, label, initial) {
+                    var opt = document.createElement('option')
+                    opt.appendChild(document.createTextNode(label));
+                    opt.value = code;
+                    if (label == initial) opt.selected = true;
+                    document.getElementById(id).appendChild(opt);
+                }
+                function populateJoystickKeySelect(id, initial) {
+                    document.getElementById(id).innerHTML = '';
+                    addKeySelect(id, 38, '\u2191', initial);
+                    addKeySelect(id, 40, '\u2193', initial);
+                    addKeySelect(id, 37, '\u2190', initial);
+                    addKeySelect(id, 39, '\u2192', initial);
+                    addKeySelect(id, 32, 'Space', initial);
+                    addKeySelect(id, 13, 'Enter', initial);
+                    addKeySelect(id, 17, 'Symbol Shift', initial);
+                    for (i = 48; i < 58; i++) {
+                        addKeySelect(id, i, String.fromCharCode(i), initial);
+                    }
+                    for (i = 65; i < 91; i++) {
+                        addKeySelect(id, i, String.fromCharCode(i), initial);
+                    }
+                }
+                $.setJoystick = function(keys) {
+                    var keysarr = keys.split(',');
+                    up = keysarr[0];
+                    down = keysarr[1];
+                    left = keysarr[2];
+                    right = keysarr[3];
+                    fire = keysarr[4];
+                    action = keysarr[5];
+                    populateJoystickKeySelect('select_key_up', up);
+                    populateJoystickKeySelect('select_key_down', down);
+                    populateJoystickKeySelect('select_key_left', left);
+                    populateJoystickKeySelect('select_key_right', right);
+                    populateJoystickKeySelect('select_key_fire', fire);
+                    populateJoystickKeySelect('select_key_action', action);		
+                }      
+                $.setJoystick(document.getElementById('selcontrol').value);                
+                $.padTouch = function(selectId,obj) {
+                    obj.style.background='#000000';
+                    var select = document.getElementById(selectId);
+                    var opt = select.options[select.selectedIndex];
+                    jsspeccy.keyboard().registerKeyDown(opt.value);
+                }
+                $.padUntouch = function(selectId,obj) {
+                    obj.style.background='#777777';
+                    var select = document.getElementById(selectId);
+                    var opt = select.options[select.selectedIndex];
+                    jsspeccy.keyboard().registerKeyUp(opt.value);
+                }
+                $.keyTouch = function(code,obj) {
+                    obj.style.background='#AAAAAA';
+                    obj.style.color='#FFFFFF';
+                    jsspeccy.keyboard().registerKeyDown(code);
+                }
+                $.keyUntouch = function(code,obj) {
+                    obj.style.background='#EEEEEE';
+                    obj.style.color='#555555';
+                    jsspeccy.keyboard().registerKeyUp(code);
+                }
 			});
 		</script>
 	</head>
@@ -67,6 +128,7 @@
 						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
 						<li><button class="audio" title="Audio on/off">audio on/off</button></li>
 						<li><button class="open" title="Open file">open file</button></li>
+						<li><button class="joystick_keys" title="Redefine joystick">redefine joystick</button></li>
 						<li><button class="fullscreen" title="Toggle fullscreen">fullscreen</button></li>
 						<li><button class="deviceinfo" title="Show device info">device info</button></li>
 						<li><button class="about" title="About webOS JSSpeccy">about</button></li>
@@ -106,7 +168,69 @@
 			<div class="panel information">
 				<button class="close">close</button>
 				<span id="content"></span>
-			</div>
+			</div>  
+            <div id='pad_block1' class='padblock'>
+                <table width='100%' border='0' cellpadding='6' cellspacing='0'>
+                    <tr>
+                        <td width='100%' align='left'>
+                            <input class='pad_up_down' type='button' value="&uarr;" onmousedown="$.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_up',this)">
+                            <br />
+                            <input class='pad_left_right' type='button' value="&larr;" onmousedown="$.padTouch('select_key_left',this)" onmouseup="$.padUntouch('select_key_left',this)">
+                            <input class='pad_left_right' type='button' value="&rarr;" onmousedown="$.padTouch('select_key_right',this)" onmouseup="$.padUntouch('select_key_right',this)">
+                            <br />
+                            <input class='pad_up_down' type='button' value="&darr;"  onmousedown="$.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_down',this)">
+                        </td>
+                    </tr>
+                </table>
+            </div>          
+            <div id='pad_block2' class='padblock'>    
+                <table width='100%' border='0' cellpadding='6' cellspacing='0'>
+                    <tr>
+                        <td width='50%' align='right'>
+                            <p>&nbsp;<p>
+                            <input class='pad_action' type='button' value='B' onmousedown="$.padTouch('select_key_action',this)" onmouseup="$.padUntouch('select_key_action',this)">
+                        </td>
+                        <td width='50%' align='right' valign='bottom'>
+                            <input class='pad_fire' type='button' value='A' onmousedown="$.padTouch('select_key_fire',this)" onmouseup="$.padUntouch('select_key_fire',this)">
+                            <p>&nbsp;<p>
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div id='joystick_keys' class="panel joystick_keys">
+                <button class="close">close</button>
+                <br/>
+                <p>Redefine joystick</p>
+                <select style="width:100%;" id="selcontrol" onchange="$.setJoystick(document.getElementById('selcontrol').value)">
+                    <option value="&#x2191;,&#x2193;,&#x2190;,&#x2192;,0,Enter" selected="">CURSOR</option>
+                    <option value="Q,A,O,P,M,Q">Q,A,O,P,M</option>                    
+                    <option value="Q,A,O,P,M,Space">Q,A,O,P,M,Space</option>                    
+                    <option value="N,M,Z,X,Symbol Shift,N">N,M,Z,X,Symbol</option>                    
+                    <option value="7,6,5,8,0,7">PROTEK</option>
+                    <option value="4,3,1,2,5,4">INTERFACE 1</option>                  
+                    <option value="9,8,6,7,0,9">INTERFACE 2</option>
+                </select>                
+                <ul>
+                    <li>  
+                        <div><label for='select_key_up'>&uarr;</label><select id='select_key_up'></select></div>
+                    </li>
+                    <li>          
+                        <div><label for='select_key_down'>&darr;</label><select id='select_key_down'></select></div>
+                    </li>
+                    <li>
+                        <div><label for='select_key_left'>&larr;</label><select id='select_key_left'></select></div>
+                    </li>
+                    <li>                   
+                        <div><label for='select_key_right'>&rarr;</label><select id='select_key_right'></select></div>
+                    </li>
+                    <li>
+                        <div><label for='select_key_fire'>A</label><select id='select_key_fire'></select></div>
+                    </li>
+                    <li>
+                        <div><label for='select_key_fire'>B</label><select id='select_key_action'></select></div>
+                    </li>
+                </ul>
+            </div>            
 		</div>
 	</body>
 </html>

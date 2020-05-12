@@ -142,16 +142,19 @@ function JSSpeccy(container, opts) {
 
 
 	/* == Keyboard control == */
-	var keyboard = JSSpeccy.Keyboard();
+	var kbd = JSSpeccy.Keyboard();
 	self.deactivateKeyboard = function() {
-		keyboard.active = false;
+		kbd.active = false;
 	};
 	self.activateKeyboard = function() {
-		keyboard.active = true;
+		kbd.active = true;
 	};
 
+  self.keyboard = function() {
+    return kbd;
+  }
   self.setKeymap = function(keymap_name) {
-    keyboard.setKeymap(keymap_name);
+    kbd.setKeymap(keymap_name);
   }; 
   
 	/* == Audio == */
@@ -281,7 +284,7 @@ function JSSpeccy(container, opts) {
 		if (newModel != currentModel) {
 			spectrum = JSSpeccy.Spectrum({
 				viewport: viewport,
-				keyboard: keyboard,
+				keyboard: kbd,
 				model: newModel,
 				soundBackend: soundBackend,
 				controller: self,

@@ -2,6 +2,20 @@
 	font-size: 11pt;
 	position: absolute;
 	width: 100%;
+	float: center;
+
+    /*
+    Uncomment these rules if you want hard-edged pixels
+    (which is not at all what a Spectrum looked like back in the day,
+    but hey, the kids seem to like it or something)
+    */   
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;   
 }
 
 .jsspeccy #jsspeccy-viewport {
@@ -39,7 +53,6 @@
 	color: white;
 }
 
-
 .jsspeccy .toolbar .stop {
 	background-image: url(images/48x48_player_pause.png);
 }
@@ -64,9 +77,11 @@
 .jsspeccy .toolbar .fullscreen {
 	background-image: url(images/48x48_fullscreen.png);
 }
-
 .jsspeccy .toolbar .deviceinfo {
 	background-image: url(images/48x48_device_info.png);
+}
+.jsspeccy .toolbar .joystick_keys {
+	background-image: url(images/48x48_settings.png);
 }
 
 .jsspeccy .panel {
@@ -84,6 +99,7 @@
 	position: absolute;
 	border: 1px solid #444;
 	word-wrap: break-word;
+	text-align: center;    
 }
 
 .jsspeccy .panel .close {
@@ -102,12 +118,14 @@
 	font-size: 10pt;
 }
 
-.jsspeccy .about, .jsspeccy .information {
-	text-align: center;
+.jsspeccy .joystick_keys select, label{
+	font-size: 32px;	
+    word-wrap: break-word;
+    margin: 3px;
 }
 
-.jsspeccy .open-file .search-wos input[type=search] {
-	width: 400px;
+.jsspeccy .open-file  {
+	text-align: left;   
 }
 
 .jsspeccy .about h1 {
@@ -119,24 +137,6 @@
 }
 .jsspeccy .about .licence {
 	font-size: 9pt;
-}
-
-#jsspeccy {
-	float: center;
-
-    /*
-    Uncomment these rules if you want hard-edged pixels
-    (which is not at all what a Spectrum looked like back in the day,
-    but hey, the kids seem to like it or something)
-    */
-    
-    image-rendering: optimizeSpeed;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -o-crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-    -ms-interpolation-mode: nearest-neighbor;    
 }
 
 .jsspeccy .commentary {
@@ -170,3 +170,79 @@
 	background-position: left center;	
 }
 
+.jsspeccy .padblock {
+	text-align: center;
+    position: fixed;
+    bottom: 0px;    
+}
+
+.jsspeccy #pad_block1 {
+    left: 0px;
+}
+
+.jsspeccy  #pad_block2 {
+    right: 0px;
+}
+
+.jsspeccy .pad_up_down {
+	-webkit-appearance: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-border-radius: 15px;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	margin: 3px;
+    margin-left: 76px;
+	background-color: #777777;
+	width: 120px;
+	height: 80px;
+}
+
+.jsspeccy .pad_left_right {
+	-webkit-appearance: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-border-radius: 15px;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	margin: 3px;
+	background-color: #777777;
+	width: 120px;
+	height: 80px;
+}
+
+.jsspeccy .pad_fire {
+	-webkit-appearance: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-border-radius: 75px;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	font-weight: bold;
+	font-size: 32px;
+	border: 0px solid #999999;
+	margin: 0px;
+	color: #FFFFFF;
+	background-color: #777777;
+	width: 140px;
+	height: 140px;
+}
+
+.jsspeccy .pad_action {
+	-webkit-appearance: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-border-radius: 75px;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	font-weight: bold;
+	font-size: 32px;
+	border: 0px solid #999999;
+	margin: 0px;
+	color: #FFFFFF;
+	background-color: #777777;
+	width: 120px;
+	height: 120px;
+}

@@ -9,21 +9,21 @@ JSSpeccy.Keyboard = function() {
 	
 	function keyDown(evt) {
 		if (self.active) {
-			registerKeyDown(evt.keyCode);
+			self.registerKeyDown(evt.keyCode);
 			if (!evt.metaKey) return false;
 		}
 	}
-	function registerKeyDown(keyNum) {
+	self.registerKeyDown = function(keyNum) {
 		var keyCode = keyCodes[keyNum];
 		if (keyCode == null) return;
 		keyStates[keyCode.row] &= ~(keyCode.mask);
 		if (keyCode.caps) keyStates[0] &= 0xfe;
 	}
 	function keyUp(evt) {
-		registerKeyUp(evt.keyCode);
+		self.registerKeyUp(evt.keyCode);
 		if (self.active && !evt.metaKey) return false;
 	}
-	function registerKeyUp(keyNum) {
+	self.registerKeyUp = function(keyNum) {
 		var keyCode = keyCodes[keyNum];
 		if (keyCode == null) return;
 		keyStates[keyCode.row] |= keyCode.mask;

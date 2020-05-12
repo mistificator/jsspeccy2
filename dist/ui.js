@@ -65,6 +65,10 @@ JSSpeccy.UI = function(opts) {
 	$('button.about', toolbar).click(function() {
 		showPanel('.about');
 	});
+
+	$('button.joystick_keys', toolbar).click(function() {
+		showPanel('.joystick_keys');
+	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
 	$(".jsspeccy #jsspeccy-fps").html(fps_html);
