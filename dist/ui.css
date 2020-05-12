@@ -1,0 +1,30 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #222;
+	color: #ddd;
+}
+h1, h2 {
+	padding: 0; margin: 0;
+}
+a:link {
+	color: #77f;
+}
+a:visited {
+	color: #97f;
+}
+a:hover, a:active {
+	color: #99f;
+}
+@font-face {
+  font-family: 'PressStart2P';
+  src: URL('PressStart2P-Regular.ttf') format('truetype');
+}
+
+html {
+	background-color: #222; /* for fullscreen mode */	
+}
+
+* {
+	font-family: PressStart2P;	
+}	

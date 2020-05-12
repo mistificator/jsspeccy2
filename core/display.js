@@ -5,7 +5,7 @@ JSSpeccy.Display = function(opts) {
 	var memory = opts.memory;
 	var model = opts.model || JSSpeccy.Spectrum.MODEL_128K;
 	var border = opts.borderEnabled;
-  var cpuFpsLimit = opts.cpuFpsLimit;
+	var cpuFpsLimit = opts.cpuFpsLimit;
 
 	var checkerboardFilterEnabled = opts.settings.checkerboardFilter.get();
 	opts.settings.checkerboardFilter.onChange.bind(function(newValue) {
@@ -54,7 +54,7 @@ JSSpeccy.Display = function(opts) {
 	var TSTATES_PER_SCANLINE = model.tstatesPerScanline;
 	self.frameLength = model.frameLength;
 	
-  var Y_COUNT = 192, X_COUNT = 32, X_COUNT_8 = X_COUNT * 8;
+	var Y_COUNT = 192, X_COUNT = 32, X_COUNT_8 = X_COUNT * 8;
   
 	var BEAM_X_MAX = X_COUNT + (border ? RIGHT_BORDER_CHARS : 0);
 	var BEAM_Y_MAX = Y_COUNT + (border ? BOTTOM_BORDER_LINES : 0);
@@ -62,19 +62,16 @@ JSSpeccy.Display = function(opts) {
 	var CANVAS_WIDTH = X_COUNT_8 + (border ? ((LEFT_BORDER_CHARS + RIGHT_BORDER_CHARS) * 8) : 0);
 	var CANVAS_HEIGHT = Y_COUNT + (border ? (TOP_BORDER_LINES + BOTTOM_BORDER_LINES) : 0);
 
-  var
-    vborder_cache = -1,
-    vborder_fill_count = 0,
-    vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT),
-    vattr_cache = new Uint8Array(X_COUNT * Y_COUNT),
-    video_frame_count = 0,
-    prev_timestamp = performance.now(),
-    skipped_frames = 0;
+	var
+		vborder_cache = -1,
+		vborder_fill_count = 0,
+		vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT),
+		vattr_cache = new Uint8Array(X_COUNT * Y_COUNT),
+		video_frame_count = 0,
+		prev_timestamp = performance.now(),
+		skipped_frames = 0;
     
-  var deviceHeight = window.screen.height;  
-  viewport.setResolution(Math.floor(deviceHeight / CANVAS_HEIGHT) * CANVAS_WIDTH, Math.floor(deviceHeight / CANVAS_HEIGHT) * CANVAS_HEIGHT);
-  viewport.canvas.width = CANVAS_WIDTH;
-  viewport.canvas.height = CANVAS_HEIGHT;
+	viewport.setResolution(CANVAS_WIDTH, CANVAS_HEIGHT);
   
 	var ctx = viewport.canvas.getContext('2d');
 	var imageData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);

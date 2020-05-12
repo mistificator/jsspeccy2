@@ -29,12 +29,9 @@ function JSSpeccy(container, opts) {
 		opts = {};
 	}
 
-  if (!opts.cpuFpsLimit) {
-    opts.cpuFpsLimit = 50;
-  }
-  
-	var originalDocumentTitle = document.title;
-
+	if (!opts.cpuFpsLimit) {
+		opts.cpuFpsLimit = 50;
+	}
 
 	/* == Z80 core == */
 	/* define a list of rules to be triggered when the Z80 executes an opcode at a specified address;
@@ -111,7 +108,8 @@ function JSSpeccy(container, opts) {
 	/* == Set up viewport == */
 	var viewport = JSSpeccy.Viewport({
 		container: container,
-		scaleFactor: 1, //opts.scaleFactor || 2,
+		panelXWidth: opts.panelXWidth,
+		panelYWidth: opts.panelYWidth,
 		onClickIcon: function() {self.start();}
 	});
 

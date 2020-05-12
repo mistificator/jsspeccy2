@@ -1,7 +1,8 @@
 JSSpeccy.Viewport = function(opts) {
 	var self = {};
-	var container = opts.container;
-	var scaleFactor = 1; //opts.scaleFactor || 2;
+	var container = opts.container;	
+	var panelXWidth = opts.panelXWidth || 0;
+	var panelYWidth = opts.panelYWidth || 120;	
 
 	var positioner = document.createElement('div');
 	container.appendChild(positioner);
@@ -43,16 +44,25 @@ JSSpeccy.Viewport = function(opts) {
 		statusIcon.onclick = opts.onClickIcon;
 	}
 
-	self.setResolution = function(width, height) {
-		container.style.width = width * scaleFactor + 'px';
+	self.setResolution = function(canvas_width, canvas_height) {	
+		var devicePixelsCount = (window.screen.width > window.screen.height) ? (window.screen.height / window.devicePixelRatio) - panelYWidth : (window.screen.width / window.devicePixelRatio) - panelXWidth;  
+		var width = (devicePixelsCount / canvas_height) * canvas_width;
+		var height = (devicePixelsCount / canvas_height) * canvas_height;
+	
+		container.style.width = width  + 'px';
+		container.style.marginLeft = (- ((devicePixelsCount / canvas_height) * canvas_width) / 2)  + 'px';
+			
+		self.canvas.style.width = width + 'px';
+		self.canvas.style.height = height + 'px';
+		statusIcon.style.top = (height / 2 - 32) + 'px';
+		statusIcon.style.left = (width / 2 - 32) + 'px';
 		
-		self.canvas.width = width;
-		self.canvas.height = height;
-		
-		self.canvas.style.width = width * scaleFactor + 'px';
-		self.canvas.style.height = height * scaleFactor + 'px';
-		statusIcon.style.top = (height * scaleFactor / 2 - 32) + 'px';
-		statusIcon.style.left = (width * scaleFactor / 2 - 32) + 'px';
+		self.canvas.width = canvas_width;
+		self.canvas.height = canvas_height;		
+	};
+	
+	self.container = function() {
+		return container;
 	};
 
 	return self;

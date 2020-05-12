@@ -1,34 +1,16 @@
-@font-face {
-  font-family: 'PressStart2P';
-  src: URL('PressStart2P-Regular.ttf') format('truetype');
-}
-
-html {
-	background-color: #222; /* for fullscreen mode */	
-}
-
-* {
-	font-family: PressStart2P;	
-}
-
 .jsspeccy {
 	font-size: 11pt;
 	position: absolute;
-	width: 98%;
+	width: 100%;
 }
 
 .jsspeccy #jsspeccy-viewport {
 	position: absolute;
-/*	margin-left: -640px; */ /* set by script */
 	left: 50%;
 	top: 50%;
 	width: 100%;	
 }
 
-.jsspeccy canvas {
-	padding: 0;
-	margin: 0;
-}
 .jsspeccy .toolbar-div {
 	clear:both;   
 }
@@ -140,9 +122,7 @@ html {
 }
 
 #jsspeccy {
-	margin: 10px;
-	padding-right: 10px;
-	float: left;
+	float: center;
 
     /*
     Uncomment these rules if you want hard-edged pixels

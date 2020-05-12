@@ -821,10 +821,10 @@ JSSpeccy.SoundBackend = function() {
 			ready to be received via the callback we set with setSource. Ignored for event-based
 			backends (= Web Audio) that trigger the callback whenever they feel like it...
 	*/
-
+	
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var fillBuffer = null;
-
+	
 	if (AudioContext) {
 		/* Use Web Audio API as backend */
 		var audioContext = new AudioContext();
@@ -833,11 +833,11 @@ JSSpeccy.SoundBackend = function() {
 		//Web audio Api changed createJavaScriptNode to CreateScriptProcessor - we support both
 		if (audioContext.createJavaScriptNode!=null) {
 			audioNode = audioContext.createJavaScriptNode(8192, 1, 1);
-		} else if (audioContext.createScriptProcessor!=null) {
-			audioNode = audioContext.createScriptProcessor(8192, 1, 1);
-		}
+			} else if (audioContext.createScriptProcessor!=null) {
+				audioNode = audioContext.createScriptProcessor(8192, 1, 1);
+			}
 
-                if (audioNode!=null) {
+            if (audioNode!=null) {
 
 			onAudioProcess = function(e) {
 				var buffer = e.outputBuffer.getChannelData(0);
@@ -873,9 +873,17 @@ JSSpeccy.SoundBackend = function() {
 			self.notifyReady = function(dataLength) {
 				/* do nothing */
 			}
+			
+//			document.querySelector('button').addEventListener('click', function() {
+			window.onload = function() {
+			  audioContext.resume().then(() => {
+//				console.log('Playback resumed successfully');
+			  });
+			}//);
+			
 
 			return self;
-                }
+		}
 	}
 
 	if (typeof(Audio) != 'undefined') {

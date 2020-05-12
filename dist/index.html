@@ -4,6 +4,7 @@
 	<head>
 		<title>webOS JSSpeccy</title>
 		<link rel="stylesheet" href="jsspeccy.css">
+		<link rel="stylesheet" href="ui.css">
 		<script src="jsspeccy-core.min.js"></script>
 		<script src="jquery-1.7.2.min.js"></script>
 		<script src="ui.js"></script>
@@ -24,36 +25,15 @@
 	            }
 	        });
 		</script> -->
-	
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				font-family: Helvetica, Arial, sans-serif;
-				background-color: #222;
-				color: #ddd;
-			}
-			h1, h2 {
-				padding: 0; margin: 0;
-			}
-			a:link {
-				color: #77f;
-			}
-			a:visited {
-				color: #97f;
-			}
-			a:hover, a:active {
-				color: #99f;
-			}
-		</style>
+
 		<script>
 			$(function() {
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", {
-					"autostart": true,
-					"measurePerformance": true,
-                    "applyContention": false,
-                    "collectOpcodesStats": false,                   
-                    "cpuFpsLimit": 50
+					autostart: true,
+                    applyContention: false,
+                    collectOpcodesStats: false,                   
+                    cpuFpsLimit: 50,
+					panelYWidth: $(".toolbar-div").height()
 				});
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
@@ -70,7 +50,6 @@
 					}
                     jsspeccy.setKeymap($(this).children(":selected").attr("id") || "");
 				});
-				$("#jsspeccy-viewport").css("margin-left", (- (Math.floor(window.screen.height / 240) * 320) / 2).toString() + "px");
 				setInterval(function() {
 					$(".fps").text(jsspeccy.getFps().toFixed(1));
                     $(".cfps").text(jsspeccy.getCfps().toFixed(1));	                    
