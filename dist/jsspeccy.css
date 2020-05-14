@@ -40,7 +40,7 @@
 	padding-right: 8px;
 }
 
-@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 144dpi), (max-device-width:1280) {
+@media (-webkit-device-pixel-ratio: 1.0), (resolution: 96dpi) {
     .jsspeccy .toolbar button {
         width: 64px;
         height: 64px;
@@ -52,7 +52,7 @@
     }
 }
 
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-device-width:1280)  {
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
     .jsspeccy .toolbar button {
         width: 24px;
         height: 24px;
@@ -236,7 +236,7 @@
 	margin: 0px;
 }
 
-@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 144dpi) {
+@media (-webkit-device-pixel-ratio: 1.0), (resolution: 96dpi) {
     .jsspeccy .pad_up_down {
         margin-left: 76px;
     }
