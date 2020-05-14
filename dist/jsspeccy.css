@@ -29,38 +29,54 @@
 	clear:both;   
 }
 .jsspeccy .toolbar {
-	margin: 0;
-	padding: 8px;
+    margin: 0px;
+	padding: 1px;
 	overflow: hidden;
 	background-color: #445;
 	list-style-type: none;
 }
 .jsspeccy .toolbar li {
 	float: left;
-	padding-right: 8px;
+	padding-right: 1px;    
 }
 
-@media (-webkit-device-pixel-ratio: 1.0), (resolution: 96dpi) {
+.jsspeccy .toolbar button {
+    margin: 0px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
     .jsspeccy .toolbar button {
         width: 64px;
         height: 64px;
     }
     .jsspeccy #preinstalled-games {
         height: 64px;
-        font-size: 24px;
+        font-size: 18pt;
         padding-left: 64px;
     }
 }
 
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .jsspeccy .toolbar button {
         width: 24px;
         height: 24px;
     }
     .jsspeccy #preinstalled-games {
         height: 24px;
-        font-size: 12px;
+        font-size: 9pt;
         padding-left: 24px;
+    }    
+}
+
+@media (-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi) {
+    .jsspeccy .toolbar button {
+        width: 8px;
+        height: 8px;
+    }
+    .jsspeccy #preinstalled-games {
+        height: 8px;
+        font-size: 3pt;
+        padding-left: 8px;
     }    
 }
 
@@ -186,9 +202,11 @@
 }
 
 .jsspeccy #jsspeccy-fps {
+    position: fixed;
     width: 250px;
-    float: right;
     text-align: right;
+    top: 0px;
+    right: 0px;
 }
 
 .jsspeccy .padblock {
@@ -221,27 +239,30 @@
 }
 
 .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
-	font-size: 18pt;
-	border-radius: 15px;
 	border: none;
-	width: 120px;
-	height: 80px;
 }
 
-
 .jsspeccy .pad_fire, .jsspeccy .pad_action {
-	border-radius: 75px;
-	font-size: 32pt;
 	border: 0px solid #999999;
 	margin: 0px;
 }
 
-@media (-webkit-device-pixel-ratio: 1.0), (resolution: 96dpi) {
+@media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
+    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+        font-size: 18pt;
+        border-radius: 15px;
+        width: 120px;
+        height: 80px;
+    }
     .jsspeccy .pad_up_down {
         margin-left: 76px;
     }
     .jsspeccy .pad_left_right {
         margin: 3px;
+    }
+    .jsspeccy .pad_fire, .jsspeccy .pad_action {
+        border-radius: 75px;
+        font-size: 32pt;
     }
     .jsspeccy .pad_fire {
         width: 140px;
@@ -253,13 +274,23 @@
     }    
 }
 
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+        font-size: 9pt;
+        border-radius: 7px;
+        width: 60px;
+        height: 40px;
+    }
     .jsspeccy .pad_up_down {
-        margin-left: 36px;
+        margin-left: 44px;
     }
     .jsspeccy .pad_left_right {
         margin: 3px;
     }
+    .jsspeccy .pad_fire, .jsspeccy .pad_action {
+        border-radius: 37px;
+        font-size: 16pt;
+    }    
     .jsspeccy .pad_fire {
         width: 70px;
         height: 70px;
@@ -267,5 +298,35 @@
     .jsspeccy .pad_action {
         width: 60px;
         height: 60px;
+    }    
+}
+
+@media (-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi) {
+    .jsspeccy #jsspeccy-fps {
+        font-size: 3pt;
+    }
+    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+        font-size: 4pt;
+        border-radius: 3px;
+        width: 45px;
+        height: 30px;
+    }
+    .jsspeccy .pad_up_down {
+        margin-left: 36px;
+    }
+    .jsspeccy .pad_left_right {
+        margin: 3px;
+    }
+    .jsspeccy .pad_fire, .jsspeccy .pad_action {
+        border-radius: 18px;
+        font-size: 9pt;
+    }    
+    .jsspeccy .pad_fire {
+        width: 55px;
+        height: 55px;
+    }
+    .jsspeccy .pad_action {
+        width: 45px;
+        height: 45px;
     }    
 }
