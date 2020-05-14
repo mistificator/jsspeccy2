@@ -40,13 +40,43 @@
 	padding-right: 8px;
 }
 
+@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 144dpi) {
+    .jsspeccy .toolbar button {
+        width: 64px;
+        height: 64px;
+    }
+    .jsspeccy #preinstalled-games {
+        height: 64px;
+        font-size: 24px;
+        padding-left: 64px;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+    .jsspeccy .toolbar button {
+        width: 24px;
+        height: 24px;
+    }
+    .jsspeccy #preinstalled-games {
+        height: 24px;
+        font-size: 12px;
+        padding-left: 24px;
+    }    
+}
+
 .jsspeccy .toolbar button {
-	width: 64px;
-	height: 64px;
 	text-indent: -5000px;
 	direction: ltr;
 	background-position: center center;
 	background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.jsspeccy #preinstalled-games {    
+	background-image: url(images/48x48_package_games_arcade.png);
+	background-repeat: no-repeat;
+	background-position: left center;	
+    background-size: contain;
 }
 
 .jsspeccy .toolbar label {
@@ -87,12 +117,10 @@
 .jsspeccy .panel {
 	top: 50%;
 	left: 50%;
-	margin-top: 250px;
-	margin-left: -250px;
-	padding-left: 10px;
-	padding-right: 10px;
-	width: 500px;
-	height: 500px;
+	margin-top: 25%;
+	margin-left: -25%;
+	padding: 1%;
+	width: 50%;
 	background-color: white;
 	color: black;
 	display: none;
@@ -104,7 +132,9 @@
 
 .jsspeccy .panel .close {
 	position: absolute;
+    height: 20pt;
 	right: 0px;
+    top: 0px;
 }
 
 .jsspeccy .panel h1, .jsspeccy .panel h2 {
@@ -119,7 +149,7 @@
 }
 
 .jsspeccy .joystick_keys select, label{
-	font-size: 32px;	
+	font-size: 24pt;	
     word-wrap: break-word;
     margin: 3px;
 }
@@ -161,19 +191,14 @@
     text-align: right;
 }
 
-.jsspeccy #preinstalled-games {
-	height: 64px;
-	font-size: 24px;
-	padding-left: 48px;
-	background-image: url(images/48x48_package_games_arcade.png);
-	background-repeat: no-repeat;
-	background-position: left center;	
-}
-
 .jsspeccy .padblock {
 	text-align: center;
     position: fixed;
     bottom: 0px;    
+}
+
+*:focus {
+    outline: 0;
 }
 
 .jsspeccy #pad_block1 {
@@ -184,65 +209,62 @@
     right: 0px;
 }
 
-.jsspeccy .pad_up_down {
-	-webkit-appearance: none;
+.jsspeccy .pad_up_down, .jsspeccy .pad_left_right, .jsspeccy .pad_fire, .jsspeccy .pad_action  {
+	appearance: none;
 	-webkit-user-select: none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-border-radius: 15px;
-	-webkit-box-shadow: 5px 5px 5px #888;
+	-webkit-tap-highlight-color: transparent;
+	box-shadow: 5px 5px 5px #888;
 	font-weight: bold;
-	font-size: 18px;
-	border: none;
-	margin: 3px;
-    margin-left: 76px;
+    color: #FFFFFF;
 	background-color: #777777;
+}
+
+.jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+	font-size: 18pt;
+	border-radius: 15px;
+	border: none;
 	width: 120px;
 	height: 80px;
 }
 
-.jsspeccy .pad_left_right {
-	-webkit-appearance: none;
-	-webkit-user-select: none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-border-radius: 15px;
-	-webkit-box-shadow: 5px 5px 5px #888;
-	font-weight: bold;
-	font-size: 18px;
-	border: none;
-	margin: 3px;
-	background-color: #777777;
-	width: 120px;
-	height: 80px;
-}
 
-.jsspeccy .pad_fire {
-	-webkit-appearance: none;
-	-webkit-user-select: none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-border-radius: 75px;
-	-webkit-box-shadow: 5px 5px 5px #888;
-	font-weight: bold;
-	font-size: 32px;
+.jsspeccy .pad_fire, .jsspeccy .pad_action {
+	border-radius: 75px;
+	font-size: 32pt;
 	border: 0px solid #999999;
 	margin: 0px;
-	color: #FFFFFF;
-	background-color: #777777;
-	width: 140px;
-	height: 140px;
 }
 
-.jsspeccy .pad_action {
-	-webkit-appearance: none;
-	-webkit-user-select: none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-border-radius: 75px;
-	-webkit-box-shadow: 5px 5px 5px #888;
-	font-weight: bold;
-	font-size: 32px;
-	border: 0px solid #999999;
-	margin: 0px;
-	color: #FFFFFF;
-	background-color: #777777;
-	width: 120px;
-	height: 120px;
+@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 144dpi) {
+    .jsspeccy .pad_up_down {
+        margin-left: 76px;
+    }
+    .jsspeccy .pad_left_right {
+        margin: 3px;
+    }
+    .jsspeccy .pad_fire {
+        width: 140px;
+        height: 140px;
+    }
+    .jsspeccy .pad_action {
+        width: 120px;
+        height: 120px;
+    }    
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+    .jsspeccy .pad_up_down {
+        margin-left: 36px;
+    }
+    .jsspeccy .pad_left_right {
+        margin: 3px;
+    }
+    .jsspeccy .pad_fire {
+        width: 70px;
+        height: 70px;
+    }
+    .jsspeccy .pad_action {
+        width: 60px;
+        height: 60px;
+    }    
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=contain">
 	<head>
 		<title>webOS JSSpeccy</title>
 		<link rel="stylesheet" href="jsspeccy.css">
@@ -173,12 +173,12 @@
                 <table width='100%' border='0' cellpadding='6' cellspacing='0'>
                     <tr>
                         <td width='100%' align='left'>
-                            <input class='pad_up_down' type='button' value="&uarr;" onmousedown="$.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_up',this)">
+                            <button class='pad_up_down' onmousedown="$.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_up',this)">&uarr;</button>
                             <br />
-                            <input class='pad_left_right' type='button' value="&larr;" onmousedown="$.padTouch('select_key_left',this)" onmouseup="$.padUntouch('select_key_left',this)">
-                            <input class='pad_left_right' type='button' value="&rarr;" onmousedown="$.padTouch('select_key_right',this)" onmouseup="$.padUntouch('select_key_right',this)">
+                            <button class='pad_left_right' onmousedown="$.padTouch('select_key_left',this)" onmouseup="$.padUntouch('select_key_left',this)">&larr;</button>
+                            <button class='pad_left_right' onmousedown="$.padTouch('select_key_right',this)" onmouseup="$.padUntouch('select_key_right',this)">&rarr;</button>
                             <br />
-                            <input class='pad_up_down' type='button' value="&darr;"  onmousedown="$.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_down',this)">
+                            <button class='pad_up_down' onmousedown="$.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_down',this)">&darr;</button>
                         </td>
                     </tr>
                 </table>
@@ -188,10 +188,10 @@
                     <tr>
                         <td width='50%' align='right'>
                             <p>&nbsp;<p>
-                            <input class='pad_action' type='button' value='B' onmousedown="$.padTouch('select_key_action',this)" onmouseup="$.padUntouch('select_key_action',this)">
+                            <button class='pad_action' onmousedown="$.padTouch('select_key_action',this)" onmouseup="$.padUntouch('select_key_action',this)">B</button>
                         </td>
                         <td width='50%' align='right' valign='bottom'>
-                            <input class='pad_fire' type='button' value='A' onmousedown="$.padTouch('select_key_fire',this)" onmouseup="$.padUntouch('select_key_fire',this)">
+                            <button class='pad_fire' onmousedown="$.padTouch('select_key_fire',this)" onmouseup="$.padUntouch('select_key_fire',this)">A</button>
                             <p>&nbsp;<p>
                         </td>
                     </tr>

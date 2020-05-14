@@ -86,7 +86,8 @@ JSSpeccy.UI = function(opts) {
 				"<br/>Device information" + 
 				"<p>User agent: " + navigator.userAgent + "</p>" +
 				"<p>" + fps_html + "</p>" +
-				"<p>Screen size: " + window.screen.width + "x" + window.screen.height + "</p>" +
+				"<p>Screen size: " + window.screen.width + "x" + window.screen.height + "<br/>" +
+				"Device pixel ratio: " + window.devicePixelRatio + "</p>" +
 				"<p>URL: " + document.URL + "</p>");
 		showPanel('.information');
 	});

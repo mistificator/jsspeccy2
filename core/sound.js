@@ -874,12 +874,12 @@ JSSpeccy.SoundBackend = function() {
 				/* do nothing */
 			}
 			
-//			document.querySelector('button').addEventListener('click', function() {
-			window.onload = function() {
+			document.querySelector('button').addEventListener('click', function() {
+//			window.onload = function() {
 			  audioContext.resume().then(() => {
 //				console.log('Playback resumed successfully');
 			  });
-			}//);
+			});
 			
 
 			return self;
