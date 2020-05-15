@@ -3,11 +3,8 @@
 DIST_FILES=\
 	build\jsspeccy-core.min.js \
 	lib\jdataview.js \
-	lib\jquery-1.7.2.min.js
-
-#MKDIR=mkdir -p  
-#COPY=cp -r 
-#CLEAN=rm -rf
+	lib\jquery-1.7.2.min.js \
+	README
 
 MKDIR=-mkdir  
 COPY_DST=for %I in ($(DIST_FILES)) do xcopy /y %I dist
