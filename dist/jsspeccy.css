@@ -44,6 +44,11 @@
     margin: 0px;
 }
 
+.jsspeccy .toolbar .reset {
+    right: 0px;
+	position: absolute;
+}
+
 @media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
     .jsspeccy .toolbar button {
         width: 64px;
@@ -131,9 +136,9 @@
 }
 
 .jsspeccy .panel {
-	top: 50%;
+	top: 10%;
 	left: 50%;
-	margin-top: 25%;
+	margin-top: 10%;
 	margin-left: -25%;
 	padding: 1%;
 	width: 50%;
@@ -165,7 +170,7 @@
 }
 
 .jsspeccy .joystick_keys select, label{
-	font-size: 24pt;	
+	font-size: 18pt;	
     word-wrap: break-word;
     margin: 3px;
 }
@@ -207,6 +212,21 @@
     text-align: right;
     top: 0px;
     right: 0px;
+}
+
+.jsspeccy #typer-div {
+    position: fixed;
+    text-align: left;
+    bottom: 0px;
+    left: 50%;
+}
+
+.jsspeccy #typer {
+	text-align: center;
+    width: 20%;
+	font-size: 20pt;
+	background-color: transparent;
+	border: 2px solid blue;
 }
 
 .jsspeccy .padblock {

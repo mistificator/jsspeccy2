@@ -45,7 +45,6 @@ JSSpeccy.Viewport = function(opts) {
 	}
 
 	self.setResolution = function(canvas_width, canvas_height) {	
-//		var devicePixelsCount = (window.screen.width > window.screen.height) ? (window.screen.height * window.devicePixelRatio) - panelYWidth : (window.screen.width * window.devicePixelRatio) - panelXWidth;  
 		var devicePixelsCount = (window.screen.width > window.screen.height) ? window.screen.height - panelYWidth : window.screen.width - panelXWidth;  
 		var width = (devicePixelsCount / canvas_height) * canvas_width;
 		var height = (devicePixelsCount / canvas_height) * canvas_height;

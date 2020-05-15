@@ -67,6 +67,7 @@ JSSpeccy.UI = function(opts) {
 	});
 
 	$('button.joystick_keys', toolbar).click(function() {
+		stopStartButton.click();
 		showPanel('.joystick_keys');
 	});
 	
@@ -139,7 +140,7 @@ JSSpeccy.UI = function(opts) {
 	var panels = [];
 
 	function showPanel(selector) {
-		$('.panel', container).not(selector).hide();
+		$('.panel', container).hide();
 		$('.panel', container).filter(selector).show();
 		controller.deactivateKeyboard();
 	}

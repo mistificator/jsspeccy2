@@ -27,13 +27,13 @@
 		</script> -->
 
 		<script>
-			$(function() {
+			$(document).ready(function() {
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", {
 					autostart: true,
                     applyContention: false,
                     collectOpcodesStats: false,                   
                     cpuFpsLimit: 50,
-					panelYWidth: $(".toolbar").height() * 0.7 // wtf?
+					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05 // wtf?
 				});
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
@@ -124,7 +124,6 @@
 				<div class= "toolbar-div">
 					<ul class="toolbar">
 						<li><button class="stop-start" title="Stop / start">stop / start</button></li>
-						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
 						<li><button class="audio" title="Audio on/off">audio on/off</button></li>
 						<li><button class="open" title="Open file">open file</button></li>
 						<li><button class="joystick_keys" title="Redefine joystick">redefine joystick</button></li>
@@ -142,10 +141,12 @@
 			                    <select id="preinstalled-games" style="width: 100%"></select>
 	                    	</div>
 						</li>
+						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
 					</ul>			
 				</div>				
 			</div>
             <div id="jsspeccy-fps"></div>
+			<div id="typer-div"><input type="text" id="typer"></input></div>
 			<div class="panel open-file">
 				<button class="close">close</button>
 				<div id="load_file">
@@ -201,7 +202,7 @@
                 <button class="close">close</button>
                 <br/>
                 <p>Redefine joystick</p>
-                <select style="width:100%;" id="selcontrol" onchange="$.setJoystick(document.getElementById('selcontrol').value)">
+                <select id="selcontrol" onchange="$.setJoystick(document.getElementById('selcontrol').value)">
                     <option value="&#x2191;,&#x2193;,&#x2190;,&#x2192;,0,Enter" selected="">CURSOR</option>
                     <option value="Q,A,O,P,M,Q">Q,A,O,P,M</option>                    
                     <option value="Q,A,O,P,M,Space">Q,A,O,P,M,Space</option>                    
