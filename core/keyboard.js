@@ -1,3 +1,18 @@
+/* LG Remote codes 
+
+Left	0x25
+Up	0x26
+Right	0x27
+Down	0x28
+OK	0x0D
+Back	0x1CD
+Red	0x193
+Green	0x194
+Yellow	0x195
+Blue	0x196
+
+*/
+
 JSSpeccy.Keyboard = function() {
 	var self = {};
 	self.active = true;

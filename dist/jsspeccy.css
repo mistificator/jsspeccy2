@@ -190,7 +190,12 @@
     position: fixed;
     text-align: left;
     bottom: 0px;
-    left: 40%;
+    left: 45%;
+    opacity: 0.4;
+}
+
+.jsspeccy #typer-div:hover, .jsspeccy #typer-div:focus-within  {
+    opacity: 1;
 }
 
 .jsspeccy #typer {
@@ -202,7 +207,8 @@
     background-size: 100% 100%;
     background-position: center center;
 	background-repeat: no-repeat;
-    color: transparent; /* cursor invisible */
+    color: white; 
+    caret-color: transparent; /* cursor invisible */
 }
 
 .jsspeccy .padblock {

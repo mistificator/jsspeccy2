@@ -340,7 +340,7 @@ JSSpeccy.UI = function(opts) {
   var saved_keypress = document.onkeypress;
   $("#typer", container).click(function() {
       if (controller.keyboard().active) {
-//          console.log("focus in on-screen keyboard");
+          console.log("focus in on-screen keyboard");
           saved_keypress = document.onkeypress;
           document.onkeypress = function() { return true; }
           controller.keyboard().active = false;
@@ -351,16 +351,36 @@ JSSpeccy.UI = function(opts) {
       }
   });
   $("#typer", container).keydown(function(e) {
-//      console.log(e.key + " " + e.keyCode);
+      console.log(e.key + " " + e.keyCode);
       $("#typer", container).val("");
       controller.keyboard().registerKeyDown(e.keyCode);
-      setTimeout(function() {controller.keyboard().registerKeyUp(e.keyCode); }, 20);  
+      setTimeout(function() { controller.keyboard().registerKeyUp(e.keyCode); }, 20);  
   });
   $("#typer", container).focusout(function() {
-//      console.log("focus out on-screen keyboard");
+      console.log("focus out on-screen keyboard");
+      $("#typer", container).val("");
       document.onkeypress = saved_keypress;
       controller.keyboard().active = true;
   });
+  
+  /* webOS virtual keyboard management */
+  if (isSmartTV) {
+    document.addEventListener("keyboardStateChange", function() {
+      var visibility = event.detail.visibility;
+      if (!visibility) {
+        $("#typer", container).blur();
+      }
+    });  
+    document.addEventListener("keydown", function(e) {
+      console.log(e.key + " " + e.keyCode);
+      if (e.keyCode == 0x196) {// LG remote blue button
+        $("#typer", container).click();
+      }
+      if (e.keyCode == 0x1CD) {// LG remote back button
+        $("#typer", container).blur();
+      }
+    });  
+  }
   
   /* FPS update */
   setInterval(function() {
@@ -372,6 +392,7 @@ JSSpeccy.UI = function(opts) {
   history.pushState(null, null, location.href);
   window.onpopstate = function () {
       history.go(1);
+      $("#typer", container).blur();
   };
   
 	return self;
