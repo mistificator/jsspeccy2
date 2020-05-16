@@ -49,42 +49,6 @@
 	position: absolute;
 }
 
-@media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
-    .jsspeccy .toolbar button {
-        width: 64px;
-        height: 64px;
-    }
-    .jsspeccy #preinstalled-games {
-        height: 64px;
-        font-size: 18pt;
-        padding-left: 64px;
-    }
-}
-
-@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-    .jsspeccy .toolbar button {
-        width: 24px;
-        height: 24px;
-    }
-    .jsspeccy #preinstalled-games {
-        height: 24px;
-        font-size: 9pt;
-        padding-left: 24px;
-    }    
-}
-
-@media (-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi) {
-    .jsspeccy .toolbar button {
-        width: 20px;
-        height: 20px;
-    }
-    .jsspeccy #preinstalled-games {
-        height: 20px;
-        font-size: 5pt;
-        padding-left: 20px;
-    }    
-}
-
 .jsspeccy .toolbar button {
 	text-indent: -5000px;
 	direction: ltr;
@@ -238,7 +202,6 @@
     background-size: 100% 100%;
     background-position: center center;
 	background-repeat: no-repeat;
-	font-size: 300%;
     color: transparent; /* cursor invisible */
 }
 
@@ -277,6 +240,18 @@
 }
 
 @media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
+    .jsspeccy #typer {
+        font-size: 300%;
+    }
+    .jsspeccy .toolbar button {
+        width: 64px;
+        height: 64px;
+    }
+    .jsspeccy #preinstalled-games {
+        height: 64px;
+        font-size: 18pt;
+        padding-left: 64px;
+    }
     .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
         font-size: 18pt;
         border-radius: 15px;
@@ -304,6 +279,15 @@
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    .jsspeccy .toolbar button {
+        width: 24px;
+        height: 24px;
+    }
+    .jsspeccy #preinstalled-games {
+        height: 24px;
+        font-size: 9pt;
+        padding-left: 24px;
+    }    
     .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
         font-size: 14pt;
         border-radius: 10px;
@@ -331,6 +315,9 @@
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.75), (min-resolution: 168dpi) {
+    .jsspeccy #typer {
+        font-size: 200%;
+    }
     .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
         font-size: 9pt;
         border-radius: 7px;
@@ -358,6 +345,18 @@
 }
 
 @media (-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi) {
+    .jsspeccy #typer {
+        font-size: 100%;
+    }
+    .jsspeccy .toolbar button {
+        width: 20px;
+        height: 20px;
+    }
+    .jsspeccy #preinstalled-games {
+        height: 20px;
+        font-size: 5pt;
+        padding-left: 20px;
+    }    
     .jsspeccy #jsspeccy-fps {
         font-size: 3pt;
     }

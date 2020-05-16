@@ -351,13 +351,10 @@ JSSpeccy.UI = function(opts) {
       }
   });
   $("#typer", container).keydown(function(e) {
-      controller.keyboard().registerKeyDown(e.keyCode);
-      $("#typer", container).val("");
-  });
-  $("#typer", container).keyup(function(e) {
-      controller.keyboard().registerKeyUp(e.keyCode);
-      $("#typer", container).val("");
 //      console.log(e.key + " " + e.keyCode);
+      $("#typer", container).val("");
+      controller.keyboard().registerKeyDown(e.keyCode);
+      setTimeout(function() {controller.keyboard().registerKeyUp(e.keyCode); }, 20);  
   });
   $("#typer", container).focusout(function() {
 //      console.log("focus out on-screen keyboard");
