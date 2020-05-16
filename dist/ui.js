@@ -350,11 +350,25 @@ JSSpeccy.UI = function(opts) {
           $("#typer", container).blur();
       }
   });
+  var keydown_code = -1;
+  function downUp(keydown_code) {
+    $("#typer", container).val("");
+    controller.keyboard().registerKeyDown(keydown_code);
+    setTimeout(function() { controller.keyboard().registerKeyUp(keydown_code); }, 20);  
+  }
   $("#typer", container).keydown(function(e) {
-      console.log(e.key + " " + e.keyCode);
-      $("#typer", container).val("");
-      controller.keyboard().registerKeyDown(e.keyCode);
-      setTimeout(function() { controller.keyboard().registerKeyUp(e.keyCode); $("#typer", container).val(e.keyCode.toString(16)); }, 20);  
+      keydown_code = e.keyCode;
+      console.log(e.key + " " + keydown_code);
+      if (keydown_code != 0xE5) {
+        downUp(keydown_code);
+      }
+  });
+  $("#typer", container).keypress(function(e) {
+    if (keydown_code == 0xE5) {
+      keydown_code = e.which;
+      console.log(e.key + " " + keydown_code);
+      downUp(keydown_code);
+    }
   });
   $("#typer", container).focusout(function() {
       console.log("focus out on-screen keyboard");
