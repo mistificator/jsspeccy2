@@ -354,7 +354,7 @@ JSSpeccy.UI = function(opts) {
       console.log(e.key + " " + e.keyCode);
       $("#typer", container).val("");
       controller.keyboard().registerKeyDown(e.keyCode);
-      setTimeout(function() { controller.keyboard().registerKeyUp(e.keyCode); }, 20);  
+      setTimeout(function() { controller.keyboard().registerKeyUp(e.keyCode); $("#typer", container).val(e.keyCode.toString(16)); }, 20);  
   });
   $("#typer", container).focusout(function() {
       console.log("focus out on-screen keyboard");
