@@ -170,9 +170,17 @@
 }
 
 .jsspeccy .joystick_keys select, label{
-	font-size: 18pt;	
+	font-size: 16pt;	
     word-wrap: break-word;
     margin: 3px;
+}
+
+.jsspeccy .joystick_keys .selcontrol {
+    width: 50%;
+}
+
+.jsspeccy .joystick_keys .selcontrol_options {
+    width: 30%;
 }
 
 .jsspeccy .open-file  {
@@ -218,15 +226,20 @@
     position: fixed;
     text-align: left;
     bottom: 0px;
-    left: 50%;
+    left: 40%;
 }
 
 .jsspeccy #typer {
 	text-align: center;
     width: 20%;
-	font-size: 20pt;
+	border: 2px solid gray;
 	background-color: transparent;
-	border: 2px solid blue;
+    background-image: url(images/keyboard.jpg);
+    background-size: 100% 100%;
+    background-position: center center;
+	background-repeat: no-repeat;
+	font-size: 300%;
+    color: transparent; /* cursor invisible */
 }
 
 .jsspeccy .padblock {
@@ -234,10 +247,6 @@
     position: fixed;
     bottom: 0px;   
     display: block;
-}
-
-*:focus {
-    outline: 0;
 }
 
 .jsspeccy #pad_block1 {

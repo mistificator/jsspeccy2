@@ -28,3 +28,7 @@ html {
 * {
 	font-family: PressStart2P;	
 }	
+
+*:focus {
+    outline: 0;
+}

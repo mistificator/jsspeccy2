@@ -39,82 +39,7 @@
 					container: "jsspeccy",
 					controller: jsspeccy
 				});
-				ui.loadPreinstalledGames();
-				$("#preinstalled-games").change(function() {
-					var filename = $(this).val();
-					if (filename) {
-						jsspeccy.loadFromUrl(
-							filename,
-							{"autoload": true}
-						);
-					}
-                    jsspeccy.setKeymap($(this).children(":selected").attr("id") || "");
-				});
-				setInterval(function() {
-					$(".fps").text(jsspeccy.getFps().toFixed(1));
-                    $(".cfps").text(jsspeccy.getCfps().toFixed(1));	                    
-				}, 1000);
-                function addKeySelect(id, code, label, initial) {
-                    var opt = document.createElement('option')
-                    opt.appendChild(document.createTextNode(label));
-                    opt.value = code;
-                    if (label == initial) opt.selected = true;
-                    document.getElementById(id).appendChild(opt);
-                }
-                function populateJoystickKeySelect(id, initial) {
-                    document.getElementById(id).innerHTML = '';
-                    addKeySelect(id, 38, '\u2191', initial);
-                    addKeySelect(id, 40, '\u2193', initial);
-                    addKeySelect(id, 37, '\u2190', initial);
-                    addKeySelect(id, 39, '\u2192', initial);
-                    addKeySelect(id, 32, 'Space', initial);
-                    addKeySelect(id, 13, 'Enter', initial);
-                    addKeySelect(id, 17, 'Symbol Shift', initial);
-                    for (i = 48; i < 58; i++) {
-                        addKeySelect(id, i, String.fromCharCode(i), initial);
-                    }
-                    for (i = 65; i < 91; i++) {
-                        addKeySelect(id, i, String.fromCharCode(i), initial);
-                    }
-                }
-                $.setJoystick = function(keys) {
-                    var keysarr = keys.split(',');
-                    up = keysarr[0];
-                    down = keysarr[1];
-                    left = keysarr[2];
-                    right = keysarr[3];
-                    fire = keysarr[4];
-                    action = keysarr[5];
-                    populateJoystickKeySelect('select_key_up', up);
-                    populateJoystickKeySelect('select_key_down', down);
-                    populateJoystickKeySelect('select_key_left', left);
-                    populateJoystickKeySelect('select_key_right', right);
-                    populateJoystickKeySelect('select_key_fire', fire);
-                    populateJoystickKeySelect('select_key_action', action);		
-                }      
-                $.setJoystick(document.getElementById('selcontrol').value);                
-                $.padTouch = function(selectId,obj) {
-                    obj.style.background='#000000';
-                    var select = document.getElementById(selectId);
-                    var opt = select.options[select.selectedIndex];
-                    jsspeccy.keyboard().registerKeyDown(opt.value);
-                }
-                $.padUntouch = function(selectId,obj) {
-                    obj.style.background='#777777';
-                    var select = document.getElementById(selectId);
-                    var opt = select.options[select.selectedIndex];
-                    jsspeccy.keyboard().registerKeyUp(opt.value);
-                }
-                $.keyTouch = function(code,obj) {
-                    obj.style.background='#AAAAAA';
-                    obj.style.color='#FFFFFF';
-                    jsspeccy.keyboard().registerKeyDown(code);
-                }
-                $.keyUntouch = function(code,obj) {
-                    obj.style.background='#EEEEEE';
-                    obj.style.color='#555555';
-                    jsspeccy.keyboard().registerKeyUp(code);
-                }
+				ui.loadPreinstalledGames();            
 			});
 		</script>
 	</head>
@@ -213,22 +138,22 @@
                 </select>                
                 <ul>
                     <li>  
-                        <div><label for='select_key_up'>&uarr;</label><select id='select_key_up'></select></div>
+                        <div><label for='select_key_up'>&uarr;</label><select id='select_key_up' class="selcontrol_options"></select></div>
                     </li>
                     <li>          
-                        <div><label for='select_key_down'>&darr;</label><select id='select_key_down'></select></div>
+                        <div><label for='select_key_down'>&darr;</label><select id='select_key_down' class="selcontrol_options"></select></div>
                     </li>
                     <li>
-                        <div><label for='select_key_left'>&larr;</label><select id='select_key_left'></select></div>
+                        <div><label for='select_key_left'>&larr;</label><select id='select_key_left' class="selcontrol_options"></select></div>
                     </li>
                     <li>                   
-                        <div><label for='select_key_right'>&rarr;</label><select id='select_key_right'></select></div>
+                        <div><label for='select_key_right'>&rarr;</label><select id='select_key_right' class="selcontrol_options"></select></div>
                     </li>
                     <li>
-                        <div><label for='select_key_fire'>A</label><select id='select_key_fire'></select></div>
+                        <div><label for='select_key_fire'>A</label><select id='select_key_fire' class="selcontrol_options"></select></div>
                     </li>
                     <li>
-                        <div><label for='select_key_fire'>B</label><select id='select_key_action'></select></div>
+                        <div><label for='select_key_fire'>B</label><select id='select_key_action' class="selcontrol_options"></select></div>
                     </li>
                 </ul>
             </div>            

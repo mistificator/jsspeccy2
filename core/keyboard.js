@@ -20,8 +20,10 @@ JSSpeccy.Keyboard = function() {
 		if (keyCode.caps) keyStates[0] &= 0xfe;
 	}
 	function keyUp(evt) {
-		self.registerKeyUp(evt.keyCode);
-		if (self.active && !evt.metaKey) return false;
+    if (self.active) {
+    	self.registerKeyUp(evt.keyCode);
+      if (!evt.metaKey) return false;
+    }    
 	}
 	self.registerKeyUp = function(keyNum) {
 		var keyCode = keyCodes[keyNum];

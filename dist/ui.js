@@ -45,7 +45,7 @@ JSSpeccy.UI = function(opts) {
 	$('button.reset', toolbar).click(function() {
 		controller.reset();
 		controller.setKeymap("");
-		$("#preinstalled-games").prop("selectedIndex", 0);
+		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
 	var audioButton = $('button.audio', toolbar);
@@ -72,16 +72,40 @@ JSSpeccy.UI = function(opts) {
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
-	$(".jsspeccy #jsspeccy-fps").html(fps_html);
+	$("#jsspeccy-fps", container).html(fps_html);
 	
-	var checkUserAgent = function(what) {
-		var deviceAgent = navigator.userAgent.toLowerCase();
-		var deviceMatch = deviceAgent.match("(" + what + ")");
-		return deviceMatch && Array.isArray(deviceMatch) && deviceMatch.length > 0;
-	}
-	
-	var isSmartTV = checkUserAgent("webos");
-	var isMobile = checkUserAgent("android|ios");
+  function checkUserAgent() {
+    var ua = navigator.userAgent.toLowerCase(), os = {},
+    android = ua.match(/(android)\s+([\d.]+)/),
+    iphone = ua.match(/(iphone\sos)\s([\d_]+)/),
+    ipad = ua.match(/(ipad).*os\s([\d_]+)/),
+    webos = ua.match(/(web[o0]s)/), // 0! Crazy bastards.
+    windows = ua.match(/(windows)\D+([\d.]+)/),
+    linux = ua.match(/(linux)\s+([\d.]+)/),
+    not_detected = ua.match(/\((\w+)\;/);
+
+    if (android) os.name = "Android", os.version = android[2] || "";
+    else
+    if (iphone) os.name = "iOS", os.version = iphone[2].replace(/_/g, ".") || "";
+    else
+    if (ipad) os.name = "iOS", os.version = ipad[2].replace(/_/g, ".") || "";
+    else
+    if (webos) os.name = "webOS", os.version = "";
+    else
+    if (windows) os.name = "Windows", os.version = windows[2] || "";
+    else
+    if (linux) os.name = "Linux", os.version = linux[2] || "";
+    else
+      os.name = (not_detected ? not_detected[1] : "Not detected"), os.version = "";
+    
+    return os;
+  }  
+
+  var os = checkUserAgent();
+  var isWindows = (os.name == "Windows") || (new URL(document.URL)).searchParams.get("is_windows") === "on";
+  var isLinux = (os.name == "Linux") || (new URL(document.URL)).searchParams.get("is_linux") === "on";
+	var isSmartTV = (os.name == "webOS") || (new URL(document.URL)).searchParams.get("is_smarttv") === "on";
+	var isMobile = (os.name == "Android") || (os.name == "iOS") || (new URL(document.URL)).searchParams.get("is_mobile") === "on";
 	$('button.deviceinfo', toolbar).click(function() {
 		$('.panel.information #content').html(
 				"<br/>Device information" + 
@@ -89,9 +113,20 @@ JSSpeccy.UI = function(opts) {
 				"<p>" + fps_html + "</p>" +
 				"<p>Screen size: " + window.screen.width + "x" + window.screen.height + "<br/>" +
 				"Device pixel ratio: " + window.devicePixelRatio + "</p>" +
-				"<p>URL: " + document.URL + "</p>");
+				"<p>URL: " + document.URL + "</p>" + 
+        "<p>Platform: " + (isSmartTV ? "SmartTV" : (isMobile ? "Mobile" : (isWindows ? "Windows" : (isLinux ? "Linux" : "Unknown")))) + "</p>" +
+        "<p>OS: " + os.name + " " + os.version + "</p>"
+        );
 		showPanel('.information');
 	});
+  
+  
+  if (!isSmartTV && !isMobile && (new URL(document.URL)).searchParams.get("typer") !== "on") {
+    $('#typer-div', container).hide();
+  }
+  if (!isMobile && (new URL(document.URL)).searchParams.get("padblock") !== "on") {
+    $('.padblock', container).hide();
+  }
 	
 	var isFullscreen = false;
 	var disableFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.msExitFullscreen || function() {};
@@ -103,16 +138,19 @@ JSSpeccy.UI = function(opts) {
 			if (!isFullscreen) {
 				enableFullscreen.call(fullscreenContext);
 				isFullscreen = true;
-			  } else {
+			} else {
 				disableFullscreen.call(document); 
 				isFullscreen = false;
-			  }
+			}
 		});		
 	}
 	else {
 		$('button.fullscreen', toolbar).hide();
 	}
 	
+  if (isSmartTV && (new URL(document.URL)).searchParams.get("joystick_keys") !== "on") {
+		$('button.joystick_keys', toolbar).hide();
+	}
 	var selectModel = $('select.select-model', toolbar);
 	$('select.select-model', toolbar).hide();
 	var modelsById = {};
@@ -162,8 +200,8 @@ JSSpeccy.UI = function(opts) {
 		fileSelect.val('');
 		hidePanels();
 	});
-	if (isSmartTV) {
-		$(".jsspeccy #load_file").hide();
+	if (isSmartTV && (new URL(document.URL)).searchParams.get("load_file") !== "on") {
+		$("#load_file", container).hide();
 	}
 	
 	var urlField = openFilePanel.find('input[type="url"]');
@@ -185,7 +223,8 @@ JSSpeccy.UI = function(opts) {
 	else {
 		urlField.val(path_url);	
 	}
-	
+
+  /* Preinstalled games routines */
 	var loadScript = function (url, callback) {
 		var request = new XMLHttpRequest();
 		request.addEventListener('load', function(e) {
@@ -198,20 +237,20 @@ JSSpeccy.UI = function(opts) {
 	var addSelectEntry = function(data) {		
 		var tapes = eval("(function() { return " + data + ";})()");
 		for (var [key, value] of Object.entries(tapes)) {
-			$("#preinstalled-games")
+			$("#preinstalled-games", toolbar)
 					.append($("<option></option>")
                     .attr("value", Object.keys(value)[0])
-                    .attr("id", Object.values(value)[0])
+                    .attr("id", isSmartTV ? Object.values(value)[0] : "")
                     .text(key)); 
 		}	
 	};
 	
 	self.loadPreinstalledGames = function() {
 		(function() {
-			$("#preinstalled-games")
+			$("#preinstalled-games", container)
 			.empty()
 			.append($("<option></option>")
-	        .text("PLAY NOW")); 				
+	        .text("PLAY NOW")); 
 		})();
 		loadScript("tapes.js?" + performance.now(), addSelectEntry);
 		if (isSmartTV) {
@@ -219,5 +258,124 @@ JSSpeccy.UI = function(opts) {
 		}		
 	};
 	
+  $("#preinstalled-games", toolbar).change(function() {
+    if ($("#preinstalled-games", toolbar).prop('selectedIndex') === 0) {
+      $('button.reset', toolbar).click();
+      return;
+    }
+    var filename = $(this).val();
+    if (filename) {
+      controller.loadFromUrl(
+        filename,
+        {"autoload": true}
+      );
+      controller.setKeymap($(this).children(":selected").attr("id") || "");
+    }
+  });
+  
+  /* Padblock routines */
+  function addKeySelect(id, code, label, initial) {
+      var opt = document.createElement('option')
+      opt.appendChild(document.createTextNode(label));
+      opt.value = code;
+      if (label == initial) opt.selected = true;
+      document.getElementById(id).appendChild(opt);
+  }
+  function populateJoystickKeySelect(id, initial) {
+      document.getElementById(id).innerHTML = '';
+      addKeySelect(id, 38, '\u2191', initial);
+      addKeySelect(id, 40, '\u2193', initial);
+      addKeySelect(id, 37, '\u2190', initial);
+      addKeySelect(id, 39, '\u2192', initial);
+      addKeySelect(id, 32, 'Space', initial);
+      addKeySelect(id, 13, 'Enter', initial);
+      addKeySelect(id, 17, 'Symbol Shift', initial);
+      for (i = 48; i < 58; i++) {
+          addKeySelect(id, i, String.fromCharCode(i), initial);
+      }
+      for (i = 65; i < 91; i++) {
+          addKeySelect(id, i, String.fromCharCode(i), initial);
+      }
+  }
+  $.setJoystick = function(keys) {
+      var keysarr = keys.split(',');
+      up = keysarr[0];
+      down = keysarr[1];
+      left = keysarr[2];
+      right = keysarr[3];
+      fire = keysarr[4];
+      action = keysarr[5];
+      populateJoystickKeySelect('select_key_up', up);
+      populateJoystickKeySelect('select_key_down', down);
+      populateJoystickKeySelect('select_key_left', left);
+      populateJoystickKeySelect('select_key_right', right);
+      populateJoystickKeySelect('select_key_fire', fire);
+      populateJoystickKeySelect('select_key_action', action);		
+  }      
+  $.setJoystick(document.getElementById('selcontrol').value);                
+  $.padTouch = function(selectId,obj) {
+      obj.style.background='#000000';
+      var select = document.getElementById(selectId);
+      var opt = select.options[select.selectedIndex];
+      controller.keyboard().registerKeyDown(opt.value);
+  }
+  $.padUntouch = function(selectId,obj) {
+      obj.style.background='#777777';
+      var select = document.getElementById(selectId);
+      var opt = select.options[select.selectedIndex];
+      controller.keyboard().registerKeyUp(opt.value);
+  }
+  $.keyTouch = function(code,obj) {
+      obj.style.background='#AAAAAA';
+      obj.style.color='#FFFFFF';
+      controller.keyboard().registerKeyDown(code);
+  }
+  $.keyUntouch = function(code,obj) {
+      obj.style.background='#EEEEEE';
+      obj.style.color='#555555';
+      controller.keyboard().registerKeyUp(code);
+  }
+  
+  /* On-screen keyboard routines */
+  var saved_keypress = document.onkeypress;
+  $("#typer", container).click(function() {
+      if (controller.keyboard().active) {
+//          console.log("focus in on-screen keyboard");
+          saved_keypress = document.onkeypress;
+          document.onkeypress = function() { return true; }
+          controller.keyboard().active = false;
+          $("#typer", container).focus();
+      }
+      else {
+          $("#typer", container).blur();
+      }
+  });
+  $("#typer", container).keydown(function(e) {
+      controller.keyboard().registerKeyDown(e.keyCode);
+      $("#typer", container).val("");
+  });
+  $("#typer", container).keyup(function(e) {
+      controller.keyboard().registerKeyUp(e.keyCode);
+      $("#typer", container).val("");
+//      console.log(e.key + " " + e.keyCode);
+  });
+  $("#typer", container).focusout(function() {
+//      console.log("focus out on-screen keyboard");
+      document.onkeypress = saved_keypress;
+      controller.keyboard().active = true;
+  });
+  
+  /* FPS update */
+  setInterval(function() {
+      $(".fps").text(controller.getFps().toFixed(1));
+      $(".cfps").text(controller.getCfps().toFixed(1));
+  }, 1000);      
+
+  /* Kill back button */
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+      history.go(1);
+  };
+  
 	return self;
 };
