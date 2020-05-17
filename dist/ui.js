@@ -352,28 +352,31 @@ JSSpeccy.UI = function(opts) {
   });
   var keydown_code = 0xE5;
   function downUp(keydown_code) {
-    document.getElementById("typer").value = "";
+    $("#typer", container).val("");
     controller.keyboard().registerKeyDown(keydown_code);
     setTimeout(function() { controller.keyboard().registerKeyUp(keydown_code); }, 20);  
   }
   $("#typer", container).keydown(function(e) {
       keydown_code = e.keyCode;
-      if (keydown_code != 0xE5) {
+      if (keydown_code !== 0xE5) {
         console.log(e.key + " " + keydown_code);
         downUp(keydown_code);
+        keydown_code = 0xE5;
       }
   });
   $("#typer", container).keypress(function(e) {
-    if (keydown_code == 0xE5) {
+    if (keydown_code === 0xE5) {
       keydown_code = e.which;
       console.log(e.key + " " + keydown_code);
       downUp(keydown_code);
     }
-    keydown_code = 0xE5;
+    else {
+      keydown_code = 0xE5;
+    }
   });
   $("#typer", container).focusout(function() {
       console.log("focus out on-screen keyboard");
-      document.getElementById("typer").value = "";
+      $("#typer", container).val("");
       document.onkeypress = saved_keypress;
       controller.keyboard().active = true;
   });
