@@ -356,13 +356,12 @@ JSSpeccy.UI = function(opts) {
     console.log(printable + " " + code);
     $("#typer", container).val("");
     controller.keyboard().registerKeyDown(code);
-    setTimeout(function() { controller.keyboard().registerKeyUp(code); }, 20);  
+    setTimeout(function() { controller.keyboard().registerKeyUp(code); $("#typer", container).val(code); }, 20);  
   }
   $("#typer", container).keydown(function(e) {
       keydown_code = e.keyCode;
       if (keydown_code !== android_keydown_code) {
         downUp(keydown_code, e.key);
-        keydown_code = android_keydown_code;
       }
   });
   $("#typer", container).on("input", function(e) {
