@@ -350,28 +350,28 @@ JSSpeccy.UI = function(opts) {
           $("#typer", container).blur();
       }
   });
-  var keydown_code = 0xE5;
-  function downUp(keydown_code) {
+  const android_keydown_code = 0xE5;
+  var keydown_code = android_keydown_code;
+  function downUp(code, printable) {
+    console.log(printable + " " + code);
     $("#typer", container).val("");
-    controller.keyboard().registerKeyDown(keydown_code);
-    setTimeout(function() { controller.keyboard().registerKeyUp(keydown_code); }, 20);  
+    controller.keyboard().registerKeyDown(code);
+    setTimeout(function() { controller.keyboard().registerKeyUp(code); }, 20);  
   }
   $("#typer", container).keydown(function(e) {
       keydown_code = e.keyCode;
-      if (keydown_code !== 0xE5) {
-        console.log(e.key + " " + keydown_code);
-        downUp(keydown_code);
-        keydown_code = 0xE5;
+      if (keydown_code !== android_keydown_code) {
+        downUp(keydown_code, e.key);
+        keydown_code = android_keydown_code;
       }
   });
-  $("#typer", container).keypress(function(e) {
-    if (keydown_code === 0xE5) {
-      keydown_code = e.which;
-      console.log(e.key + " " + keydown_code);
-      downUp(keydown_code);
+  $("#typer", container).on("input", function(e) {
+    if (keydown_code === android_keydown_code) {
+      keydown_code = e.target.value.toUpperCase().charCodeAt(0);
+      downUp(keydown_code, e.target.value);
     }
     else {
-      keydown_code = 0xE5;
+      keydown_code = android_keydown_code;
     }
   });
   $("#typer", container).focusout(function() {
