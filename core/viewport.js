@@ -49,19 +49,19 @@ JSSpeccy.Viewport = function(opts) {
 		var width = (devicePixelsCount / canvas_height) * canvas_width;
 		var height = (devicePixelsCount / canvas_height) * canvas_height;
     var scale = Math.max(Math.max(width / window.screen.width, height / window.screen.height), 1);
-    width = width / scale;
-    height = height / scale;
+    width = (width / scale).toFixed(0);
+    height = (height / scale).toFixed(0);
 	
 		container.style.width = width  + 'px';
-		container.style.marginLeft = (- width / 2)  + 'px';
+		container.style.marginLeft = (- width / 2).toFixed(0)  + 'px';
 			
 		self.canvas.style.width = width + 'px';
 		self.canvas.style.height = height + 'px';
-		statusIcon.style.top = (height / 2 - 32) + 'px';
-		statusIcon.style.left = (width / 2 - 32) + 'px';
+		statusIcon.style.top = (height / 2 - 32).toFixed(0) + 'px';
+		statusIcon.style.left = (width / 2 - 32).toFixed(0) + 'px';
 		
 		self.canvas.width = canvas_width;
-		self.canvas.height = canvas_height;		
+		self.canvas.height = canvas_height;
 	};
 	
 	self.container = function() {
