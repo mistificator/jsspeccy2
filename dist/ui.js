@@ -354,9 +354,8 @@ JSSpeccy.UI = function(opts) {
   var keydown_code = android_keydown_code;
   function downUp(code, printable) {
     console.log(printable + " " + code);
-    $("#typer", container).val("");
     controller.keyboard().registerKeyDown(code);
-    setTimeout(function() { controller.keyboard().registerKeyUp(code); $("#typer", container).val(code); }, 20);  
+    setTimeout(function() { controller.keyboard().registerKeyUp(code); $("#typer", container).val(printable.length == 1 ? printable : ""); }, 20);  
   }
   $("#typer", container).keydown(function(e) {
       keydown_code = e.keyCode;
@@ -366,7 +365,7 @@ JSSpeccy.UI = function(opts) {
   });
   $("#typer", container).on("input", function(e) {
     if (keydown_code === android_keydown_code) {
-      keydown_code = e.target.value.toUpperCase().charCodeAt(0);
+      keydown_code = e.target.value.toUpperCase().charCodeAt(e.target.value.length - 1);
       downUp(keydown_code, e.target.value);
     }
     else {
