@@ -118,16 +118,8 @@ JSSpeccy.UI = function(opts) {
         "<p>OS: " + os.name + " " + os.version + "</p>"
         );
 		showPanel('.information');
-	});
-  
-  
-  if (!isSmartTV && !isMobile && (new URL(document.URL)).searchParams.get("typer") !== "on") {
-    $('#typer-div', container).hide();
-  }
-  if (!isMobile && (new URL(document.URL)).searchParams.get("padblock") !== "on") {
-    $('.padblock', container).hide();
-  }
-	
+	});   
+
 	var isFullscreen = false;
 	var disableFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.msExitFullscreen || function() {};
 	var fullscreenContext = document.documentElement;
@@ -335,14 +327,21 @@ JSSpeccy.UI = function(opts) {
       obj.style.color='#555555';
       controller.keyboard().registerKeyUp(code);
   }
-  
+
+  if (!isMobile && (new URL(document.URL)).searchParams.get("padblock") !== "on") {
+    $('.padblock', container).hide();
+  }
+    
   /* On-screen keyboard routines */
   var saved_keypress = document.onkeypress;
+  var saved_padblock_visibility = false;
   $("#typer", container).click(function() {
       if (controller.keyboard().active) {
           console.log("focus in on-screen keyboard");
           saved_keypress = document.onkeypress;
           document.onkeypress = function() { return true; }
+          saved_padblock_visibility = $('.padblock', container).is(":visible");
+          $('.padblock', container).hide();
           controller.keyboard().active = false;
           $("#typer", container).focus();
       }
@@ -376,8 +375,15 @@ JSSpeccy.UI = function(opts) {
       console.log("focus out on-screen keyboard");
       $("#typer", container).val("");
       document.onkeypress = saved_keypress;
+      if (saved_padblock_visibility) {
+        $('.padblock', container).show();
+      }
       controller.keyboard().active = true;
   });
+
+  if (!isSmartTV && !isMobile && (new URL(document.URL)).searchParams.get("typer") !== "on") {
+    $('#typer-div', container).hide();
+  }  
   
   /* webOS virtual keyboard management */
   if (isSmartTV) {
