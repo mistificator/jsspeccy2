@@ -29,11 +29,12 @@
 		<script>
 			$(document).ready(function() {
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", {
-					autostart: true,
-                    applyContention: false,
+					autostart: false,
+                    applyContention: true,
                     collectOpcodesStats: false,                   
                     cpuFpsLimit: 50,
-					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05 // wtf?
+					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05, // wtf?
+					border: 1 // default is 4
 				});
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",

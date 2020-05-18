@@ -4,7 +4,7 @@ JSSpeccy.Display = function(opts) {
 	var viewport = opts.viewport;
 	var memory = opts.memory;
 	var model = opts.model || JSSpeccy.Spectrum.MODEL_128K;
-	var border = opts.borderEnabled;
+	var border = opts.border;
 	var cpuFpsLimit = opts.cpuFpsLimit;
 
 	var checkerboardFilterEnabled = opts.settings.checkerboardFilter.get();
@@ -44,10 +44,10 @@ JSSpeccy.Display = function(opts) {
 	}
 
 
-	var LEFT_BORDER_CHARS = 4;
-	var RIGHT_BORDER_CHARS = 4;
-	var TOP_BORDER_LINES = 24;
-	var BOTTOM_BORDER_LINES = 24;
+	var LEFT_BORDER_CHARS = Math.round(Math.min(Math.max(border, 0), 4));
+	var RIGHT_BORDER_CHARS = Math.round(Math.min(Math.max(border, 0), 4));
+	var TOP_BORDER_LINES = Math.round(Math.min(Math.max(border * 0.75, 0), 3) * 8);
+	var BOTTOM_BORDER_LINES = Math.round(Math.min(Math.max(border * 0.75, 0), 3) * 8);
 	var TSTATES_PER_CHAR = 4;
 	
 	var TSTATES_UNTIL_ORIGIN = model.tstatesUntilOrigin;

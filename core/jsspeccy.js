@@ -288,9 +288,9 @@ function JSSpeccy(container, opts) {
 				model: newModel,
 				soundBackend: soundBackend,
 				controller: self,
-				borderEnabled: ('border' in opts) ? opts.border : true,
-        collectOpcodesStats: opts.collectOpcodesStats,
-        cpuFpsLimit: opts.cpuFpsLimit
+				border: ('border' in opts) ? opts.border : 4,
+				collectOpcodesStats: opts.collectOpcodesStats,
+				cpuFpsLimit: opts.cpuFpsLimit
 			});
 			currentModel = newModel;
 			self.onChangeModel.trigger(newModel);

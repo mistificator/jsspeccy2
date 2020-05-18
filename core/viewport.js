@@ -47,10 +47,10 @@ JSSpeccy.Viewport = function(opts) {
 	self.setResolution = function(canvas_width, canvas_height) {	
 		var devicePixelsCount = (window.screen.width > window.screen.height) ? window.screen.height - panelYWidth : window.screen.width - panelXWidth;  
 		var width = (devicePixelsCount / canvas_height) * canvas_width;
-		var height = (devicePixelsCount / canvas_height) * canvas_height;
-    var scale = Math.max(Math.max(width / window.screen.width, height / window.screen.height), 1);
-    width = (width / scale).toFixed(0);
-    height = (height / scale).toFixed(0);
+		var height = devicePixelsCount;
+		var scale = Math.max(Math.max(width / window.screen.width, height / window.screen.height), 1);
+		width = (width / scale).toFixed(0);
+		height = (height / scale).toFixed(0);
 	
 		container.style.width = width  + 'px';
 		container.style.marginLeft = (- width / 2).toFixed(0)  + 'px';
