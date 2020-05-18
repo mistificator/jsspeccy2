@@ -692,51 +692,68 @@ JSSpeccy.SoundGenerator = function(opts) {
 	}
 
 	
-	
+	var prev_time = performance.now();
+  var samples_count = 0;
+	var skipped = 0;
+  var calculated_sample_rate = 0;
 	function fillBuffer(buffer) {
 		var n = 0;
-		
+    var local_skipped = 0;
 		for (var i=0; i<buffer.length; i++) {
 			var avg = 0;
-			for (var j=0; j<oversampleRate; j++) {
-				avg = avg + soundData[n++];
+      var j=0;
+			for (; j<oversampleRate && n < soundData.length; j++, n++) {
+        avg += soundData[n]; // repeately run over array size, wtf?
 			}
-			avg = avg / oversampleRate;
+			avg = avg / (j || 1);
 			avg = avg * 0.7;
 			avg = avg + aySoundData[i] / 2;
 			
 			buffer[i] = avg;
 		}
-		
-		if (n>=soundData.Length) {
+
+		n = buffer.length * oversampleRate;
+    samples_count += soundData.length;
+
+		if (n >= soundData.length) {
+      skipped += n - soundData.length;
 			soundData = new Array();
 		}
 		else {
-			soundData.splice(0,n);
+			soundData.splice(0, n);
 		}
 
-		if (buffer.length>=aySoundData.Length) {
+		if (buffer.length >= aySoundData.length) {
 			aySoundData = new Array();
 		}
 		else {
-			aySoundData.splice(0,buffer.length);
+			aySoundData.splice(0, buffer.length);
 		}
-		
+       
+    var cur_time = performance.now();
+    if (cur_time - prev_time > 2000) {
+      calculated_sample_rate = Math.round(1000.0 * (samples_count / oversampleRate) / (cur_time - prev_time));
+      console.log("processed " + samples_count + ", tail " + soundData.length + ", sample rate " + calculated_sample_rate + ", skipped " + skipped);
+      prev_time = cur_time;
+      samples_count = 0;
+      skipped = 0;
+    }
 	}
 	backend.setSource(fillBuffer);
 
 	function handleAySound(size) {
 		if (!backend.isEnabled) return;
 		size = Math.floor(size);
-		while (size--) {
-			WCount++;
+    var start_index = aySoundData.length;
+    aySoundData.length += size;
+    for (var i = start_index; i < aySoundData.length; i++, soundDataAyFrameBytes++, WCount++)
+    {
 			if (WCount==25) {
 				AY8912Update_8();
 				WCount = 0;
 			}
-			aySoundData.push(RenderSample());
-			soundDataAyFrameBytes++;
-		}	
+			aySoundData[i] = RenderSample();
+    }
 	}
 	
 	self.updateBuzzer = function(val, currentTstates) {
@@ -754,21 +771,26 @@ JSSpeccy.SoundGenerator = function(opts) {
 	self.createSoundData = function (size, val) {
 		if (!backend.isEnabled) return;
 		size = Math.floor(size);
-		if (size>=1) {
-			for (var i=0; i<size; i++) {
-				soundData.push(val);
-			}
+		if (size > 0) {
+      var start_index = soundData.length;
+      soundData.length += size;
+      soundData.fill(val, start_index);
 			soundDataFrameBytes+=size;
 		}
 	}
 
-	self.endFrame = function() {
-
+	self.endFrame = function() {  
 		var pad_val = 0;
 		if (lastaudio) pad_val = buzzer_val;
 
-		self.createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes,pad_val);
-		handleAySound(samplesPerFrame - soundDataAyFrameBytes);
+    var fill_skipped = 0;
+    const protect_buffer_underrun = 0.1 * sampleRate * oversampleRate;
+    if (soundData.length < protect_buffer_underrun) {
+      fill_skipped = protect_buffer_underrun - soundData.length;
+    }
+    self.createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
+    handleAySound(samplesPerFrame - soundDataAyFrameBytes + fill_skipped / oversampleRate);
+    
 		lastaudio = 0;
 		lastAyAudio = 0;
 		soundDataFrameBytes = 0;
@@ -828,23 +850,38 @@ JSSpeccy.SoundBackend = function() {
 	if (AudioContext) {
 		/* Use Web Audio API as backend */
 		var audioContext = new AudioContext();
+    audioContext.suspend();
 		var audioNode = null;
 		
 		//Web audio Api changed createJavaScriptNode to CreateScriptProcessor - we support both
+    const buffer_size = 1024;
 		if (audioContext.createJavaScriptNode!=null) {
-			audioNode = audioContext.createJavaScriptNode(8192, 1, 1);
+			audioNode = audioContext.createJavaScriptNode(buffer_size, 1, 1);
 			} else if (audioContext.createScriptProcessor!=null) {
-				audioNode = audioContext.createScriptProcessor(8192, 1, 1);
+				audioNode = audioContext.createScriptProcessor(buffer_size, 1, 1);
 			}
 
-            if (audioNode!=null) {
-
+		self.sampleRate = 44100;
+    if (audioNode!=null) {
+/*      const buffers_count = 4;
+      var buffer_index = 0;
+      var buffers = new Array(buffers_count);
+      for (var b = 0; b < buffers_count; b++) {
+        buffers[b] = new Array(buffer_size);
+        buffers[b].fill(0);
+      }*/
 			onAudioProcess = function(e) {
 				var buffer = e.outputBuffer.getChannelData(0);
-				fillBuffer(buffer);
+        fillBuffer(buffer);
+/*        var current_buffer = buffers[buffer_index];
+        for (var i = 0; i < buffer_size; i++) {
+          buffer[i] = current_buffer[i];
+        }
+				if (fillBuffer(buffers[(buffers_count + buffer_index - 1) % buffers_count])) {
+          buffer_index = (buffer_index + 1) % buffers_count;
+        }*/
 			};
 
-			self.sampleRate = 44100;
 			self.isEnabled = false;
 			self.setSource = function(fillBufferCallback) {
 				fillBuffer = fillBufferCallback;
@@ -861,12 +898,14 @@ JSSpeccy.SoundBackend = function() {
 						audioNode.onaudioprocess = onAudioProcess;
 						audioNode.connect(audioContext.destination);
 					}
+          console.log("sound enabled");
 					return true;
 				} else {
 					/* disable */
 					self.isEnabled = false;
 					audioNode.onaudioprocess = null;
 					audioNode.disconnect(0);
+          console.log("sound disabled");
 					return false;
 				}
 			}
@@ -874,10 +913,9 @@ JSSpeccy.SoundBackend = function() {
 				/* do nothing */
 			}
 			
-			document.querySelector('button').addEventListener('click', function() {
-//			window.onload = function() {
+			document.querySelector("*").addEventListener("click", function() {
 			  audioContext.resume().then(() => {
-//				console.log('Playback resumed successfully');
+				  console.log('Playback resumed successfully');
 			  });
 			});
 			
@@ -890,7 +928,6 @@ JSSpeccy.SoundBackend = function() {
 		var audio = new Audio();
 		if (audio.mozSetup) {
 			/* Use Audio Data API as backend */
-			self.sampleRate = 44100;
 			audio.mozSetup(1, self.sampleRate);
 
 			self.isEnabled = false;
@@ -916,7 +953,6 @@ JSSpeccy.SoundBackend = function() {
 
 	/* use dummy no-sound backend. We still keep a handle to the callback function and
 	call it on demand, so that it's not filling up a buffer indefinitely */
-	self.sampleRate = 5500; /* something suitably low */
 	self.isEnabled = false;
 	self.setAudioState = function(state) {
 		return false;
