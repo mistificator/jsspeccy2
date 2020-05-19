@@ -343,7 +343,9 @@ function JSSpeccy(container, opts) {
 	};
 	self.onStop = Event();
 	self.stop = function() {
-		saved_audio_state = self.getAudioState();
+		if (self.isRunning) {
+			saved_audio_state = self.getAudioState();
+		}
 		self.setAudioState(false);
 		self.isRunning = false;
 		updateViewportIcon();
@@ -370,6 +372,7 @@ function JSSpeccy(container, opts) {
 		self.setAudioState(false);
 	}
 
+	saved_audio_state = self.getAudioState();
 	if (!('autostart' in opts) || opts['autostart']) {
 		saved_audio_state = self.getAudioState();
 		self.start();

@@ -65,17 +65,17 @@ JSSpeccy.UI = function(opts) {
 	refreshAudioButton(controller.getAudioState());
 
 	$('button.open', toolbar).click(function() {
-		stopStartButton.click();
+		controller.stop();
 		showPanel('.open-file');
 	});
 
 	$('button.about', toolbar).click(function() {
-		stopStartButton.click();
+		controller.stop();
 		showPanel('.about');
 	});
 
 	$('button.joystick_keys', toolbar).click(function() {
-		stopStartButton.click();
+		controller.stop();
 		showPanel('.joystick_keys');
 	});
 	
