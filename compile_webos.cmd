@@ -19,4 +19,5 @@ echo Build
 "!nmake_exe!" all
 
 echo Start server
-start npx http-server ./dist/ -p 6321 -o
+taskkill /fi "windowtitle eq http-server"
+start npx http-server ./dist/ -p 6321 -o -c-1
