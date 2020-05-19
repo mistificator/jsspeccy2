@@ -42,6 +42,12 @@ JSSpeccy.UI = function(opts) {
 	controller.onStop.bind(refreshStopStartButton);
 	refreshStopStartButton();
 
+	document.addEventListener("visibilitychange", function() {
+		if (document.hidden && controller.isRunning) {
+			controller.stop();
+		}
+	}, false);
+	
 	$('button.reset', toolbar).click(function() {
 		controller.reset();
 		controller.setKeymap("");
@@ -59,10 +65,12 @@ JSSpeccy.UI = function(opts) {
 	refreshAudioButton(controller.getAudioState());
 
 	$('button.open', toolbar).click(function() {
+		stopStartButton.click();
 		showPanel('.open-file');
 	});
 
 	$('button.about', toolbar).click(function() {
+		stopStartButton.click();
 		showPanel('.about');
 	});
 

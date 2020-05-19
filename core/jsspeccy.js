@@ -332,15 +332,19 @@ function JSSpeccy(container, opts) {
     }
    , Math.ceil(1000.0 / opts.cpuFpsLimit));  
 
+	var saved_audio_state = false;
 	self.onStart = Event();
 	self.start = function() {
 		if (self.isRunning) return;
 		self.isRunning = true;
 		updateViewportIcon();
 		self.onStart.trigger();
+		self.setAudioState(saved_audio_state);
 	};
 	self.onStop = Event();
 	self.stop = function() {
+		saved_audio_state = self.getAudioState();
+		self.setAudioState(false);
 		self.isRunning = false;
 		updateViewportIcon();
 		self.onStop.trigger();
@@ -367,6 +371,7 @@ function JSSpeccy(container, opts) {
 	}
 
 	if (!('autostart' in opts) || opts['autostart']) {
+		saved_audio_state = self.getAudioState();
 		self.start();
 	} else {
 		self.stop();
