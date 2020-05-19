@@ -17,6 +17,10 @@ exit /b
 echo Build
 "!nmake_exe!" clean
 "!nmake_exe!" all
+if %errorlevel% neq 0 (
+  pause
+  exit /b
+)
 
 echo Start server
 taskkill /fi "windowtitle eq http-server"

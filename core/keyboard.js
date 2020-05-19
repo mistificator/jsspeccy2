@@ -1,4 +1,4 @@
-/* LG Remote codes 
+/* LG TV Remote codes 
 
 Left	0x25
 Up	0x26
@@ -16,6 +16,12 @@ Blue	0x196
 JSSpeccy.Keyboard = function() {
 	var self = {};
 	self.active = true;
+	
+	self.TV_Back	= 0x1CD,
+	self.TV_Red		= 0x193,
+	self.TV_Green	= 0x194,
+	self.TV_Yellow	= 0x195,
+	self.TV_Blue	= 0x196;
 	
 	var keyStates = [];
 	for (var row = 0; row < 8; row++) {
@@ -52,8 +58,8 @@ JSSpeccy.Keyboard = function() {
 		if (self.active && !evt.metaKey) return false;
 	}
 	
-  var allKeyCodes = {
-  "": {
+	var allKeyCodes = {
+	"": {
 		49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
@@ -115,10 +121,14 @@ JSSpeccy.Keyboard = function() {
 		190: {row: 7, mask: 0x04, sym: true}, /* . => sym + M */
 		222: {row: 4, mask: 0x08, sym: true}, /* ' => sym + 7 */
 		
+		/* tv remote buttons */
+		[self.TV_Red]: {row: 4, mask: 0x01}, /* TV RED as 0 */
+		[self.TV_Green]: {row: 7, mask: 0x01}, /* TV GREEN as space */
+		
 		999: null
 	},
-  "QAOP": {
-    49: {row: 3, mask: 0x01}, /* 1 */
+	"QAOP": {
+		49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
 		52: {row: 3, mask: 0x08}, /* 4 */
@@ -128,17 +138,22 @@ JSSpeccy.Keyboard = function() {
 		56: {row: 4, mask: 0x04}, /* 8 */
 		57: {row: 4, mask: 0x02}, /* 9 */
 		48: {row: 4, mask: 0x01}, /* 0 */
-    
-    38: {row: 2, mask: 0x01}, /* up as Q */
-    40: {row: 1, mask: 0x01}, /* down as A */
-    37: {row: 5, mask: 0x02}, /* left as O */
-    39: {row: 5, mask: 0x01}, /* right as P */
-    13: {row: 7, mask: 0x04}, /* enter as M */
-    
-    999: null
-  },
-  "OKZX": {
-    49: {row: 3, mask: 0x01}, /* 1 */
+		
+		13: {row: 6, mask: 0x01}, /* enter */
+
+		38: {row: 2, mask: 0x01}, /* up as Q */
+		40: {row: 1, mask: 0x01}, /* down as A */
+		37: {row: 5, mask: 0x02}, /* left as O */
+		39: {row: 5, mask: 0x01}, /* right as P */
+	
+		/* tv remote buttons */
+		[self.TV_Red]: {row: 7, mask: 0x04}, /* TV RED as M */
+		[self.TV_Green]: {row: 7, mask: 0x01}, /* TV GREEN as space */
+
+		999: null
+	},
+	"OKZX": {
+		49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
 		52: {row: 3, mask: 0x08}, /* 4 */
@@ -148,17 +163,22 @@ JSSpeccy.Keyboard = function() {
 		56: {row: 4, mask: 0x04}, /* 8 */
 		57: {row: 4, mask: 0x02}, /* 9 */
 		48: {row: 4, mask: 0x01}, /* 0 */
-    
-    38: {row: 5, mask: 0x02}, /* up as O */
-    40: {row: 6, mask: 0x04}, /* down as K */
-    37: {row: 0, mask: 0x02}, /* left as Z */
-    39: {row: 0, mask: 0x04}, /* right as X */
-    13: {row: 7, mask: 0x01}, /* enter as space */
-    
-    999: null
-  },
-  "1250": {
-    49: {row: 3, mask: 0x01}, /* 1 */
+		
+		13: {row: 6, mask: 0x01}, /* enter */
+
+		38: {row: 5, mask: 0x02}, /* up as O */
+		40: {row: 6, mask: 0x04}, /* down as K */
+		37: {row: 0, mask: 0x02}, /* left as Z */
+		39: {row: 0, mask: 0x04}, /* right as X */
+		
+		/* tv remote buttons */
+		[self.TV_Red]: {row: 7, mask: 0x01}, /* TV RED as space */
+		[self.TV_Green]: {row: 7, mask: 0x01}, /* TV GREEN as space */
+
+		999: null
+	},
+	"1250": {
+		49: {row: 3, mask: 0x01}, /* 1 */
 		50: {row: 3, mask: 0x02}, /* 2 */
 		51: {row: 3, mask: 0x04}, /* 3 */
 		52: {row: 3, mask: 0x08}, /* 4 */
@@ -168,18 +188,23 @@ JSSpeccy.Keyboard = function() {
 		56: {row: 4, mask: 0x04}, /* 8 */
 		57: {row: 4, mask: 0x02}, /* 9 */
 		48: {row: 4, mask: 0x01}, /* 0 */
-    
-    37: {row: 3, mask: 0x01}, /* left as 1 */
-    39: {row: 3, mask: 0x02}, /* right as 2 */
-    13: {row: 3, mask: 0x10}, /* enter as 5 */
-    
-    999: null
-  }}; 
-  var keyCodes = {};
-  self.setKeymap = function(keymap_name) {
-    keyCodes = allKeyCodes[keymap_name];
-  };
-  self.setKeymap("");
+		
+		13: {row: 6, mask: 0x01}, /* enter */
+
+		37: {row: 3, mask: 0x01}, /* left as 1 */
+		39: {row: 3, mask: 0x02}, /* right as 2 */
+		
+		/* tv remote buttons */
+		[self.TV_Red]: {row: 3, mask: 0x10}, /* TV RED as 5 */
+		[self.TV_Green]: {row: 4, mask: 0x01}, /* TV GREEN as 0 */
+
+		999: null
+	}}; 
+	var keyCodes = {};
+		self.setKeymap = function(keymap_name) {
+	keyCodes = allKeyCodes[keymap_name];
+	};
+	self.setKeymap("");
 	
 	self.poll = function(addr) {
 		var result = 0xff;
