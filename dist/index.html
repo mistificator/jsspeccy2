@@ -29,10 +29,11 @@
 		<script>
 			$(document).ready(function() {
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", {
-										autostart: false, // no autostart enables sound on Chrome browser
-                    applyContention: true, // contention makes sound and game speed NORMAL
-                    collectOpcodesStats: false,                   
-                    cpuFpsLimit: 50,
+					autostart: false, // no autostart enables sound on Chrome browser
+					applyContention: true, // contention makes sound and game speed NORMAL
+					collectOpcodesStats: false,                   
+					cpuFpsLimit: 50,
+					debugPrint: true,
 					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05 // wtf?
 				});
 				var ui = JSSpeccy.UI({

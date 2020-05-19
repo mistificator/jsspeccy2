@@ -21,12 +21,11 @@ if (!window.DataView) window.DataView = jDataView;
 
 function JSSpeccy(container, opts) {
 	var self = {};
+	
+	opts = opts || {};
 
 	if (typeof(container) === 'string') {
 		container = document.getElementById(container);
-	}
-	if (!opts) {
-		opts = {};
 	}
 
 	if (!opts.cpuFpsLimit) {
@@ -158,7 +157,7 @@ function JSSpeccy(container, opts) {
   }; 
   
 	/* == Audio == */
-	var soundBackend = JSSpeccy.SoundBackend();
+	var soundBackend = JSSpeccy.SoundBackend({debugPrint: opts.debugPrint});
 	self.onChangeAudioState = Event();
 	self.getAudioState = function() {
 		return soundBackend.isEnabled;
@@ -290,10 +289,14 @@ function JSSpeccy(container, opts) {
 				controller: self,
 				borderEnabled: ('border' in opts) ? opts.border : true,
         collectOpcodesStats: opts.collectOpcodesStats,
-        cpuFpsLimit: opts.cpuFpsLimit
+        cpuFpsLimit: opts.cpuFpsLimit,
+				debugPrint: opts.debugPrint
 			});
 			currentModel = newModel;
 			self.onChangeModel.trigger(newModel);
+			if (opts.debugPrint) {
+				console.log("model is " + (currentModel == JSSpeccy.Spectrum.MODEL_128K ? "128k" : (currentModel == JSSpeccy.Spectrum.MODEL_48K ? "48k" : "unknown")));
+			}
 		}
 	};
 

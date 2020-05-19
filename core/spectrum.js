@@ -1,12 +1,15 @@
 JSSpeccy.Spectrum = function(opts) {
 	var self = {};
 
+	opts = opts || {};
+	
 	model = opts.model || JSSpeccy.Spectrum.MODEL_128K;
 
 	var viewport = opts.viewport;
 	var keyboard = opts.keyboard;
 	var controller = opts.controller;
 	var soundBackend = opts.soundBackend;
+	var debugPrint = opts.debugPrint;
 
 	var memory = JSSpeccy.Memory({
 		model: model
@@ -25,7 +28,8 @@ JSSpeccy.Spectrum = function(opts) {
 
 	var sound = JSSpeccy.SoundGenerator({
 		model: model,
-		soundBackend: soundBackend
+		soundBackend: soundBackend,
+		debugPrint: debugPrint
 	});
 
 	var ioBus = JSSpeccy.IOBus({

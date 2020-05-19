@@ -37,7 +37,10 @@
 
 JSSpeccy.SoundGenerator = function (opts) {
 	var self = {};
+	
+	opts = opts || {};
 
+	var debugPrint = opts.debugPrint;
 	var clockSpeed = opts.model.clockSpeed;
 	var frameLength = opts.model.frameLength;
 	var backend = opts.soundBackend;
@@ -690,7 +693,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 
 	var prev_time = performance.now();
 	var samples_count = 0;
-	var skipped = 0;
+	var skipped = 0, theoretical_skipped = 0;
 	function fillBuffer(buffer) {
 		var n = 0;
 		var local_skipped = 0;
@@ -698,7 +701,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 			var avg = 0;
 			var j = 0;
 			for (; j < oversampleRate && n < soundData.length; j++, n++) {
-				avg += soundData[n]; // repeately run over array size, wtf?
+				avg += soundData[n]; // repeatedly run over array size, wtf?
 			}
 			avg = avg / (j || 1);
 			avg = avg * 0.7;
@@ -722,11 +725,14 @@ JSSpeccy.SoundGenerator = function (opts) {
 			aySoundData.splice(0, buffer.length);
 		}
 
-		var cur_time = performance.now();
-		if (cur_time - prev_time > 5000) {
-//			console.log("Processed " + samples_count + ", tail " + soundData.length + ", skipped " + skipped);
-			prev_time = cur_time;
-			skipped = 0;
+		if (debugPrint) {
+			var cur_time = performance.now();
+			if (cur_time - prev_time > 5000) {
+				console.log("Processed " + samples_count + ", tail " + soundData.length + ", skipped " + skipped + ", theoretical skipped " + theoretical_skipped);
+				prev_time = cur_time;
+				skipped = 0;
+				theoretical_skipped = 0;
+			}
 		}
 	}
 	backend.setSource(fillBuffer);
@@ -780,7 +786,17 @@ JSSpeccy.SoundGenerator = function (opts) {
 		const protect_buffer_underrun = 0.1 * sampleRate * oversampleRate;
 		if (soundData.length < protect_buffer_underrun) {
 			fill_skipped = protect_buffer_underrun - soundData.length;
+			theoretical_skipped += fill_skipped;
+			if (fill_skipped)
+			{
+			  var adj_fill_skipped = Math.min(fill_skipped, 1024);
+/*				if (debugPrint) {
+					console.log("fill_skipped = " + fill_skipped + ", adj_fill_skipped = " + adj_fill_skipped);
+				}*/
+				fill_skipped = adj_fill_skipped;
+			}
 		}
+		fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;
 		self.createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
 		handleAySound(samplesPerFrame - soundDataAyFrameBytes + fill_skipped / oversampleRate);
 
@@ -822,8 +838,11 @@ JSSpeccy.SoundGenerator = function (opts) {
 	return self;
 };
 
-JSSpeccy.SoundBackend = function () {
+JSSpeccy.SoundBackend = function (opts) {
 	var self = {};
+	
+	opts = opts || {};
+	var debugPrint = opts.debugPrint;
 
 	/* Regardless of the underlying implementation, an instance of SoundBackend exposes the API:
 	sampleRate: sample rate required by this backend
@@ -857,23 +876,9 @@ JSSpeccy.SoundBackend = function () {
 
 		self.sampleRate = 44100;
 		if (audioNode != null) {
-			/*      const buffers_count = 4;
-			var buffer_index = 0;
-			var buffers = new Array(buffers_count);
-			for (var b = 0; b < buffers_count; b++) {
-			buffers[b] = new Array(buffer_size);
-			buffers[b].fill(0);
-			}*/
 			onAudioProcess = function (e) {
 				var buffer = e.outputBuffer.getChannelData(0);
 				fillBuffer(buffer);
-				/*        var current_buffer = buffers[buffer_index];
-				for (var i = 0; i < buffer_size; i++) {
-				buffer[i] = current_buffer[i];
-				}
-				if (fillBuffer(buffers[(buffers_count + buffer_index - 1) % buffers_count])) {
-				buffer_index = (buffer_index + 1) % buffers_count;
-				}*/
 			};
 
 			self.isEnabled = false;
@@ -892,14 +897,18 @@ JSSpeccy.SoundBackend = function () {
 						audioNode.onaudioprocess = onAudioProcess;
 						audioNode.connect(audioContext.destination);
 					}
-					console.log("Sound enabled");
+					if (debugPrint) {
+						console.log("Sound enabled");
+					}
 					return true;
 				} else {
 					/* disable */
 					self.isEnabled = false;
 					audioNode.onaudioprocess = null;
 					audioNode.disconnect(0);
-					console.log("Sound disabled");
+					if (debugPrint) {
+						console.log("Sound disabled");
+					}
 					return false;
 				}
 			}
@@ -909,7 +918,9 @@ JSSpeccy.SoundBackend = function () {
 
 			document.querySelector("*").addEventListener("click", function () {
 				audioContext.resume().then(() => {
-					console.log('Playback resumed successfully');
+					if (debugPrint) {
+						console.log("Playback resumed successfully");
+					}
 				});
 			});
 
