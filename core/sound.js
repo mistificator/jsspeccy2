@@ -783,17 +783,18 @@ JSSpeccy.SoundGenerator = function (opts) {
 			pad_val = buzzer_val;
 
 		var fill_skipped = 0;
-		const protect_buffer_underrun = 0.2 * sampleRate * oversampleRate;
+		const protect_buffer_underrun = 0.1 * sampleRate * oversampleRate;
 		if (soundData.length < protect_buffer_underrun) {
 			fill_skipped = protect_buffer_underrun - soundData.length;
 			theoretical_skipped += fill_skipped;
-			// uncomment to make more smooth interleaving
-			/*
 			if (fill_skipped)
 			{
-				fill_skipped = Math.min(fill_skipped, 1024);
+			  var adj_fill_skipped = Math.min(fill_skipped, 1024);
+/*				if (debugPrint) {
+					console.log("fill_skipped = " + fill_skipped + ", adj_fill_skipped = " + adj_fill_skipped);
+				}*/
+				fill_skipped = adj_fill_skipped;
 			}
-			*/
 		}
 		fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;
 		self.createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
