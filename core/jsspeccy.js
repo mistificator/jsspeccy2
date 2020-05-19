@@ -271,6 +271,8 @@ function JSSpeccy(container, opts) {
 			var snapshotBuffer = JSSpeccy.autoloaders[currentModel.tapeAutoloader].buffer;
 			var snapshot = JSSpeccy.Z80File(snapshotBuffer);
 			loadSnapshot(snapshot);
+			if (tape.isTurbo()) tape.startTape();
+
 		}
 	}
 
@@ -288,9 +290,9 @@ function JSSpeccy(container, opts) {
 				model: newModel,
 				soundBackend: soundBackend,
 				controller: self,
-				borderEnabled: ('border' in opts) ? opts.border : true,
-        collectOpcodesStats: opts.collectOpcodesStats,
-        cpuFpsLimit: opts.cpuFpsLimit
+				border: ('border' in opts) ? opts.border : 4,
+				collectOpcodesStats: opts.collectOpcodesStats,
+				cpuFpsLimit: opts.cpuFpsLimit
 			});
 			currentModel = newModel;
 			self.onChangeModel.trigger(newModel);

@@ -16,8 +16,8 @@ JSSpeccy.Spectrum = function(opts) {
 		viewport: viewport,
 		memory: memory,
 		model: model,
-		borderEnabled: opts.borderEnabled,
-    cpuFpsLimit: opts.cpuFpsLimit,
+		border: opts.border,
+		cpuFpsLimit: opts.cpuFpsLimit,
 		settings: {
 			'checkerboardFilter': controller.settings.checkerboardFilter
 		}
@@ -33,6 +33,7 @@ JSSpeccy.Spectrum = function(opts) {
 		display: display,
 		memory: memory,
 		sound: sound,
+		controller: controller,
 		contentionTable: model.contentionTable
 	});
 
@@ -40,13 +41,14 @@ JSSpeccy.Spectrum = function(opts) {
 		memory: memory,
 		ioBus: ioBus,
 		display: display,
-    collectOpcodesStats: opts.collectOpcodesStats
-	});
+		controller: controller,
+		collectOpcodesStats: opts.collectOpcodesStats	});
 
 	/* internal state to allow picking up mid-frame (e.g. when loading from a snapshot) */
 	var startNextFrameWithInterrupt = true;
 
 	self.runFrame = function() {
+
 		display.startFrame();
 		if (startNextFrameWithInterrupt) {
 			processor.requestInterrupt();
@@ -62,7 +64,8 @@ JSSpeccy.Spectrum = function(opts) {
 		processor.reset();
 		memory.reset();
 		sound.reset();
-    display.reset();
+    	display.reset();
+		if (controller.currentTape!=null) controller.currentTape.stopTape();
 	};
   
   self.getFps = function() {
@@ -89,6 +92,8 @@ JSSpeccy.Spectrum = function(opts) {
 	JSSpeccy.traps.tapeLoad = function() {
 		if (!controller.currentTape) return true; /* no current tape, so return from trap;
 			resume the trapped instruction */
+		if (controller.currentTape.isTurbo()) return true;
+						
 		var block = controller.currentTape.getNextLoadableBlock();
 		if (!block) return true; /* no loadable blocks on tape, so return from trap */
 
