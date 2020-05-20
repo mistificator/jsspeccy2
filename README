@@ -4,7 +4,7 @@ webOS JSSpeccy: A ZX Spectrum emulator in pure JavaScript (primarily for LG TVs)
 
 https://github.com/mistificator/jsspeccy2-webos
 
-Windows build instructions:
+Windows build instructions for LG TV:
 
 1. Install some make system (MSVS or GCC or whatever), cause we need to build via Makefile.
 
@@ -12,7 +12,7 @@ Windows build instructions:
 
 3. Install npm.
 
-4. Run compile.cmd
+4. Run compile_webos.cmd
   OR
 4.1 At project folder call:
 npm install coffee-script --save-dev
@@ -37,7 +37,7 @@ LG TV deployment instructions:
 
 Web deployment instructions:
 
-1. Put all files from archive to host server.
+1. Put all files and "games" and "images" subfolders from "dist" folder to host server.
 
 2. Move your games you want to see in drop-down list to /games/ folder, modify tapes.js corresponding to games list.
 
