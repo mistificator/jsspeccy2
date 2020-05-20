@@ -124,7 +124,7 @@ function JSSpeccy(container, opts) {
 		};
 		viewport.canvas.ondrop = function(evt) {
 			var files = evt.dataTransfer.files;
-			self.loadLocalFile(files[0]);
+			self.loadLocalFile(files[0], opts);
 			return false;
 		};
 	}
@@ -190,10 +190,13 @@ function JSSpeccy(container, opts) {
 		});
 
 		request.addEventListener('load', function(e) {
+			const reader = new FileReader();
+			reader.addEventListener('loadend', () => {
+				self.loadFile(url, reader.result, opts);
+			});
+			reader.readAsArrayBuffer(request.response);
 			self.isDownloading = false;
 			updateViewportIcon();
-			data = request.response;
-			self.loadFile(url, data, opts);
 			/* URL is not ideal for passing as the 'filename' argument - e.g. the file
 			may be served through a server-side script with a non-indicative file
 			extension - but it's better than nothing, and hopefully the heuristics
@@ -204,7 +207,7 @@ function JSSpeccy(container, opts) {
 
 		/* trigger XHR */
 		request.open('GET', url, true);
-		request.responseType = "arraybuffer";
+		request.responseType = "blob";
 		self.isDownloading = true;
 		updateViewportIcon();
 		request.send();
@@ -214,13 +217,42 @@ function JSSpeccy(container, opts) {
 		if (!opts) opts = {};
 
 		var fileType = 'unknown';
-		if (name && name.match(/\.sna(\.zip)?$/i)) {
+		
+		if (name && name.match(/\.zip$/i)) {
+			if (opts.debugPrint) {
+				console.log("Zipped data ", data);
+			}			
+			var unzipper = new JSUnzip(new Uint8Array(data));
+			if (opts.debugPrint) {
+				console.log("Open ZIP file ", name);
+			}
+			if (unzipper.isZipFile()) {
+				if (opts.debugPrint) {
+					console.log("ZIP signature ok");
+				}
+				unzipper.readEntries();
+				for (var entry of unzipper.entries) {
+					if (opts.debugPrint) {
+						console.log("ZIP entry ", entry.fileName, ", compression ", entry.compressionMethod);
+					}					
+					var uncompressed = (entry.compressionMethod === 0) ? entry.data : (entry.compressionMethod === 8) ? JSInflate.inflate(entry.data) : null;
+					if (uncompressed) {
+						if (self.loadFile(entry.fileName, new Uint8Array(uncompressed).buffer, opts)) {
+							return true;
+						}
+					}
+				}				
+			}
+			return false;
+		}
+		
+		if (name && name.match(/\.sna$/i)) {
 			fileType = 'sna';
-		} else if (name && name.match(/\.tap(\.zip)?$/i)) {
+		} else if (name && name.match(/\.tap$/i)) {
 			fileType = 'tap';
-		} else if (name && name.match(/\.tzx(\.zip)?$/i)) {
+		} else if (name && name.match(/\.tzx$/i)) {
 			fileType = 'tzx';
-		} else if (name && name.match(/\.z80(\.zip)?$/i)) {
+		} else if (name && name.match(/\.z80$/i)) {
 			fileType = 'z80';
 		} else {
 			var signatureBytes = new Uint8Array(data, 0, 8);
@@ -234,6 +266,10 @@ function JSSpeccy(container, opts) {
 			}
 		}
 
+		if (opts.debugPrint) {
+			console.log("File type is", fileType);
+		}
+		
 		switch (fileType) {
 			case 'sna':
 				loadSnapshot(JSSpeccy.SnaFile(data));
@@ -248,8 +284,12 @@ function JSSpeccy(container, opts) {
 				loadTape(JSSpeccy.TzxFile(data), opts);
 				break;
       default:
-        alert('Unknown type of file ' + name);
+				if (opts.debugPrint) {
+					console.log('Unknown type of file ' + name);
+				}
+				return false;
 		}
+		return true;
 	};
 
 	/* Load a snapshot from a snapshot object (i.e. JSSpeccy.SnaFile or JSSpeccy.Z80File) */
@@ -271,7 +311,6 @@ function JSSpeccy(container, opts) {
 			var snapshot = JSSpeccy.Z80File(snapshotBuffer);
 			loadSnapshot(snapshot);
 			if (tape.isTurbo()) tape.startTape();
-
 		}
 	}
 
@@ -363,7 +402,7 @@ function JSSpeccy(container, opts) {
 	self.setModel(JSSpeccy.Spectrum.MODEL_128K);
 
 	if (opts.loadFile) {
-		self.loadFromUrl(opts.loadFile, {'autoload': opts.autoload});
+		self.loadFromUrl(opts.loadFile, {'autoload': opts.autoload, 'debugPrint': opts.debugPrint});
 	}
 
 	if (!('audio' in opts) || opts['audio']) {

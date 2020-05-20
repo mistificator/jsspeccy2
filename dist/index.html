@@ -8,7 +8,8 @@
 		<script src="jsspeccy-core.min.js"></script>
 		<script src="jquery-1.7.2.min.js"></script>
 		<script src="ui.js"></script>
-<!-- 	<script src="js-unzip.min.js"></script>  -->
+		<script src="js-unzip.min.js"></script>
+		<script src="js-inflate.min.js"></script>
 	
 <!--		<script src="webOSTVjs-1.2.0/webOSTV.js" charset="utf-8"></script>
  		<script src="webOSTVjs-1.2.0/webOSTV-dev.js" charset="utf-8"></script>  
@@ -33,13 +34,14 @@
 					applyContention: true, // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
-					debugPrint: false,
+					debugPrint: true,
 					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05, // wtf?
 					border: 1 // default is 4
 				});
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
-					controller: jsspeccy
+					controller: jsspeccy,
+					debugPrint: true
 				});
 				ui.loadPreinstalledGames();            
 			});

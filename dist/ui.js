@@ -19,6 +19,14 @@ JSSpeccy.UI = function(opts) {
 	}
 
 	$(container).addClass('jsspeccy');
+	
+	var url_pars_list = [];
+	function urlPar(key) {
+		if (!url_pars_list.includes(key)) {
+			url_pars_list.push(key);
+		}
+		return (new URL(document.URL)).searchParams.get(key);
+	}
 
 	/* Set up toolbar */
 	var toolbar = $('.toolbar', container);
@@ -110,10 +118,10 @@ JSSpeccy.UI = function(opts) {
   }  
 
   var os = checkUserAgent();
-  var isWindows = (os.name == "Windows") || (new URL(document.URL)).searchParams.get("is_windows") === "on";
-  var isLinux = (os.name == "Linux") || (new URL(document.URL)).searchParams.get("is_linux") === "on";
-	var isSmartTV = (os.name == "webOS") || (new URL(document.URL)).searchParams.get("is_smarttv") === "on";
-	var isMobile = (os.name == "Android") || (os.name == "iOS") || (new URL(document.URL)).searchParams.get("is_mobile") === "on";
+  var isWindows = (os.name == "Windows") || urlPar("is_windows") === "on";
+  var isLinux = (os.name == "Linux") || urlPar("is_linux") === "on";
+	var isSmartTV = (os.name == "webOS") || urlPar("is_smarttv") === "on";
+	var isMobile = (os.name == "Android") || urlPar("is_mobile") === "on";
 	$('button.deviceinfo', toolbar).click(function() {
 		$('.panel.information #content').html(
 				"<br/>Device information" + 
@@ -148,7 +156,7 @@ JSSpeccy.UI = function(opts) {
 		$('button.fullscreen', toolbar).hide();
 	}
 	
-  if (isSmartTV && (new URL(document.URL)).searchParams.get("joystick_keys") !== "on") {
+  if (isSmartTV && urlPar("joystick_keys") !== "on") {
 		$('button.joystick_keys', toolbar).hide();
 	}
 	var selectModel = $('select.select-model', toolbar);
@@ -196,11 +204,11 @@ JSSpeccy.UI = function(opts) {
 
 	var fileSelect = openFilePanel.find('input[type="file"]');
 	fileSelect.change(function() {
-		controller.loadLocalFile(this.files[0], {'autoload': autoloadTapes.is(':checked')});
+		controller.loadLocalFile(this.files[0], {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
 		fileSelect.val('');
 		hidePanels();
 	});
-	if (isSmartTV && (new URL(document.URL)).searchParams.get("load_file") !== "on") {
+	if (isSmartTV && urlPar("load_file") !== "on") {
 		$("#load_file", container).hide();
 	}
 	
@@ -208,7 +216,7 @@ JSSpeccy.UI = function(opts) {
 	openFilePanel.find('button.open-url').click(function() {
 		var url = urlField.val();
 		if (url !== '') {
-			controller.loadFromUrl(url, {'autoload': autoloadTapes.is(':checked')});
+			controller.loadFromUrl(url, {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
 			hidePanels();
 		}
 	});
@@ -267,7 +275,7 @@ JSSpeccy.UI = function(opts) {
     if (filename) {
       controller.loadFromUrl(
         filename,
-        {"autoload": true}
+        {"autoload": true, 'debugPrint': opts.debugPrint}
       );
       controller.setKeymap($(this).children(":selected").attr("id") || "");
     }
@@ -336,7 +344,7 @@ JSSpeccy.UI = function(opts) {
       controller.keyboard().registerKeyUp(code);
   }
 
-  if (!isMobile && (new URL(document.URL)).searchParams.get("padblock") !== "on") {
+  if (!isMobile && urlPar("padblock") !== "on") {
     $('.padblock', container).hide();
   }
     
@@ -345,7 +353,9 @@ JSSpeccy.UI = function(opts) {
   var saved_padblock_visibility = false;
   $("#typer", container).click(function() {
       if (controller.keyboard().active) {
-          console.log("focus in on-screen keyboard");
+					if (opts.debugPrint) {
+						console.log("focus in on-screen keyboard");
+					}
           saved_keypress = document.onkeypress;
           document.onkeypress = function() { return true; }
           saved_padblock_visibility = $('.padblock', container).is(":visible");
@@ -360,7 +370,9 @@ JSSpeccy.UI = function(opts) {
   const android_keydown_code = 0xE5;
   var keydown_code = android_keydown_code;
   function downUp(code, printable) {
-    console.log(printable + " " + code);
+		if (opts.debugPrint) {
+			console.log(printable + " " + code);
+		}
     controller.keyboard().registerKeyDown(code);
     setTimeout(function() { controller.keyboard().registerKeyUp(code); $("#typer", container).val(printable.length == 1 ? printable : ""); }, 20);  
   }
@@ -380,7 +392,9 @@ JSSpeccy.UI = function(opts) {
     }
   });
   $("#typer", container).focusout(function() {
-      console.log("focus out on-screen keyboard");
+			if (opts.debugPrint) {
+				console.log("focus out on-screen keyboard");
+			}
       $("#typer", container).val("");
       document.onkeypress = saved_keypress;
       if (saved_padblock_visibility) {
@@ -389,7 +403,7 @@ JSSpeccy.UI = function(opts) {
       controller.keyboard().active = true;
   });
 
-  if (!isSmartTV && !isMobile && (new URL(document.URL)).searchParams.get("typer") !== "on") {
+  if (!isSmartTV && !isMobile && urlPar("typer") !== "on") {
     $('#typer-div', container).hide();
   }  
   
@@ -403,10 +417,10 @@ JSSpeccy.UI = function(opts) {
     });  
     document.addEventListener("keydown", function(e) {
       console.log(e.key + " " + e.keyCode);
-      if (e.keyCode == 0x196) {// LG remote blue button
+      if (e.keyCode == controller.keyboard().TV_Blue) {// LG remote blue button
         $("#typer", container).click();
       }
-      if (e.keyCode == 0x1CD) {// LG remote back button
+      if (e.keyCode == controller.keyboard().TV_Back) {// LG remote back button
         $("#typer", container).blur();
       }
     });  
@@ -425,5 +439,26 @@ JSSpeccy.UI = function(opts) {
       $("#typer", container).blur();
   };
   
+	var load_url = urlPar("load");
+	if (load_url) {
+	  setTimeout(function() {
+			load_url = decodeURI(load_url);
+			if (opts.debugPrint) {
+				console.log("load url: ", load_url);
+			}
+			controller.loadFromUrl(load_url, {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
+		}, 0);
+	}
+
+	if (opts.debugPrint) {
+		console.log("URL keys: ", url_pars_list);
+	}	
+
+	if (isSmartTV) { // ignore autostart: false on SmartTV
+		setTimeout(function() {
+			controller.start();
+		}, 0);
+	}
+	
 	return self;
 };

@@ -692,7 +692,6 @@ JSSpeccy.SoundGenerator = function (opts) {
 	}
 
 	var prev_time = performance.now();
-	var samples_count = 0;
 	var skipped = 0, theoretical_skipped = 0;
 	function fillBuffer(buffer) {
 		var n = 0;
@@ -728,7 +727,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 		if (debugPrint) {
 			var cur_time = performance.now();
 			if (cur_time - prev_time > 5000) {
-				console.log("Processed " + samples_count + ", tail " + soundData.length + ", skipped " + skipped + ", theoretical skipped " + theoretical_skipped);
+				console.log("Sound data tail " + soundData.length + ", skipped " + skipped + ", correction " + theoretical_skipped);
 				prev_time = cur_time;
 				skipped = 0;
 				theoretical_skipped = 0;

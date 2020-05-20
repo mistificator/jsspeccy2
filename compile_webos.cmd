@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 echo Check NPM packets
-rem call npm install coffee-script google-closure-compiler http-server --save-dev
+rem call npm install coffee-script google-closure-compiler http-server minify --save-dev
 
 echo Get latest nmake in system
 set pf=%PROGRAMFILES(X86)%

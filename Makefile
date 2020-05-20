@@ -2,6 +2,8 @@
 
 DIST_FILES=\
 	build\jsspeccy-core.min.js \
+	build\js-unzip.min.js \
+	build\js-inflate.min.js \
 	lib\jdataview.js \
 	lib\jquery-1.7.2.min.js \
 	README
@@ -30,6 +32,12 @@ build/z80.js: core/z80.coffee
 	$(MKDIR) build
 	$(NPX) coffee -c -o build/ core/z80.coffee
 
+build/js-unzip.min.js: lib/js-unzip.js
+	$(NPX) minify lib/js-unzip.js > build/js-unzip.min.js
+
+build/js-inflate.min.js: lib/js-inflate.js
+	$(NPX) minify lib/js-inflate.js > build/js-inflate.min.js
+	
 CORE_JS_FILES=\
 	core/jsspeccy.js \
 	core/display.js \
