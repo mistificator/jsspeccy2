@@ -10,6 +10,7 @@ It's a kind of crutch but it works. To load tapes from any Internet resources yo
 link, you should combine JSSpeccy URL, proxy URL and tape file URL, it looks that way: https://mistificator.github.io/jsspeccy2-webos/dist/?load=https://non-cors.herokuapp.com/https://archive.org/download/World_of_Spectrum_June_2017_Mirror/World%20of%20Spectrum%20June%202017%20Mirror.zip/World%20of%20Spectrum%20June%202017%20Mirror/sinclair/games/f/Frightmare128(BUGFIX).tzx.zip
 Or you could press "Open file" button in top panel of JSSpeccy and copy-paste proxied URL of Xenophobe https://non-cors.herokuapp.com/https://archive.org/download/World_of_Spectrum_June_2017_Mirror/World%20of%20Spectrum%20June%202017%20Mirror.zip/World%20of%20Spectrum%20June%202017%20Mirror/sinclair/games/x/Xenophobe.tap.zip or whatever you want to play.  
 
+
 Windows build instructions for LG TV:
 
 1. Install some make system (MSVS or GCC or whatever), cause we need to build via Makefile.
@@ -107,24 +108,3 @@ Matt Westcott
 <matt@west.co.tt> - http://matt.west.co.tt/ - @gasmanic
 
 =====================
-
-mistificator
-
-Windows build instructions:
-
-1. Install some make system (MSVS or GCC or whatever), cause we need to build via Makefile.
-
-2. Install Perl.
-
-3. Install npm.
-
-4. Run compile.cmd
-  OR
-4.1 At project folder call:
-npm install coffee-script --save-dev
-npm install google-closure-compiler --save-dev 
-4.2. Build Makefile:
-nmake all
-(or what maker you have)
-
-5. Output in "dist" folder, open index.html. Enjoy.
