@@ -1,0 +1,2505 @@
+from https://sites.google.com/site/g7eob1/computer/zx-spectrum/zx-spectrum-pokes
+
+ZX SPECTRUM POKES
+
+NAME			POKE
+===============================================================================
+19 - BOOT CAMP		33849,0 time; 33538,0:33539,195:35717,0 Ammo;
+			35718,0:36451,62,36452,0 No weight limit;
+			36451,62:36452,100:36453,0 always full speed
+1942			52472,0 lives; 46646,0 infinite rolls;
+			50819,195 invincible; 50822,58 mega-invincible
+1943			57538,0 energy; 53158,0 rolls
+1985 - THE DAY AFTER	49303,0 lives; 49852,255 255 lives
+1994			40315,0 lives; 38762,0 strength; 
+			39130,x x=start level (1-8)
+1999			38230,0 lives; 45861,255 255 lives
+20 TONS			25535,48:25539,0 time
+3D BAT ATTACK		47501,183 lives; 47601,58 immune to bats;
+			23910,255:45001,255 255 lives
+3DC			34298,201 immunity; 34036,0 jumps; 26955,0 oxygen
+3D ESCAPE FROM OMICRON	24800,48:24805,0 moves;
+			25203,48:25207,0:25262,48:25269,0 exit guesses
+3D LUNAATTACK		56440,0 lives; 53111,255 255 lives; 56237,0 fuel;
+			57269,175 temperature
+3D PACMAN		33220,183 lives; 34184,x x=pills to collect (1-162)
+3D SPACE WARS		26244,0:26949,0 (maybe 26969,0) lives
+3D STARFIGHTER		35714,183 energy
+3D STARSTRIKE		56733,0 shields and lasers
+3D STARSTRIKE 2		40528,0:33661,161 fuel; 33674,161 cool lasers;
+			33696,161 shields
+3D TANK DUEL		51311,0 lives
+3D TUNNEL (48K)		29711,0 lives
+720~			40774,0 lives; 35357,0 tickets; 40360,0 money;
+			41918,0 time
+
+
+ABU SIMBEL PROFANATION	47693,0 lives; 47672,201 invincible; 
+			47684,0 no baddies; 45877,201 transform objects;
+			47656,0 transform yourself; 45295,195 alt.invincible
+ACADEMY			44716,0 missiles; 44752,0 flares; 44794,0 ammo;
+			44831,0 delay bombs; 44456,0 fuel;
+			50584,201 deflector; 32924,33 load any level;
+			31378,225:31386,255 no weight limit
+ACCELERATOR		31531,0 lives; 32217,255 255 lives
+ACE			38056,24 fuel; 32506,0:32507,0:32508,0 invincible
+ACE 2088		41890,36 lives
+ACE OF ACES		32506,0:32507,0:32508,0 lives
+ACROJET			25148,10 lives
+ACTION BIKER		56359,201 time; 55919,201 fuel; 55679,0:61266,0 sleep;
+			56086,3 don't need headlamp; 25148,0 lives;
+			55603,0:55604,0:61221,0:61222,0 invincible
+ACTION FARCE 2		62267,0 lives
+ACTION FORCE		50013,0 lives; 49326,x:54234,x where x=start level
+ACTION FORCE 2		51905,182 lives; 51455,201 energy; 
+			60579,49 kill tank with 10 hits
+ACTION REFLEX		57450,0 no missiles; 50955,24:58321,201 time;
+			50002,30:55850,0:56813,0:57055,0 keys, lifebelts, etc.
+			50770,0:50771,0:50772,0:50964,0:50965,0:50966,0 lives
+AD ASTRA		35853,0 lives; 28592,0 better fire power;
+			29907,0:29908,0:29909,0 different alien formations;
+			28793,0:28794,0:28795,0 all ships one hit only;
+			30847,0:30848,0:30849,0 one ship instead of four
+A DAY IN THE LIFE	45525,0 lives
+A WEEK IN LIFE OF THING	45523,183 lives; 30183,0:39509,0 energy; 32576,0 ammo
+ADDAMS FAMILY		31055,0 lives; 30918,0 alternative lives poke
+ADDER ATTACK		57136,0 lives
+ADIDAS CHAMP FOOTBALL	49291,0 other team can not score
+ADV. PINBALL SIMULATOR	35237,0 balls
+AFTERBURNER		24471,189 lives
+AFTEROIDS		27060,33 lives; 28520,33 ammo; 28911,33 bombs;
+			30655,58 invincible
+AFTER THE WAR PART 1	49001,0 lives; 55539,0 time; 52364,60 energy
+			48950,0 alt.lives; 48826,0 view end code
+AFTER THE WAR PART 2	49001,0 lives; 49202,0 time; 56056,0 energy;
+			50020,0 ammo; 49820,201 invincible; code : 94656981
+AGENT ORANGE		37044,0 lives; 52757,0:52758,0:52759,255 also lives?
+AGENT X			26817,201 energy; 26099,0 lives; 25917,0 time
+AGENT X II Part 1	57821,0 energy; 57776,0 alternative energy poke
+AGENT X II Part 2	62499,0 energy
+AGENT X II Part 3	50561,0 energy
+AH DIDDUMS		24786,0 lives; 24942,255:26482,255 255 lives; 
+			25924,0 train stays; 26278,0 infinite ball; 
+			25701,0 no jack-in-the-box
+AIRWOLF			45982,0 lives; 58317,0 floating chopper; 44665,0 bonus
+AIRWOLF 2		53471,0 lives; 57391,58 invincible
+ALCHEMIST		47599,201 spell energy; 47544,201 stamina
+ALI BABA		64167,0 lives
+ALIEN (GARY HOWLAND)	38032,0 lives; 38092,0 time; 37456,0 bombs;
+			37406,0 no nasties
+ALIEN 8			51736,0 lives; 44460,201 time; 43735,201 invincible;
+			45121,x where x=no. of chambers left to fix (1-36)
+ALIEN ATTACK		63178,0:63152,0 lives; 26655,0 shots
+ALIEN DESTROYER		48654,0 lives; 48418,195 invincible
+ALIEN EVOLUTION		58228,0 lives; 61527,0 time; 58143,0 mines
+ALIEN GUERILLA		28988,182 lives
+ALIEN HIGHWAY		39443,0:39412,0 energy; 35125,0 time
+ALIENS			31014,0 ammo; 30829,0:30830,0:30831,0 no impregnation;
+			31834,0 stamina; 30768,0:34484,195 no capture
+ALIENS (US)		Level 1 : 7324G; Level 2 : 2727H; Level 3 : 1506E;
+			Level 4 : 5761H; Level 5 : 0640C; Level 6 : 0663F
+ALIEN STORM		36552,0 credits
+ALIEN SWARM		24266,x where x=no. of lives required
+ALIEN SYNDROME		47503,0 lives; 47984,0 invincible
+ALIQUID SIMPLEX		24120,183 lives
+ALTERED BEAST		25585,0 credits; 61350,0 lives (L1); 
+			61481,0 lives (L2); 61750,0 lives (L3);
+			60428,0 lives (L4); 61531,0 lives (L4);
+			61330,0 energy (L1); 61461,0 energy (L2);
+			61730,0 energy (L3); 60408,0 energy (L4);
+			61511,0 energy (L5)
+AMAUROTE		46381,201:40615,0:46312,0 money,lives and bombs;
+			42456,0 no damage; 42506,0 money; 38552,0 bombs;
+			46192,0 no bomb bounce; 42974,175 no city damage;
+			38341,0 no explosions
+AMAZ. ADV. ROBIN HOOD	46911,0 lives; 43065,182 energy
+AMERICAN TURBO KING	29767,0:29834,0 lives; 44567,0 time;
+			29942,0:30008,0 lives (lightgun); 45075,0 time (LG)
+AMOTOS PUF		52018,182 lives
+ANARCHY			42886,201 lives; 34566,33 time; 42405,255 255 lives
+ANDROID 1		52249,24:52250,32:53897,0 unknown
+ANDROID 2		52262,0 lives; 53894,0 time; 48136,0 alt.lives poke;
+			48156,0 alt.time poke
+ANDROIDE		29771,183 lives
+ANDROIDS		28902,0 enemy lasers don't hurt; 
+			29406,0 running into nasties doesn't hurt;
+			28613,0 lasers
+ANDY CAPP		65032,0 alcometer; 43584,0 kisses;
+			63580,0 alt.alcometer; 65026,201 alt.kisses
+ANFRACTUOS		25132,0 time; 31729,0 lives; 31819,0 energy;
+			31853,0 thrust; 25156,0 alt.time, 31870,0 fuel
+A NIGHTMARE ROB. STREET 49990,x where x=energy; 53267,0 ammo doesn't kill you;
+			56139,0 dogs don't kill you; 
+			49937,x where x=number of enemies
+ANO GAIA		53252,0 lives
+ANTANES			53000,179 energy; 53074,0 laser
+ANT ATTACK		36673,0 rescuer lives; 36714,0 rescuee lives; 
+			36122,0 infinite bombs; 36322,0 time
+ANTICS			61252,0:60777,0 pollen; 57602,33:57604,192 stamina
+APACHE			29932,183 lives; 29901,0 energy; 30647,0 arrows
+APB 128k		35338,0 demerits
+APOCALYPSE		23578,182 lives
+AQUAPLANE		25448,182 lives
+AQUARIUS		31055,0 lives
+ARCADE FLIGHT SIM	48002,0 player 1 lives; 47947,0 player 2 lives;
+			65322,0 fuel; 47630,0 bonus
+ARCADE FRUIT MACHINE	40636,0 money
+ARCADIA			25776,0 lives
+ARCHAEOLOGIST		58740,0 lives
+ARC OF YESOD 128	48261,205:48262,98:48263,192:48264,0 lives
+ARC OF YESOD 48k	47590,0 lives; 50904,255 no nasties
+ARCTIC FOX		58309,0 missiles and mines
+ARKANOID		33702,0 lives; 40167,0 (???)
+ARKANOID II 128k	37586,0 lives; 36451,52:36452,100:36453,0 go faster;
+			33875,0 alt.lives
+ARKANOID II 48k		37484,182 lives; 33055,255:33909,0 alt.lives; 
+			40413,1 two bats; 40413,4 catch; 30313,32 Laser;
+			40414,1 next screen; 40415,64 power ball; 
+			33423,0:33429,0 no moving bricks;
+			40443,n number of bricks; 40420,n speed of ball
+ARKOS PART 1		52117,182 lives; 51572,182 alt. lives poke
+ARKOS PART 2		52126,182 lives
+ARMY MOVES part 1	54597,0 lives
+ARMY MOVES part 2	53772,0 lives; Level 2 code - 27351
+ARTURA			32138,182 energy
+ASSASSIN		51337,0:51626,0 energy; 55716,0 ammo
+ASTERIX			36726,0 lives (Asterix); 36662,0 lives (Obelix)
+ASTRAL INVASION		24603,0 lives
+ASTROBALL		57242,182 lives; 59812,0 time
+ASTRO BLASTER		47422,0 lives; 26369,x x=# of lives
+ASTROCLONE		55792,62:55793,5:55794,255 255 clones
+ASTRO MARINE CORPS PT1	40866,183 lives; 45096,0 time; 30787,0 fully armed;
+			30744,255 255 grenades; 30783,255 255 mega ammo
+ASTRO MARINE CORPS PT2	40866,183 lives; 45096,0 time; 27205,255 255 grenades;
+			27717,255 255 shields; DAGOBAH - access code
+ASTRONUT		50808,201:48093,201 immunity
+ASTROPLANER		37036,0 lives
+A TEAM			26419,42 energy; 26379,0 lives; 26391,0 clips;
+			26318,0 bombs; 26337,98 only one enemy; 
+			26359,175 only one jeep
+ATF			35717,0:35718,0 no weight limit; 32990,0 lives;
+			36451,62:36452,100:36453,0 full speed
+ATHENA 48K		50267,0 big jumps; 55268,61 time; 51212,0 energy
+ATHENA 128K		48558,100 loads of time
+ATIC ATAC		36519,0 lives; 35851,62:35852,241:35855,40 energy;
+			35353,0:35362,0:36571,0 also needed for lives?
+ATOM ANT		49384,0:49444,0 lives; 49374,24:49435,24 invincible
+ATTACK OF THE EMPIRE	55913,0 lives
+ATTACK KILLER TOMATOES	49433,0 (,81?) lives; 25323,0 time; 39092,0 alt.time
+ATTACK ON ATLANTIS	27366,0 lives
+ATV SIMULATOR		60250,0 lives; 53718,201 time; 49433,81 fuel
+AUF WIEDERSEHEN MONTY	41139,0 lives; 42160,201 invincible; 
+			47715,201 no crushers; 42160,201 harmless aliens;
+			37002,0 walk on water
+AUTOLABYRINTH		24249,0 lives
+AUTOMANIA		64589,183 lives; 64968,167 alt.lives; 
+			53801,x x=# of lives; 64675,201 invincible
+AVALON			58342,58 energy; 59317,0 magic; 58316,201 dunno
+			23782,2:23876,201:23878,204:23879,227 alt.energy
+AVENGER			51919,201 time; 51527,183 keys; 58294,0 lives;
+			41619,24 kwon calls; 55519,183 shuriken
+AXONS			54578,0 lives
+
+
+BABALIBA (English)	56734,0 lives; 49685,0 bombs
+BABALIBA (Spanish)	56749,0 lives; 49732,0 bombs
+BABBO NATALE		33766,58:39454,58:40934,58 hours; 33806,58 anti-cloud;
+    (SPECIAL DELIVERY)	39113,24 anti-flame; 33670,60 no bad prezzies
+BACK TO SKOOL		29655,52 lines; 24401,0 kisses; 
+			24417,0 hayley resets lines to 0; 
+			29838,62 no noise for lines
+BACK TO THE FUTURE	54501,201 energy
+BAD DREAM		55745,0 lives
+BALL BREAKER		39844,0 deflector; 37888,0:37952,0 lives;
+			35685,0:32880,X where x=start screen (0 to ???);
+			35904,0 alt.lives
+BALL BREAKER 2		35874,0 lives; 39883,0 ammo
+BALL CRAZY		28489,201 lives; 28086,255 255 lives; 
+			32995,0 invincible; 31085,0 ammo
+BANGERS AND MASH	39713,195 lives
+BARBARIAN (PALACE)	50914,0 energy
+BARBARIAN (PSYGNOSIS)	37480,12 lives; 50914,0 alt. lives; 27680,0 dunno;
+			51005,x where x=no.of units of energy
+BARBARIAN 2		38508,0 lives; 40159,0 energy
+BARGAIN BASEMENT	52732,0:51580,0 lives
+BARMY BURGERS		58654,0 lives; 56543,0 spray; 43721,255 255 lives
+BART VS SPACE MUTANTS	23305,x x lives
+BASIL MOUSE DETECTIVE	41296,0 energy; 41968,201 time
+BATMAN (3D)		36798,0 lives; 37512,166 infinite big jumps;
+			26174,201 fast boots; 36800,0 alt.lives poke; 
+			26052,58 speed up Batman (in empty rooms);
+			39908,201 invincible
+BATMAN THE MOVIE	24345,0 time
+BATTLE TOOTHPASTE TUBES	24596,0 lives; 24520,24 invincible
+BATTLE RACE		44641,0 lives
+BATTLEZONE		44641,0 lives
+BATTY			48440,0 infinite lives; 47633,255 255 lives
+BAZOOKA BILL		41931,0 lives; 28489,201 invincible(?)
+BC BILL			47589,201 lives
+BEACH BUGGY SIMULATOR	45878,0 fuel; 51065,0:51780,195 time
+BEACH HEAD		32963,x where x=no. of lives
+BEAMRIDER		51009,0 lives; 51358,0 missiles
+BEAR A GRUDGE		30073,33 lives
+BEAR BOVVER		39192,0 lives; 39134,0 bombs; 49236,255 255 lives;
+			49231,255 255 bombs
+BEATCHA			29455,0 lives
+BEDLAM			58691,0:59430,0:59783,0:59972,0:60069,0 lives;
+			30037,0 stop balls
+BENNY HILL'S MAD CHASE	34942,0 time; 34957,42 alt.time
+BESTIAL WARRIOR		32417,58:32610,58 lives
+BEVERLY HILLS COP	34708,183 lives
+BEYOND THE ICE PALACE	38280,182 lives
+BIFF			55196,0 energy
+BIG BAD JOHN		64585,0 infinite everything;
+			64622,0:64623,0:64624,0 dunno
+BIG BEN STRIKES AGAIN	43120,0 lives; 43105,201 invincible
+BIGFOOT			55189,0 lives; 55589,183 alt.lives; 55431,58 energy
+BIGGLES			57786,0 lives; 53170,0 bombs; 55430,0 grenades
+BIGNOSE'S USA ADVENTURE	42822,0 lives
+BIG TROUB. LITTLE CHINA	30236,183 lives
+BILLY BLUEBOTTLE	29202,0:37427,0:42140,0 lives;
+			28842,0:37182,0:37498,0 energy
+BILLY BONG		28572,0 lives
+BILLY THE KID (JOYSTCK)	42592,58 lives; 39726,0 ammo; 35969,24 always pass
+BIMBO			28164,0:44083,0 lives; 26727,24:28474,17 invincible;
+			27309,0:27314,0:27675,201 time; 27432,10 10 carrots
+BIONIC COMMANDOS 128	34690,0 lives; 34611,0:34612,0:34613,0 time;
+			34659,0 (,182?) possibly needed for lives;
+			49298,201 alternative time poke
+BIONIC NINJA		51360,0:53392,0 lives; 53183,0 time; 51346,176 energy
+BIRDS AND THE BEES	31981,0 lives; 31984,24 time;
+			37852,255 255 lives; 37088,number of flowers * 5;
+			37664,x where x=start level (0 to 8);
+BIRDY			52791,0 lives
+BITE THE DUST		35934,0 lives; 39257,x where x=no.of lives
+BLACKBEARD		32832,183 lives; 38584,0 ammo
+BLACK HAWK		34695,183 lives
+BLACK LAMP		33606,127:34487,127 lives
+BLACK MAGIC		27946,0:30053,0:31745,0:32010,0:38434,0 lives; 
+			33620,0 arrows; 38665,0 spells; 24730,0 invincible
+BLACK TIGER		46065,0 lives; 44939,0 energy
+BLADE ALLEY		58201,0 lives
+BLADE WARRIOR		39490,36 lives; 39263,201 invincible; 37135,0 time;
+			37161,0 alt.lives; 37161,151 alt.time
+BLASTEROIDS		28468,0 credits
+BLAZING THUNDER		33350,0 lives; 34835,0 smarts; 
+			34780,0:34810,0:35630,0 energy
+BLIND ALLEY		25284,0 lives
+BLIND PANIC		40596,201 energy; 38688,195:38773,195 keys; 
+			58201,0 alt.energy; 41013,x level;
+			38929,x:38930,y screen co-ords; 34513,58 auto-fire;
+			33497,66 start with bomb
+BLINKY'S SCARY SCHOOL	53456,0 lives; 51424,0 energy
+BLOB THE COP		48022,0 energy; 42263,0 puzzle time
+BLOCKADE RUNNER		29286,0:32310,0 lives
+BLOODY			29446,0 lives
+BLOW OUT		38933,0 lives; 40403,0 smart bombs
+BLUE MAX		43983,195:43984,163:34985,167 lives
+BLUE THUNDER		48552,0 lives; 48542,42 alt.lives; 41006,255 255 lives
+BMX KIDZ		52108,0 energy; 37392,0 alt.energy
+BMX NINJA		35526,182 lives
+BMX SIMULATOR		49264,58 time
+BMX SIMULATOR 2		32091,201 time (side 1); 39092,201 time (side 2)
+BOBBY BEARING		29688,175 time; 28094,36 alternate time poke
+BOBSLEIGH		43589,0:43549,0:43614,0 time; 43585,201 alt.time
+BOID			55872,42 lives; 44692,0:56311,0:56326,0 time;
+			49754,195 anti-nasties; 52522,195:52665,195 anti-fire
+BOINGS			36610,0 lives; 35937,0 jumps
+BOMB ALLEY		27366,0 lives
+BOMBER BOB PENTAGON CAP	40538,0 lives; 38904,0 time; 29875,58 invincible
+BOMBER MAN		33248,0 lives; 32851,x x=# of lives;
+			32846,x x=level difficulty; 35908,201 invincible
+BOMB FUSION		35460,0 lives; 35141,0 defusion time
+BOMB JACK		49984,0 lives; 49530,x where x=number of lives;
+			43612,0 lives (different version?)
+BOMB JACK 2		25379,0 lives
+BOMBSCARE		56777,0 lives; 54129,0 shots; 56286,0 energy;
+			57316,201 time; 52286,0 alt.energy; 50129,0 alt.ammo;
+			53322,0 alt.time
+BONGO			27449,0 lives; 27412,195 quicker death scene
+BONKERS			26428,0 lives
+BOOTY			58294,0 lives; 52796,32:52798,58 access hidden game;
+			54045,0 oxygen (hidden game); 
+			52824,195 always complete hidden game
+BORZAK			56117,0 lives; 
+			58576,33:58577,x:58578,0 where x=start level (1-6)
+BOSCONIAN 87		33356,0 lives; 33848,0 less missiles
+BOULDER DASH		31128,195 lives; 31008,182 alt.lives; 26011,33 time
+BOULDER DASH 2		31481,182 lives; 25976,182 time
+BOULDER DASH 3		31008,182 lives; 45462,0:26011,0:26012,0:26013,0 time;
+			31118,195 alt.lives; 26075,158 alt.time
+BOULDER DASH CONS KIT	60221,0 lives; 62446,0 time
+BOUNCE PANIC		54913,0 lives
+BOUNDER			36610,0 lives; 35937,0 jumps
+BOUNTY BOB STRIKES BACK	43852,0 lives
+BOUNTY HUNTER		43723,0 lives; 39840,0 ammo; 43694,0 keep weapons
+BRAINACHE		28064,0 lives
+BRAIN DAMAGE		25381,182 lives
+BRAINSTORM		65134,0 bonus; 47312,0 backsteps;
+			36941,0 always complete the screen
+BRAT ATTACK		52847,182:52850,182 lives
+BRAVESTARR		51803,24:51804,18 time
+BRAXX BLUFF		23730,255:23731,255 dunno
+BREAK NECK		51473,0 lives; 49540,0 lasers
+BRIAN BLOODAXE		26582,0 lives; 27957,0 energy; 26656,142 dunno;
+			25127,0 immune after death; 
+			29182,118:29183,201 no nasties
+BRICK (DIABOLIC)	58367,0 lives
+BRICK BREAKER		50624,0 lives; 61527,0 time; 61970,255 255 lives
+BRIDE OF FRANKENSTEIN	40476,201 energy; 37605,201 no nasties; 
+			35486,201 elixir
+BRIX			53712,0 lives
+BRONX STREET COP	38168,0 lives; 42720,0 ammo (joystick);
+			42600,0 ammo (light-gun)
+BRUCE LEE		51540,0:51548,0 lives; 51795,0 alt. lives 1st player;
+			51803,0 alt. lives 2nd player
+BUBBLE BOBBLE		43871,195 lives; 36854,225:36855,225:36856,195:36857,7:
+			36858,141 pause skips levels; 43835,150 invincible;
+			43933,3 fast bubbles; 43929,16 long bubbles;
+			35397,62:35398,10 always get heart;
+			34313,n poke with N in game to change next level;
+			43873,195 alt.lives
+BUBBLE BUSTER		32969,183 lives; 32900,0 invincible;
+			32822,54:49202,x where x=start level (0-11)
+BUBBLE DIZZY		43232,0 lives; 48830,245:48831,62:48832,39:48833,50:
+			48834,198:48835,168:48836,241:48837,237:48838,77 oxygen;
+			43198,0:45591,195 energy; 60183,195 skip intro
+BUBBLER			57517,0 lives; 52533,0 time; 57514,183 alt. lives poke
+BUBBLE RUN		36699,182 lives
+BUBBLE TROUBLE		53326,0:54285,0 lives; 48063,0 time
+BUCCANEER		27318,0 lives
+BUCK ROGERS		63137,183 lives
+BUGABOO			27999,201 invincible
+BUG BLASTER		31210,0 lives
+BUG EYES		43393,0 lives; 36037,201 dunno
+BUGGY BOY 128k		37966,24 time
+BUGGY BOY 48k		39086,0 time
+BUMPY			47771,0 lives; 47386,0 hammers; 
+			51717,0:52296,0:52807,0 water
+BUSTOUT			29209,0:29275,0:30037,0 lives
+BUTCH HARD GUY		35392,0 lives
+BYTE BITTEN		53429,0 lives; 52790,0 time; 43358,255 255 lives
+
+
+C5 CLIVE		47168,47 batteries
+CABAL 48k		32203,0 lives; 40519,0 ammo; 49661,221 dunno;
+			34822,24 invincible; 39202,201 bombs;
+			39217,201:39245,201 no nasties
+CABAL 128k		31996,0:45760,0 lives; 40405,0 bombs
+CAGE MATCH		50062,62:50063,22:50064,0 energy
+CALL ME PSYCHO		48050,0 lives
+CAMELOT WARRIORS	53920,33:53921,6:53922,0 lives
+CANNONBALL		32807,x # of lives; 32957,0 lives
+CAPTAIN DYNAMO		30866,0 lives; 30819,24 invincible
+CAPTAIN FIZZ BLASTERONS	25496,0:25497,0:25498,0 energy for player 1;
+			25523,0:25524,0:25525,0 energy for player 2
+CAPTAIN KELLY		43804,0 energy; 43339,0 ammo; 47975,0 oxygen
+CAPTAIN PLANET		54848,0 lives; 34051,0 time; 52452,0 lightning bolts
+CAPTAIN PYTRON		65409,58 energy
+CAPTAIN TRUENO PART 1	38310,24 energy; 39840,182 lives; 
+			31259,24:31260,3 alt energy
+CAPTAIN TRUENO PART 2	28712,58 energy; 26168,182 lives; level code: 270653
+CAR WARS		32337,0 lives
+CASEY JONES		56033,0 lives
+CASH DASH		35828,0 lives
+CASTLE MASTER		49471,0:52544,0 energy
+CATCH 23		46813,0 ammo; 61635,0 bombs; 32400,182 dunno;
+			46812,182 dunno
+CATCHY			30239,0 lives
+CATERPILLA		27363,183 lives
+CATWALK			40487,183 lives
+CAULDRON		40060,0 lives; 28602,0:34756,0 magic
+CAULDRON 2		52974,0 lives; 57578,0 magic
+CAVELON			24019,146:24080,184 lives?
+CAVEMANIA		51938,195 lives; 44731,195 ammo
+CAVERN FIGHTER		31683,0:31684,0 lives
+CAVES OF DOOM		39196,0 lives; 25269,100 100 lives
+CEASEFIRE		48647,62:48648,32:48649,50:48650,228:48651,91:48652,0:
+			48653,0 energy
+CENTIPEDE (DK'Tronics)	31435,0 centipede returns to top each time
+CENTROPODS		27387,183 lives
+CENTURIONS		64340,205:64341,0:64342,64 lives
+CERIUS			65520,0 lives; 47086,0 dunno; 46605,0 time bonus;
+			48305,34 power
+CHAIN REACTION		42217,0 jet; 43646,0 rad; 43339,0 time
+CHALLENGE OF THE GOBOTS	51330,205:52515,205 lives
+CHAMBERS OF DEATH	49544,0 lives; 43239,0 energy
+CHAOS			39106,0 player create spells always work; 
+			38040,200 can't cast illusions; 36506,32 turns
+CHAMPIONSHIP RUN	61482,195 always qualify; 58070,24 no rank saturation
+CHASE HQ		39998,166 credits; 39937,0 time; 45221,0 turbos;
+			46351,62 weedy baddies
+CHASE HQ II		40382,183 credits
+CHEEKAH'S EXPLOITS	28418,0 lives
+CHEQUERED FLAG		54545,0:54546,0:54547,0(,250?) dunno!
+CHEVY CHASE		42350,0 time
+CHICAGO 30		63794,183 lives
+CHILLER			34025,0 lives; 34412,0 no bad mushrooms
+CHIMERA			59118,0 time; 60960,0:60961,0 food; 
+			60913,0:61340,0:61341,0 water
+CHOCKMAN		33750,0 lives
+CHOPPER MISSION		36603,0 lives; 37284,0 time
+CHRONOS			56906,167 lives; 26987,201 autofire; 53407,x x lives
+CHUBBY GRISTLE		29851,0 lives
+CHUCKIE EGG		42791,24 lives; 39151,0 bonus; 39205,0 time;
+			42837,182 alternative lives poke
+CHUCKIE EGG 2		35453,0 lives
+CJ IN THE USA		42232,182 lives; 53887,195:54567,195 invincible;
+			43718,0 bombs
+CJ'S ELEPHANT ANTICS	52425,182 lives; 51606,0 bombs
+CLASSIC AXIENS		58269,0:58270,24:60569,0 lives
+CLASSIC INVADERS	33274,0 lives
+CLASSIC MUNCHER		30533,182 lives
+CLIFF HANGER		26515,100 100 lives (use, start game, die, start again)
+COBRA			36515,183:34925,183 lives; 39611,201 weapon time; 
+			37915,201 invincible
+COBRA FORCE		49277,183 lives; 52912,183 freeze; 52778,183 missiles
+CODENAME MAT		24318,201 lives
+COLLISION COURSE	36541,0:36545,24 lives; 43176,0 time
+COLLOSEUM		48529,183 lives
+COLLYWOBBLES		61010,183 energy; 60560,183 spells; 61177,0 keys
+COLOUR CLASH		26297,0:28219,0 lives; 27853,0 bombs
+COMBAT LYNX		42525,0:42526,0:42527,0 ammo
+COMBAT SCHOOL		37088,0 time; 37088,53 normal time;
+			43511,0 kill instructor (enter during fight)
+COMBAT ZONE		45262,0 lives
+COMBUSTION		41896,183 lives
+COMEME			56928,183 lives
+COMMANDO		27653,182 lives; 27771,190 grenades
+CONFUSED		49860,0:51988,0 lives
+CONFUSION (Blaby)	58270,0:58271,0 lives
+CON-QUEST		23335,201 invincible; 62673,201 energy
+CONQUESTADOR		59490,0 invincible; 62370,0 no nasties
+CONTACT SAM CRUISE	28295,201:28351,0:28352,0:26054,55 medikits and money
+CONTINENTAL CIRCUS	33590,195 time; 36766,61 can't be overtaken;
+			42858,33 infinite continues
+COOKIE			28697,0 lives; 26197,0 no bin monster
+CONQUESTADOR		59490,0 invincible; 62370,0 no nasties
+COP-OUT			35370,0 lives; 44929,0 invincible
+CORE			40408,0 battery
+COSMIC CRUISER		25373,0 lives
+COSMIC DEBRIS		53963,0 lives
+COSMIC GUERILLA		28988,182 lives
+COSMIC PIRATE (BLABY)	47598,0:48170,0:48313,0:48379,0 lives; 43023,0 fuel
+COSMIC RAIDERS		25624,0 lives; 24498,0 bombs
+COSMIC WARTOAD		35143,167 lives
+COUNT DUCKULA		43316,0 time
+COWBOY KIDZ		45833,183 lives
+CRACK-UP		40484,182 lives
+CRAZY CARS		29406,60 (,183?) time
+CRAZY CRANE		26371,0:30412,0 lives
+CRAZY PENGUIN		41872,183 lives
+CREEPY CRAWLER		29592,0 player 1 lives; 29604,0 player 2 lives
+CRIME BUSTERS		61012,201 invincible; 60158,33 time; 47219,201 lives
+CRITICAL MASS		56879,0 (,52?) energy
+CROSSFIRE		30748,0 time; 30578,24 bullets go constantly;
+			33848,8 invincible (maybe for a different game?)
+CROSSWIZE		51617,0 invincible
+CRYSTAL CASTLES		63733,0 lives
+CRYSTAL KINGDOM DIZZY	57267,0 lives; 60808,182 energy
+CUBEY			47528,0:50875,0 lives
+CURSE OF SHERWOOD	64613,0 lives; 63033,0 invincible
+CYBERNOID		39403,0 lives; 31799,0 weapons; 36617,195 invincible;
+			27210,0:27211,0 cybermace; 34732,201 no cannons;
+			36928,201 no aliens; 38896,201 no rockets;
+			39906,201 no small nasties; 37479,201 no snakes
+CYBERNOID 2		36198,0 lives; 32202(34402?),0 ammo; 26896,0 invincible;
+			35911,201 alt. invinciblility poke
+CYBER RATS		27803,0 player 1 lives; 27815,0 player 2 lives
+CYBER TANKS		25991,183 lives
+CYBERUN			62930,0:62931,0:62932,0 lives; 36188,175 lives; 
+			36168,0 invincible
+CYBERZONE		63478,0 lives
+CYBOTRON		26495,0 lives
+CYCLONE			37536,0 lives; 33429,0 time
+CYLU			37919,0 fuel
+CYROX			50187,0 lives
+
+
+DALEY'S DECATHLON	24000,0 day 1 lives; 24085,0 day 2 lives
+DALEY'S SUPERTEST 128	38323,58 lives; 37928,167 alt. lives poke
+DALEY'S SUPERTEST	46394,0:47394,0 day 1 lives; 36520,183 day 2 lives
+DAN DARE (ORIGINAL)	47710,201 energy; 46885,201 time; 43526,0 ammo;
+			42863,0 fall any height; 42111,0 no mean treens;
+			44413,201 no roof and floor guns
+DAN DARE (RE-RELEASE)	47728,201 energy; 46903,201 time; 43544,0 ammo;
+			42881,0 fall any height; 42129,0 no mean treens;
+			44431,201 no roof and floor guns
+DAN DARE 2		60677,0 time; 54390,0 lives; 61827,0:61840,0 no treens;
+			56382,201 invincible; 53050,201 no CRUNCH!;
+			53778,0:63397,x x=start level (0 to 3);
+			58278,62:58279,80:58280,18:58281,201 energy
+DAN DARE 3		41922,0 fuel; 58494,0 lives; 52036,0 ammo;
+			34317,0 255 smarts and bounces
+DANDY			27601,33:27602,232:27603,3:27650,33:27651,232:
+			27652,3 both players invincible;
+			35972,201 freeze nasties; 27598,0:27647,0 time
+DANGEROUS GARDENS	30361,201 invincible
+DARIUS			39291,183 lives; 33902,183:37106,0:43841,0 invincible
+DARK FUSION		48279,0 lives; 42039,0 energy
+DARKMAN 128k		45546,183 energy (first level, enter during game)
+DARK SIDE		45482,0:47924,0:45436,0 shields; 45436,0 fuel; 
+			47621,167 time; 47595,0 alt. fuel poke
+DEADLY EVIL		52326,0 time; 52438,0 energy; 52418,0 energy (princess);
+			51870,0 only need one key
+DEAD OR ALIVE		45820,0 thirst; 46766,0 lives; 46941,0 ammo
+DEAD RACER		27150,0 lives
+DEA TENEBARUM		63897,0:63898,0:63899,0 time; 35980,0:35981,180 lives
+DEATH BEFORE DISHONOUR	38415,195 lives; 48083,201 pod energy
+DEATHCHASE		26463,0 lives
+DEATH OR GLORY		37788,201:37912,201:38117,201:38189,201 shields
+DEATHSCAPE		34473,0 lives; 42557,201 energy; 42627,201 no overload;
+			50752,0:51186,0 everything
+DEATH STAR BATTLE	35809,0:37640,0 lives
+DEATH STAR INTERCEPTOR	36714,0:38348,0 lives; 36679,0:38170,0 energy
+DEATH WISH 3		39856,201 injury; 38678,175:39353,175 ammo;
+			41734,0 no backstabbing;
+			or... 38678,183:39353,183 ammo; 43301,183 injury
+DEATHZONE		60149,0 lives; 59198,x where x=level (1 to 4)
+DEEP STRIKE		47720,0 dunno
+DEFENDA			37531,0 lives; 34163,0 smart bombs; 50584,201 shields
+DEFENDER		30822,255 dunno; 37815,255 dunno again
+DEFENDERS OF THE EARTH	52940,0:52941,0 lives; 46178,0:46201,0 no alert
+DEFLEKTOR		34473,0 lives; 42707,201 time; 42557,201 energy;
+			42627,201 no overload
+DEJA VU			50290,0 lives; 45692,0 energy; 43293,0 time;
+			47230,60 firepower; 48854,0 puzzle time
+DEJA VU - THE REMIX	45717,0 lives; 45700,0 energy; 43293,0 time;
+			47231,60 firepower; 45782,0 shields
+DELTA CHARGE		40868,58 lives; 32938,x where x=no. of lives
+DEMOLITION		57718,0 lives
+DEMON SLAYER		54227,0:54265,0:54303,0:54341,0:55654,0:55702,0 energy;
+			53425,0 blasts; 55476,0 time
+DEMON'S REVENGE		30699,17 energy
+DENIZEN			58594,0:56505,205 torch; 61226,0 bullets;
+			56355,0:60614,0:64053,0 energy; 
+			60822,0:60823,0:60824,0 door passes
+DESERT BURNER		40578,0 lives
+DESOLATOR		36770,0 flips; 45205,201 energy; 39636,183 lives
+DESTROYER		28279,0 lives
+DESTRUX			54938,0 credits; 65418,0 time
+DEVIANTS		35272,0:35286,0 ammo; 26575,0 time; 61196,0 energy;
+			26524,0 valves
+DEVIL'S CROWN		58986,201 oxygen; 52518,195 no dark rooms
+DICK TRACY		29615,50 lives
+DIE ALIEN SLIME		35480,201 lives/energy; 33227,195 time
+DIGGER DAN		25559,0 lives; 26363,0 oxygen
+DILITHIUM LIFT		31230,0 lives
+DIMENSION DESTRUCTORS	51124,182 shields; 48819,x where x=no. of shields
+DINKY DIGGER		58574,0:58844,0 lives
+DIRT TRACK RACER	54938,0 credits; 36714,0:36715,0 energy
+DISCO DAN		49266,0:56668,0 lives
+DISPOSABLE HEROES	41248,0:41249,0 lives; 38375,0:38376,0 time;
+			38756,0:38757,0:43255,0:43256,0:45869,0:45870,0 energy
+DIZZY			54216,0 invincible; 62745,0 lives; 
+			60137,201 walk through walls
+DIZZY DOWN THE RAPIDS	42986,0 lives; 36669,0:36809,0 apples; 34887,0 energy
+DIZZY, PRINCE YOLKFOLK	30891,182 lives; 37240,0:37241,0 show walls;
+			39053,1 double speed
+DIZZY THREE & A HALF	32880,182 lives
+DNA WARRIOR		38631,182 lives
+DOC THE DESTROYER	56385,0 lives
+DOGSBODY		32619,0 lives
+DOMINATOR		27523,0:27524,0 lives
+DONKEY KONG		33371,0 lives; 35370,0 alternative lives poke
+DON'T PANIC (PANIC NOW)	24195,182 lives
+DOOMBASE		40024,0 lives
+DOOMDARKS REVENGE	28262,24:25525,0 no mist; 33611,201 dragons don't hurt;
+			33886,24:33887,25 free movement;
+			34388,62:31423,195 choose at night;
+			34601,0:34639,0 free warriors; 26009,122 see buildup;
+			31957,62:32064,24 always recruit; 
+			33270,201 no night move;
+			29583,62:29584,57:29585,50:29586,130:29587,93:
+			29588,24:29588,241 control all
+DOOMSDAY CASTLE		38902,201:29440,201 energy
+DOOMSKULLE		46758,0 lives; 49534,183 ammo
+DOTTY			28383,183 lives
+DOUBLE DRAGON		37693,0 lives part 1; 37815,0 lives part 2;
+			37813,0 lives part 3a; 37794,0 lives part 3b;
+			37824,0 lives part 4; 37818,0 lives part 5a;
+			37979,0 lives part 5b; 39393,1 lots of strenth
+DOUBLE DRAGON II	29014,0 player 1 lives; 29033,0 player 2 lives
+DOUBLE TAKE		40243,201:49022,0:39475,201 lives
+DOWN TO EARTH		40141,182 (,0?) lives; 39815,0 time; 
+			38583,0:38911,0:39168,0:39387,0 bombs
+DOWNTOWN		53553,0 lives; 43928,0 time; 51918,0 ammo
+DRACONUS		64215,0 lives; 62866,0 flames
+DRAGON BREED		37354,254:37331,254 invincible; 
+			26094,62:26095,57:26096,0 loads of time
+DRAGONFIRE		41105,182 lives
+DRAGON NINJA		38918,0 lives; 38684,1 time; 43455,8 repulsion
+DRAGON SPIRIT		54498,0 lives; 54449,201 invincible
+DRAGONTORC		58337,255 invincible
+DRAGON'S LAIR		51867,0 lives
+DRAGON'S LAIR II	35766,0 lives
+DR DESTRUCTO		39119,0 invincible; 39136,0 lives; 42517,0 days
+DR FRANKY & THE MONSTER	51475,0:51476,0 lives
+DRILLER			48246,0 energy; 49425,0:49022,0 shield; 
+			39368,0:39369,0:39370,0:52152,195:52153,230:52154,204
+			infinite time
+DRILLER TANKS		48246,0 lives
+DR MADDO (CASTLEHUSTLE) 60604,0 lives
+DROIDS			31295,0:34248,0:34782,0 invincible; 28127,175 bug-fix;
+			34450,0:34548,0:34584,0:34499,0 get passes;
+			39866,0:39867,0:39868,0 wrong codes accepted
+DRUID			34072,201:28501,24:30039,0:31326,0:32808,0 everything;
+			24890,201 energy
+DRUID 2			30012,58 energy; 34639,24 frozen nasties
+DRUNK POLICEMAN		50563,127 127 lives
+DUET			44114,0:46185,0 lives
+DUKES OF HAZARD		44246,0 lives
+DUN DARACH		44458,0:45395,153:45396,153:45397,15 money;
+			34999,255 no nasties; 34378,24 unlock all doors
+DUSTIN			52045,195:52932,0:52937,0 time; 52904,0 invincible;
+			52939,0 no penalties
+DUSTMAN			30092,0 lives
+DUSTY DROID		40654,183 lives
+DYNAMIC DUO		56912,175:56913,60 invincible
+DYNAMITE DAN		52678,0:57035,0 lives; 51558,0 energy; 
+			58770,201 no enemies; 59093,201 disable teleporters
+DYNAMITE DAN 2		29002,182 energy; 29544,201 no monsters; 
+			33170,201 no mesmerism; 29002,0:29003,24 alt. energy;
+			32587,201 water harmless; 28245,201 no items; 
+			32541,201 get everything; 28464,201 disable bombs;
+			27675,32:27678,4 no water;
+			31622,66 move left/right while falling
+DYNAMITE DUX		44277,0:44401,0 invincible
+DYNATRON MISSION	41629,0 lives; 41606,201 invincible; 44969,255 255 lives
+
+
+E-MOTION		40460,0 lives; 35388,x where x=no. of lives
+EARTHLIGHT 128		50119,0:50120,62 lives; 51708,62 ammo; 
+			50607,83:50610,62 shields; 49944,195 land to finish;
+			50668,83:50671,62:50853,83 fuel
+EARTHLIGHT 48K		50026,0 (50062?) lives; 51284,0 fuel; 51618,0 ammo;
+			53143,0 alt. ammo poke
+EARTH SHAKER		35344,0 lives; 34535,201 energy; 42967,0 rev gs?;
+			35001,24 falling things harmless; 
+			60072,234 no map limitations
+EDD THE DUCK		25489,0 lives
+EGG-HEAD		56648,0 lives
+EIDOLON			41317,0:41318,24:36117,201:40232,78:41455,17 invinc.
+ELEKTRO STORM		46688,0 bases; 40598,0 ammo
+ELEVATOR ACTION		42085,0 lives
+ELEVATOR BOY		47668,0 ammo
+ELIMINATOR (Altern.)	35962,183 lives
+ELIMINATOR (Hewson)	40311,183:44715,183 lives
+ELITE 128		42358,0 energy; 55408,0 fuel; 60555,0 one hit to kill;
+			29490,195:59989,0:60740,0 invincible; 60466,0 lasers;
+			42870,0 missiles; 46028,0 cargo bay; 42898,0 esc.pod;
+			54703,0:54713,0 hyperspace anywhere; 
+			47215,3:47229,24 money; 
+			53583,0:53593,0:63533,24 ecm jammer
+ELITE 48K		39517,0 energy; 39959,0 missiles; 46759,0 laser temp; 
+			42263,0 blow up space stations; 41971,0 no thargons;
+			46848,0 one hit to destroy; 39987,0 escape;
+			56280,0:56290,0 hyperspace anywhere; 40016,0 no loss;
+			56260,0 galactic hyperspace; 59398,0 cargo;
+			28820,0 bomb; 28832,201 no bomb flash;
+			54261,3:54275,24 cash; 61467,0:61477,0:41914,24 ecm;
+			61530,33:61534,246:61536,0 cloaking device;
+			29974,195:46300,0:47033,0 indestructable;
+			46848,201 destroy aliens; 56997,0 fuel
+ELITE SUPERTRUX 128	25135,0 time
+ELITE SUPERTRUX 48K	24604,0 time
+EL MISTERIO DEL NILO	55469,246 lives; 43933,0 ammo; 43995,0 bombs
+ELVEN WARRIOR		36767,0 energy; 38094,0 keys; 38710,0 ammo
+EMPIRE FIGHTS BACK	53322,0 energy
+EMPIRE STRIKES BACK	43624,0 shields
+ENDURO RACER		43651,0 time
+ENGINEER HUMPTY		41767,0:41768,0 spanners
+EQUINOX			30737,0 lives; 41915,0 alt lives
+ERIC AND THE FLOATERS	33245,0 lives
+ESCAPE MCP		27068,0 lives
+ESCAPE PLANET ROBOT MON	43640,183 credits
+ESKIMO EDDIE		24686,24:24687,76 miss out annoying first level;
+			44624,0 lives
+ESPIONAGE (GRANDSLAM)	61468,181:61469,240 remove protection
+ETHNIPOD		61193,0 player 1 lives; 61453,0 player 2 lives;
+			56988,0 player 1 bombs; 57286,0 player 2 bombs
+EUREKA!			46228,0 lives in arcade sections
+EVERYONE'S A WALLY	58179,201 indestructable; 58215,182 lives;
+			43308,201 other characters don't move;
+			59320,24 change character anywhere
+EVIL DEAD		42236,0 lives
+EXODUS			32411,0 lives
+EXOLON			40221,0 lives; 33646,0 ammo; 37456,0 grenades;
+			42338,0 no nasties; 36845,0 no cannon fire; 
+			42330,201 no enemies; 33663,0 double fire; 
+			40110,201 mines harmless; 36831,24 cannons harmless;
+			38221,0 alt.lives; 31646,0 alt.ammo; 
+			35456,0 alt.grenades 
+EXPLODING WALL		43037,0 lives
+EXPLORER		32054,0:32179,0 lives
+EXPRESS RAIDER		60503,0 strength; 60147,0 lives; 61100,0 time
+EXTERMINATOR		52062,0 credits
+EXTREME			55850,0 energy; 54386,0 torches; 48960,0 shields;
+			31749,0 time; 54642,0 smarts; 54275,0 turbos;
+			55853,0 alt.energy; 31752,0 alt.time; 54389,0 alt.ammo
+
+
+F1 TORNADO		60873,0 lives; 61139,0 ammo
+FACTORY BREAKOUT	30500,0:30595,0 lives; 30439,100 25603 lives!
+FAHRENHEIT 3000		30818,0 lives; 30370,2 activate level cheat by pressing 
+			'9' (previously 6,7,8,9,0), password is JOGxx where
+			xx is a level code, 11 being level 1.
+FAIRLIGHT		61893,0 energy; 62797,24 no weight limit; 
+			63478,24 no locked doors; 
+			58813,62:58814,6:58815,0 see rooms draw;
+			62199,201 blindfold baddies
+FAIRLIGHT 128		61858,183:61866,183 energy
+FAIRLIGHT 2		30429,0 energy (part 1); 31978,0 energy (part 2);
+			32027,24 no locked doors; 31341,0 carry anything
+FAIRLIGHT 2 128		31978,0 energy
+FALCON PATROL 2		40550,201 lives; 45363,x where x=no. of lives
+FALCON RENEGADE LORD	33784,0 time; 33524,195 energy
+FALL GUY		43896,2 lives; 43539,0 one jump to complete level;
+			43402,192:43403,195 bonus; 44199,0 alt.lives poke
+FANTASIA		30513,0 lives
+FANTASTIC VOYAGE	54492,0:54227,0 infinite lives & no infections
+FANTASY WORLD DIZZY	63001,0 lives; 42481,x where x=no. of lives
+FARGO WELLS		50051,183:50071,183 lives (both players)
+FAST AND FURIOUS	59553,24:59554,75:59353,58:59526,58:60770,201 invincible
+FAST BREED		30107,0 lives
+FAST FOOD		47844,167 lives; 
+			25700,0:25701,0 extra life after each level
+FAT WORM BLOWS A SPARKY	30624,201 invincible; 48861,0 get all spindles;
+			30644,61:30734,61:30766,61:30471,61 immortal & sparkies
+FEARLESS FRANK		44369,0 lives
+FERNANDEZ MUST DIE	23985,16:23990,17:23995,19 lives; 
+			47301,255 pl1 255 lives; 47290,255 pl2 255 lives
+FERNANDO MARTIN BASKET	31735,0 energy; 27002,201 get all rebounds;
+			33276,0 violent public; 28861,4 no replay
+FEUD			47190,201:44186,0:49043,7:49210,201 invincible
+			and all spells last forever;
+			51425,0:51447,0:51493,201 energy
+FIDO			48880,0:49332,0:54768,0 lives
+FIDO 2 - PUPPY POWER	45832,0:46284,0:53668,0 lives
+FIGHTING WARRIOR	60991,0 energy; 61212,16 dunno!
+FINDER'S KEEPERS	34252,0 lives; 30394,251=lives (1-251 max);
+			34208,0 strength
+F.I.R.E.		60793,182 lives
+FIREBIRD		27221,0 lives
+FIREBIRDS		27235,0 lives
+FIREFLY			44998,255 255 lives; 45453,167 lives; 45889,24 time;
+			43670,201 teleports no longer spin around;
+			38720,201 no enemies; 42877,24 yokas not needed
+FIRELORD		39805,0 infinite trading; 38570,0:38556,7 auto-fire; 
+			34509,0:39974,0:40003,58 lives; 34984,58 energy
+			43515,24:43516,7 weapon; 39171,58 fire;
+			36716,0 lives (version 2); 39771,0 no trials (v2);
+			36781,0 energy, ammo, trading time (v2)
+FIREMAN FRED		36419,0:36520,0:36621,0:39337,0:40306,0:41176,0:
+			42420,0:43618,0:45074,0:46171,0:47208,0:48360,0:
+			49571,0:50754,0:52032,0:53342,0:54601,0:55817,0:
+			57056,0:58431,0 lives (phew!)
+FIRETRAP		46509,195 lives; 47629,0 time; 
+			45654,0:45655,122 invincible
+FLAK			57132,0 lives
+FLASH GORDON		50732,0 time; 49123,0 bullets
+FLUNKY			36320,183 time
+FLYING FORMULA		35448,0 lives
+FLYING SHARK		42464,255 255 lives; 48980,0:48981,0 bombs;
+			51631,201 no enemies; 48114,0:48115,1(,0?) invincible;
+			39997,3 skip level
+FOOTBALLER OF THE YEAR	50253,0 goal cards; 
+			38217,255:38218,255 start with 365535 quid;
+			35171,255:35172,255 in-game cash boost
+FORCE II		62267,0 lives
+FORGOTTEN WORLDS	35741,0 player 1 lives; 35796,0 player 2 lives
+FORMULA ONE		31756,6:31757,8:31758,0 accelerate more quickly
+			31798,16 slow down faster
+FORT APOCALYPSE		36939,0 lives
+FOXX FIGHTS BACK	48071,0 energy; 46535,0 lives
+FRANK BRUNO'S BOXING	65483,1 weak opponents
+FRANKENSTEIN 2000	37741,0:37798,0 lives
+FRANKENSTEIN JUNIOR	40476,201 energy; 37605,201 no ghosts; 35486,201 elixir
+FRANK N STEIN		34124,0 lives; 28277,100 100 lives; 
+			28265,x where x=starting level;
+			36047,0:36048,0:36049,0 energy
+FRED			31175,0 energy; 31171,0 energy (different poke);
+			37729,0 bullets
+FREDDY HARDEST PART 1	64011,167 lives; 63481,201:63585,201 immunity
+FREDDY HARDEST PART 2	61607,183 (or 167) lives; 61455,201 immunity;
+			access code : 897653
+FREDDY HARDEST S.MANHAT	59005,0 lives; 58756,0 no nasties; 57626,255 255 lives
+FREE CLIMBING		48965,0 lives; 62240,183 time; 48073,255 255 lives
+FREEX			57155,0 lives
+FREEZ BEES		34610,0 lives
+FRENZY			29956,0 lives; 29812,x where x=no. of lives
+FRENZY (Spectrum Games)	25664,0:25665,24 lives
+FRIDGE FRENZY		37286,182 lives
+FRIGHTMARE		43892,183:44013,183:43852,183:43976,183 lives
+FROG SHOOTER		32973,0:32977,195 lives
+FRONTLINE		62499,0 lives; 63400,0 bombs
+FROST BYTE		36560,182 lives; 33805,182 time; 33754,62 ammo
+FRUIT MACHINE SIMULATOR	49386,0 money
+FRUIT MACHINE SIM 2	56342,0:60933,0 credits
+FULL THROTTLE		45161,0:48427,201 can't slow down, pass thru things
+FURY			24525,255:24546,254 loads of cash
+FUTURE BIKE SIMULATOR	43472,255 invincible; 38528,182 lives; 37986,0 smarts;
+			43548,255 radar on
+FUTURE KNIGHT		31683,0 energy
+
+
+G-FORCE			49323,0 lives
+G-LOC			24902,255 lives
+GALACTIC ABDUCTORS	26176,0:26789,0:27861,0 lives
+GALACTIC GUNNERS	65008,0 lives; 40004,255 255 lives
+GALACTIC TROOPER	28332,0:28339,0 lives
+GALACTICANS		26946,0 lives
+GALACTOIDS (INVADERS)	31791,0 lives
+GALAXIANS		54757,0 lives
+GALAXY FORCE		34552,183 lives
+GALLETRON		53213,0 lives
+GALVAN			23290,0:23414,0 lives
+GAME OVER PART 1	38691,0:39334,0 lives; 39273,201 energy; 
+			32417,0 grenades; 32378,0 ammo
+GAME OVER PART 2	38692,0 lives; 32529,185 energy; 32379,0 shield
+			Access Code : 18024
+GAME OVER 2		58579,0 lives on part 1; 57743,0 lives on part 2;
+			64559,201 skip password at start of level 2
+GAMES DESIGNER		38079,0 lives (all games);
+GANGPLANK		30939,0 time
+GARFIELD		33595,0 no hunger; 45335,201 sleep
+GAUNTLET		48489,0:48497,0 health; 36919,0 treasure time;
+			44887,24 no generation; 36482,0:36483,0 no poison food;
+			36985,24 shots don't hurt other players;
+			44566,0 keys; 38044,0 can't shoot bottles;
+			38050,0:38052,0 shots destroy walls;
+			44556,0:44487,0:44405,0:44446,0:44528,0 walk thru walls;
+			43394,0 cloak; 45566,24 stamp on generators;
+			37492,24 shoot thru walls;
+			38769,62:38770,192:38771,0 continue from where you died;
+			40897,201 no non-generated nasties; 45566,24 potions;
+GEE BEE AIR RALLY	41402,0:41403,0:41404,0 time
+GEMINI WING		34370,0 lives
+GENUS			42633,0 lives; 43944,0 shield; 44354,0 time
+GHOSTBUSTERS		40845,0:40191,0:40625,0:42173,0:40192,167 infinite
+			men, traps never fill up, backpacks don't discharge
+GHOST HUNT 16K		25965,0 lives
+GHOST HUNTERS		55510,0 energy
+GHOSTLY GRANGE		40654,183 lives
+GHOSTS N GOBLINS	36057,191:36058,194 lives; 33433,201 extra speed;
+			33352,201 lives (diff. version?); 45132,24 invincible;
+			39857,135:39858,50:39859,180 dunno
+GHOULS N GHOSTS 48K	35390,0 lives; 35612,128 128 lives
+GHOULS N GHOSTS 128K	38631,201:38635,201:39879,201:36195,58:36198,61 inv.
+GIANT'S REVENGE		24504,0 lives
+GIFT FROM THE GODS	57408,66 stamina; 54459,62:57460,100 dunno
+GILBERT 128K		28662,182:28692,182 time; 30528,0 snot; 
+			33279,24 pass sub-games
+GILBERT 48K		28523,182:28553,182 time; 30372,0 snot; 
+			33067,24 pass sub-games
+GILLIGAN'S GOLD		52881,0:52882,0:52883,0 lives; 52210,62 time
+GISSA KISS		25386,255 lives
+GLIDER RIDER		34973,0 energy; 34818,0 time; 34931,0 bombs;
+			37461,0:37462,0:37463,0 no direction change when hit;
+			37441,0 lasers don't fire
+GLOBULAR TROUBLES	41543,0:41592,0 lives
+GLUG GLUG		34139,0:34211,0 lives; 31288,0 unstoppable bullets;
+			31482,0 nasties die forever; 34176,0:34227,0 pl2 lives
+GNASHER			27624,0 lives
+GNONI			45260,0 lives
+GOBBLE A GHOST		30597,0 lives
+GO BEAR GO		33425,183 lives; 33538,183 dunno
+GOLDEN AXE		46652,0 credits; 46686,x where x=no. of credits
+GOLD RUSH		28665,255 255 lives
+GONZALEZZZZZ PART 1	32382,0 lives; 37693,0 time; 31890,128 128 lives
+GONZALEZZZZZ PART 2	35749,0 lives; 36655,0 energy; 47835,0 ammo
+GOODY			47780,0 lives
+GOONIES			33409,0 lives
+GOTCHA			55926,0 lives
+GOTHIK			43934,58:42110,58 energy
+GO TO HELL		63275,5 invincible
+GRAND NATIONAL		53375,0 energy
+GRAND PRIX SIMULATOR	53152,201 no computer cars; 53413,33 no mud skids;
+			61467,62:61468,1 always win
+GREAT ESCAPE		41953,183 morale; 50475,201 no other people;
+			51243,201 dunno
+GREAT GURIANOS		34962,0 lives
+GREEN BERET		41652,190 lives; 44542,0 no mines; 46195,0 no mortar;
+			46325 no mortar fire; 41998,0 speed up;
+			44868,0 no bullets; 42076,255 255 lives;
+			42076,0 alt.lives; 46377,8 extra fire power;
+			44607,0 alt.no mines; 47183,0 alt.no mortars
+GREMLINS (THOR)		37615,0 lives
+GREMLINS 2		35622,182 lives; 37071,x where x=no. of lives
+GREYFELL		57318,0 lives
+GRID-BUG		28673,0 lives
+GRID PATROL		30208,0 lives
+GRID-RUN		49550,0 lives
+GRIDRUNNER		29906,0 lives
+GROUND ATTACK		27872,0 lives; 29064,0:36212,0 alt.lives
+GRYZOR 48K		33015,255 255 lives; 34919,0 lives (first level)
+GRYZOR 128K		35478,255 255 lives; 37338,0 lives (first level)
+GUARDIAN ANGEL		59005,0 lives; 58756,0 no nasties; 57626,255 255 lives
+GUARDIAN		52678,0 lives; 56345,0 star smashers
+GUARDIAN II		50233,0 lives; 50435,0 smarts
+GUERILLA WAR 128	40872,0 lives; 48010,0 no nasties; 40593,0 keep tank
+GUIDO			52133,0 lives
+GUNBOAT			42915,0 energy
+GUN FIGHTER		65535,0 lives+ammo; 53163,48:43164,118 loads of cash
+GUNFRIGHT		49233,0 lives; 51711,0:51715,201 bullets; 
+			48224,182 draw; 43163,255 money; 23912,201 dunno;
+			42640,x dunno; 49250,0 dunno; 46022,0 dunno; 
+			47919,0:47920,0 stops bandit shooting;
+			43154,0:42082,x x=starting bandit;
+			46344,0:48464,0:48544,0:49745,0 different lives poke
+GUNHEAD			38402,0 lives; 38323,95:38326,95 no ship increase
+GUNRUNNER		49171,0 lives; 49080,62 immortal; 48838,62 no aliens
+GUNSMOKE		53818,183 lives; 38647,183 alt. lives poke
+GUN STAR		44215,201 lives; 44436,201 speed up
+GUPPI			54789,0 lives; 54644,0 life force
+GUTZ			38915,183 lives; 47265,167 energy
+GYRON			29952,0:29089,0 infinite viability;
+			(first poke may be 29552,201 or 29522,201!)
+GYROSCOPE		53922,0 lives; 59149,0 time; 53887,201 immortal;
+			53253,42 ! doesn't kill; 53322,58 nasties don't kill
+GYROSCOPE 2		38596,0 time
+			
+
+HADES NEBULA		49883,0 lives; 61998,0 lives (different poke)
+HALAGA			41160,0 lives
+HALLS OF THE THINGS	32717,0 energy; 35923,255 max magic; 24576,0(?)
+HAMON 4 (DEMO)		34662,183 lives
+HANDY ANDY		29840,182 lives
+HAPPIEST DAYS / LIFE	55885,0:55886,0 lives
+HARD CHEESE		27434,0 lives
+HARD DRIVIN' 128	41944,0 time; 42478,255 invincible
+HARD DRIVIN' 48K	41927,0 time; 42458,255 invincible
+HARRIER ATTACK		27048,201 no flak
+H.A.T.E.		53246,14 lives
+HAWKS			29600,201 invincible
+HAUNTED HEDGES		30609,0 lives
+HAUNTED HOUSE		44866,0 energy; 44021,0 time; 44377,0 lives;
+			42922,62 fall any height
+HAVOC			25613,0:25614,0:25615,0 invincible
+HAVOC (PLAYERS)		38296,0 lives; 38909,0 damage
+HAWK STORM		32166,0:35309,0 energy; 
+			35727,0:36607,0:37807,0:34872,0 ammo
+HEAD OVER HEELS		42195,0 lives; 35315,0 ammo/specials; 41841,0:41842,0:
+			41843,34:41844,25:41848,33:41851,33 invincible
+HEADSTART		36654,0:45405,0 lives
+HEARTBROKEN		53479,0:54380,0 lives; 53896,0:53897,0:53898,195:
+			53899,144:53900,210 may need this too.....
+HEARTLAND		23565,58 energy; 41315,0:41322,12:41326,0:41327,50:
+			41328,200:41329,161 time;
+			23902,201:42985,201 alternative lives and time poke
+HEAVY ON THE MAGICK	33102,0:33103,0:33201,48 dunno; 33152,24 stamina;
+			33130,201:33189,201:40207,24:33240,201 dunno either!
+HEIST 2012		36106,12:36190,182 lives
+HELICHOPPER		40623,0 lives; 40114,0 time
+HELLFIRE		31440,0:35088,0:40084,0:44636,0 lives
+HELLFIRE ATTACK		41697,0 lives
+HELTER SKELTER		36936,0 lives; 42194,33 time
+HE-MAN (ADVENTURESOFT)	24576,0 energy; 25451,201 time;
+			27107,0 no nasty stuff comes out of the swamp
+HENRY'S HOARD		34793,0 lives; 64776,201 invincible(?); 
+			35899,0 alt.lives poke
+HERBERT'S DUMMY RUN	36208,0:39695,0 lives; 36739,255 255 lives
+HERCULES (ALPHA OMEGA)	40074,0:50071,0 lives; 32506,1 finish one task to win
+H.E.R.O.		44322,182:44521,182:54157,183 lives; 54918,183 bombs;
+			45659,182 power; 53534,0 invincible
+HERO BOMBER		44088,255 255 lives
+HERO QUEST		34151,182 moves (128k); 33867,182 moves (48k)
+HIDEOUS			32544,183 lives; 31801,0 ammo; 32499,183 fuel;
+			29836,0 no damage
+HIGHLANDER		55860,0 energy
+HIGH STEEL		30642,182 lives; 30101,x where x=no. of level
+HIGHRISE HARRY		51595,0 lives
+HIGHWAY ENCOUNTER	35125,0 time; 39443,0:39412,0 invincible;
+			37268,43 alternative time poke
+HIJACK			63412,0 time; 60546,0 code always correct
+HIT SQUAD		51550,0 lives
+HIVE			34069,167 invincible; 38601,56 dunno
+HOBGOBLIN		36714,0 lives; 37446,0 time; 36720,0 alt. lives poke;
+			37450,0 alt. time poke; 36743,58 keep glowing stuff
+HOLIDAY IN SUMARIA	50330,182 lives
+HOLLYWOOD POKER		36081,x where x=no. of lives; 
+			36100,255:36678,255:36699,255 245 quid;
+			36101,10:36679,10:36700,10 girl gets no cash
+HONBA ZA POKLADEM	41233,0 lives
+HONG KONG PHOOEY	33128,0 invincible
+HOOPER			53309,0 lives; 45199,0 time
+HOPPER			25393,0 lives
+HOPPER COPPER		28961,0 lives; 29018,0 dunno
+HOPPIN' MAD		41968,0 lives; 44955,0 time; 42569,0 invincible
+HORACE AND THE SPIDERS	27680,167 lives; 25142,0 no hills level 1;
+			28773,0 no spiders lev 1; 30070,0 no spiders lev 3;
+			29626,52 ropes don't shorten lev 2
+HORACE GOES SKIING	29009,0 only ambulances; 29270,0 no cars;
+			30762,0:30027,0:30644,0 no ski or ambulance fees
+HOUSE OF LIVING DEAD	52477,0:52478,0 lives
+HOUSE THAT JACK BUILT	26822,0 lives
+HOWARD THE DUCK		57213,0 lives
+HOW TO BE A COMP.BAST.	65356,195:34582,62 energy
+HUBERT			51163,0:51164,0 lives
+HUDSON HAWK 128K	34037,183 lives
+HUMAN KILLING MACHINE	35061,0 invincible; 40519,0 lives; 
+			39830,0 freeze enemies; 
+			38647,0:38772,0:38748,0 harmless enemies
+HUMPHREY		31557,0:31769,0 lives
+HUMPTY DUMPTY FUZZY WUZ	38466,0:38467,0 lives
+HUNCHBACK		26888,0 lives; 27288,1 always get bonus;
+			26903,x:24760,x x=# of lives (1-12)
+HUNCHBACK 2		30147,183:34634,0:35888,183:37954,183:38905,0 lives
+HUNCHY			45632,0 lives
+HUNDRA			41375,0 energy; 40723,0:40724,0:40725,0 lives
+HUNGRY HORACE		26429,0 lives
+HYDROFOOL		25863,201 oil; 
+			25883,0:25887,0:25891,0:25900,0:25906,0 invincible
+HYPARAID		47187,0:47188,0 batteries
+HYPERACTION		25099,0:25100,0 lives
+HYPER ACTIVE		34548,0 lives; 34146,x where x=no. of lives
+HYPERBLASTER		55223,176 time
+HYPERLANE+		48938,182 lives
+HYPER NUDGE 2000	51912,0 credits
+HYPSYS 1		54199,0 energy; 54260,182 ammo;
+			54108,201 big ships don't kill you
+HYPSYS 2		54500,0:54513,0 energy; 54607,182 rockets;
+			54561,182:54568,0 ammo;
+			54409,201 big ships don't kill you
+HYSTERIA		44588,201 invincible; 44527,201 shields and power
+
+
+I AIN'T GOT NOBODY	39196,0 lives; 25269,100 100 lives
+I, BALL			49165,0:48790,0 lives; 45188,0 missiles;
+			49781,33 no overheat; 49483,0 time; 49714,33 no baddies;
+			49781,58 invincible; 49017,33 no weapon loss
+I, BALL 2		43384,255 255 lives; 43612,33:43619,33 invincible;
+			36664,201:39674,201 no enemies; 45601,33 no keys req.;
+			35338,33:35327,33 no time blocks; 43366,250 250 bombs;
+			39920,0 infinite bombs; 43394,150 150 fireballs;
+			43410,x where x=start level (0 to 48)
+ICE ATTACK		53111,60 lives
+ICE TEMPLE		63132,0 lives; 60934,119:60935,201 temp, crystal, fuel
+ICICLE WORKS		30939,0 time
+I.C.U.P.S.		34549,200:39404,200 no nasties on level one, invincible
+IKARI WARRIORS		40272,0 invincible; 39273,0 lives; 39917,183 ammo;
+			40076,183 grenades; 40618,0 fuel; 62384,190 tanks
+I'M IN SHOCK		32086,48 lives
+IMPACT			54500,183 lives
+IMPLOSION		38029,0 energy; 34278,0 fuel; 37714,0 ammo;
+			34419,0 lives
+IMPOSSABALL		41185,0 lives; 37706,0 time; 37539,0 alt.time poke
+IMPOSSAMOLE		53432,0 energy
+IMPOSSIBLE MISSION	44441,167 use if you get garbage message when calling
+			the agency (before starting); 45256,0 bonus time;
+			45271,0 game time; 30198,0 inits (after starting);
+			48934,x x inits (after starting);
+			30217,0 snoozes (after starting);
+			48935,x x snoozes (after starting);
+			30216,0 use freeze robots anytime; 
+			30197,0 use reset lifts anytime;
+			41452,175 do searches instantly; 
+			36862,0 robots stay frozen forever
+IMPOSSIBLE MISSION 2	42813,1:42823,201 time; 43994,182 items; 
+			57361,0:59368,201 harmless robots; 41507,1 dunno;
+			36853,58 no time penalties
+INCREDIBLE SHR. FIREMAN	60217,167 lives; 59505,255:60456,255 255 lives; 
+			59876,0 no nasties; 60205,201 invincible
+INDIANA JONES LAST CRUS	43076,0 lives; 37370,0 invisible; 38014,0 no 1st enemy;
+			38680,0 mega jumps; 35179,0 esp; 35756,0 slow enemies;
+			38129,0 fast punches; 38137,0:38141,0 whips;
+			42389,0 alt lives poke; 33948,0 dunno
+INDIANA JONES TEMPLE	33948,0 lives
+INFILTRATOR		40327,201 dunno
+INSPECTOR GADGET	54993,0 energy; 55237,0 lives
+INTENSITY		49629,0:49714,0 lives
+INTERCHANGE (INS.HECTI)	65430,0 time; 35625,0 ammo; 57220,0 lives
+INTERN. NINJA RABBITS	50318,0 lives
+INTO THE EAGLE'S NEST	36639,0 ammo; 40507,0 keys; 41140,0 lives;
+			39946,0 no death from shooting explosives
+INVADERS (DK'TRONICS)	28694,0 lives; 26495,x where x=no. of lives
+INVASION BODY SNATCHERS	43762,183 lives; 45235,183 bombs
+IRON SOLDIER		53965,62 lives; 51416,62 weapons; 55437,0 ammo?;
+			54221,33 alternative lives poke
+ITALIAN SUPER CAR	29340,0 takes; 34415,0 time
+ITASUNDORIOUS		36581,0 lives
+
+
+JACK AND THE BEANSTALK	56110,0 lives 
+JACK THE NIPPER		43519,0 lives; 44278,58:44285,58 invincible
+JACK THE NIPPER 2	43251,0 lives; 34426,0 invincible; 38306,0 ammo
+JACKAL			43422,0 lives; 38967,0:39048,5 alt.lives?
+JACKLE AND WIDE		45545,0 time; 46029,0 invincible; 39248,0 strength
+JAILBREAK		28124,0 lives
+JAILBREAK (Konami)	50651,182 lives; 50817,201 alt. lives
+JANGLER			29848,0 lives
+JASON'S GEM		49821,0:50583,0:52157,0:53699,0 lives
+JASPER			24140,47 lives (won't work if IF1 is on)
+JAWS			33904,182 lives
+JAWZ			29845,0 lives
+JET BIKE SIMULATOR	27156,201 always qualify
+JETPAC			25014,0 lives; 25367,x x=# of lives;
+			26070,62:26071,5:26072,0 only need one fuel cell
+JET SET WILLY		35899,0 lives; 35123,0 no enemies; 37874,0 auto collect;
+			36477,1 fall any height; 41983,255 only one object;
+			59900,255 fix attic bug; 36358,0 huge jumps; 
+			36353,60 jump up walls; 37203,0:37438,0 stop nasties;
+			36545,0 easier banyan tree; 34275,10 WRITETYPER on; 
+			36635,239 work with Interface 1; 34795,x x=start room;
+			34480,195:34481,202:34482,135 no colour code required;
+			32840,0 dunno; 56250,0 dunno; 34493,195 dunno;
+			37982,0:37994,0 invincible
+JET SET WILLY 2		31254,195 lives; 34686,1 only one object;
+			31224,201 invincible; 31653,201 no nasties;
+			30436,205 walk on water; 32269,201 harmless nasties;
+			30027,x where x=start room (1-130);
+			31657,x where x=max. monsters (1-15)
+JETSONS			34056,182:40837,182 time; 42857,183 lives;
+			42847,0 energy
+JET STORY		60388,0 rockets; 64043,24 shields
+JOCK AND THE TIME RINGS	56101,0 power; 56855,0:58245,0 lives
+JOE BLADE		65032,50 no enemies; 65029,50 doors unlocked;
+			65026,50:38506,0 time; 65035,24 energy;
+			31865,0:37797,0 inf. strength & time when defusing;
+			38480,201 alt. time; 37852,201 alt. energy; 
+			36748,201 alt. no enemies; 38402,201 alt. doors
+JOE BLADE 2		59116,20:59117,225 loads of time;
+			58108,20:58109,225 completes subgames
+JOE BLADE 3 128		37899,0 ammo and energy
+JOE BLADE 3 48K		37904,0 energy & firepower; 
+			44815,0:44850,0 stop all timers;		
+			37288,229:37289,33:37290,80:37291,80:37292,34:37293,11:
+			37294,146:37295,225 infinite keys and discs
+JONNY QUEST		50625,182:54202,0:54205,0 energy
+JOUST			26544,0 lives
+JUDGE DREDD		24936,24 lives (this may be 24963,24)
+JUGGERNAUT		31531,62 no damage; 26857,62 quick phoning
+JUMBERT			26153,0 lives
+JUMPING JACK		30093,0:30094,0:30095,0:30096,24 lives
+JUNGLE FEVER		30010,183:31201,183 lives; 30242,0 time
+JUNGLE TROUBLE		24166,182 lives
+JUNGLE WARFARE		40379,0:40380,0 lives
+
+
+K-RING			33636,0 lives; 38881,201 invincible
+KAI TEMPLE		47783,0:47824,0 lives; 41437,0 time
+KAMIKAZE		25454,0 lives
+KAMIKAZE (Code Masters)	28584,0 lives; 43104,0 hostages
+KARNOV			32972,0 lives; 37149,201 immunity; 
+			24952,2 max. firepower; 24949,15 get all objects;
+			32968,0 keep weapons when killed; 32856,255 255 lives;
+			36847,201 start where killed
+KAT TRAP		31039,45 lives; 30140,0 see end screen
+KEMSHU			25790,0 time
+KENDO WARRIOR		38342,0 lives; 38225,183 energy; 38986,0 easy baddies
+KGB SUPERSPY		41352,0 lives
+KIDNAP			57187,182:57275,182 lives
+KICK BOXING		55748,0:56741,0 infinite endurance and bonus
+KICKTURN		62108,0 lives
+KIKSTART II		47780,201 lives
+KILLER KONG		57983,0:57984,0 lives
+KINETIK			61998,0 lives; 
+			61998,127:53151,201:62309,201:54979,201 dunno
+KING KONG		60167,0 lives
+KIREL			59322,154 time; 35392,0 lives
+KLAX			59143,0 credits; 41687,0 tile misses
+KLIMAX			52447,0 time; 52344,0 energy; 55293,0 power;
+			55327,0 range; 55312,0 speed
+KNIGHTFALL		56838,0 lives; 34396,0 time
+KNIGHT LORE		50205,0:50206,0:50207,0 time; 53567,0 lives; 
+			50084,201 don't become wolf; 
+			49759,x x=no.of objects left to get
+KNIGHTMARE		38686,16:38693,16 energy
+KNIGHT TYME 48K		27813,0 energy; 32007,183 fuel; 24584,255:24585,255:
+			45322,255:45323,255:41456,0:41457,0 screen jumper
+KNIGHT TYME 128K	28111,183 energy; 33063,183 fuel; 44905,183 time
+KNUCKLE BUSTERS		35991,0 lives
+KOKOTONI WILF		43742,0 lives; 42214,255 255 lives;
+			28929,8:28934,8:28939,8 invincible; 
+			42177,2 some enemies harmless
+KOKY			40400,0 lives
+KOMANDO 2		43948,0 lives
+KONG			37018,0 lives
+KONG STRIKES BACK	42523,0:42524,0:42525,0:43100,0:43101,0:43102,0:44111,0:
+			44112,0:44113,0 lives; 45182,0:45183,0:45184,0 bombs
+KOSMIC KANGA		36212,0 lives; 23994,255 255 lives
+KOSMOS			53709,0:53710,0 oxygen; 46952,0:46953,0 ammo
+KRAAL			53180,0 energy
+KRAHECK			22538,54
+KRAKOUT			46565,0 lives
+KUNG-FU			51267,0 lives; 52166,201 no music
+KUNG-FU KNIGHTS		47123,0 lives
+KUNG-FU MASTER		27982,0 lives
+KWIK SNAX		46562,183 lives; 40909,0 see end of game
+
+
+LA CENTRALE NUCLEARE	30374,0 lives
+LANCER LORD		27174,0 lives
+LAP OF THE GODS		53979,0:54421,0 lives
+LAPD			54430,0:57521,0:57806,0 energy; 54260,0 fast ammo;
+			50241,0:54248,0:50254,80 ammo; 49972,x x=no.men to kill
+LASER SNAKER		49443,0:49444,0 lives
+LASER SQUAD		32498,0 action points; 36774,0 ammo; 
+			36770,0 fire with no action points; 
+			36774,201 baddies can't fire
+LASERWARP		38027,0 lives; 38543,255 255 lives
+LASER WHEEL		32849,0 lives; 34997,201 energy
+LAST DUEL		37605,0 player 1 lives; 37610,0 player 2 lives; 
+			31277,0:31284,0 dunno; 40063,0 dunno
+LAST MISSION (Opera)	45682,0 lives
+LAST NINJA 2		36576,198 energy on part 1; 35993,198 energy on part 2;
+			36751,198 energy on part 3; 40777,0 lives
+LAST NINJA REMIX	36577,33 lives
+LAS IRES LUCES/GLAURUNG	57931,0:57932,0:57933,0 lives
+LAST SUNSET FOR LATTICA	40561,0:40562,0:45146,0:45147,0:48669,0:48670,0 lives
+LAST VAMPIRE		45161,0:45162,0:45264,0:45265,0 invincible;
+			51813,0:51814,0 cash; 45540,0 no nasties;
+			59340,0:59341,0:59342,0:59343,0:59344,0:59345,0:
+			59346,0 all items are free
+LAZER TAG		45373,182 lives; 42317,x:43142,195 x lives?
+LAZER ZONE		28180,183 lives; 29779,0 smart bombs
+LAZY JONES		56985,0 lives
+LEE ENFIELD SPACE ACE	51291,0:54472,0:56110,0 shields
+LEGEND OF AMAZON WOMEN	57690,183 lives; 60040,0 time; 57960,0 alt.lives
+LEGEND OF KAGE		37064,0:37065,0 lives; 
+			30609,200:41338,200:41339,200 200 lives
+LEMMINGS		51792,0:51803,0:51819,0 time; 37716,90 never fail;
+			43044,0 fallers; 43178,0 climbers; 43281,0 builders;
+			42985,0 bashers; 43701,0 miners; 43142,0 diggers;
+			44145,0 blockers
+LEONARD			64309,0 lives
+LEOPARD			41435,0 lives
+LES FLICS		37143,0:39996,0 lives; 37344,0:37345,0 food
+LIBERATOR		49649,0:49650,0 lives
+LICENCE TO KILL 128	48640,183:55816,0 lives; 54933,0 ammo; 57952,0 time;
+			54608,0:57106,0:58674,0:59701,0 energy
+LICENCE TO KILL	48K	48633,183:55802,0 lives; 57372,239 bonus; 54919,0 ammo;
+			59400,0:54605,0:57078,0:58646,0 energy; 57927,0 time;
+			56241,0 boats don't kill you
+LIFELINE		37439,0:44090,0:48018,0 lives; 37308,0:44056,0 shields
+LIFE OF HARRY		26592,0 air; 26245,201:26283,0:26301,0 invincible
+LIGHT CORRIDOR		40750,0:40754,0 lives
+LIGHTFARCE		58195,0:58199,0:58200,0:58201,0 energy
+LIGHT FORCE		40725,0 lives; 39552,175:39553,50:39554,127:39555,181:
+			39556,194 invincible
+LIL' ALIEN		26627,0 lives
+LINE OF FIRE		42616,201 invincible
+LITTLE PUFF		62344,201 energy
+LIVE AND LET DIE	27261,201 fuel; 43900,0 missiles;
+			43324,0 mines, rocks etc. don't kill you
+LIVING DAYLIGHTS	38913,201 lives; 33000,0 alternative lives poke
+LIVINGSTONE, I PRESUME	24391,0 lives
+LOCOMOTION		39112,195 infinite stopclock
+LODE RUNNER		35426,182:35512,182 lives; 35375,x where x=no. of lives
+LONE WOLF		60214,24 lives
+LOOPZ			65353,0:65354,0 time
+LOONY ZOO		52764,0:52765,0 lives
+LORDS OF MIDNIGHT	64867,0:64868,0:24724,0:24725,0:25283,24:25284,62 lets
+			you access everyone straight away and walk through
+			dragons!
+LOST CAVES		33078,0 lives
+LOTUS ESPRIT TURBO CHAL	52856,0 always qualify
+LUNAR CRABS		24282,0 lives
+LUNAR JETMAN		36965,0 lives; 36268,0:36269,0 fuel;
+			43092,x-1 x=level; 43117,255 255 lives (player 2)
+LUNAR RESCUE		44406,0 lives
+
+
+MACADAM BUMPER		29029,0 balls
+MACAROID		40473,0 lives
+MACH 3			24632,195 lives; 30706,201 invincible
+MAD CAVERNS (CAVES)	40445,183 lives
+MAD HATTER		48406,0 lives
+MAD MIX			40285,62 lives;	33421,0 no bad guys
+MAD NURSE		38073,0 lives; 44817,0 gas
+MAGGOT			31507,0 invincible
+MAGIC CARPET		29530,0 lives; 31018,0 score doesn't go down
+MAGIC LAND DIZZY	29623,182 lives; 41179,201 walk through walls;
+			29611,58 tune continues when dead; 40536,1 double speed
+MAGIC MEANIES		28165,183:30096,183 lives
+MAGLAXIANS		59350,255 255 lives; 59354,7 ???
+MAG MAX			58472,183 lives
+MAGNETRON		42671,235:42672,160 lives
+MANGO JONES		58455,0:58456,0:58469,182:58470,0 shields; 45563,0:
+			45564,0:45607,182:45608,0:45658,182:45659,0:45817,182:
+			45818,0:46025,182:46026,0:46177,182:46178,0 time;
+			45141,182:45142,0:58281,0:58282,0 ammo;
+			45467,182:45468,0:56465,0:56466,0:58720,182:
+			58721,0 bombs
+MANIC MINER (Bug Byte)	35136,0 lives; 34795,195:34796,241:34797,135:
+			36233,195:36234,149:36235,141 infinite air;
+			36106,0 invincible; 36160,0 no horizontal enemies;
+			36150,0 stops enemies from moving
+MANIC MINER (Soft.Proj)	35142,0 lives; 34801,195:34802,247:34803,135:
+			36244,195:36245,160:36246,141 infinite air
+MANTRONIX		46175,0 lives; 46001,61 invincible
+MARAUDER		35160,175:35161,50:35162,95:35163,250 lives;
+			34225,0 smart bombs; 34219,0:34225,0:34230,0 no baddies
+MARBLE MADNESS DELUXE	38400,0 time
+MARBLE MADNESS CONS.KIT	38579,0 time
+MARIO BROS		44079,0 lives
+MARSPORT		44955,24 dunno; 34379,24 no heralds/wardens; 
+			34057,201 no sept warriors; 43865,24 no sept leaders;
+			36607,24:36587,24:44955,24 unlock all doors;
+			35496,0 infinite charges
+MARTIANOIDS		46793,0 lives; 24407,201 dunno
+MASK			50048,0:50053,0:50057,0:50060,0 lives; 
+			43747,62:43748,201:43749,50:43750,36:43751,134 dunno!
+MASK II			41560,0:41561,0:44944,0:45325,0:45326,0:43122,0 lives
+MASTERS OF UNIVERSE	42173,0 lives; 41274,255 255 lives; 51406,0 invinc.;
+ (Gremlin)		43210,n n=number of ghosts; 52346,60 slow clock;
+			41420,175:41421,0 any number of chords
+MATCH POINT		53646,0:53657,0 move faster
+MATRIX (GRIDRUNNER 2)	36606,0 lives
+MAYHEM			37897,0 time; 37822,0 shields; 
+			32965,120 force first digit to be on first level
+MAX HEADROOM		31391,0 energy; 33163,0:33164,0:36785,0:36786,0:
+			33165,0:36787,0 dunno 
+MAZE CHASE		34248,0 lives; 34301,x where x=no. of lives
+MAZE DEATH RACE		24249,0 lives
+MAZEMANIA		42962,0 lives; 42582,0 energy; 
+			49258,0:49399,0 jump on aliens anytime
+MEGA APOCALYPSE		23578,0 lives
+MEGABLAST		38059,0 lives; 38589,182 smart bombs
+MEGABUCKS		38154,0 energy; 37460,0 time; 38154,0 credits;
+			32020,0 dunno
+MEGANOVA		32382,0 lives; 31705,x where x=no. of lives;
+			26719 - part 2 code; 16640 - part 3 code
+MEGAPEDE		27545,0 lives
+MEGAPHOENIX		50385,0 lives
+MELT DOWN		49270,0 lives
+MENACE			26521,0 lives; 27356,255 255 units of time
+MENTAL BLOCK		37159,0 lives; 36409,0 time; 35845,0 1 tile needed
+MERCENARY		60288,58 no locked doors; 33356,0 dunno; 39724,0 dunno
+MERLIN			36562,182 lives
+META-GALACTIC LLAMAS	36337,183 lives
+METAL ARMY		42198,0 lives; 48518,0 ammo
+METALDRONE		47035,0:48932,0 lives
+METAPLEX		39691,0 laser; 36778,0 acid; 
+			39671,167:36536,201 shield; 48122,201 dunno
+METEOR STORM		31086,182 lives; 29976,255 255 lives
+METROCROSS		43006,195:44490,0 time
+METROPOLIS		59572,0:61058,0 energy
+MIAMI CHASE		34056,183 lives; 41440,183 time
+MIAMI COBRA GT		40984,48:42417,0 time; 43130,0 turbo; 
+			42328,0 extra bonus
+MICKEY MOUSE		36520,0 lives; 40814,201 water; 40012,0 slow down;
+			40035,0 bolts; 40091,0 bird's head; 40114,0 glue;
+			40137,0 repulsive; 40058,0 shields
+MICROBALL		42307,0 balls
+MICROBOT		55836,0:55837,0 lives
+MICROMAZE		59591,0 lives; 59638,x initial cheese req. (1 to 25)
+MICRO MOUSE / DEBUGGING	32500,201 no baddies; 28980,62 lives
+MICRONAUT 1		34651,195:34650,0 energy; 34768,107 clouds mean energy;
+			52150,81 turbo speed; 52163,62 turbo slow; 
+			52591,0 hit wall speed; 52004,0:52005,0 turn anytime
+MIDNIGHT RESISTANCE 128	36633,0 lives; 40131,0 weapons; 40152,0 backpacks;
+			47577,0:47578,0:47579,0 keys; 36473,0 energy
+MIDNIGHT RESISTANCE 48K	36480,0 lives; 39975,0 weapons; 39996,0 backpacks
+MIG-29 SOVIET FIGHTER	34379,24 lives; 40884,0 bullets; 52449,0 fuel;
+			38634,0 bombs; 41216,0 seekers; 39256,0 rockets
+MIG BUSTER		39223,0 lives; 39819,183 ammo; 49737,0 energy;
+			39319,x where x=no. of lives
+MIKIE			40843,182 lives; 42405,255 255 lives
+MILLIMON		24456,0 lives
+MILLIPEDE		25101,0 invincible
+MIMZOID DEATH DUDE	45308,0:45309,0 energy
+MINDER			43673,180 cash; 27602,182 time
+MIND YOUR HEAD		30939,0 time
+MISSION 91		25745,0:25752,0:25753,13 lives
+MISSION COLLISION	43572,0 lives
+MISSION ELEVATOR	48724,0 lives; 49855,0 time
+MISSION FALLOUT		26717,0 lives
+MISSION IMPOSSIBLE	25758,0 lives
+MISSION JUPITER		60468,0 lives; 57806,0 fuel; 58322,0 ammo;
+			58534,201 invincible; 50964,201 no nasties; 
+			57774,189 move anywhere; 58329,201 no alien fire;
+			58312,0:58254,0 mega laser; 58254,0 autofire;
+			58659,201 aliens are invincible!
+MISSION OMEGA		47688,0 lives
+MOLAR MAUL		24912,182 lives
+MOLECULE MAN		64585,0 infinite everything;
+			64622,0:64623,0:64624,0 dunno
+MOLEY CHRISTMAS		38302,0:38352,0:34117,0 lives
+MONSTER MUNCH		46089,0 energy
+MONSTERS IN HELL	26570,182:26571,0 lives; 26591,0:26592,0:29038,0:
+			29039,0:29530,0:29531,0 holy power
+MONTE CARLO CASINO	30707,0:30736,0:30708,0 money
+MONTY IS INNOCENT	56440,201 invincible
+MONTY MOLE		38004,0 lives; 36301,201 no crushers; 
+			35874,255 fall any height;
+			37607,0:37608,0:37609,0 some nasties don't kill
+MONTY ON THE RUN	34716,24:40238,195 lives; 36765,201 immunity; 
+			39039,x x=# of lives; 39030,x start screen; 
+			39504,0 harmless water; 34445,201 no crushers;
+			KIT: Jetpac, passport, rope, gasmask, rum
+MOON ALERT		39754,0 lives; 42404,255 255 lives; 42654,195 energy;
+			42249,24 time; 42585,2:42596,2 immediate scroll
+MOON BUGGY (ANIROG)	26653,0 lives
+MOON BUGGY (VISIONS)	27908,0 lives
+MOON CRESTA		38070,0:38117,0 invincible (apart from when docking)
+MOONLIGHT MADNESS	57145,183 lives; 59945,30 30 lives; 57747,0 dunno;
+			57833,0:57834,0:57835,0 fall any height
+MOON PATROL		36724,0 lives
+MOON STRIKE		52221,0 lives; 42205,0 lives (128k version);
+			42251,60:42252,202 dunno
+MOONSWEEPER		53359,0 lives
+MOONTORC		55769,0:55770,0 money; 
+			53293,0:53294,0 energy, axes and spells
+MORRIS MEETS THE BIKERS	26134,0 lives; 26232,x where x=no. of lives
+MOTHERSHIP		26356,0:31570,0 lives
+MOTORBIKE MADNESS	33551,195 lives
+MOTOR MASSACRE		50944,0 fuel; 50971,0 energy?; 45664,0 other energy?
+MOTOS			42241,0 lives; 42462,0:33292,0:41966,0 power;
+			42473,0:41967,0:33295,0 jumps
+MOTO X			27663,0:29661,0 lives
+MOUNTY MICK		35181,0:45676,0:46738,0 infinite lives, battery, ammo
+MOVIE			64905,41:64906,248 lives; 30969,20 see end
+MOVING TARGET		50439,0 lives; 58606,0 energy; 49009,0 ammo; 
+			56585,0 keys
+MR FREEZE		33823,0:33824,0 lives
+MR HELI			55827,255 255 lives; 56128,0 lives
+MR WEEMS & SHE VAMPIRES	39974,0:40019,0:41228,0 energy; 30742,2:39973,0 potions
+MR WIMPY		33501,0 start on level 2; 33721,x x=# of pepper; 
+			33501,0 time; 33693,0 lives; 43105,0 infinite pepper
+MR WONG'S LOOPY LAUNDRY	25003,0 lives; 25985,0 starch; 27630,0:27637,0 time
+MS PACMAN		56997,0 player 1 lives; 57106,0 player 2 lives;
+			48516,255 255 lives
+MUGSY			43012,0:42906,0 (42908?) always beat hitman
+MUGSY 2			27504,62:27505,10:27506,50:27507,226:27508,105:27509,0:
+			27511,224:27512,105 lives
+MUNCHER			28383,0:28455,0 lives; 30532,0 lives (diff.version?)
+MUNSTERS		37891,0 time
+MURRAY MOUSE SUPER COP	65040,0 lives
+MUSHROOM ALLEY		50841,0 lives
+MUTANT MONTY		56483,183 lives; 54800,0:54867,0:54893,0:55321,0 dunno
+MUTANTS			29667,0 lives; 29742,0 alternative lives poke;
+			26702,0:26718,0:26743,0:26775,201:26791,0:26796,0 energy
+MUTAN ZONE I		35204,0:43333,0 lives
+MUTAN ZONE II		35181,0:34279,0 lives; 
+			33666,255:33709,255:39412,255 255 lives
+MYSTERY OF THE NILE	55471,0:55472,0:54473,0 lives; 
+			24026,58:24017,x something in the Spanish version
+MYTH			33611,0 lives; 62045,0 credits; 61504,x dunno
+
+
+NARC			35135,183 credits; 35986,183 ammo; 36023,183 rockets;
+			35690,182 lives
+NAVY MOVES (Spanish)	49962,0 lives on part 1; 54047,0 lives on part 2;
+			55790,0 ammo on part ?; part 2 access code : 63723
+NAVY SEALS		37805,0 lives on part 1; 25223,0 time on part 1;
+			53048,0 lives on part 2; 25221,0 time on part 2
+NEBULUS			32921,0 lives; 43650,0 time;
+			33666,201:36807,201 makes nasties invisible
+NECKS PLEASE		53217,0 stamina; 44558,0:46765,0 magic
+NECROPLASM		40047,0:40048,0 lives; 
+			43587,0:43588,2 512 time units on code screen
+NEMESIS			51949,0 lives; 51479,1 invincible
+NEMESIS THE WARLOCK	31851,0:31858,0 ammo
+NETHER EARTH		51812,0:51813,0:51814,0:51815,0 use all for robots;
+			44399,18:44615,33 inf. supplies; 51841,0 credits
+NETHER WORLD		33551,0 lives; 65341,195 time; 31738,58 brick smashers;
+			32232,58:32238,0 demon killers; 65500,255 speed;
+			33949,0:33950,175:58701,0:58702,172 fix autostart bug
+NEW ZEALAND STORY	51516,182 lives; 50000,0 invincible; 51771,201 arrows;
+			51732,201 no enemies
+NEXOR			36212,0 lives
+NIFTY LIFTY		43526,0:50526,0 lives; 42877,0 time
+NIGEL MANSELLS GP 1	33581,255:33596,255 255 seconds
+NIGHTBREED		40583,183 lives
+NIGHT GUNNER		24763,182 lives; 24001,195:24002,194:24003,94 dunno
+NIGHTMARE		48743,0 lives
+NIGHTMARE RALLY		25112,0:26515,182:41764,0 lives; 41744,182 energy
+NIGHTSHADE		52739,0 energy; 52190,50:52191,205:52192,187 lives;
+			53442,0:53443,12(,1?) alternative lives poke; 
+			58056,0 walk through walls; 52739,0 no nasties;
+			52665,33:52668,52 another alternative lives poke!;
+			49228,20 run fast all the time;
+			52900,0:52901,0:52902,0 see final screen when you die
+NIGHT SHIFT		25221,0 never get fired; 25265,58 alt. poke
+NINJA COMMANDO		51763,0 lives; 29076,255 255 lives
+NINJA MASSACRE		55832,0 lives
+NINJA SCOOTER SIM	45128,0:45864,201 time
+NINJA WARRIORS		29591,183:52942,69:53224,69 lives; 39981,0 dunno;
+			29591,0 ammo; 29646,201 dunno; 29701,201 dunno;
+			24599,0 shuriken (player 1); 24654,0 energy; 
+			46899,0 alt. energy
+NO.1			57609,0 lives
+NODES OF YESOD		32661,0 lives
+NODES OF YESOD 128	40461,183:40513,0 lives
+NOMAD			40703,0 lives; 40785,x x lives;	34569,201 invincible
+NONAMED			33175,0 lives; 33094,0:33095,0:33096,0 invincible
+NONTERRAQUEOUS		30596,24 no laser doors; 36047,195 energy; 
+			36222,0 dunno; 25646,195 break; 36464,24 bombs; 
+			25699,24 dunno; 26689,24 no nasties;
+			38241,201:38348,7 no rays
+NORMAN (CUBITOID)	40423,0:40424,0 lives; 36257,0:36258,0 freezes
+NORMAN (RELEASE VER.)	40426,0:40427,0 lives; 
+			36475,0:36476,0:36590,0:36591,0 freezes
+NORTH STAR		44433,0 no enemies; 48371,180 lives; 
+			45283,0 no enemies; 43680,0 top weaponry
+NOSFERATU		32499,0 time; 39791,201 baddies don't move;
+			39391,201 invincible
+NOTORIK			34930,0:34956,0 energy
+NTH ZONE		53035,0:53036,0:53053,182:53054,0 lives
+NUCLEAR BOWLS		54317,0 lives
+NUCLEAR COUNTDOWN	41803,0 lives; 47789,0 energy
+
+
+OBLITERATOR		33595,182 energy
+OCTAN			58411,0:58412,0:58289,0 lives
+OCTIPEDE		27163,0 lives
+ODD BALL		50346,0 lives; 44675,0:44676,0 inflation
+ODD JOB EDDIE		30349,0 lives
+ODYSSEY 1		25300,0 lives
+OFFICIAL FATHER XMAS.	33122,0 time
+OH MUMMY!		24381,0:33337,0 lives
+OINK!			49665,0 lives on Pete's Pimple;
+			47195,0 lives on Tom Thug; 
+			47182,0 lives on Rubbish Man
+OLLI AND LISSA		36060,201:36713,225 infinite energy
+OLLI AND LISSA 3	37274,0 lives; 33601,24 fall any height
+OMEGA ONE		61768,0 lives
+ON THE RUN		39026,201 energy; 43669,182 time; 35784,0 ammo;
+			36212,201 invisible nasties
+ONE FOR THE ROAD	27066,0 lives
+OPERATION GUNSHIP	53926,0 fuel; 55976,0 bullets; 56304,0 rockets;
+			53977,201 armour; 53377,x where x=men to save (1-8)
+OPERATION HANOI		52885,0 ammo; 28863,0 lives; 33488,0 tnt
+OPERATION THUNDERBOLT	44529,183 lives; 37913,0 credits;
+			37929,255:37949,255 255 grenades;
+			37919,255:37939,255 255 rounds of ammo;
+			37931,255:37951,255 255 units of energy;
+			40897,0 no enemy fire (+3 version only)
+OPERATION WOLF 128	40727,183 ammo; 41150,0:51762,0 no damage;
+			40837,0:40838,0 continues; 39728,0 no enemy fire;
+			40840,0 alt. damage poke; 40756,183 grenades
+OPERATION WOLF 48K	40784,0 credits; 40681,0 bullets; 
+			40710,0 grenades; 40733,255 loads of energy
+OPERATION HORMUZ 128	47123,0 lives
+ORBITER			29112,0 lives
+ORBIX THE TERRORBALL	65529,0:32127,0:32188,0 lives
+ORIENTAL HERO		28995,0 energy; 27472,x where x=energy (1-255)
+ORION			37319,201 invincible; 38059,x where x=no. of lives
+OUTCAST			57227,0 lives
+OUTLAW			38395,0 lives; 37675,182:38913,182 ammo;
+			39207,0 dynamite
+OUT OF THIS WORLD	26984,182 lives
+OUTRUN			39204,0 time; 40623,0 alternative time poke
+OVERKILL		42968,0 lives
+OVERLANDER		27320,0:27296,0:32062,0 energy; 29521,0 lives;
+			61422,x where x=no. of lives
+
+
+P-47			30795,0 lives; 30407,x:30799,x where x=speed
+PACLAND 128		23541,0 lives
+PACMAN			28745,0:28746,0 lives
+PACMANIA		35141,0 lives; 34526,0 turbo pacman
+PACMAN'S REVENGE	26000,0:27354,183 lives
+PADDINGTON'S GARDEN GM.	55284,0:57676,0 lives
+PAKACUDA		28502,0 lives
+PANAMA JOE		38633,183 lives; 35198,255 255 lives
+PANG			35437,0 player 1 lives; 35469,0 player 2 lives;
+			28202,0 time; 24968,36:24969,133 player 1 invincible;
+			24970,36:24971,133 player 2 invincible (invincible
+			pokes should be entered when in PAUSE mode!)
+PANIC (Ian Collier)	29874,0 lives
+PANIC (PSS)		55980,0 lives
+PANIC DIZZY		35993,0 no moving belts
+PANTHER			33673,182 lives
+PANZADROME		25657,1 all accessories fitted;	30410,0 mortars;
+			32597,0 shields; 28658,0 fuel; 28854,0 mines
+PAPERBOY		50495,201 invincible; 49263,0 infinite papers;
+			50577,190 lives
+PAPERBOY 2		41053,0 lives; 41264,0 papers
+PARA ACADEMY		47948,0 lives
+PARABOLA		38303,0 lives
+PARADROID		35480,0 lives
+PARANOID PETE		60226,0 lives
+PARAP SHOCK		37992,0 lives
+PARK PATROL		53949,0 lives; 53200,255 loads of energy
+PARIS TO DAKAR		47947,0 time; 49786,0 damage; 47746,182 fuel;
+			49337,1:49338,0 start in first position
+PATHETIC PABLO BROS	28908,48 lives
+PAT THE POSTMAN		55219,0 lives
+PAWS			48810,0:50518,0:64938,0 lives
+PEDRO			28524,0 seeds
+PEDRO / PIRATE'S ISLAND	31777,0 lives
+PEKING			40104,0:51329,0 time; 51094,0 show moves; 
+			39672,204:39673,200:39674,155:39676,134:39699,56 screen
+			doesn't blank out when you press pause
+PENETRATOR		40778,0 lives
+PENGY			43341,0:47556,0 lives
+PENTAGRAM		49916,0 lives; 50751,0 enormous jumps; 49977,182 time
+PEOPLE FROM SIRIUS	31329,0 invincible; 31473,0 ammo; 31374,0 light;
+			28505,0 dunno
+PERISCOPE UP		44400,0 subs; 44793,0 droids
+PETER PACK RAT		27640,0 lives
+PHANTIS	Part 1		54216,0 lives; 54232,0 alt. lives
+PHANTIS Part 2		57606,0 lives; 18757 access code
+PHANTOMAS		44819,0 energy; 25095,201 something OK
+PHANTOMAS 2		28405,30 invincible
+PHANTOM CLUB		49803,237 energy
+PHANTOM F4 (both parts)	64693,0 energy; 64712,0 ammo; 64712,0 grenades
+PHEENIX			29375,0 lives
+PHILEAS FOGG BALLOON	58003,0 lives; 64391,119 helium; 64565,0 bombs/sandbags
+PI-BALLED		46457,0 lives; 44424,255 255 lives
+PICK N' PILE		34551,0 lives
+PIECES OF EIGHT		36562,182 lives
+PI-IN-ERE		38151,0 lives; 36379,x where x=no. of lives
+PI IN THE SKY		46955,0:46956,0 lives
+PIMEVAL MAN		50186,0:50187,0 lives
+PINBALL			31566,0 lives; 28950,255 255 lives
+PINBALL SIMULATOR	35237,0 balls
+PINBALL WIZARD		51566,0 balls
+PINGO			29374,0 lives
+PIPELINE		31213,183 lives
+PIPEMANIA		34011,0 time
+PIPPO			27529,0:27530,0 lives
+PI R2			38752,0 lives; 38481,0 energy
+PIROMANIA		41896,0 lives; 32822,0 water; 32928,0 foam
+PI THERE!		55941,0:55942,0 lives
+PIXY THE MICRODOT 2	28402,0 lives; 27048,0 energy; 28366,24 invincible
+PLANETOIDS		24026,255 255 lives; 26744,0 no enemy fire;
+			24373,182 shots go forever
+PLASMA BALL		37429,0 lives
+PLATOON			31268,0:31269,0:31270,0 lives/morale; 31138,0 grenades
+PLAY FOR YOUR LIFE	30066,0 lives
+PLEXAR			47754,0 lives
+PLOTTING		38345,183 lives
+PLUM DUFF		56239,0:63915,0 lives; 57339,24 immune to plants;
+			57363,24 immune to kids
+PLUMMET			25146,0 lives; 63529,0 lifts don't move;
+			25309,255 255 lives; 25200,20 dunno
+POGO			44259,182 lives
+POGOTRON		34910,183 lives
+POPEYE			26242,0 time; 30057,195 spinach; 
+			26095,x where x=no. of hearts (1-24)
+POPEYE 2		45228,0:48301,0 time; 46804,0 lives
+POP STARS		47397,0 lives; 47867,0:48836,0 time;
+			47904,0:48382,0 moves
+POSEIDON, PLANET 11	42182,0 lives; 42266,0 energy; 42354,0:42379,0 keys;
+			47197,0 fuel; 43277,0 temp; 40955,57 9 keys at start
+POSTMAN PAT		26860,0 lives; 24373,0 time
+POTSWORTH AND CO	46792,183 lives; 44869,0 energy
+POTTY PAINTER		55632,0 lives; 57971,0 freezes
+POTTY PIGEON		25903,0 lives; 24499,47:25931,47 255 lives
+POWERAMA		33791,0 lives
+POWER DRIFT		47223,0 credits; 47242,0 always qualify
+POWER PYRAMIDS		51175,183 lives; 37379,183:49209,183 energy
+POWER PYRAMIDS (Q*Bert)	27292,0 lives
+PRUA AKCIA (Prakcia?)	60819,0 energy
+PREDATOR		51413,0 lives
+PREDATOR II		28729,0:29049,0 ammo cases; 28706,0 ammo;
+			29035,0 fast ammo; 39372,0:29777,201 hostages
+PRINCE CLUMSY		47063,58 lives; 45170,0 keys
+PRISON RIOT 128		35475,0 ammo and energy
+PRISON RIOT 48K		35409,0 ammo and energy
+PRO BMX			31784,24:36231,201 no time limit
+PRO BMX SIM (EXPERT)	37076,62:37077,49 time; 36104,24 only one lap
+PRO BMX SIM (STANDARD)	37043,62:37044,49 time; 36071,24 only one lap
+PROHIBITION		25421,182 lives; 30284,0 shoot time; 
+			25544,182:26380,182 hide time
+PROJECT FUTURE		29332,0 lives; 27662,0 no enemies; 30147,255 255 lives;
+			24984,0:24985,0:24986,0 dunno
+PRO MOUNTAIN BIKE SIM	50972,0:50982,0 time
+PRO POWER BOAT SIM	37780,0 lives; 38421,0 mines
+PRO SKATE SIMULATOR	56291,0:56292,0:56293,0 code always okay; 
+			38377,0 time; 37502,182 lives
+PSSST			24983,0 lives
+PSYCHO CITY		25930,0 lives
+PSYCHO SOLDIER		40807,0:40123,0 lives and bombs; 41401,201 invincible
+PSYTRAXX		55620,0:55621,0 lives; 48930,255 255 lives; 
+			26142,52:26143,55 dunno; 22625,0:28626,0 dunno;
+			41098,17:41099,32:41100,1:41101,0 dunno;
+			26142,62:26143,255:26144,0 dunno
+PSYTRON			28625,0:28626,0 fuel; 
+			26142,62:26143,255:26145,0 infinite oxygen; 
+			41098,17:41099,32:41100,1:41101,0 lives;
+			(28625,0:28626,0 fuel)
+PUD PUD			49287,0 lives
+PULSATOR		34730,0 lives
+PULSE WARRIOR		57791,0 lives
+PULSOID			48126,0 lives
+PUNCHY			45632,0 lives
+PUSH OFF		26862,167 lives; 27136,182 time
+PUZZNIC			37913,0 retries; 46084,0 time
+PYJAMARAMA		48670,0 lives; 48658,0 lives (popcorn version); 
+			43883,x x=no. of lives (either version);
+			33832,0 energy (popcorn version)
+PYRACURSE		33446,201 energy; 33450,201 alternative energy poke
+PYRAMANIA (16/48)	30349,0 lives
+PYRAMID			44685,0 energy
+
+
+Q-10 TANKBUSTER		55645,0 lives
+QANG			63985,182 lives
+QARX			46064,0 lives; 45944,0:45945,0 invincible;
+			45370,183 time; 44991,x where x=start level
+QUACKERS		27733,0 lives
+QUACKSHOT		26215,201 invincible
+QUARTET			61194,201 energy (joe); 61292,201 energy (edgar);
+			51081,201 energy (mary); 61144,201 energy (lee)
+QUAZATRON		58347,195:58438,220:58349,224 invincible;
+			58238,0:58255,24:58256,65 energy
+QUICKDRAW MCGRAW	24765,0:33067,0:33135,0:35242,0:35288,0:38438,0:
+			38880,0:38894,0:43440,0:43873,0:44404,0 energy
+
+
+R-TYPE			36658,195:36659,98:36660,5:37452,0 lives; 
+			38241,22:38242,154 dunno; 46580,0:46572,201 invincible;
+			34473,63 dunno; 37362,0:37374,0 alt. lives poke;
+			37525,0 credits; 65132,175 dunno
+RAIDER OF CURSED MINE	50420,0:50421,0 lives
+RAIDERS			25962,0 lives
+RAID OVER MOSCOW	40299,182:43364,182:43369,182:46507,182:49130,182 lives;
+			46512,182:30414,182 discs; 
+			37473,174:37473,157 bypass hanger screen
+RAINBOW ISLANDS		65109,0 lives; 25471,x where x=no. of lives (1-128)
+RAM			30511,0 lives; 31643,24:31648,24 grenades
+RAMBO			27401,183:27402,201:30263,183 lives; 38841,24 immunity
+RAMBO 3			57830,0:57831,0:57832,0 invincible; 60190,0 credits
+RAMON RODRIGUEZ		60011,0:60012,0:60013,195 lives
+RAMPAGE			56693,190 energy
+RAMPARTS		43059,0 lives; 35079,201 invincible
+RANARAMA		57436,205:59836,205:57572,201:59821,0:57421,0 lives;
+			51631,201:53532,132:51533,201 cast power runes;
+			57633,33 immortal			
+RAPEDE			29492,0 lives
+RAPID FIRE		52904,0 lives; 55183,0 bonus
+RAPSCALLION		34762,183 lives
+RASTAN 128		40084,182 lives; 39710,0 energy; 39393,0 icons;
+			30605,0 mega-jumps; 55070,0 invincible
+RASTAN 48K		48909,255 255 lives; 55628,0:55255,0 lives and energy;
+			40269,5 lives; 39710,0 energy; 40790,0 large jumps;
+			39895,0 alt. energy poke
+RASTERSCAN		39220,0 power; 39228,0 time; 40078,201 no logic game
+RATTLER			44092,0:44093,0 lives
+REACTOR			31964,0:34062,0 lives
+REAL GHOSTBUSTERS	40913,0 lives
+REBEL			49958,0 invincible; 51139,0:49239,0 energy;
+			52295,0 time; 49235,0 lives; 53110,0 mirrors;
+			49351,0 no enemies; 49313,x where x=level (1-9)
+REBEL SQUAD		48640,x lives?
+RECKLESS RUFUS		37440,0 lives; 34209,0 ammo
+RED HEAT		33644,62 lives; 31367,255:37977,255 no fall down;
+			33377,x-1 where x=level; 33390,x where x=ammo
+RED LED			32626,0:31928,0:41961,0 energy & time; 32746,201 lives
+REFLEX			58153,183 lives
+RENEGADE 128		40468,182 lives; 39785,0 time; 47666,7 hard punches?;
+			35094,0 easy fight?
+RENEGADE 48K		41047,182 lives
+RENEGADE III		38500,0 lives; 39095,0 time; 38459,0 altern. lives poke
+RENTAKILL RITA		57982,0 lives; 58520,0 ammo; 58229,0 food
+REPTON			63922,0 lives
+REPTON 2		63646,0 lives
+RETURN OF THE JEDI	52139,62 lives; 46267,201 no trees
+RETURN OF THE THINGS	36348,0 energy
+REVEAL			33086,0 lives; 42038,0 time; 32612,x where x=no.of lives
+REVOLUTION		35652,182 lives; 47111,0 time; 34831,level (0-7)
+REVOLVER		38587,183 lives
+REX PART 1		38745,0 smarts; 39396,0 shields; 40057,0 lives; 
+			47708,201 no nasties; 38157,0 get all weapons;
+			38416,58:46372,62:46373,20 rapid fire; 
+			53242,58:53214,58 speed up; 46661,201 no gun shots;
+			51576,201 no extra enemy
+REX PART 2		40303,0 lives; 38721,0 smarts; 39170,0 shields;
+			47708,201 no nasties; 
+RICK DANGEROUS		58359,0 lives; 65075,0 ammo; 64166,0 bombs
+RICK DANGEROUS II	35376,0 lives; 34541,0:38303,0 ammo;
+			34574,0:39745,0 bombs
+RICOCHET		37398,0 lives; 32866,255 255 lives
+RIKOSPHERE		48965,0:48966,0:52407,0:52408,0 lives
+RIK THE ROADIE		34033,201 time
+RIPTOFF			35427,0:35432,0 lives; 35528,x where x=no. of lives
+RIPTOFF 128		35223,0 lives
+RIVER RAID		24251,0 lives
+RIVER RESCUE		33420,0:33452,0 lives; 33199,255 255 lives
+ROAD BLASTERS 128	29261,0 lives; 37100,0 fuel
+ROAD BLASTERS 48K	48634,60 lives; 55214,0 fuel; 48635,0 money; 
+			47541,0 no corners; 47025,0 turbo
+ROAD RACER		27073,0:27150,0 lives
+ROAD RUNNER		40806,0:40891,0:42600,0 lives; 39140,0 no fainting
+ROAD RUNNER (HI-TEC)	55110,183:55178,183 lives
+ROAD TOAD		30259,0 lives (player 1); 30208,16 16 lives
+ROAD WARS		43059,183 player 1 lives; 43078,183 player 2 lives
+ROBIN OF THE WOOD	48690,0 energy; 55857,0 dunno
+ROBOCOP			39540,201 immunity; 45722,201:25424,0 time;
+			25917,0 lives; 31007,0 no baddies; 34039,0 turbo speed;
+			25795,0 don't pause when shot
+ROBOCOP II		38765,0 lives; 27587,x where x=no. of lives (1-128)
+ROBOCOP III 128K	46235,183:46460,183:46461,0:46462,0:46544,183 energy
+ROBON			29139,0:29140,0 lives
+ROBOT ESCAPE		54700,183 lives
+ROBOTICS		25664,0:25665,24 lives
+ROBOT MESSIAH		53336,0 lives
+ROBOTO			56096,0:56097,24 lives
+ROBOTRON 2084		54158,0 lives (final version); 
+			54545,0 lives (early version)
+ROBOT RUMPUS		50950,0 lives
+ROCK 'N' ROLL		41423,0 lives
+ROCK 'N' ROLL (YS)	33847,0 lives; 34396,0 time
+ROCMAN			37200,0 lives
+ROCKET RAIDER		28639,0:28640,0 lives (player 1)
+ROCKFALL		25252,47 lives
+ROCKFALL 2		50589,183 lives; 51838,49:51839,57 start on any level
+ROCKFORD		57048,182 lives; 56926,0 time
+ROCKMAN			56344,33 lives; 52549,0 time; 46353,0 freeze nasties;
+			56332,0 alt. lives
+ROCK STAR ATE HAMSTER	25621,0 money
+ROCKY HORROR SHOW 128K	34595,0 time
+ROCKY HORROR SHOW 48K	48893,0 time; 48821,0 alternative time poke 
+RODLAND 128		51223,0 lives
+ROGUE TROOPER		30942,0 lives; 35091,0 fire power; 30882,42 strength
+ROLAND'S RAT RACE	54319,175 time; 49660,0:49661,201 energy; 55169,0 glue;
+			50940,201:56449,82 alt. lives and glue
+ROLLAROUND		30900,175 lives
+ROLLER COASTER		36594,50:36868,70:36869,0 lives
+ROLLING THUNDER		39792,0 lives; 40013,0 energy; 38909,0 time;
+			40318,0 slow motion; 43397,0 enemies look like you!
+ROMMEL'S REVENGE	42976,0 lives
+ROUND THE BEND		41057,182 time
+RUFF AND REDDY		35789,0 lives; 54457,0 time
+RUN FOR GOLD		41097,0 energy; 29866,60:37278,60 extra energy
+RUPERT AND ICE CASTLE	38844,0 lives
+RUPERT AND TOYM. PARTY	46374,0 lives
+RYGAR			51216,0 time; 61577,0 lives
+
+
+SABOTAGE		33148,24 lives; 43396,255 255 lives
+SABOTEUR		46998,0:47007,0 time; 29894,0:29094,0:46558,0 energy
+SABOTEUR 2 48K		37122,0 time; 61340,201 energy
+SABOTEUR 2 128K		37741,0 time; 62046,201 energy
+SABRE WULF		43575,0 lives; 45520,0 player 2 lives;
+			39702,30 no nasties; 43848,201 invincible;
+			44786,0 no animals; 39393,0 see ending;
+			44685,186:44677,84:44675,255 walk fast all the time
+SABRINA			28738,0 lives
+SACRED ARMOUR ANTIRIAD	57050,201 energy; 34270,0 lives
+SAI COMBAT		63364,201:32421,201 255 lives; 32421,255 alt. 255 lives
+SAIGON COMBAT UNIT	43528,0 lives on part 1; 43650,0 bombs on part 1;
+			52474,0:52580,0:52639,0 energy on part 1;
+			43732,0 lives on part 2; 43854,0 bombs on part 2;
+			49466,0:49572,0:49631,0 energy on part 2
+SAIMAZOOM		49027,0 lives; 48768,0 water
+SAINT DRAGON		54652,0 credits
+SALAMANDER		38902,201 invincible; 38592,0 bombs; 35616,0 ammo;
+			40653,0:40654,0:40655,0:40680,0:40681,0:40682,0 dunno; 
+			38498,0 alternative invincibility poke
+SAM SPADE		25215,0:26381,0 lives
+SAMANTHA FOX STRIP POKR	23408,6 let sam win over 1000 and watch!;
+			23392,255 dunno
+SAMURAI			41889,0 infinite buying points
+SAMURAI WARRIOR		37866,183 lives; 23826,0:33013,0 lives
+SAND SCORCHERS		44539,0:44540,0 pl.1 lives; 44849,0:44850,0 pl.2 lives
+SANTA'S XMAS CAPERS	43871,0 lives
+SANXION			35028,0 no enemies; 36585,0 lives
+SARACEN			30066,0 lives
+SARLMOOR		35050,0:40877,0:41794,0:44641,0:48347,0 lives
+SAS COMBAT SIM		33034,0 lives
+SAS OP. THUNDERFLASH	31918,182:34095,201 invincible
+SATAN			part 2 access code : 01020304
+SAVAGE PART 1		39319,0:57520,0:58601,0:37299,0 lives;
+			37557,0:39297,0:39319,0:58584,0 energy;
+			37299,99 99 lives
+SAVAGE PART 2		32664,183 lives; 35803,99 99 lives
+SAVAGE PART 3		57848,183 lives; 57919,0 energy; 34398,99 99 lives
+SCEPTRE OF BAGDAD	59858,0 lives
+SCHIZOIDS		25102,0 lives
+SCOOBY DOO		34536,0 invincible (except skulls); 29614,0 lives
+SCOOBY AND SCRAPPY DOO	57275,183 lives
+SCORE 3020		44897,0 balls
+SCRAMBLE		29539,255 255 lives; 29528,255 lots of fuel
+SCRAMBLE (KRYPTONFORCE) 34806,0 lives; 29135,0:32173,0 fuel
+SCRAMBLE SPIRITS	46114,0 player 1 lives; 46212,0 player 2 lives
+SCRIZAM			34539,201 lives
+SCUBA DIVE		55711,x x=# of lives; 45696,0 affects clams;
+			55845,0 infinite lives
+SCUBA KIDZ		50600,0:54538,0:54539,0 oxygen
+SCUMBALL		49098,255 255 lives; 49093,255 255 grenades; 
+			65036,0:65037,0 lives; 52801,0 spares; 52866,0 ammo;
+			52928,0 energy
+SEA OF BLOOD		34242(34245?),195:34247,195:30241,201 lives
+SECTOR 90		36584,0:36585,0:36586,0:36420,182 lives
+SENDA SALVAJE		56959,0:57488,0 lives (part 1);
+			56449,0:56483,0 lives (part 2)
+SENTINEL		34252,0:34253,24 energy; 31684,0 dunno; 32462,0 dunno;
+			37408,0 alternative energy poke
+SENTINEL (Abacus)	31684,0 bases
+SERGEANT SEYMOUR	34248,182:37229,183 lives
+SEX XONIX		29403,0 lives
+SEYMOUR AT THE MOVIES	43939,0 lives
+SEYMOUR TAKE 1		48475,0 lives
+SHADOW OF THE BEAST	33220,0 energy
+SHADOW SKIMMER		53872,0:53873,24 lives
+SHANGHAI KARATE		37388,0 computer always loses
+SHANGHAI WARRIORS	45363,0 lives; 37273,x where x=no. of lives (1-99)
+SHAO LIN'S ROAD		44838,0 lives
+SHARK			52407,0 ammo; 48699,0 lives; 49189,201 invincible
+SHARK ATTACK		26241,0 lives (player 1)
+SHARKEY'S MOLL		27812,0 cases; 27781,0 ammo; 25439,201 energy;
+			25623,0 bombs
+SHINOBI			34715,0 lives; 34576,255 loads of time; 
+			34524,x where x=lives and credits; 
+			46689,x where x=enemy power
+SHOCKWAY RIDER		46119,183 lives; 57363,201 time; 52340,0 last level;
+			46119,0 lives+complete level when you die;
+			43825,x where x=no. of minutes of time
+SHOOT OUT		56252,0 time; 61476,0 lives
+SHORT CIRCUIT PART 1	52637,9:52647,9 invincible
+SHORT CIRCUIT PART 2	36485,183:35921,183 lives and conscience
+SHORT'S FUSE		51869,0 lives; 53413,0 bomb time
+SHURIKEN		24435,201 lives; 64187,201 bombs; 64170,201 ammo
+SHUTTLE (BLABY)		51583,0 lives
+SHUTTLE SHOCK		28311,x x lives
+SIDE ARMS		29411,127 lives; 29253,182 dunno; 39511,24 invincible
+SIDERAL WAR		25115,0:38178,0 lives
+SIDEWALK		52877,100 time; 60234,0 dunno
+SIDEWINDER II		32821,183 lives
+SIDEWIZE		52637,9:52647,9 invincible; 36890,182 lives
+SIGMA SEVEN		60399,0 lives; 34202,19:58524,19:58852,19 alt. lives
+SIGMA SEVEN 128		34162,0:60071,0:60399,0:37232,0:53675,0 lives and time
+SILENT SERVICE		25991,255 aft torpedoes; 25993,255 bow torpedoes;
+			25995,255 bow torpedoes; 25997,255 aft torpedoes;
+			26006,255 guns
+SILENT SHADOW		33191,0:34624,166 lives; 
+			40382,255:41600,255:41155,255 dunno
+SILKWORM		38052,182 lives; 47894,0 invincible chopper
+SIM CITY		26241,0:26242,0 money
+SINCL.USER PHOTO ALBUM	56203,0:56364,0 time; 51765,0:56249,0 lives
+SIR FRED		46862,201 energy; 46650,167 lives
+SIR LANCELOT		23892,0:23893,0 lives;
+			23892,24:23893,37:23604,66:23605,66 lots of time;
+			23790,0:23791,0:23792,0 don't play tune when you die;
+			23690,195 complete level as soon as you start it!
+SIRWOOD			40742,0 lives (part 1); 38486,0 lives (part 2);
+			36268,0 lives (part 3)
+SKATEBOARD		22568,0 lives
+SKATEBOARD JOUST	41136,0 lives
+SKATEBOARD KIDZ		25723,0 lives
+SKATEBOARD SIMULATOR	37502,182:34281,0 time
+SKATE CRAZY		46473,201 time; 42646,126 lives; 46409,201 no fatigue
+SKATIN' USA		55475,255 loads of energy; 55493,255 loads of ammo
+SKOOL DAZE		30464,201 no lines, teachers ignore you;
+			63935,255:63937,0 infinite lines
+SKY HIGH STUNTMAN	38235,0 takes; 32039,0 no baddies
+SKYRANGER		31802,62 lives
+SKY WARRIORS		53011,0 lives
+SLAP DAB		27846,0:28065,0 lives; 28575,0 paint
+SLAP FIGHT		48873,0 lives; 57175,201 invincible
+SLEEPWALKER		55761,0 lives
+SLIGHTLY MAGIC		40975,0 lives; 40921,201 magic; 44456,200 invincible 
+SLIPPERY SID		29159,0:29160,0 lives
+SLY SPY - SECRET AGENT	29625,0 100 credits
+SMAILY			44312,0 lives
+SMASHOUT		41502,0 lives
+SMASH TV		32537,183 lives
+SMUDGE AND THE MOONIES	47744,0 lives; 51594,0 time; 53183,0 energy;
+			43541,x where x=no. of lives
+SNARE			47162,0 lives; 47606,201 no moving bad guys; 
+			49320,0 no nasties; 46083,x where x=no. of lives
+SNOBALL IN HELL		36181,183:36770,183 lives
+SNOWMAN			63197,0 lives; 28635,0:28636,0:28637,0 255 lives
+SOCCER SKILLS		48376,0:48377,0:48390,0:48391,0 energy
+SOFT AND CUDDLY		60344,0 lives; 60561,0 lasers don't overheat
+SOLARIS			34664,183 lives; 34601,0 energy
+SOLDIER 1		44932,0 lives; 52291,0 grenades; 44066,0 time
+SOLDIER OF FORTUNE	44797,182:49349,0 lives; 
+			45337,24:50175,24 don't need tablets
+SOLDIER OF LIGHT	50035,255 255 lives; 50552,0:51119,0:56078,0 energy
+SOLOMONS KEY		49344,183 lives; 50830,0:50831,0 fireballs;
+			37995,0 time; 49334,201 invincible
+SON OF BLAGGER		34688,0 lives
+SOOTY AND SWEEP		36585,0 time
+SORCERY			40159,255 255 energy; 49823,0 invincible
+SOS			38935,0 lives
+SOS (Mastertronic)	33951,0 lives; 33091,0:35238,0 energy; 36311,0 disks;
+			36373,0 coins; 36418,0 flags; 36373,0 days;
+			34759,192 (34764,201?) always daylight
+SOUL OF A ROBOT		29819,0 lives and psyche; 25812,x x=# of lives; 
+			25816,0 55 lives, 5500 psyche and a laser
+SOVIET			62654,0 lives; 34143,0 bombs
+SPACE 7			50327,62 lives
+SPACE COMMAND		43807,0 lives
+SPACE GUN		63565,0 energy
+SPACE HARRIER		46551,0 lives; 41499,X where x=no.of lives;
+			46543,195:46544,14:46545,182:46570,195:46571,14:
+			46572,182 alternative lives poke
+SPACE HARRIER II	40912,0 lives
+SPACE INTRUDERS		27049,182 lives
+SPACE QUEST		29767,0:29890,0:30031,0:30154,0:30231,0 lives
+SPACE RAIDERS		25962,0 lives
+SPACE WALK		30159,0 lives
+SPACE WORM		57888,0 lives
+SPACE ZOMBIES		29553,0 player 1 lives; 29565,0 player 2 lives;
+			30146,x where x=no. of lives
+SPAGHETTI WESTERN 128	27279,0 ammo; 27008,0 retries; 30733,0 invincible
+SPAGHETTI WESTERN 48K	33185,0 ammo; 32928,0 retries; 36411,0 invincible
+SPECIMEN		46992,0:46993,0:50787,0:50788,0 power
+SPECIMEN II		46848,0:50512,0 energy
+SPECTRAL INVADERS	25062,254 254 lives
+SPECTRAPEDE		49450,0:49590,0:49730,0:49824,0:49926,0:50028,0 lives
+SPECTRUM INVASION FORCE	28659,0 lives
+SPECTRAL PANIC		28522,0 lives
+SPECTRES		25680,183 lives
+SPECTRON		57987,0 lives
+SPECVENTURE		48139,0 lives
+SPEEDBOAT ASSASSIN	36276,0:44046,0 lives
+SPEED DUEL		25680,183 lives; 26572,x where x=no. of lives 
+SPEED KING 2		59656,24 pass through other riders
+SPEED ZONE		34664,183 lives
+SPELLBOUND		55066,0:55070,0:55071,0:55072,0 time;
+			27871,0:36133,0 energy;
+			35101,195:35102,59:35103,106 stops anyone dying
+SPELLBOUND DIZZY	51291,0 lives; 51983,71:51985,0 show walls
+SPIKE			27034,0 lives
+SPIKE IN TRANSYLVANIA	30981,0 lives; 38023,0 energy
+SPIKY HAROLD		34813,0 lives; 36121,201 invincible; 
+			34808,24 alternative invincibility poke; 
+			23609,109:23908,209 remove monsters
+SPINDIZZY		56467,201 time; 48072,201:48401,201 alt. time poke;
+			51398,0:51399,0:51400,0:51401,0:51402,0:51403,0:
+			51404,0 energy
+SPIRITS			51754,0 lives; 51453,0 energy; 49688,x x=no. of lives
+SPITFIRE 40		34383,0:54399,183 lives; 29030,201 select any mission
+SPITTING IMAGE		54399,183 lives
+SPLAT			34057,48 lives
+SPLIT PERSONALITIES	54399,182 lives
+SPOOKED			60504,255 time
+SPOOKY CASTLE		33527,0 lives; 35545,0 energy
+SPORE			53334,42 lives
+SPRAYMANIA		28280,182 lives; 27187,182 time
+SPY HUNTER		53544,0 lives; 44004,201:52202,201 no enemies; 
+			49551,201 no collision;	54494,195:54495,139:
+			54496,208:55711,255:55779,255 dunno!
+			53983,201 easier game; 56705,201:56767,201 no sound
+SPY VS SPY 2		59307,0 time; 50980,0 strength; 50868,0 fuel
+SPY WHO LOVED ME	36185,0 lives; 36107,0 invincible on level 1
+STACK UP		39229,0 credits; 51135,0:51242,1 see screen on pause
+STAINLESS STEEL		46837,183:46957,183 lives; 40702,0 dunno;
+			49323,255 255 lives
+STARBIKE		48778,0 shields
+STARBLADE		38462,182 lives
+STARBLITZ		24727,0 lives; 27697,0 bombs
+STARBURST		39760,183 lives
+STARBYTE		48130,0 lives
+STARCLASH		25381,183 lives
+STAR DRAGON		45355,0 lives
+STARDUST		49152,0 lives
+STAR FARCE		62311,0 lives
+STAR FIREBIRDS		48877,182 lives (player 1)
+STARFOX			35876,0 fuel
+STARGLIDER		54647,201 fuel; 54690,201 shield; 54421,0 missiles;
+			54450,0 mission time
+STARION			46526,0 lives (version 1); 46600,0 lives (version 2)
+STAR PILOT		44130,0 player 1 lives; 44393,0 player 2 lives
+STARQUAKE		50274,0 lives; 54505,201 energy; 42604,201 no rays;
+			40956,201 no aliens; 52857,24:50000,201 invincible;
+			52878,24 key not needed; 54303,201 power;
+			52516,33 access card; 52273,62 security door
+STAR RAIDERS 2		46214,195 lives; 44111,0 energy; 44178,0 bombs;
+			42495,0:42696,0 no laser overheat
+STAR RUNNER		49548,0 lives; 49560,0 time
+STAR WARRIOR		27432,0 lives
+STAR WARS		45268,0 shields
+STEEL EAGLE		32895,0 lives; 35563,0:35575,0 no recharge
+STEELYARD BLUES		28418,0 lives
+STEG THE SLUG		31985,0:33234,0:33255,0:37437,0 lives
+STEIN			33723,0 lives; 28265,x x=level
+STIFFLIP AND CO.	Part 2 access code : DEFACED
+STOMPING STAN		43655,0:43777,0:44604,0:49076,0:51023,0:
+			53140,0:53465,0 lives (phew!)
+STONKERS		24576,0 dunno
+STOP THE EXPRESS	34464,183:34926,183:35257,183 lives; 
+			35780,0:39549,0 time
+STORM			47743,201 energy (agravain); 48613,201 energy (storm)
+STORMBRINGER 128	28208,0 strength; 
+			29296,0:29364,0:34649,0 use any object(?)
+STORMBRINGER 48K	38865,0 strength; 40220,0 dunno;
+			40161,0:46702,0:46301,99:46183,99 use any object(?)
+STORMLORD		58105,0:34650,0 invincible; 58110,0 time; 56889,0 lives;
+			56877,201:34092,0 invincible (different version?);
+			33866,0 no fire pods
+STRANGELOOP		63160,182 lives
+STREAKER		50218,0 lives
+STREET FIGHTER		42348,201 invincible; 37963,0 freeze enemy;
+			35601,255 big bonus
+STREET FIGHTER II	41314,255 energy; 37792,0:38254,15 both players can
+			play the same guy, including bosses
+STREET GANG		39254,0 lives
+STREET HASSLE		49661,182 lives
+STREET HAWK (Original)	34486,0 lives
+STREET HAWK		39990,91 energy
+STRIDER			39950,0 lives; 39672,0 time; 39942,183 energy; 
+			41592,x where x=energy (1-255)
+STRIDER II		33130,0 lives
+STRIKE FORCE COBRA	48389,0 time; 48568,0:48585,0 lives;
+			46499,0:46500,0:46501,0 no baddies
+STRIP DICE		27418,45:27656,45 dunno
+STRONTIUM DOG		52156,0 lives
+STRYKER CRYPT OF TROGAN	42845,0 lives; 42797,201 energy; 42398,0 magic
+STUNTMAN SEYMOUR	36094,0 lives; 35014,42 bombs
+STUPID			47520,0 lives
+STYX			31763,183 lives; 29822,x:29856,x x=no.of lives (1-6)
+SUB			25663,x where x=no. of lives
+SUBTERRANEAN NIGHTMARE	43435,0 lives
+SUBTERRANEAN STRYKER	63196,183 lives
+SUBMARINER		50643,0 lives
+SUPER CHAMPS		32009,183 time
+SUPER CYCLE		43560,150 time
+SUPER DRAGON SLAYER	51615,183 energy (expert version)
+SUPER FRUIT MACHINE	53777,0 money
+SUPER G-MAN		31936,0 lives; 28118,0 ammo; 28564,0 fuel; 
+			32306,0 alternative lives poke
+SUPER HANG ON		49487,0 time part 1; 48172,0 time part 2;
+			49680,0 time (America); 49698,0 time (Asia);
+			49824,0 time (Europe); 49913,0 time (Africa)
+SUPER HERO		49626,190 lives
+SUPERKID		53585,0 lives
+SUPERKID IN SPACE	51695,255 255 of everything; 46790,0 no guards/balls
+SUPER MONACO GP		30966,201 always qualify; 38061,0 no fatal crashes
+SUPER PIPELINE 2	32511,18 lives?
+SUPER ROBIN HOOD	50545,0 health
+SUPER SCRAMBLE SIM	42344,177:42396,0 time;
+			48718,33:48719,144:49720,144 dunno
+SUPER SEYMOUR SAVES PL	63872,0 lives; 47352,0 time; 27191,0 128k compatible
+SUPER SPACE INVADERS	59691,0 player 1 lives; 58644,0 player 1 shields;
+			58710,0 player 2 lives; 58743,0 player 2 sheilds
+SUPER SPRINT		49358,201 always qualify; 40968,205 always get upgrade
+SUPER STUNT MAN		27262,0 time; 25517,0:35532,183 lives
+SUPER TANK SIMULATOR	45148,0 lives
+SUPERTED		40307,0 lives
+SURFACE TENSION		36488,0 lives
+SURVIVOR		37734,0:37735,0 energy; 36047,0:36048,0 ammo;
+			29337,71 dunno
+SWEEVO'S WORLD		33219,0 lives; 37008,255 255 lives; 
+			33599,182 ouches (other version);
+			34912,10:35732,37 dunno
+SWEEVO'S WHIRLED 128	48155,182 lives; 48632,182 ouches
+SWITCHBLADE		38465,0:37345,0 lives
+SWIV 128		49751,182 heli lives; 49872,182 jeep lives
+			(enter both at the menu on 128k page 1)
+SWORD OF THE SAMURAI	55729,24:55730,25 lives; 56116,0 time
+SWORD SLAYER 128	52407,0 dunno
+SWORD SLAYER 48K	52338,0 dunno
+SYNTAX			35750,0 lives; 35302,0 time
+
+
+T-BIRD			38816,183 lives
+TAFFY TURNER		34672,0 lives
+TAI-CHI TORTOISE	65121,0 lives; 56867,201 energy; 28342,0 shurikens
+TALES/ARABIAN NIGHTS	57833,0 lives
+TALKING HEDZ		52611,0 lives; 52539,0:53200,0 time; 
+			52577,0:53245,0 moves
+TALOS			55917,0:55918,0 lives
+TASK FORCE		57202,0 lives; 49574,0 time; 54009,0 weapons;
+			53517,0 shields
+TANIUM			38648,182:34253,183 lives
+TANK			30209,0 lives; 
+			32901,0:32909,0:32925,0:32945,0:33150,0 energy
+TANK COMMAND		65535,0 lives, bombs, grenades
+TANTALUS		42247,0 invincible; 42228,0 lives; 42826,0 energy
+TANX			29487,0 ammo
+TAPPER			33233,182 lives
+TARANTULA		45044,255 255 lives (enter during game!)
+TARGET RENEGADE		63160,50 lives; 62936,0 time
+TARZAN			51002,167:51185,167 lives; 52268,167 energy;
+			51013,0 time
+TARZAN GOES APE		47131,0 lives
+TASWORD TWO		64516,x x=bordercolor
+TAU CETI		49116,0 missiles; 49207,167 ammo; 49161,167 flares;
+			49784,201 shields
+TECHNICIAN TED 128K	43147,33:44485,24 invincible; 43201,255 fall any height;
+			44492,0 walk thru walls; 41067,0 (41074,0?) time;
+			43766,0(,176?):43788,24 lives
+TECHNICIAN TED 48K	44210,50:44258,0 lives; 47711,0 walk through walls;
+			43890,0 time; 48058,0 fall any height; 
+			47728,10 sprites don't kill; 45230,33 task time
+TECHNOCOP		31183,20:37266,201:42979,201:48736,201 lives
+TEENAGE MUTANT TURTLES	49596,0:53774,0 energy; 49560,0 time; 
+			47834,0 no flashes; 62888,0 code always okay
+TELADON			65269,0 laser; 35945,0 oxygen; 35969,0 lives
+TEMPEST			33537,183:33610,183 lives; 34909,0 superzaps
+TERMINATION		55274,0 energy; 53120,0 time
+TERMINUS		45583,0 laser; 47023,0 energy; 46970,201 dunno
+TERRA COGNITA		50615,0:50616,0:44486,0 fuel; 45004,0 lives
+TERRA CRESTA		37798,190 lives; 35050,0:35051,0:35052,0 alt.lives poke
+TERRA FORCE		29892,0 lives
+TERRAHAWKS		41782,0 shields; 46209,0 antimat
+TERRAMEX		43517,182 lives
+TERRAPIN		29525,255 255 lives; 29529,255 255 bombs
+TERROR DAKTYL 4D	37629,0 lives
+TERRORPODS		55655,183:55695,182:62305,182:62792,182 lives
+TEST DRIVE II		28174,0 lives; 27529,x:27905,x where x=no. of lives
+TETROID			44965,98 only one line needed
+THANATOS		56058,201:56549,24:56016(56816?),24:58021,24:58220,24:
+			58788(58778?),24:59174,24:59240,24 dunno
+THAT'S THE SPIRIT	53127,62:53129,50 sanity; 53664,0 fatigue
+THE ARK			58723,0 lives; 27769,0 time
+THE BANG BANK		33907,48:33911,0 lives;
+       (SILVER GUN)	27027,48:27031,0:27055,48:27059,0 time
+THE DETECTIVE		41051,0:41052,0 lives
+THE DEVIL RIDES IN	27876,182:28727,182 lives
+THE DIAMONDS		40654,183 lives
+THE GAME		39118,0 lives
+THE MASTER		32773,0 lives
+THEM!			29332,0 lives
+THE PLOT		44658,0 energy; 47100,0 lives
+THE PRIZE		43102,0 lives
+THE RACE		55541,0 time
+THE SHAKY GAME		27338,183 lives
+THE SURVIVORS		43752,0 lives; 43624,0 energy (droid 1);
+			43654,0 energy (droid 2); 43684,0 energy (droid 3)
+THE WOMBLES		28837,0 lives; 44210,0 time
+THEY STOLE A MILLION	28767,153 9,900 quid; 28766,153 990,000 quid!
+THING BOUNCES BACK	45255,0 lives; 63853,175 alternative lives;
+			63852,107 oil; 63858,32:63859,178 no doors;
+			63861,205:63862,177 no lasers
+THINGY AND THE DOODAHS	63387,50 lives
+THOR			42667,195 lives; 39544,0 lightning; 41576,52 energy
+THREE WEEKS IN PARADISE	50066,201 lives (48k); 38348,0 lives (128k)
+THROUGH THE TRAP DOOR	44116,201 time; 47492,0 dunno
+THRUST			39219,0 lives; 54903,201 fuel
+THRUST II		34200,0 lives; 34476,0 time
+THUNDERBIRDS		55985,0 weight; 58927,0 lives; 59095,0 fuel;
+			50927,0:50928,0:50929,0:52930,0 alternative lives poke;
+			62134,0 yet another lives poke!
+THUNDERBLADE		41964,0:42018,0 lives
+THUNDERCATS		31401,0:31402,0 lives; 31403,24 alternative lives poke;
+			25291,0 time; 32219,1 invincible; 31474,201 no nasties;
+			30060,0 weird (128 only)
+THUNDERCEPTOR		54487,201 lives
+THUNDERJAWS		39967,0 lives
+TIGER ROAD 		51445,0 lives; 51602,183 time;
+			51602,61 start time again (or you can't finish level)
+TILER			30172,0 lives
+TILT			55030,0 energy
+TIME FLIES		35113,0 lives
+TIME FLIGHT		34699,127 127 lives
+TIME MACHINE (Vivid Im)	47494,0 lives
+TIME OUT		60259,0 lives
+TIME SCANNER		27448,0 lives; 27053,172:27595,195 credits
+TIMEZONE		42724,0:42725,0:42726,0:42727,0 lives
+TINTIN ON THE MOON	31247,147 energy
+TIR NA NOG		34202,200 (,255?) no sidhe; 31365,201 safe plants;
+			34751,201 no dungeon ghosts; 30801,195 safe snake nat.;
+			35421,24 no locked doors; 33727,24 sidhe won't kill;
+			31109,0 dunno; 27057,0:27058,0:27068,0:27069,0:
+			32403,0:26919,0 dunno
+TITANIC PART 1		54641,0:59189,0:59043,0 lives
+TITANIC PART 2		54693,0:59350,0:59389,0 lives; access code : SUSIE
+TITANIC BLINKY		60735,0 lives; 60113,0 energy
+TLL			35006,0 lives; 35807,0 time
+TOADRUNNER		27395,222:27396,149 lives
+TOBOR			57832,182:58606,183 lives
+TOMAHAWK		24601,0 lives; 37087,24 ammo; 37140,167 rockets;
+			37206,167 hellfires; 32646,195 fall any height
+TOMB OF SYRINX		58046,0 lives; 57286,201 no nasties
+TOMCAT			36150,0 lives
+TOOBIN'			61721,0 credits; 41836,x where x=no. of credits
+TOP CAT			62566,0 energy; 64796,0 time
+TOP FRUIT MACHINE	61546,0 credits
+TOP GUN			26460,0 player 1 lives; 27727,n:27728,n n=player 2 lives
+TORNADO ECR		54693,0 lives
+TOTAL ECLIPSE SPHINX J	48025,195 energy, water, time
+TOTAL RECALL		38336,0 ammo; 25360,0 time;
+			26108,0:37532,0:41667,0:47709,0 energy
+TO THE TOP		29448,182 lives
+TOUR DE FORCE		45902,0 heat; 42062,0 lives; 45472,24 time
+TOWDIE			29999,0 lives
+TOWER OF EVIL		59386,0 lives
+TOY BIZARRE		38794,201 lives
+TOYOTA CELICA GT RALLY	51334,46:51335,255 always qualify
+TRAILBLAZER		36745,201 flying ball; 35499,0 jumps
+TRANSMUTER		28878,0 lives
+TRANSVERSION		26020,0 lives; 25393,255:27893,255 255 lives
+TRANTOR			56711,0 time; 56596,0 energy; 25446,0 lives;
+			52514,0 no aliens; 54236,0 ammo; 61008,201 invincible
+TRANZ AM		25445,0 lives
+TRAP			27126,0 access any ship; 39558,0 lives
+TRAP DOOR		44139,24 time; 44251,0 max. bonus; 
+			44108,20 alternative time poke
+TRASHMAN		52037,0 time; 42528,0 lives; 
+			48985,201:42457,0:42458,0:42459,0 invincible;
+			42467,0:42468,0:42444,0:42445,0:42453,0:42457,0:
+			32359,0 alternative invincibility poke
+TRAVEL WITH TRASHMAN	38656,142:38658,183 dunno
+TRAXX			31769,0 lives
+TRAZ			44154,0 lives
+TREASURE ISLAND		59669,0:60127,0:61143,0:61282,0 lives
+TREASURE ISLAND DIZZY	60774,24 invincible; 25081,24 water harmless;
+			62242,201 walk through walls; 29289,201 alt. invinc.
+TREMOR			52744,0 lives
+TRIAXOS			30724,0:33288,0:37116,0 inf. time, dynamite & ammo
+TRIBBLE TRUBBLE		32110,183:32849,183:34214,183:35026,183 tribbles;
+			31981,0:31984,24 air
+TROM			26721,0 lives
+TROUBLE BREWIN'		31199,0:31565,0:35627,0:50959,0 lives
+TUBARUBA		27944,0 lives
+TUJAD			27212,0:27213,0 lives
+TUNELES MARCIANOS	63457,255 lives
+TURBO ESPRIT		60514,0:60515,0:60516,0:60517,0:60518,0:60519,0:
+			60520,0:60521,0:60573,0:60574,0:60575,0:60576,0:
+			60577,0:60578,0:60579,0:60580,0:62434,0:62435,0:
+			62436,0:62437,0:62438,0:62439,0:62440,0:62441,0 invinc.;
+			29893,0 lives
+TURBO GIRL		27003,182 lives
+TURBO OUTRUN		47035,0 credits; 46954,x where x=no. of credits
+TURBO THE TORTOISE	53693,182 lives; 56401,182 energy; 54085,0 ammo
+TURBULENCE		49449,0 lives; 52202,201 time
+TURMOIL			57557,0 lives
+TURRICAN		28670,0 continues; 31501,0 gyros; 28581,183 lives
+TURRICAN II		42167,0 shields, time, lives
+TUSKER			38630,0 lives; 40767,61 no enemies; 40766,100 bombs
+TUTANKHAMUN		27783,0 lives
+TWIN TURBO V8		49759,0 lives; 42006,x where x=no. of lives (1-99)
+TWISTER			42412,0:42490,0 energy; 42646,183 ammo
+TWISTER FRUIT MACHINE	33715,0:33566,0 money
+TYPE ROPE		32091,0 time
+TYPHOON			41664,182:41829,182 lives; 40459,99 99 lives?; 
+			39143,0:39303,0 dunno, needed by 99 lives poke?
+
+
+UCM			36337,0 player 1 lives; 43734,0 player 2 lives;
+			27832,0:30884,24:34198,24 bazooka; 32767,201 no enemies
+UGH!			61340,0 lives; 60888,x where x=no. of lives
+ULISES			35057,0 lives
+ULTIMA RATIO		55062,0 lives; 50306,183:50360,183 time; 52424,182 zap!
+ULTIMATE WARRIOR	50643,0 lives; 50655,x where x=no. of lives
+UNDERGROUND		56637,0 lives
+UNDERWURLDE		59375,0 lives; 38042,33 blue gems last forever;
+			45018,201 no nasties; 59591,0 dunno;
+			36980,x where x=no.of lives
+UNITRAX			29264,0 lives
+UNIVERSAL HERO		38904,190 lives; 38840,24 invincible
+UN SQUADRON		29264,201 invincible
+URIDIUM			31307,33 lives; 54419,0:54420,255 invincible
+
+
+VAMPIRE			28405,30 invincible
+VATMAN			56681,0:56547,0 invincible; 55435,0 no enemies;
+			52132,201 autofire; 55445,0 one enemy
+VECTRON			49640,201 energy
+VEGETABLE CRASH		34484,183 lives; 34626,x where x=no.of lives
+VENOM			52262,24; 52255,0:52256,0:52257,0 immunity;
+			45600,0 (?); 49941,201 no enemies; 52254,175 immunity??
+VENOM STRIKES BACK	52254,175 invincible; 45600,0 ammo; 
+			45803,201 water harmless; 49941,201 no enemies;
+			42831,0:42849,0:44914,0 alt. invincibility poke
+VENTURAMA		53629,0:53630,0 lives
+VICTORY ROAD		65244,0 player 1 lives (enter during game)
+VIDEO POKER		45547,0 money
+VIDEO POOL		38753,0:33769,60 shots
+VIEW TO A KILL		Game 2 - QRS21, Game 3 - QQQQQ, Final - HRMQE
+			28032,255:28087,8:29243,8:30543,8 fixes bug in game 3
+VIGILANTE		48735,0 lives; 48713,201 energy; 38233,0 time
+VIGILANTE PATROL	59938,0:59939,0 lives
+VINDICATOR		33448,0:34064,0 lives on part 1;
+			34139,0:34203,0 lives on part 2; 38631,0 rockets;
+			34364,0 time on part 3; 35055,0 lives on part 3
+VINDICATORS		37913,0 player 1 lives; 38094,0 player 2 lives
+VIPER 3			30533,0 lives
+VIRUS			44945,0:44912,0 lives (maybe only need one of these...);
+			56447,99 bombs; 37835,0:44942,167 dunno
+VIXEN			57541,0 time; 51789,183 lives
+VIZ			41652,0 lives; 32635,0 time
+VOIDRUNNER		39935,0 lives
+VOLCANO			40178,0:40304,0:41834,0 lives
+
+
+WACKY DARTS		37070,0 time
+WALLS			50051,0 lives; 50071,0 dunno
+WANDERER		28010,182 shields
+WAR			37033,0 lives
+WAY OF EXPLODING FIST	44793,x where x=no.of time units required (1-255)
+WAY OF EXPLODING FIST 2	27061,0 lives; 27233,x where x=no. of lives
+WAY OF THE TIGER	45532,201 unarmed combat lives (possibly 45554,183);
+			45178,201 pole fighting lives;
+			45806,201 sword fighting lives (possibly 45828,183)
+WEC LE MANS 128		33261,195 time
+WEC LE MANS 48K		33249,195 time
+WEST BANK		52518,182 lives; 51210,x where x=no.of lives
+WHEELIE			30037,201 lives
+WHERE TIME STOOD STILL	54945,0 lives
+WHO DARES WINS 2	50833,0 lives; 51847,0 grenades
+WHOLE NEW BALL GAME	50056,182 lives; 51485,0 time
+WHOPPER CHASE		62367,183 lives; 60174,x where x=number of lives
+WILD WEST HERO		30092,0 lives; 23821,30 30 lives
+WILD WEST SEYMOUR	46043,0 lives
+WILLY WINO'S STAG NIGHT	33139,182 lives
+WINGED AVENGER		26770,0 shields
+WINGED AVENGER MK.II	26716,0 lives; 26844,x where x=no.of lives
+WINGED WARLORDS		24526,183 lives (player 1)
+WITCHFIEND		49299,0 potions
+WIZ			60305,0 lives; 64355,0:64218,0:64279,0:64399,0 runes
+WIZARD WILLY 128	35622,0 lives
+WIZARD'S LAIR		51419,0 weapons; 52056,0 energy; 47968,0 lives;
+			52081,0 keys; 47753,0 more energy;
+			25522,255 255 lives; 25516,255 255 keys;
+			25517,255 255 rings; 25518,255 255 diamonds
+WIZARD'S WARRIORS	25519,0 lives
+WIZBALL	128		37016,0 lives; 36795,33:36788,33 invincible
+WIZBALL 48k		37052,0 lives; 48190,201 invincible
+WONDERBOY		34362,0 lives; 34338,0 axe; 
+			34106,195:40816,195:41250,195:41870,195:38176,0 invinc.;
+			41250,195:41870,195:38176,0 vitality; 
+			35305,24 load any level (48k version)
+WONKY CHATEAU		57010,0 lives
+WORSE THINGS HAPPEN	35443,0 droids; 35303,0:33221,0 energy; 
+		AT SEA	30008,201 no sinking
+WRIGGLER		49564,0 lives; 59273,0 energy
+WRIGGLER (TAPEWORM)	60853,0 lives
+WULFAN			31273,0 immortality; 25862,0 lives
+
+
+XARAX			41352,0 lives; 50800,0 dunno
+XAVIOR			62481,0 lives; 62931,x where x=no. of lives
+XECUTOR			47216,201 player 1 invincible; 48259,201 no enemy fire;
+			47320,201 player 2 invincible; 54017,0 player 1 lives;
+			53538,0 player 2 lives
+XEN			34814,182 lives
+XENO			22225,1 lives
+XENON			25029,182 lives; 25004,0 energy
+XEVIOUS			53756,58 lives;
+			55333,62:55334,5:55335,50:55336,4:55338,201 alt. lives;
+XOR			43186,0:43194,0 moves
+XYBOTS			27333,0 credits
+
+
+YABBA DABBA DOO		43612,0 lives; 37003,x where x=no. of lives
+YETI			47894,0 lives; 56160,0 temp; 
+			48311,24 (48328,0?) grenades; 49065,24 (49077,0?) ammo
+YIE AR KUNG FU		29587,183 lives; 61482,0 energy; 
+			29483,x where x=no. of lives; 61461,175 one hit kills;
+			49374,0:49405,0:50561,0:51545,0 dunno
+YIE AR KUNG FU II	45655,182 lives
+YOGI BEAR		35090,0 safe holes; 33912,24 lives;
+			55091,0:34900,0:35092,0:35093,0:45026,24 invincible;
+			35090,0 alternative invincibility poke
+YOGI'S GREAT ESCAPE	33569,183 lives; 33590,61 invincible
+YS CAPERS		61920,0:61946,0 power; 61815,0 time
+YUCAN			46081,0 lives; 49871,0:49872,0:49873,0 bombs
+
+
+Z			41286,182 lives
+Z-MAN			28809,0 lives
+ZARJAS			30230,183:30256,183 energy
+ZAXXAN			50244,183 lives
+ZAXXON			33170,182 lives; 32961,255:32973,255 255 lives
+ZENJI			37196,182 lives; 38307,182 time
+ZHAK			27868,0 lives
+ZIG ZAG			54065,0 lives
+ZIPPER FLIPPER		52153,0 balls
+ZIP ZAP			53750,183:54141,183 energy; 54038,0 time; 
+			53382,99 99 lives
+ZOIDS			53613,0 power; 55781,191 missiles; 54653,0 bullets;
+			55013,24 damage
+ZOLYX			50476,0 time; 50800,0 lives
+ZOMBIE ZOMBIE		34804,0 ammo
+ZONE M			25588,0 lives; 25581,24:25582,251 invincible
+ZORRO			53729,0 lives
+ZUB			45941,183:46092,183:46210,183 energy; 
+			36050,x x=start level (1-10); 37473,201 no enemies
+ZYBEX			45277,0 lives (player 1)
+ZYNAPS			45424,201 lives; 39775,201 invincible;
+			45592,24:45008,255 possibly lives
+ZYTHUM			54786,0:54790,0:54791,0 lives; 51270,0:51271,0 ammo;
+			56498,0 time; 54410,201 no baddies; 52503,255 255 lives;
+			54786,0:54790,0:54791,0:56498,0 alt. time poke;
+			51067,0:51068,0 dunno; 52508,x bombs
+ZZOOM			24743,0 lives
