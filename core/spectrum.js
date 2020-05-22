@@ -48,6 +48,10 @@ JSSpeccy.Spectrum = function(opts) {
 		controller: controller,
 		collectOpcodesStats: opts.collectOpcodesStats	});
 
+		self.poke = function(addr, val) {
+			memory.write(addr, val);
+		}
+		
 	/* internal state to allow picking up mid-frame (e.g. when loading from a snapshot) */
 	var startNextFrameWithInterrupt = true;
 

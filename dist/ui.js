@@ -87,6 +87,12 @@ JSSpeccy.UI = function(opts) {
 		showPanel('.joystick_keys');
 	});
 	
+	$('button.pokes', toolbar).click(function() {
+		controller.stop();
+		$("#error_text", pokesPanel).text("");
+		showPanel('.pokes');
+	});
+	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
 	$("#jsspeccy-fps", container).html(fps_html);
 	
@@ -156,7 +162,7 @@ JSSpeccy.UI = function(opts) {
 		$('button.fullscreen', toolbar).hide();
 	}
 	
-  if (isSmartTV && urlPar("joystick_keys") !== "on") {
+  if (!isMobile && urlPar("joystick_keys") !== "on") {
 		$('button.joystick_keys', toolbar).hide();
 	}
 	var selectModel = $('select.select-model', toolbar);
@@ -221,6 +227,32 @@ JSSpeccy.UI = function(opts) {
 		}
 	});
 	
+	var pokesPanel = $('.panel.pokes', container);
+	pokesPanel.find("button.apply_pokes").click(function () {
+		var poke = pokesPanel.find('input[type="text"]');
+		var str = poke.val();
+		var ok = false;
+		if (str !== "") {
+		  for (var substr of str.split(":")) {
+				var addr, val;
+				[addr, val] = substr.split(",").map(Number);;
+				if (addr >= 16384 && addr < 65536 && val >= 0 && val < 256) {
+					controller.poke(addr, val);
+				}
+				else {
+					$("#error_text", pokesPanel).text("Addresses or values are wrong");
+				}
+				console.log(addr, " ", val);
+			}
+		}
+		else {
+			$("#error_text", pokesPanel).text("Pokes string is empty");
+		}
+		if (ok) {
+			hidePanels();
+		}
+	});
+	
 	const app_url = new URL(document.URL);
 	const path_url = app_url.protocol + "//" + (app_url.host.length > 0 ? app_url.host + "/" : "") + app_url.pathname.substring(0, app_url.pathname.lastIndexOf('/'));
 //	const downloads_path = "file:///media/internal/downloads"; 
@@ -233,7 +265,7 @@ JSSpeccy.UI = function(opts) {
 	}
 
   /* Preinstalled games routines */
-	var loadScript = function (url, callback) {
+	var loadResource = function (url, callback) {
 		var request = new XMLHttpRequest();
 		request.addEventListener('load', function(e) {
 			callback(request.response);
@@ -260,10 +292,12 @@ JSSpeccy.UI = function(opts) {
 			.append($("<option></option>")
 	        .text("PLAY NOW")); 
 		})();
-		loadScript("tapes.js?" + performance.now(), addSelectEntry);
+		loadResource("tapes.js?" + performance.now(), addSelectEntry);
+		/*
 		if (isSmartTV) {
-			loadScript(usb_path + "tapes.js", addSelectEntry);
+			loadResource(usb_path + "tapes.js", addSelectEntry);
 		}		
+		*/
 	};
 	
   $("#preinstalled-games", toolbar).change(function() {
@@ -281,6 +315,10 @@ JSSpeccy.UI = function(opts) {
     }
   });
   
+	loadResource("zx_spectrum_pokes.txt", function(text) {
+		pokesPanel.find("textarea").val(text);
+	});
+	
   /* Padblock routines */
   function addKeySelect(id, code, label, initial) {
       var opt = document.createElement('option')

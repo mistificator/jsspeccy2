@@ -98,6 +98,9 @@
 .jsspeccy .toolbar .joystick_keys {
 	background-image: url(images/48x48_settings.png);
 }
+.jsspeccy .toolbar .pokes {
+	background-image: url(images/48x48_pokes.png);
+}
 
 .jsspeccy .panel {
 	top: 10%;
@@ -390,4 +393,12 @@
         width: 45px;
         height: 45px;
     }    
+}
+
+.jsspeccy .pokes textarea{
+	width: 100%;
+	font-style: normal; 
+	font-weight: normal;
+	font-size: 5pt;
+	font-family: monospace;
 }

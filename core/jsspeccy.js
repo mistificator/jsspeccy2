@@ -394,10 +394,14 @@ function JSSpeccy(container, opts) {
 		spectrum.reset();
 	};
 
-  self.getFps = function() {
-    return spectrum.getFps();
-  };
+	self.getFps = function() {
+		return spectrum.getFps();
+	};
 
+	self.poke = function(addr, val) {
+		return spectrum.poke(addr, val);
+	};
+	
 	/* == Startup conditions == */
 	self.setModel(JSSpeccy.Spectrum.MODEL_128K);
 
