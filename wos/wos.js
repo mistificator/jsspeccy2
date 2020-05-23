@@ -14,6 +14,7 @@ function WoS() {
 	self.wos_base = "https://www.worldofspectrum.org";
 	self.wos_search = "/infoseekid.cgi%3Fid=";
 	self.wos_index = "/games/";
+	self.wos_top100 = "/bestgames.html";
 	
 	var loadResource = function (url) {
 		return new Promise((resolve, reject) => {
@@ -29,14 +30,28 @@ function WoS() {
 		if (letter == "#") {
 			letter = "1";
 		}
-		var str = await loadResource(self.cors_proxy + self.wos_base + self.wos_index + letter.toLowerCase() + ".html");
+		var str = letter != "-" ? await loadResource(self.cors_proxy + self.wos_base + self.wos_index + letter.toLowerCase() + ".html") : await loadResource(self.cors_proxy + self.wos_base + self.wos_top100);
 		var html = $.parseHTML(str);
 		var out = [];
-		$("pre", html).each(function( i, el ) {
-			for (var a of $("a", el)) {
-				out.push({title: $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).replace("?", "%3F")});
-			}
-		});
+		if (letter != "-") {
+			$("pre", html).each(function(i, el) {
+				var n = 0;
+				for (var a of $("a", el)) {
+					out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).replace("?", "%3F")});
+				}
+			});
+		}
+		else {
+			$("table", html).each(function(i, el) {
+				var score_label = $("tr:contains('Score')", el);
+				if (score_label.length) {
+					var n = 0;
+					for (var a of $("a", el)) {
+						out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).replace("?", "%3F")});
+					}
+				}
+			});
+		}
 		return new Promise((resolve) => { resolve(out); });
 	}
 	
@@ -44,7 +59,7 @@ function WoS() {
 		var str = await loadResource(catalogue_url);
 		var html = $.parseHTML(str);	
 		var tapes_links = [];
-		$("table", html).each(function( i, el ) {
+		$("table", html).each(function(i, el) {
 			var filename_label = $("tr:contains('Filename')", el);
 			if (filename_label.length) {			
 				var index = $("td:contains('Filename')", filename_label).index();
@@ -61,7 +76,12 @@ function WoS() {
 					if (ext != "TZX" && ext != "TAP" && ext != "Z80" && ext != "SNA") {
 						continue;
 					}
-					tapes_links.push(self.cors_proxy + self.wos_base + href);
+					if (ext == "TAP") {
+						tapes_links.unshift(self.cors_proxy + self.wos_base + href);
+					}
+					else {
+						tapes_links.push(self.cors_proxy + self.wos_base + href);
+					}
 				}
 				return false; // break
 			}
@@ -69,12 +89,27 @@ function WoS() {
 		return new Promise((resolve) => { resolve(tapes_links); });
 	}
 
-	self.init = function(letter_container, index_container, links_container) {
-		$(letter_container).empty();
-		$(letter_container).append($("<option></option>").text('#'));
-		for (var c = ("A").charCodeAt(0); c <= ("Z").charCodeAt(0); c++) {
-			$(letter_container).append($("<option></option>").text(String.fromCharCode(c)));
-		}
+	self.init = function(catalogue_container, letter_container, index_container, links_container) {
+		$(catalogue_container).empty();
+		$(catalogue_container).append($("<option></option>").text('TOP-100 - WorldOfSpectrum.org TOP-100'));
+		$(catalogue_container).append($("<option></option>").text('WoS ALL - WorldOfSpectrum.org full catalogue'));
+		
+		$(catalogue_container).change(function() {
+			$(letter_container).empty();
+			switch ($(catalogue_container + " option:selected").index()) {
+				case 0: // top-100
+					$(letter_container).append($("<option></option>").text('-'));
+					break;
+				case 1: // full catalogue
+					for (var c = ("A").charCodeAt(0); c <= ("Z").charCodeAt(0); c++) {
+						$(letter_container).append($("<option></option>").text(String.fromCharCode(c)));
+					}
+					$(letter_container).append($("<option></option>").text('#'));
+					break;
+			}
+			$(letter_container).trigger("change");
+		});		
+
 		$(letter_container).change(function() {
 			$(index_container).empty();
 			self.getIndex($(letter_container + " option:selected").html()).then(function(index) {
@@ -92,13 +127,13 @@ function WoS() {
 			self.getLinks($(index_container + " option:selected").attr("href")).then(function(links) {
 				for (var i = 0; i < links.length; i++) {
 					var opt = $("<option></option>");
-					opt.text((i + 1).toString() + ". " + links[i].slice(links[i].lastIndexOf("/") + 1));
+					opt.text((i + 1).toString() + "." + links[i].slice(links[i].lastIndexOf("/") + 1));
 					opt.attr("href", links[i]);
 					$(links_container).append(opt);
 				}
 			});	
 		});
-		$(letter_container).trigger("change");
+		$(catalogue_container).trigger("change");
 	}
 	
 	return self;

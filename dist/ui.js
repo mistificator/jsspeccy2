@@ -96,6 +96,7 @@ JSSpeccy.UI = function(opts) {
 	$('button.run', toolbar).click(function() {
 		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, 'debugPrint': opts.debugPrint});
 		hidePanels();
+		controller.start();
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";

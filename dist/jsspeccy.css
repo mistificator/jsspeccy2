@@ -66,6 +66,10 @@
 }
 */
 
+.jsspeccy #catalogue, .jsspeccy #letter, .jsspeccy #index  { 
+    margin-right:-12px;
+ }
+
 .jsspeccy .toolbar label {
 	color: white;
 }
@@ -270,6 +274,12 @@
         height: 64px;
         font-size: 18pt;
     }
+    .jsspeccy #catalogue {
+        width: 96px;
+    }
+    .jsspeccy #letter{
+        width: 48px;
+    }
     .jsspeccy #index {
         width: 192px;
     }
@@ -316,6 +326,12 @@
         height: 24px;
         font-size: 9pt;
     }
+    .jsspeccy #catalogue {
+        width: 36px;
+    }
+    .jsspeccy #letter{
+        width: 18px;
+    }		
     .jsspeccy #index {
         width: 72px;
     }
@@ -395,6 +411,12 @@
         height: 20px;
         font-size: 5pt;
     }
+    .jsspeccy #catalogue {
+        width: 30px;
+    }
+    .jsspeccy #letter{
+        width: 15px;
+    }		
     .jsspeccy #index {
         width: 60px;
     }
