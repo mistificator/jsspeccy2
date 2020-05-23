@@ -6,10 +6,11 @@
 		<link rel="stylesheet" href="jsspeccy.css">
 		<link rel="stylesheet" href="ui.css">
 		<script src="jsspeccy-core.min.js"></script>
-		<script src="jquery-1.7.2.min.js"></script>
+		<script src="jquery-1.12.4.min.js"></script>
 		<script src="ui.js"></script>
 		<script src="js-unzip.min.js"></script>
 		<script src="js-inflate.min.js"></script>
+		<script src="wos.min.js"></script>
 	
 <!--		<script src="webOSTVjs-1.2.0/webOSTV.js" charset="utf-8"></script>
  		<script src="webOSTVjs-1.2.0/webOSTV-dev.js" charset="utf-8"></script>  
@@ -29,7 +30,7 @@
 
 		<script>
 			$(document).ready(function() {
-				var jsspeccy = JSSpeccy("jsspeccy-viewport", {
+				var opts = {
 					autostart: false, // no autostart enables sound on Chrome browser
 					applyContention: true, // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
@@ -37,13 +38,16 @@
 					debugPrint: true,
 					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05, // wtf?
 					border: 1 // default is 4
-				});
+				};
+				var jsspeccy = JSSpeccy("jsspeccy-viewport", opts);
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
 					controller: jsspeccy,
 					debugPrint: true
 				});
-				ui.loadPreinstalledGames();            
+//				ui.loadPreinstalledGames();
+				var wos = new WoS();
+				wos.init("#letter", "#index", "#links");            
 			});
 		</script>
 	</head>
@@ -68,9 +72,13 @@
 								<select class="select-model"></select>
 							</div>
 							<div>
-								<select id="preinstalled-games" style="width: 100%"></select>
+								<select class="catalogue" id="letter"></select>
+								<select class="catalogue" id="index"></select>
+								<select class="catalogue" id="links"></select>
+<!--								<select id="preinstalled-games" style="width: 100%"></select>-->
 							</div>
 						</li>
+						<li><button class="run" title="Run game">run</button></li>
 						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
 					</ul>			
 				</div>				
@@ -166,10 +174,9 @@
 						<button class="close">close</button>
 						<br/>
 						<p>Apply pokes</p>
-						<span class="note">Format is &quot;address1,value1:address2,value2:...&quot;</span>
-						<p><input type="text"></input><button class="apply_pokes">Poke</button></p>
+						<p><input type="text" placeholder="addr1,val1:addr2,val2:..."></input><button class="apply_pokes">Poke</button></p>
 						<span class="note" id="error_text"></span>
-						<textarea rows=40 cols=40 class="note" readonly></textarea>
+						<textarea rows=40 cols=40 readonly></textarea>
 				</div>  		
 		</div>
 	</body>

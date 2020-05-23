@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WoS test</title>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script src="wos.js"></script>
+		<script>		
+			$(document).ready(function() {
+				var wos = new WoS();
+				wos.init("#letter", "#index", "#links");
+			});
+		</script>
+	</head>
+	<body>
+		<select id="catalogue"><option>WoS</option></select>
+		<select id="letter"></select>
+		<select id="index"></select>
+		<select id="links"></select>
+	</body>
+</html>

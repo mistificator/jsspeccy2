@@ -24,4 +24,4 @@ if %errorlevel% neq 0 (
 
 echo Start server
 taskkill /fi "windowtitle eq http-server"
-start npx http-server ./dist/ -p 6321 -o -c-1
+start npx http-server ./dist/ -p 6321 -o -c-1 -S -C 127.0.0.1.cert -K 127.0.0.1.key

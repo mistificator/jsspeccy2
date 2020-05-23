@@ -59,7 +59,7 @@ JSSpeccy.UI = function(opts) {
 	$('button.reset', toolbar).click(function() {
 		controller.reset();
 		controller.setKeymap("");
-		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
+//		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
 	var audioButton = $('button.audio', toolbar);
@@ -91,6 +91,11 @@ JSSpeccy.UI = function(opts) {
 		controller.stop();
 		$("#error_text", pokesPanel).text("");
 		showPanel('.pokes');
+	});
+
+	$('button.run', toolbar).click(function() {
+		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, 'debugPrint': opts.debugPrint});
+		hidePanels();
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
@@ -231,22 +236,27 @@ JSSpeccy.UI = function(opts) {
 	pokesPanel.find("button.apply_pokes").click(function () {
 		var poke = pokesPanel.find('input[type="text"]');
 		var str = poke.val();
-		var ok = false;
+		var ok = true;
 		if (str !== "") {
 		  for (var substr of str.split(":")) {
 				var addr, val;
 				[addr, val] = substr.split(",").map(Number);;
+				if (opts.debugPrint) {
+					console.log("Poke ", addr, " ", val);
+				}
 				if (addr >= 16384 && addr < 65536 && val >= 0 && val < 256) {
 					controller.poke(addr, val);
 				}
 				else {
 					$("#error_text", pokesPanel).text("Addresses or values are wrong");
+					ok = false;
+					break;
 				}
-				console.log(addr, " ", val);
 			}
 		}
 		else {
 			$("#error_text", pokesPanel).text("Pokes string is empty");
+			ok = false;
 		}
 		if (ok) {
 			hidePanels();
@@ -274,6 +284,7 @@ JSSpeccy.UI = function(opts) {
 		request.send();
 	}
 
+	/*
 	var addSelectEntry = function(data) {		
 		var tapes = eval("(function() { return " + data + ";})()");
 		for (var [key, value] of Object.entries(tapes)) {
@@ -293,11 +304,6 @@ JSSpeccy.UI = function(opts) {
 	        .text("PLAY NOW")); 
 		})();
 		loadResource("tapes.js?" + performance.now(), addSelectEntry);
-		/*
-		if (isSmartTV) {
-			loadResource(usb_path + "tapes.js", addSelectEntry);
-		}		
-		*/
 	};
 	
   $("#preinstalled-games", toolbar).change(function() {
@@ -314,6 +320,7 @@ JSSpeccy.UI = function(opts) {
       controller.setKeymap($(this).children(":selected").attr("id") || "");
     }
   });
+	*/
   
 	loadResource("zx_spectrum_pokes.txt", function(text) {
 		pokesPanel.find("textarea").val(text);

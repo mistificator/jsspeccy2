@@ -27,6 +27,7 @@ html {
 
 * {
 	font-family: PressStart2P;	
+	font-style: normal;
 }	
 
 *:focus {

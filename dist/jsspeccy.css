@@ -57,12 +57,14 @@
     background-size: contain;
 }
 
+/*
 .jsspeccy #preinstalled-games {    
 	background-image: url(images/48x48_package_games_arcade.png);
 	background-repeat: no-repeat;
 	background-position: left center;	
     background-size: contain;
 }
+*/
 
 .jsspeccy .toolbar label {
 	color: white;
@@ -101,6 +103,9 @@
 .jsspeccy .toolbar .pokes {
 	background-image: url(images/48x48_pokes.png);
 }
+.jsspeccy .toolbar .run {
+	background-image: url(images/48x48_run.png);
+}
 
 .jsspeccy .panel {
 	top: 10%;
@@ -120,9 +125,9 @@
 
 .jsspeccy .panel .close {
 	position: absolute;
-    height: 20pt;
+	height: 20pt;
 	right: 0px;
-    top: 0px;
+	top: 0px;
 }
 
 .jsspeccy .panel h1, .jsspeccy .panel h2 {
@@ -256,10 +261,20 @@
         width: 64px;
         height: 64px;
     }
-    .jsspeccy #preinstalled-games {
+/*    .jsspeccy #preinstalled-games {
         height: 64px;
         font-size: 18pt;
         padding-left: 64px;
+    }*/
+    .jsspeccy .catalogue {
+        height: 64px;
+        font-size: 18pt;
+    }
+    .jsspeccy #index {
+        width: 192px;
+    }
+    .jsspeccy #links {
+        width: 192px;
     }
     .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
         font-size: 18pt;
@@ -292,11 +307,21 @@
         width: 24px;
         height: 24px;
     }
-    .jsspeccy #preinstalled-games {
+/*    .jsspeccy #preinstalled-games {
         height: 24px;
         font-size: 9pt;
         padding-left: 24px;
-    }    
+    }    */
+    .jsspeccy .catalogue {
+        height: 24px;
+        font-size: 9pt;
+    }
+    .jsspeccy #index {
+        width: 72px;
+    }
+    .jsspeccy #links {
+        width: 72px;
+    }
     .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
         font-size: 14pt;
         border-radius: 10px;
@@ -361,11 +386,21 @@
         width: 20px;
         height: 20px;
     }
-    .jsspeccy #preinstalled-games {
+/*    .jsspeccy #preinstalled-games {
         height: 20px;
         font-size: 5pt;
         padding-left: 20px;
-    }    
+    }    */
+    .jsspeccy .catalogue {
+        height: 20px;
+        font-size: 5pt;
+    }
+    .jsspeccy #index {
+        width: 60px;
+    }
+    .jsspeccy #links {
+        width: 60px;
+    }
     .jsspeccy #jsspeccy-fps {
         font-size: 3pt;
     }
@@ -395,10 +430,14 @@
     }    
 }
 
-.jsspeccy .pokes textarea{
+.jsspeccy  .pokes textarea{
 	width: 100%;
-	font-style: normal; 
+	font-size: 11px;
+	font-family: "Courier New", Courier, monospace;
 	font-weight: normal;
-	font-size: 5pt;
-	font-family: monospace;
+	font-style: normal;
+}
+
+.jsspeccy .pokes input{
+	width: 80%;
 }
