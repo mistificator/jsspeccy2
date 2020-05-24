@@ -152,8 +152,8 @@ function JSSpeccy(container, opts) {
   self.keyboard = function() {
     return kbd;
   }
-  self.setKeymap = function(keymap_name) {
-    kbd.setKeymap(keymap_name);
+  self.setKeymap = function(keymap_str) {
+    kbd.setKeymap(keymap_str);
   }; 
   
 	/* == Audio == */
