@@ -126,83 +126,48 @@ JSSpeccy.Keyboard = function() {
 		[self.TV_Green]: {row: 7, mask: 0x01}, /* TV GREEN as space */
 		
 		999: null
-	},
-	"QAOP": {
-		49: {row: 3, mask: 0x01}, /* 1 */
-		50: {row: 3, mask: 0x02}, /* 2 */
-		51: {row: 3, mask: 0x04}, /* 3 */
-		52: {row: 3, mask: 0x08}, /* 4 */
-		53: {row: 3, mask: 0x10}, /* 5 */
-		54: {row: 4, mask: 0x10}, /* 6 */
-		55: {row: 4, mask: 0x08}, /* 7 */
-		56: {row: 4, mask: 0x04}, /* 8 */
-		57: {row: 4, mask: 0x02}, /* 9 */
-		48: {row: 4, mask: 0x01}, /* 0 */
-		
-		13: {row: 6, mask: 0x01}, /* enter */
-
-		38: {row: 2, mask: 0x01}, /* up as Q */
-		40: {row: 1, mask: 0x01}, /* down as A */
-		37: {row: 5, mask: 0x02}, /* left as O */
-		39: {row: 5, mask: 0x01}, /* right as P */
-	
-		/* tv remote buttons */
-		[self.TV_Red]: {row: 7, mask: 0x04}, /* TV RED as M */
-		[self.TV_Green]: {row: 7, mask: 0x01}, /* TV GREEN as space */
-
-		999: null
-	},
-	"OKZX": {
-		49: {row: 3, mask: 0x01}, /* 1 */
-		50: {row: 3, mask: 0x02}, /* 2 */
-		51: {row: 3, mask: 0x04}, /* 3 */
-		52: {row: 3, mask: 0x08}, /* 4 */
-		53: {row: 3, mask: 0x10}, /* 5 */
-		54: {row: 4, mask: 0x10}, /* 6 */
-		55: {row: 4, mask: 0x08}, /* 7 */
-		56: {row: 4, mask: 0x04}, /* 8 */
-		57: {row: 4, mask: 0x02}, /* 9 */
-		48: {row: 4, mask: 0x01}, /* 0 */
-		
-		13: {row: 6, mask: 0x01}, /* enter */
-
-		38: {row: 5, mask: 0x02}, /* up as O */
-		40: {row: 6, mask: 0x04}, /* down as K */
-		37: {row: 0, mask: 0x02}, /* left as Z */
-		39: {row: 0, mask: 0x04}, /* right as X */
-		
-		/* tv remote buttons */
-		[self.TV_Red]: {row: 7, mask: 0x01}, /* TV RED as space */
-		[self.TV_Green]: {row: 7, mask: 0x01}, /* TV GREEN as space */
-
-		999: null
-	},
-	"1250": {
-		49: {row: 3, mask: 0x01}, /* 1 */
-		50: {row: 3, mask: 0x02}, /* 2 */
-		51: {row: 3, mask: 0x04}, /* 3 */
-		52: {row: 3, mask: 0x08}, /* 4 */
-		53: {row: 3, mask: 0x10}, /* 5 */
-		54: {row: 4, mask: 0x10}, /* 6 */
-		55: {row: 4, mask: 0x08}, /* 7 */
-		56: {row: 4, mask: 0x04}, /* 8 */
-		57: {row: 4, mask: 0x02}, /* 9 */
-		48: {row: 4, mask: 0x01}, /* 0 */
-		
-		13: {row: 6, mask: 0x01}, /* enter */
-
-		37: {row: 3, mask: 0x01}, /* left as 1 */
-		39: {row: 3, mask: 0x02}, /* right as 2 */
-		
-		/* tv remote buttons */
-		[self.TV_Red]: {row: 3, mask: 0x10}, /* TV RED as 5 */
-		[self.TV_Green]: {row: 4, mask: 0x01}, /* TV GREEN as 0 */
-
-		999: null
 	}}; 
 	var keyCodes = {};
-		self.setKeymap = function(keymap_name) {
-	keyCodes = allKeyCodes[keymap_name];
+	self.setKeymap = function(keymap_str) {
+		var tv_remote_keys = [38, 40, 37, 39, self.TV_Red, self.TV_Green];
+		if (!keymap_str || keymap_str.length == 0)
+		{
+			keyCodes = allKeyCodes[""];
+			return;
+		}
+		var i = 0;
+		allKeyCodes[keymap_str] = JSON.parse(JSON.stringify(allKeyCodes[""]));
+		for (var key of keymap_str.split(",").splice(0, tv_remote_keys.length)) {
+			key = key.trim();
+			switch (key) {
+				case '\u2191':
+					key = 38;
+					break;
+				case '\u2193':
+					key = 40;
+					break;
+				case '\u2190':
+					key = 37;
+					break;
+				case '\u2192':
+					key = 39;
+					break;
+				case 'Space':
+					key = 32;
+					break;
+				case 'Enter':
+					key = 13;
+					break;
+				case 'Symbol Shift':
+					key = 17;
+					break;
+				default:
+					key = key.charCodeAt(0);
+					break;
+			};
+			allKeyCodes[keymap_str][tv_remote_keys[i++]] = allKeyCodes[""][key.toFixed(0)];
+		}
+		keyCodes = allKeyCodes[keymap_str];
 	};
 	self.setKeymap("");
 	

@@ -58,7 +58,6 @@ JSSpeccy.UI = function(opts) {
 	
 	$('button.reset', toolbar).click(function() {
 		controller.reset();
-		controller.setKeymap("");
 //		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
@@ -168,7 +167,7 @@ JSSpeccy.UI = function(opts) {
 		$('button.fullscreen', toolbar).hide();
 	}
 	
-  if (!isMobile && urlPar("joystick_keys") !== "on") {
+  if (!isMobile && !isSmartTV && urlPar("joystick_keys") !== "on") {
 		$('button.joystick_keys', toolbar).hide();
 	}
 	var selectModel = $('select.select-model', toolbar);
@@ -318,7 +317,7 @@ JSSpeccy.UI = function(opts) {
         filename,
         {"autoload": true, 'debugPrint': opts.debugPrint}
       );
-      controller.setKeymap($(this).children(":selected").attr("id") || "");
+//      controller.setKeymap($(this).children(":selected").attr("id") || "");
     }
   });
 	*/
@@ -365,6 +364,9 @@ JSSpeccy.UI = function(opts) {
       populateJoystickKeySelect('select_key_right', right);
       populateJoystickKeySelect('select_key_fire', fire);
       populateJoystickKeySelect('select_key_action', action);		
+		if (isSmartTV) {
+			controller.setKeymap(keys);
+  }      
   }      
   $.setJoystick(document.getElementById('selcontrol').value);                
   $.padTouch = function(selectId,obj) {
