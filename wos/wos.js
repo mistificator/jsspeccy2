@@ -37,7 +37,7 @@ function WoS() {
 			$("pre", html).each(function(i, el) {
 				var n = 0;
 				for (var a of $("a", el)) {
-					out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).replace("?", "%3F")});
+					out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).split("?").join("%3F")});
 				}
 			});
 		}
@@ -47,7 +47,7 @@ function WoS() {
 				if (score_label.length) {
 					var n = 0;
 					for (var a of $("a", el)) {
-						out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).replace("?", "%3F")});
+						out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).split("?").join("%3F")});
 					}
 				}
 			});
@@ -89,28 +89,37 @@ function WoS() {
 		return new Promise((resolve) => { resolve(tapes_links); });
 	}
 
+	var is_wos_catalogue = false;
 	self.init = function(catalogue_container, letter_container, index_container, links_container) {
-		$(catalogue_container).empty();
+		var count = $(catalogue_container + " option", ).length;
 		$(catalogue_container).append($("<option></option>").text('TOP-100 - WorldOfSpectrum.org TOP-100'));
-		$(catalogue_container).append($("<option></option>").text('WoS ALL - WorldOfSpectrum.org full catalogue'));
+		$(catalogue_container).append($("<option></option>").text('WoS All - WorldOfSpectrum.org full catalogue'));
 		
 		$(catalogue_container).change(function() {
-			$(letter_container).empty();
-			switch ($(catalogue_container + " option:selected").index()) {
+			is_wos_catalogue = false;
+			switch ($(catalogue_container + " option:selected").index() - count) {
 				case 0: // top-100
+					is_wos_catalogue = true;
+					$(letter_container).empty();
 					$(letter_container).append($("<option></option>").text('-'));
+					$(letter_container).trigger("change");
 					break;
 				case 1: // full catalogue
+					is_wos_catalogue = true;
+					$(letter_container).empty();
 					for (var c = ("A").charCodeAt(0); c <= ("Z").charCodeAt(0); c++) {
 						$(letter_container).append($("<option></option>").text(String.fromCharCode(c)));
 					}
 					$(letter_container).append($("<option></option>").text('#'));
+					$(letter_container).trigger("change");
 					break;
 			}
-			$(letter_container).trigger("change");
 		});		
 
 		$(letter_container).change(function() {
+			if (!is_wos_catalogue) {
+				return;
+			}
 			$(index_container).empty();
 			self.getIndex($(letter_container + " option:selected").html()).then(function(index) {
 				for (var i of index) {
@@ -122,7 +131,11 @@ function WoS() {
 				$(index_container).trigger("change");
 			});	
 		});
+		
 		$(index_container).change(function() {
+			if (!is_wos_catalogue) {
+				return;
+			}		
 			$(links_container).empty();
 			self.getLinks($(index_container + " option:selected").attr("href")).then(function(links) {
 				for (var i = 0; i < links.length; i++) {
@@ -133,6 +146,7 @@ function WoS() {
 				}
 			});	
 		});
+		
 		$(catalogue_container).trigger("change");
 	}
 	

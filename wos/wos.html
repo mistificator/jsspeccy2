@@ -4,10 +4,14 @@
 		<title>WoS test</title>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<script src="wos.js"></script>
+		<script src="zxcz.js"></script>
 		<script>		
 			$(document).ready(function() {
 				var wos = new WoS();
 				wos.init("#catalogue", "#letter", "#index", "#links");
+
+				var zxcz = new ZxCz();
+				zxcz.init("#catalogue", "#letter", "#index", "#links");
 			});
 		</script>
 	</head>

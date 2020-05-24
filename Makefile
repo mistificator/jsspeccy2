@@ -5,6 +5,7 @@ DIST_FILES=\
 	build\js-unzip.min.js \
 	build\js-inflate.min.js \
 	build\wos.min.js \
+	build\zxcz.min.js \
 	lib\jdataview.js \
 	lib\jquery-1.12.4.min.js \
 	README
@@ -41,6 +42,9 @@ build/js-inflate.min.js: lib/js-inflate.js
 
 build/wos.min.js: wos/wos.js
 	$(NPX) minify wos/wos.js > build/wos.min.js
+
+build/zxcz.min.js: wos/zxcz.js
+	$(NPX) minify wos/zxcz.js > build/zxcz.min.js
 	
 CORE_JS_FILES=\
 	core/jsspeccy.js \
