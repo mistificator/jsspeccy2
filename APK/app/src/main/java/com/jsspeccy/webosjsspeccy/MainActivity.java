@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         mWebView = new WebView(this);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl("https://mistificator.github.io/jsspeccy2-webos/dist/index.html?always_fullscreen=on&no_contention=on");
+        mWebView.loadUrl("https://mistificator.github.io/jsspeccy2-webos/dist/index.html?always_fullscreen=on");
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

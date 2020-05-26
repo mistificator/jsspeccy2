@@ -392,6 +392,15 @@
         width: 60px;
         height: 60px;
     }    
+		
+		select {
+			-moz-appearance: none;
+			-webkit-appearance: none;
+		}
+
+		select::-ms-expand {
+			display: none;
+		}		
 }
 
 @media (-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi) {
@@ -450,6 +459,15 @@
         width: 45px;
         height: 45px;
     }    
+		
+		select {
+			-moz-appearance: none;
+			-webkit-appearance: none;
+		}
+
+		select::-ms-expand {
+			display: none;
+		}		
 }
 
 .jsspeccy  .pokes textarea{
