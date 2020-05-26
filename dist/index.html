@@ -33,7 +33,7 @@
 			$(document).ready(function() {
 				var opts = {
 					autostart: false, // no autostart enables sound on Chrome browser
-					applyContention: true, // contention makes sound and game speed NORMAL
+					applyContention: ((new URL(document.URL)).searchParams.get("no_contention") !== "on"), // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
 					debugPrint: true,
@@ -47,10 +47,10 @@
 					debugPrint: true
 				});
 //				ui.loadPreinstalledGames();
-				var wos = new WoS();
-				wos.init("#catalogue", "#letter", "#index", "#links");            
 				var zxcz = new ZxCz();
 				zxcz.init("#catalogue", "#letter", "#index", "#links");            
+				var wos = new WoS();
+				wos.init("#catalogue", "#letter", "#index", "#links");            
 			});
 		</script>
 	</head>

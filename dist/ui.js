@@ -151,7 +151,7 @@ JSSpeccy.UI = function(opts) {
 	var disableFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.msExitFullscreen || function() {};
 	var fullscreenContext = document.documentElement;
 	var enableFullscreen = fullscreenContext.requestFullscreen || fullscreenContext.webkitRequestFullscreen || fullscreenContext.mozRequestFullscreen || fullscreenContext.msRequestFullscreen || function() {};	
-	var isFullscreenAvailable = !isSmartTV && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
+	var isFullscreenAvailable = !isSmartTV && urlPar("always_fullscreen") !== "on" && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
 	if (isFullscreenAvailable) {
 		$('button.fullscreen', toolbar).click(function() {
 			if (!isFullscreen) {
