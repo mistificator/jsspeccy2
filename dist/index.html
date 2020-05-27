@@ -33,18 +33,19 @@
 			$(document).ready(function() {
 				var opts = {
 					autostart: false, // no autostart enables sound on Chrome browser
-					applyContention: ((new URL(document.URL)).searchParams.get("no_contention") !== "on"), // contention makes sound and game speed NORMAL
+					applyContention: ($.urlPar("no_contention") !== "on"), // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
-					debugPrint: true,
+					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
+					audioBufferSize: $.urlPar("audio_buffer") || "1024",
 					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05, // wtf?
-					border: 1 // default is 4
+					border: $.urlPar("border") || "1" // default is 4
 				};
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", opts);
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
 					controller: jsspeccy,
-					debugPrint: true
+					debugPrint: $.urlPar("debug_print") === "on" ? true : false
 				});
 //				ui.loadPreinstalledGames();
 				var zxcz = new ZxCz();

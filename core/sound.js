@@ -842,6 +842,7 @@ JSSpeccy.SoundBackend = function (opts) {
 	
 	opts = opts || {};
 	var debugPrint = opts.debugPrint;
+	var buffer_size = opts.audioBufferSize || 1024;
 
 	/* Regardless of the underlying implementation, an instance of SoundBackend exposes the API:
 	sampleRate: sample rate required by this backend
@@ -866,12 +867,19 @@ JSSpeccy.SoundBackend = function (opts) {
 		var audioNode = null;
 
 		//Web audio Api changed createJavaScriptNode to CreateScriptProcessor - we support both
-		const buffer_size = 1024;
+		if (audioContext.createScriptProcessor != null) {
+			audioNode = audioContext.createScriptProcessor(buffer_size, 1, 1);
+			if (debugPrint) {
+				console.log("audioNode is ScriptProcessorNode");
+			}
+		}
+		else
 		if (audioContext.createJavaScriptNode != null) {
 			audioNode = audioContext.createJavaScriptNode(buffer_size, 1, 1);
-		} else if (audioContext.createScriptProcessor != null) {
-			audioNode = audioContext.createScriptProcessor(buffer_size, 1, 1);
-		}
+			if (debugPrint) {
+				console.log("audioNode is JavaScriptNode");
+			}
+		} 
 
 		self.sampleRate = 44100;
 		if (audioNode != null) {

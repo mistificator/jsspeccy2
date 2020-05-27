@@ -157,7 +157,7 @@ function JSSpeccy(container, opts) {
   }; 
   
 	/* == Audio == */
-	var soundBackend = JSSpeccy.SoundBackend({debugPrint: opts.debugPrint});
+	var soundBackend = JSSpeccy.SoundBackend({debugPrint: opts.debugPrint, audioBufferSize: opts.audioBufferSize});
 	self.onChangeAudioState = Event();
 	self.getAudioState = function() {
 		return soundBackend.isEnabled;

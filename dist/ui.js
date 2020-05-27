@@ -1,3 +1,11 @@
+var url_pars_list = [];
+$.urlPar = function(key) {
+	if (!url_pars_list.includes(key)) {
+		url_pars_list.push(key);
+	}
+	return (new URL(document.URL)).searchParams.get(key);
+}
+
 JSSpeccy.UI = function(opts) {
 	var self = {};
 	
@@ -22,13 +30,6 @@ JSSpeccy.UI = function(opts) {
 
 	$(container).addClass('jsspeccy');
 	
-	var url_pars_list = [];
-	function urlPar(key) {
-		if (!url_pars_list.includes(key)) {
-			url_pars_list.push(key);
-		}
-		return (new URL(document.URL)).searchParams.get(key);
-	}
 
 	/* Set up toolbar */
 	var toolbar = $('.toolbar', container);
@@ -131,10 +132,10 @@ JSSpeccy.UI = function(opts) {
   }  
 
   var os = checkUserAgent();
-  var isWindows = (os.name == "Windows") || urlPar("is_windows") === "on";
-  var isLinux = (os.name == "Linux") || urlPar("is_linux") === "on";
-	var isSmartTV = (os.name == "webOS") || urlPar("is_smarttv") === "on";
-	var isMobile = (os.name == "Android") || urlPar("is_mobile") === "on";
+  var isWindows = (os.name == "Windows") || $.urlPar("is_windows") === "on";
+  var isLinux = (os.name == "Linux") || $.urlPar("is_linux") === "on";
+	var isSmartTV = (os.name == "webOS") || $.urlPar("is_smarttv") === "on";
+	var isMobile = (os.name == "Android") || $.urlPar("is_mobile") === "on";
 	$('button.deviceinfo', toolbar).click(function() {
 		$('.panel.information #content').html(
 				"<br/>Device information" + 
@@ -153,7 +154,7 @@ JSSpeccy.UI = function(opts) {
 	var disableFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.msExitFullscreen || function() {};
 	var fullscreenContext = document.documentElement;
 	var enableFullscreen = fullscreenContext.requestFullscreen || fullscreenContext.webkitRequestFullscreen || fullscreenContext.mozRequestFullscreen || fullscreenContext.msRequestFullscreen || function() {};	
-	var isFullscreenAvailable = !isSmartTV && urlPar("always_fullscreen") !== "on" && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
+	var isFullscreenAvailable = !isSmartTV && $.urlPar("always_fullscreen") !== "on" && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
 	if (isFullscreenAvailable) {
 		$('button.fullscreen', toolbar).click(function() {
 			if (!isFullscreen) {
@@ -169,9 +170,11 @@ JSSpeccy.UI = function(opts) {
 		$('button.fullscreen', toolbar).hide();
 	}
 	
-  if (!isMobile && !isSmartTV && urlPar("joystick_keys") !== "on") {
+	/* // remap joystick is always ok =)
+  if (!isMobile && !isSmartTV && $.urlPar("joystick_keys") !== "on") {
 		$('button.joystick_keys', toolbar).hide();
 	}
+	*/
 	var selectModel = $('select.select-model', toolbar);
 	$('select.select-model', toolbar).hide();
 	var modelsById = {};
@@ -221,7 +224,7 @@ JSSpeccy.UI = function(opts) {
 		fileSelect.val('');
 		hidePanels();
 	});
-	if (isSmartTV && urlPar("load_file") !== "on") {
+	if (isSmartTV && $.urlPar("load_file") !== "on") {
 		$("#load_file", container).hide();
 	}
 	
@@ -389,7 +392,7 @@ JSSpeccy.UI = function(opts) {
 			$.prev_keyupdown_time = performance.now();
   }
 
-  if (!isMobile && urlPar("padblock") !== "on") {
+  if (!isMobile && $.urlPar("padblock") !== "on") {
     $('.padblock', container).hide();
   }
     
@@ -448,7 +451,7 @@ JSSpeccy.UI = function(opts) {
       controller.keyboard().active = true;
   });
 
-  if (!isSmartTV && !isMobile && urlPar("typer") !== "on") {
+  if (!isSmartTV && !isMobile && $.urlPar("typer") !== "on") {
     $('#typer-div', container).hide();
   }  
   
@@ -484,7 +487,7 @@ JSSpeccy.UI = function(opts) {
       $("#typer", container).blur();
   };
   
-	var load_url = urlPar("load");
+	var load_url = $.urlPar("load");
 	if (load_url) {
 	  setTimeout(function() {
 			load_url = decodeURI(load_url);
