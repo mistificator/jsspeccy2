@@ -115,13 +115,35 @@
 				<div id='pad_block1' class='padblock'>
 						<table width='100%' border='0' cellpadding='6' cellspacing='0'>
 								<tr>
-										<td width='100%' align='left'>
-												<button class='pad_up_down' onmousedown="$.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_up',this)" ontouchstart="$.padTouch('select_key_up',this)" ontouchend="$.padUntouch('select_key_up',this)">&uarr;</button>
-												<br />
-												<button class='pad_left_right' onmousedown="$.padTouch('select_key_left',this)" onmouseup="$.padUntouch('select_key_left',this)" ontouchstart="$.padTouch('select_key_left',this)" ontouchend="$.padUntouch('select_key_left',this)">&larr;</button>
-												<button class='pad_left_right' onmousedown="$.padTouch('select_key_right',this)" onmouseup="$.padUntouch('select_key_right',this)" ontouchstart="$.padTouch('select_key_right',this)" ontouchend="$.padUntouch('select_key_right',this)">&rarr;</button>
-												<br />
-												<button class='pad_up_down' onmousedown="$.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_down',this)" ontouchstart="$.padTouch('select_key_down',this)" ontouchend="$.padUntouch('select_key_down',this)">&darr;</button>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_up_left' onmousedown="$.padTouch('select_key_left',this); $.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_left',this); $.padUntouch('select_key_up',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">\</button>
+										</td>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_up' onmousedown="$.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_up',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">&uarr;</button>
+										</td>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_up_right' onmousedown="$.padTouch('select_key_right',this); $.padTouch('select_key_up',this)" onmouseup="$.padUntouch('select_key_right',this); $.padUntouch('select_key_up',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">/</button>
+										</td>
+								</tr>
+								<tr>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_left' onmousedown="$.padTouch('select_key_left',this)" onmouseup="$.padUntouch('select_key_left',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">&larr;</button>
+										</td>
+										<td width='33%' align='left'>
+										</td>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_right' onmousedown="$.padTouch('select_key_right',this)" onmouseup="$.padUntouch('select_key_right',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">&rarr;</button>
+										</td>
+								</tr>
+								<tr>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_down_left' onmousedown="$.padTouch('select_key_left',this); $.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_left',this); $.padUntouch('select_key_down',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">/</button>
+										</td>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_down' onmousedown="$.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_down',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">&darr;</button>
+										</td>
+										<td width='33%' align='left'>
+												<button class='pad_arrow pad_down_right' onmousedown="$.padTouch('select_key_right',this); $.padTouch('select_key_down',this)" onmouseup="$.padUntouch('select_key_right',this); $.padUntouch('select_key_down',this)" ontouchstart="$(this).mousedown()" ontouchend="$(this).mouseup()">\</button>
 										</td>
 								</tr>
 						</table>
@@ -170,7 +192,7 @@
 										<div><label for='select_key_fire'>A</label><select id='select_key_fire' class="selcontrol_options"></select></div>
 								</li>
 								<li>
-										<div><label for='select_key_fire'>B</label><select id='select_key_action' class="selcontrol_options"></select></div>
+										<div><label for='select_key_action'>B</label><select id='select_key_action' class="selcontrol_options"></select></div>
 								</li>
 						</ul>
 				</div>   

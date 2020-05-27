@@ -238,24 +238,22 @@
     right: 0px;
 }
 
-.jsspeccy .pad_up_down, .jsspeccy .pad_left_right, .jsspeccy .pad_fire, .jsspeccy .pad_action  {
+.jsspeccy .pad_arrow, .jsspeccy .pad_fire, .jsspeccy .pad_action  {
 	appearance: none;
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	box-shadow: 5px 5px 5px #888;
 	font-weight: bold;
-    color: #FFFFFF;
-	background-color: #777777;
-}
-
-.jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+  color: #FFFFFF;
+	background-color: #808080;
 	border: none;
 }
 
-.jsspeccy .pad_fire, .jsspeccy .pad_action {
-	border: 0px solid #999999;
-	margin: 0px;
+.jsspeccy 	.pad_arrow:active, .jsspeccy .pad_fire:active, .jsspeccy .pad_action:active {
+	border: none;
+	background-color: #606060;
 }
+
 
 @media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
     .jsspeccy #typer {
@@ -286,17 +284,11 @@
     .jsspeccy #links {
         width: 192px;
     }
-    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+		.jsspeccy 	.pad_arrow  {
         font-size: 18pt;
         border-radius: 15px;
         width: 120px;
-        height: 80px;
-    }
-    .jsspeccy .pad_up_down {
-        margin-left: 76px;
-    }
-    .jsspeccy .pad_left_right {
-        margin: 3px;
+        height: 120px;
     }
     .jsspeccy .pad_fire, .jsspeccy .pad_action {
         border-radius: 75px;
@@ -338,17 +330,11 @@
     .jsspeccy #links {
         width: 72px;
     }
-    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+    .jsspeccy 	.pad_arrow  {
         font-size: 14pt;
         border-radius: 10px;
         width: 90px;
-        height: 60px;
-    }
-    .jsspeccy .pad_up_down {
-        margin-left: 60px;
-    }
-    .jsspeccy .pad_left_right {
-        margin: 3px;
+        height: 90px;
     }
     .jsspeccy .pad_fire, .jsspeccy .pad_action {
         border-radius: 50px;
@@ -368,17 +354,11 @@
     .jsspeccy #typer {
         font-size: 200%;
     }
-    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+    .jsspeccy 	.pad_arrow  {
         font-size: 9pt;
         border-radius: 7px;
         width: 60px;
-        height: 40px;
-    }
-    .jsspeccy .pad_up_down {
-        margin-left: 44px;
-    }
-    .jsspeccy .pad_left_right {
-        margin: 3px;
+        height: 60px;
     }
     .jsspeccy .pad_fire, .jsspeccy .pad_action {
         border-radius: 37px;
@@ -435,17 +415,11 @@
     .jsspeccy #jsspeccy-fps {
         font-size: 3pt;
     }
-    .jsspeccy .pad_up_down, .jsspeccy .pad_left_right{
+    .jsspeccy 	.pad_arrow  {
         font-size: 4pt;
         border-radius: 3px;
         width: 45px;
-        height: 30px;
-    }
-    .jsspeccy .pad_up_down {
-        margin-left: 36px;
-    }
-    .jsspeccy .pad_left_right {
-        margin: 3px;
+        height: 45px;
     }
     .jsspeccy .pad_fire, .jsspeccy .pad_action {
         border-radius: 18px;

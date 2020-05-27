@@ -1,5 +1,7 @@
 JSSpeccy.UI = function(opts) {
 	var self = {};
+	
+	$.key_timeout = 50;
 
 	var container = opts.container;
 	if (typeof(container) === 'string') {
@@ -368,28 +370,23 @@ JSSpeccy.UI = function(opts) {
 			controller.setKeymap(keys);
   }      
   }      
-  $.setJoystick(document.getElementById('selcontrol').value);                
+  $.setJoystick(document.getElementById('selcontrol').value); 
+	$.prev_keyupdown_time = performance.now();
   $.padTouch = function(selectId,obj) {
-      obj.style.background='#000000';
       var select = document.getElementById(selectId);
       var opt = select.options[select.selectedIndex];
-      controller.keyboard().registerKeyDown(opt.value);
+			setTimeout(function() {
+				controller.keyboard().registerKeyDown(opt.value);
+			}, Math.max($.key_timeout - (performance.now() - $.prev_keyupdown_time), 0));
+			$.prev_keyupdown_time = performance.now();
   }
   $.padUntouch = function(selectId,obj) {
-      obj.style.background='#777777';
       var select = document.getElementById(selectId);
       var opt = select.options[select.selectedIndex];
-      controller.keyboard().registerKeyUp(opt.value);
-  }
-  $.keyTouch = function(code,obj) {
-      obj.style.background='#AAAAAA';
-      obj.style.color='#FFFFFF';
-      controller.keyboard().registerKeyDown(code);
-  }
-  $.keyUntouch = function(code,obj) {
-      obj.style.background='#EEEEEE';
-      obj.style.color='#555555';
-      controller.keyboard().registerKeyUp(code);
+			setTimeout(function() {
+				controller.keyboard().registerKeyUp(opt.value);
+			}, Math.max($.key_timeout - (performance.now() - $.prev_keyupdown_time), 0));
+			$.prev_keyupdown_time = performance.now();
   }
 
   if (!isMobile && urlPar("padblock") !== "on") {
@@ -422,7 +419,7 @@ JSSpeccy.UI = function(opts) {
 			console.log(printable + " " + code);
 		}
     controller.keyboard().registerKeyDown(code);
-    setTimeout(function() { controller.keyboard().registerKeyUp(code); $("#typer", container).val(printable.length == 1 ? printable : ""); }, 20);  
+    setTimeout(function() { controller.keyboard().registerKeyUp(code); $("#typer", container).val(printable.length == 1 ? printable : ""); }, $.key_timeout);  
   }
   $("#typer", container).keydown(function(e) {
       keydown_code = e.keyCode;
