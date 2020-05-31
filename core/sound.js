@@ -45,6 +45,7 @@ SoundGenerator = function (opts) {
 	var frameLength = opts.model.frameLength;
 	var sampleRate = opts.backendSampleRate || 44100;
 	var is_enabled = opts.backendEnabled || false;
+	var audioBufferSize = opts.backendAudioBufferSize || 1024;
 	var samplesPerFrame = Math.floor(sampleRate * frameLength / clockSpeed); /* TODO: account for this not being an integer by generating a variable number of samples per frame */
 
 	var oversampleRate = 8;
@@ -689,8 +690,8 @@ SoundGenerator = function (opts) {
 
 	var prev_time = performance.now();
 	var skipped = 0, theoretical_skipped = 0;
-	self.fillBuffer = function(buffer_size) {
-		var buffer = new Array(buffer_size);
+	self.fillBuffer = function() {
+		var buffer = new Array(audioBufferSize);
 		var count = 0;
 		var local_skipped = 0;
 		for (var i = 0; i < buffer.length; i++) {
@@ -785,7 +786,7 @@ SoundGenerator = function (opts) {
 			theoretical_skipped += fill_skipped;
 			if (fill_skipped)
 			{
-			  var adj_fill_skipped = Math.min(fill_skipped, 1024);
+			  var adj_fill_skipped = Math.min(fill_skipped, audioBufferSize);
 /*				if (debugPrint) {
 					console.log("fill_skipped = " + fill_skipped + ", adj_fill_skipped = " + adj_fill_skipped);
 				}*/

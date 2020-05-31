@@ -13,15 +13,21 @@ JSSpeccy.SoundGenerator = function (opts) {
 		model: opts.model,
 		backendSampleRate: backend.sampleRate,
 		backendEnabled: backend.isEnabled,
+		backendAudioBufferSize: backend.audioBufferSize,
 		debugPrint: opts.debugPrint	
 	}]]);
 
 	var fillBuffer = function(buffer) {
-		for (var i = 0; i < buffer.length; i++)
-		{
+		const count = Math.min(buffer.length, wrapper_buffer.length);
+		var i = 0;
+		for (; i < count; i++) {
 			buffer[i] = wrapper_buffer[i];
 		}
-		snd_worker.postMessage(["fillBuffer", [backend.audioBufferSize]]);
+		const fill_val = buffer[Math.max(0, count - 1)];
+		for (; i < buffer.length; i++) {
+			buffer[i] = fill_val;
+		}
+		snd_worker.postMessage(["fillBuffer", []]);
 		wrapper_buffer = wrapper_buffer.slice(buffer.length);
 	}
 	backend.setSource(fillBuffer);
@@ -109,14 +115,14 @@ JSSpeccy.SoundBackend = function (opts) {
 
 		//Web audio Api changed createJavaScriptNode to CreateScriptProcessor - we support both
 		if (audioContext.createScriptProcessor != null) {
-			audioNode = audioContext.createScriptProcessor(buffer_size, 1, 1);
+			audioNode = audioContext.createScriptProcessor(buffer_size, 0, 1);
 			if (debugPrint) {
 				console.log("audioNode is ScriptProcessorNode");
 			}
 		}
 		else
 		if (audioContext.createJavaScriptNode != null) {
-			audioNode = audioContext.createJavaScriptNode(buffer_size, 1, 1);
+			audioNode = audioContext.createJavaScriptNode(buffer_size, 0, 1);
 			if (debugPrint) {
 				console.log("audioNode is JavaScriptNode");
 			}
@@ -124,8 +130,7 @@ JSSpeccy.SoundBackend = function (opts) {
 
 		if (audioNode != null) {
 			onAudioProcess = function (e) {
-				var buffer = e.outputBuffer.getChannelData(0);
-				fillBuffer(buffer);
+				fillBuffer(e.outputBuffer.getChannelData(0));
 			};
 
 			self.isEnabled = false;
