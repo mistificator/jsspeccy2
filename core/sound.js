@@ -35,16 +35,16 @@
 //
 // *******************************************************************************/
 
-JSSpeccy.SoundGenerator = function (opts) {
+SoundGenerator = function (opts) {
 	var self = {};
 	
 	opts = opts || {};
 
-	var debugPrint = opts.debugPrint;
+	var debugPrint = opts.debugPrint || false;
 	var clockSpeed = opts.model.clockSpeed;
 	var frameLength = opts.model.frameLength;
-	var backend = opts.soundBackend;
-	var sampleRate = backend.sampleRate;
+	var sampleRate = opts.backendSampleRate || 44100;
+	var is_enabled = opts.backendEnabled || false;
 	var samplesPerFrame = Math.floor(sampleRate * frameLength / clockSpeed); /* TODO: account for this not being an integer by generating a variable number of samples per frame */
 
 	var oversampleRate = 8;
@@ -57,14 +57,10 @@ JSSpeccy.SoundGenerator = function (opts) {
 
 	var frameCount = 0;
 
-	var audio = null;
-	var audioContext = null;
-	var audioNode = null;
-
 	var WCount = 0;
 	var lCounter = 0;
 
-	var aySoundData = new Array;
+	var aySoundData = new Array();
 	var soundDataAyFrameBytes = 0;
 
 	var ayRegSelected = 0;
@@ -693,14 +689,15 @@ JSSpeccy.SoundGenerator = function (opts) {
 
 	var prev_time = performance.now();
 	var skipped = 0, theoretical_skipped = 0;
-	var fillBuffer = function(buffer) {
-		var n = 0;
+	self.fillBuffer = function(buffer_size) {
+		var buffer = new Array(buffer_size);
+		var count = 0;
 		var local_skipped = 0;
 		for (var i = 0; i < buffer.length; i++) {
 			var avg = 0;
 			var j = 0;
-			for (; j < oversampleRate && n < soundData.length; j++, n++) {
-				avg += soundData[n]; // repeatedly run over array size, wtf?
+			for (; j < oversampleRate && count < soundData.length; j++, count++) {
+				avg += soundData[count]; // repeatedly run over array size, wtf?
 			}
 			avg = avg / (j || 1);
 			avg = avg * 0.7;
@@ -709,13 +706,13 @@ JSSpeccy.SoundGenerator = function (opts) {
 			buffer[i] = avg;
 		}
 
-		n = buffer.length * oversampleRate;
+		count = buffer.length * oversampleRate;
 
-		if (n >= soundData.length) {
-			skipped += n - soundData.length;
+		if (count >= soundData.length) {
+			skipped += count - soundData.length;
 			soundData = new Array();
 		} else {
-			soundData.splice(0, n);
+			soundData.splice(0, count);
 		}
 
 		if (buffer.length >= aySoundData.length) {
@@ -733,11 +730,11 @@ JSSpeccy.SoundGenerator = function (opts) {
 				theoretical_skipped = 0;
 			}
 		}
+		return buffer;
 	}
-	backend.setSource(fillBuffer);
 
 	function handleAySound(size) {
-		if (!backend.isEnabled)
+		if (!is_enabled)
 			return;
 		size = Math.floor(size);
 		var start_index = aySoundData.length;
@@ -765,7 +762,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 	}
 
 	self.createSoundData = function (size, val) {
-		if (!backend.isEnabled)
+		if (!is_enabled)
 			return;
 		size = Math.floor(size);
 		if (size > 0) {
@@ -805,8 +802,9 @@ JSSpeccy.SoundGenerator = function (opts) {
 		soundDataAyFrameBytes = 0;
 		if (frameCount++ < 2)
 			return;
-		if (backend.isEnabled) {
-			backend.notifyReady(soundData.length / oversampleRate);
+		
+		if (is_enabled) {
+			postMessage(["notifyReady", soundData.length / oversampleRate]);
 		}
 
 	}
@@ -834,121 +832,26 @@ JSSpeccy.SoundGenerator = function (opts) {
 		AY8912_init(clockSpeed / 2, sampleRate, 8);
 	}
 
+	self.setEnabled = function(state) {
+		is_enabled = state;
+	}
+	
 	return self;
 };
 
-JSSpeccy.SoundBackend = function (opts) {
-	var self = {};
-	
-	opts = opts || {};
-	var debugPrint = opts.debugPrint;
-	var buffer_size = opts.audioBufferSize || 1024;
-
-	/* Regardless of the underlying implementation, an instance of SoundBackend exposes the API:
-	sampleRate: sample rate required by this backend
-	isEnabled: whether audio is currently enabled
-	setSource(fn): specify a function fn to be called whenever we want to receive audio data.
-	fn is passed a buffer object to be filled
-	setAudioState(state): if state == true, enable audio; if state == false, disable.
-	Return new state (may not match the passed in state - e.g. if sound is unavailable,
-	will always return false)
-	notifyReady(dataLength): tell the backend that there is dataLength samples of audio data
-	ready to be received via the callback we set with setSource. Ignored for event-based
-	backends (= Web Audio) that trigger the callback whenever they feel like it...
-	 */
-
-	self.sampleRate = 44100;
-
-	var AudioContext = window.AudioContext || window.webkitAudioContext;
-	var fillBuffer = null;
-
-	if (AudioContext) {
-		/* Use Web Audio API as backend */
-		var audioContext = new AudioContext();
-		audioContext.suspend();
-		var audioNode = null;
-
-		//Web audio Api changed createJavaScriptNode to CreateScriptProcessor - we support both
-		if (audioContext.createScriptProcessor != null) {
-			audioNode = audioContext.createScriptProcessor(buffer_size, 1, 1);
-			if (debugPrint) {
-				console.log("audioNode is ScriptProcessorNode");
-			}
-		}
-		else
-		if (audioContext.createJavaScriptNode != null) {
-			audioNode = audioContext.createJavaScriptNode(buffer_size, 1, 1);
-			if (debugPrint) {
-				console.log("audioNode is JavaScriptNode");
-			}
-		} 
-
-		if (audioNode != null) {
-			onAudioProcess = function (e) {
-				var buffer = e.outputBuffer.getChannelData(0);
-				fillBuffer(buffer);
-			};
-
-			self.isEnabled = false;
-			self.setSource = function (fillBufferCallback) {
-				fillBuffer = fillBufferCallback;
-				if (self.isEnabled) {
-					audioNode.onaudioprocess = onAudioProcess;
-					audioNode.connect(audioContext.destination);
-				};
-			}
-			self.setAudioState = function (state) {
-				if (state) {
-					/* enable */
-					self.isEnabled = true;
-					if (fillBuffer) {
-						audioNode.onaudioprocess = onAudioProcess;
-						audioNode.connect(audioContext.destination);
-					}
-					if (debugPrint) {
-						console.log("Sound enabled");
-					}
-					return true;
-				} else {
-					/* disable */
-					self.isEnabled = false;
-					audioNode.onaudioprocess = null;
-					audioNode.disconnect(0);
-					if (debugPrint) {
-						console.log("Sound disabled");
-					}
-					return false;
-				}
-			}
-			self.notifyReady = function (dataLength) {
-				/* do nothing */
-			}
-
-			document.querySelector("*").addEventListener("click", function () {
-				audioContext.resume().then(() => {
-					if (debugPrint) {
-						console.log("Playback resumed successfully");
-					}
-				});
-			});
-			
-			return self;
+onmessage = function(e) {
+	var makeCall = function(e) {
+		var args = e.data[1];
+		return self.snd_gen[e.data[0]].apply(null, args);
+	}
+	if (e.data[0] === "SoundGenerator") {		
+		var args = e.data[1];
+		self.snd_gen = SoundGenerator.apply(null, args);
+	}
+	else {
+		var out = makeCall(e);
+		if (out) {
+			postMessage([e.data[0], out]);
 		}
 	}
-
-	/* use dummy no-sound backend. We still keep a handle to the callback function and
-	call it on demand, so that it's not filling up a buffer indefinitely */
-	self.isEnabled = false;
-	self.setAudioState = function (state) {
-		return false;
-	}
-	self.setSource = function (fn) {
-		fillBuffer = fn;
-	};
-	self.notifyReady = function (dataLength) {
-		var buffer = new Float32Array(dataLength);
-		fillBuffer(buffer);
-	}
-	return self;
-
 }
