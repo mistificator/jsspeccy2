@@ -693,7 +693,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 
 	var prev_time = performance.now();
 	var skipped = 0, theoretical_skipped = 0;
-	function fillBuffer(buffer) {
+	var fillBuffer = function(buffer) {
 		var n = 0;
 		var local_skipped = 0;
 		for (var i = 0; i < buffer.length; i++) {
@@ -857,6 +857,8 @@ JSSpeccy.SoundBackend = function (opts) {
 	backends (= Web Audio) that trigger the callback whenever they feel like it...
 	 */
 
+	self.sampleRate = 44100;
+
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var fillBuffer = null;
 
@@ -881,7 +883,6 @@ JSSpeccy.SoundBackend = function (opts) {
 			}
 		} 
 
-		self.sampleRate = 44100;
 		if (audioNode != null) {
 			onAudioProcess = function (e) {
 				var buffer = e.outputBuffer.getChannelData(0);
@@ -930,34 +931,7 @@ JSSpeccy.SoundBackend = function (opts) {
 					}
 				});
 			});
-
-			return self;
-		}
-	}
-
-	if (typeof(Audio) != 'undefined') {
-		var audio = new Audio();
-		if (audio.mozSetup) {
-			/* Use Audio Data API as backend */
-			audio.mozSetup(1, self.sampleRate);
-
-			self.isEnabled = false;
-			self.setAudioState = function (state) {
-				self.isEnabled = state;
-				return state;
-			}
-
-			self.setSource = function (fn) {
-				fillBuffer = fn;
-			}
-			self.notifyReady = function (dataLength) {
-				var buffer = new Float32Array(dataLength);
-				fillBuffer(buffer);
-				if (self.isEnabled) {
-					var written = audio.mozWriteAudio(buffer);
-				}
-			}
-
+			
 			return self;
 		}
 	}
