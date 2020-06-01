@@ -1,5 +1,11 @@
 JSSpeccy.SoundGenerator = function (opts) {
 	var snd_worker = new Worker("sound.min.js");
+	var queue = [];
+	var postMessage = function(msg) {
+		queue.push(msg);
+	}
+
+	
 	var wrapper_buffer = [];
 	var ayRegSelected = 0;
 	var AY8912_Regs = new Int32Array(16); // fake duplicate of AY8912_Regs of sound.js 
@@ -8,7 +14,8 @@ JSSpeccy.SoundGenerator = function (opts) {
 	}
 	
 	var backend = opts.soundBackend;
-	snd_worker.postMessage(["SoundGenerator", 
+
+	postMessage(["SoundGenerator", 
 	[{
 		model: opts.model,
 		backendSampleRate: backend.sampleRate,
@@ -27,35 +34,42 @@ JSSpeccy.SoundGenerator = function (opts) {
 		for (; i < buffer.length; i++) {
 			buffer[i] = fill_val;
 		}
-		snd_worker.postMessage(["fillBuffer", []]);
+		postMessage(["fillBuffer", []]);
 		wrapper_buffer = wrapper_buffer.slice(buffer.length);
 	}
 	backend.setSource(fillBuffer);
 
 	self.updateBuzzer = function (val, currentTstates) {
-		snd_worker.postMessage(["updateBuzzer", Array.prototype.slice.call(arguments, 0)]);
+		postMessage(["updateBuzzer", Array.prototype.slice.call(arguments, 0)]);
 	}
 	self.createSoundData = function (size, val) {
-		snd_worker.postMessage(["createSoundData", Array.prototype.slice.call(arguments, 0)]);
+		postMessage(["createSoundData", Array.prototype.slice.call(arguments, 0)]);
 	}
 	self.endFrame = function () {
-		snd_worker.postMessage(["endFrame", []]);
+		postMessage(["endFrame", []]);
+		if (queue.length > 0) {
+			snd_worker.postMessage(queue);
+			queue = [];
+		}
 	}
 	self.selectSoundRegister = function (reg) {
+		if (ayRegSelected === reg) {
+			return;
+		}
 		ayRegSelected = reg;
-		snd_worker.postMessage(["selectSoundRegister", Array.prototype.slice.call(arguments, 0)]);
+		postMessage(["selectSoundRegister", Array.prototype.slice.call(arguments, 0)]);
 	}
 	self.writeSoundRegister = function (val, currentTstates) {
 		AY8912_Regs[ayRegSelected] = val;
-		snd_worker.postMessage(["writeSoundRegister", Array.prototype.slice.call(arguments, 0)]);
+		postMessage(["writeSoundRegister", Array.prototype.slice.call(arguments, 0)]);
 	}
 	self.readSoundRegister = function () {
-		snd_worker.postMessage(["readSoundRegister", []]);
+		postMessage(["readSoundRegister", []]);
 		return AY8912_Regs[ayRegSelected];
 	}
 	self.reset = function () {
 		wrapper_buffer = [];
-		snd_worker.postMessage(["reset", []]);
+		postMessage(["reset", []]);
 	}
 	
 	var prev_state = false;
@@ -71,10 +85,10 @@ JSSpeccy.SoundGenerator = function (opts) {
 				break;
 		};
 		if (prev_state != backend.isEnabled) {
-			snd_worker.postMessage(["setEnabled", [backend.isEnabled]]);
+			postMessage(["setEnabled", [backend.isEnabled]]);
 			prev_state = backend.isEnabled;
 			if (backend.isEnabled) {
-				snd_worker.postMessage(["fillBuffer", [backend.audioBufferSize]]); // force buffer init
+				postMessage(["fillBuffer", [backend.audioBufferSize]]); // force buffer init
 			}
 		}
 	}

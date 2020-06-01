@@ -750,16 +750,15 @@ SoundGenerator = function (opts) {
 	}
 
 	self.updateBuzzer = function (val, currentTstates) {
-		if (val == 0)
+		if (val == 0) {
 			val = -1;
-
-		if (buzzer_val != val) {
-			var sound_size = (currentTstates - lastaudio) * sampleRate * oversampleRate / clockSpeed;
-			self.createSoundData(sound_size, buzzer_val);
-
-			buzzer_val = val;
-			lastaudio = currentTstates;
 		}
+
+		var sound_size = (currentTstates - lastaudio) * sampleRate * oversampleRate / clockSpeed;
+		self.createSoundData(sound_size, buzzer_val);
+
+		buzzer_val = val;
+		lastaudio = currentTstates;
 	}
 
 	self.createSoundData = function (size, val) {
@@ -841,18 +840,29 @@ SoundGenerator = function (opts) {
 };
 
 onmessage = function(e) {
-	var makeCall = function(e) {
-		var args = e.data[1];
-		return self.snd_gen[e.data[0]].apply(null, args);
-	}
-	if (e.data[0] === "SoundGenerator") {		
-		var args = e.data[1];
-		self.snd_gen = SoundGenerator.apply(null, args);
-	}
-	else {
-		var out = makeCall(e);
-		if (out) {
-			postMessage([e.data[0], out]);
+	if (self.opts && self.opts.debugPrint) {
+		var time = performance.now();
+		self.commands_count = (self.commands_count || 0) + e.data.length; 
+		self.prev_time = self.prev_time || time;
+		if (time - self.prev_time > 5000) {
+			console.log("Sound worker received ", self.commands_count, " AY8912 commands, ", (1000.0 * self.commands_count / (time - self.prev_time)).toFixed(2), " commands per sec");
+			self.prev_time = time;
+			self.commands_count = 0;
 		}
+	}
+	for (var msg of e.data) {
+		var makeCall = function(msg) {
+			return self.snd_gen[msg[0]].apply(null, msg[1]);
+		}
+		if (msg[0] === "SoundGenerator") {		
+			self.snd_gen = SoundGenerator.apply(null, msg[1]);
+			self.opts = msg[1][0];
+		}
+		else {
+			var out = makeCall(msg);
+			if (out) {
+				postMessage([msg[0], out]);
+			}
+		}		
 	}
 }
