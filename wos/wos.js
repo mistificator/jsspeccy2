@@ -144,10 +144,13 @@ function WoS() {
 					opt.attr("href", links[i]);
 					$(links_container).append(opt);
 				}
+				$(links_container).trigger("change");
 			});	
 		});
 		
-		$(catalogue_container).trigger("change");
+		if (count == 0) {
+			$(catalogue_container).trigger("change");
+		}
 	}
 	
 	return self;

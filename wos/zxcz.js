@@ -26,12 +26,9 @@ function ZxCz() {
 		var html = $.parseHTML(str);
 		var out = [];
 		out.push({page: "1", catalogue_url: page_1});
-		$(".paging", html).each(function(i, table) {
-			for (var a of $("a", table)) {
-				out.push({page: $(a).text().trim(), catalogue_url: self.cors_proxy + self.zxcz_base + "/" + encode($(a).attr("href"))});
-			}
-			return false;
-		});
+		for (var a of $("a", $(".paging", html).first())) {
+			out.push({page: $(a).text().trim(), catalogue_url: self.cors_proxy + self.zxcz_base + "/" + encode($(a).attr("href"))});
+		}
 		return new Promise((resolve) => { resolve(out); });
 	}
 	
@@ -102,9 +99,12 @@ function ZxCz() {
 			opt.text(tape_url.slice(tape_url.lastIndexOf("/") + 1));
 			opt.attr("href", tape_url);
 			$(links_container).append(opt);
+			$(links_container).trigger("change");
 		});
 		
-		$(catalogue_container).trigger("change");
+		if (count == 0) {
+			$(catalogue_container).trigger("change");
+		}
 	}
 	
 	return self;

@@ -371,14 +371,26 @@ function JSSpeccy(container, opts) {
     }
    , Math.ceil(1000.0 / opts.cpuFpsLimit));  
 
+	var load_on_start = "";
+	self.setLoadUrlOnStart = function(url) {
+		load_on_start = self.isRunning ? "" : url;
+	}
+	 
 	var saved_audio_state = false;
 	self.onStart = Event();
 	self.start = function() {
-		if (self.isRunning) return;
+		if (self.isRunning) {
+			load_on_start = "";
+			return;
+		}
 		self.isRunning = true;
 		updateViewportIcon();
 		self.onStart.trigger();
 		self.setAudioState(saved_audio_state);
+		if (load_on_start.length > 0) {
+			self.loadFromUrl(load_on_start, {"autoload": true, 'debugPrint': opts.debugPrint});
+		}
+		load_on_start = "";
 	};
 	self.onStop = Event();
 	self.stop = function() {
@@ -389,6 +401,7 @@ function JSSpeccy(container, opts) {
 		self.isRunning = false;
 		updateViewportIcon();
 		self.onStop.trigger();
+		load_on_start = "";
 	};
 	self.reset = function() {
 		spectrum.reset();

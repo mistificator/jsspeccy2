@@ -96,9 +96,17 @@ JSSpeccy.UI = function(opts) {
 	});
 
 	$('button.run', toolbar).click(function() {
-		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, 'debugPrint': opts.debugPrint});
 		hidePanels();
 		controller.start();
+		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, 'debugPrint': opts.debugPrint});
+	});
+	
+	$("#links").change(function() {
+		hidePanels();
+		if (!controller.isRunning) {
+			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
+			urlField.val($("#links").children(":selected").attr("href"));	
+		}
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
@@ -232,8 +240,8 @@ JSSpeccy.UI = function(opts) {
 	openFilePanel.find('button.open-url').click(function() {
 		var url = urlField.val();
 		if (url !== '') {
-			controller.loadFromUrl(url, {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
 			hidePanels();
+			controller.loadFromUrl(url, {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
 		}
 	});
 	
