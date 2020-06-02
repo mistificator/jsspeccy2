@@ -3,6 +3,7 @@ package com.jsspeccy.webosjsspeccy;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
@@ -21,7 +22,15 @@ public class MainActivity extends Activity {
         mWebView.clearCache(true);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl("https://mistificator.github.io/jsspeccy2-webos/dist/index.html?always_fullscreen=on&audio_buffer=16384");
+        mWebView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+        mWebView.setLongClickable(false);
+        mWebView.setHapticFeedbackEnabled(false);
+        mWebView.loadUrl("https://mistificator.github.io/jsspeccy2-webos/dist/webos.html");
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
