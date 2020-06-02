@@ -502,8 +502,14 @@ SoundGenerator = function (opts) {
 		AY_OutNoise = (AY8912_OutputN | AY8912_Regs[AY_ENABLE]);
 	}
 
+	const rnd_count = 1024;
+	var rnd_i = 0;
+	var pseudo_rnd = new Array(rnd_count);
+	for (var i = 0; i < rnd_count; i++) {
+		pseudo_rnd[i] = Math.round(Math.random() * 510);
+	}
+	  
 	function RenderSample() {
-
 		var VolA,
 		VolB,
 		VolC,
@@ -635,7 +641,7 @@ SoundGenerator = function (opts) {
 					AY8912_CountN = AY8912_CountN - AY_NextEvent;
 			if (AY8912_CountN <= 0) {
 				//Is noise output going to change?
-				AY8912_OutputN = Math.round(Math.random() * 510);
+				AY8912_OutputN = pseudo_rnd[rnd_i = ((rnd_i + 1) % rnd_count)];
 				AY_OutNoise = (AY8912_OutputN | AY8912_Regs[AY_ENABLE]);
 				AY8912_CountN = AY8912_CountN + AY8912_PeriodN;
 			}
@@ -696,7 +702,7 @@ SoundGenerator = function (opts) {
 		var buffer = new Array(audioBufferSize);
 		var count = 0;
 		var local_skipped = 0;
-		for (var i = 0; i < buffer.length; i++) {
+		for (var i = 0; i < audioBufferSize; i++) {
 			var avg = 0;
 			var j = 0;
 			for (; j < oversampleRate && count < soundDataLength; j++, count++) {
@@ -709,7 +715,7 @@ SoundGenerator = function (opts) {
 			buffer[i] = avg;
 		}
 
-		count = buffer.length * oversampleRate;
+		count = audioBufferSize * oversampleRate;
 
 		if (count >= soundDataLength) {
 			skipped += count - soundDataLength;
@@ -722,13 +728,13 @@ SoundGenerator = function (opts) {
 			}
 		}
 
-		if (buffer.length >= aySoundDataLength) {
+		if (audioBufferSize >= aySoundDataLength) {
 			aySoundDataLength = 0;
 		} else {
-			aySoundDataLength -= buffer.length;
+			aySoundDataLength -= audioBufferSize;
 			for (var i = 0; i < aySoundDataLength; i++)
 			{
-				aySoundData[i] = aySoundData[i + buffer.length];
+				aySoundData[i] = aySoundData[i + audioBufferSize];
 			}			
 		}
 
@@ -750,7 +756,7 @@ SoundGenerator = function (opts) {
 		size = Math.floor(size);
 		var start_index = aySoundDataLength;
 		if (aySoundData.length < aySoundDataLength + size) {
-			aySoundData.length += size;
+			aySoundData.length += Math.max(65536, size);
 		}
 		aySoundDataLength += size;
 		for (var i = start_index; i < aySoundDataLength; i++, soundDataAyFrameBytes++, WCount++) {
@@ -779,12 +785,12 @@ SoundGenerator = function (opts) {
 			return;
 		size = Math.floor(size);
 		if (size > 0) {
-			var start_index = soundDataLength;
-			if (soundData.length < soundDataLength + size) {
-				soundData.length += size;
+			var newDataLength = soundDataLength + size;
+			if (soundData.length < newDataLength) {
+				soundData.length += Math.max(65536, size);
 			}
-			soundDataLength += size;
-			soundData.fill(val, start_index, soundDataLength);
+			soundData.fill(val, soundDataLength, newDataLength);
+			soundDataLength = newDataLength;
 			soundDataFrameBytes += size;
 		}
 	}

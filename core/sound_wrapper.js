@@ -2,6 +2,15 @@ JSSpeccy.SoundGenerator = function (opts) {
 	var snd_worker = new Worker("sound.min.js");
 	var queue = [];
 	var postMessage = function(msg) {
+	/*
+		if (msg[0] === "updateBuzzer" && queue.length > 0) {
+			var q_msg = queue[queue.length - 1];
+			if (q_msg[0] === msg[0] && q_msg[1][0] === msg[1][0]) {
+				queue[queue.length - 1][1][1] = msg[1][1];
+				return;
+			}
+		}
+		*/
 		queue.push(msg);
 	}
 
