@@ -6,6 +6,7 @@ DIST_FILES=\
 	build\js-inflate.min.js \
 	build\wos.min.js \
 	build\zxcz.min.js \
+	build\sound.min.js \
 	lib\jdataview.js \
 	lib\jquery-1.12.4.min.js \
 	README
@@ -45,6 +46,9 @@ build/wos.min.js: wos/wos.js
 
 build/zxcz.min.js: wos/zxcz.js
 	$(NPX) minify wos/zxcz.js > build/zxcz.min.js
+
+build/sound.min.js: core/sound.js
+	$(NPX) minify core/sound.js > build/sound.min.js
 	
 CORE_JS_FILES=\
 	core/jsspeccy.js \
@@ -52,6 +56,7 @@ CORE_JS_FILES=\
 	core/io_bus.js \
 	core/keyboard.js \
 	core/memory.js \
+	core/sound_wrapper.js \
 	core/sound.js \
 	build/roms.js \
 	build/autoloaders.js \
@@ -66,7 +71,7 @@ CORE_JS_FILES=\
 build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 	$(MKDIR) build
 	$(NPX) google-closure-compiler \
-		--js=core/jsspeccy.js --js=core/display.js --js=core/io_bus.js --js=core/keyboard.js --js=core/sound.js \
+		--js=core/jsspeccy.js --js=core/display.js --js=core/io_bus.js --js=core/keyboard.js --js=core/sound_wrapper.js \
 		--js=core/memory.js --js=build/roms.js --js=build/autoloaders.js --js=core/sna_file.js --js=core/spectrum.js \
 		--js=core/tap_file.js --js=core/tzx_file.js --js=core/viewport.js --js=build/z80.js \
 		--js=core/z80_file.js \

@@ -203,7 +203,7 @@
     text-align: left;
     bottom: 0px;
     left: 45%;
-    opacity: 0.4;
+    opacity: 0.5;
 }
 
 .jsspeccy #typer-div:hover, .jsspeccy #typer-div:focus-within  {
@@ -247,6 +247,7 @@
   color: #FFFFFF;
 	background-color: #808080;
 	border: none;
+	opacity: 0.7;
 }
 
 .jsspeccy 	.pad_arrow:active, .jsspeccy .pad_fire:active, .jsspeccy .pad_action:active {
