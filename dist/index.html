@@ -38,8 +38,8 @@
 					cpuFpsLimit: 50,
 					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
 					audioBufferSize: $.urlPar("audio_buffer") || "1024",
-					panelYWidth: $(".jsspeccy .toolbar button").outerHeight() * 1.05, // wtf?
-					border: $.urlPar("border") || "1" // default is 4
+					panelYWidth: Math.floor($(".jsspeccy .toolbar button").outerHeight() * 1.05), // wtf?
+					border: $.urlPar("border") || "1" // ZX Spectrum default is 4
 				};
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", opts);
 				var ui = JSSpeccy.UI({

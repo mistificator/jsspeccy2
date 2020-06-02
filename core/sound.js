@@ -774,13 +774,13 @@ SoundGenerator = function (opts) {
 		}
 
 		var sound_size = (currentTstates - lastaudio) * sampleRate * oversampleRate / clockSpeed;
-		self.createSoundData(sound_size, buzzer_val);
+		createSoundData(sound_size, buzzer_val);
 
 		buzzer_val = val;
 		lastaudio = currentTstates;
 	}
 
-	self.createSoundData = function (size, val) {
+	var createSoundData = function (size, val) {
 		if (!is_enabled)
 			return;
 		size = Math.floor(size);
@@ -801,7 +801,7 @@ SoundGenerator = function (opts) {
 			pad_val = buzzer_val;
 
 		var fill_skipped = 0;
-		const protect_buffer_underrun = 0.1 * sampleRate * oversampleRate;
+		const protect_buffer_underrun = 128 * Math.sqrt(audioBufferSize) * oversampleRate; //0.1 * sampleRate * oversampleRate; // 4 * audioBufferSize * oversampleRate
 		if (soundDataLength < protect_buffer_underrun) {
 			fill_skipped = protect_buffer_underrun - soundDataLength;
 			if (fill_skipped)
@@ -811,7 +811,7 @@ SoundGenerator = function (opts) {
 				fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;
 			}
 		}
-		self.createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
+		createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
 
 		fill_skipped = 0;
 		if (aySoundDataLength * oversampleRate < protect_buffer_underrun) {
