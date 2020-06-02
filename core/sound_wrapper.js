@@ -1,10 +1,21 @@
 JSSpeccy.SoundGenerator = function (opts) {
+	var backend = opts.soundBackend;
 	var snd_worker = new Worker("sound.min.js");
 	var queue = [];
-	var postMessage = function(msg) {
+	const forcedPostMessage = true;
+	var postMessage = function(msg, forced) {
+		if (!backend.isEnabled && (forced || false) !== forcedPostMessage) {
+			return;
+		}
+		if (msg[0] === "updateBuzzer" && queue.length > 0) {
+			var q_msg = queue[queue.length - 1];
+			if (q_msg[0] === msg[0] && q_msg[1][0] === msg[1][0]) {
+				q_msg = msg;
+				return;
+			}
+		}
 		queue.push(msg);
 	}
-
 	
 	var wrapper_buffer = [];
 	var ayRegSelected = 0;
@@ -13,8 +24,6 @@ JSSpeccy.SoundGenerator = function (opts) {
 		reg = 0;
 	}
 	
-	var backend = opts.soundBackend;
-
 	postMessage(["SoundGenerator", 
 	[{
 		model: opts.model,
@@ -22,7 +31,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 		backendEnabled: backend.isEnabled,
 		backendAudioBufferSize: backend.audioBufferSize,
 		debugPrint: opts.debugPrint	
-	}]]);
+	}]], forcedPostMessage);
 
 	var fillBuffer = function(buffer) {
 		const count = Math.min(buffer.length, wrapper_buffer.length);
@@ -42,12 +51,23 @@ JSSpeccy.SoundGenerator = function (opts) {
 	self.updateBuzzer = function (val, currentTstates) {
 		postMessage(["updateBuzzer", Array.prototype.slice.call(arguments, 0)]);
 	}
-	self.createSoundData = function (size, val) {
-		postMessage(["createSoundData", Array.prototype.slice.call(arguments, 0)]);
-	}
+	
+	var prev_state = false;
 	self.endFrame = function () {
+		if (prev_state != backend.isEnabled) {
+			postMessage(["setEnabled", [backend.isEnabled]], forcedPostMessage);
+			prev_state = backend.isEnabled;
+			if (backend.isEnabled) {
+				postMessage(["fillBuffer", [backend.audioBufferSize]]); // force buffer init
+			}
+			else {
+				wrapper_buffer = [];
+				queue = [];
+			}
+		}		
+
 		postMessage(["endFrame", []]);
-		if (queue.length > 0) {
+		if (backend.isEnabled && queue.length > 0) {
 			snd_worker.postMessage(queue);
 			queue = [];
 		}
@@ -69,10 +89,10 @@ JSSpeccy.SoundGenerator = function (opts) {
 	}
 	self.reset = function () {
 		wrapper_buffer = [];
+		queue = [];
 		postMessage(["reset", []]);
 	}
 	
-	var prev_state = false;
 	snd_worker.onmessage = function(e) {
 		switch (e.data[0]) {
 			case "fillBuffer":
@@ -84,13 +104,6 @@ JSSpeccy.SoundGenerator = function (opts) {
 			case "notifyReady":
 				break;
 		};
-		if (prev_state != backend.isEnabled) {
-			postMessage(["setEnabled", [backend.isEnabled]]);
-			prev_state = backend.isEnabled;
-			if (backend.isEnabled) {
-				postMessage(["fillBuffer", [backend.audioBufferSize]]); // force buffer init
-			}
-		}
 	}
 	
 	return self;

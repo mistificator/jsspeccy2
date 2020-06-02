@@ -52,6 +52,7 @@ SoundGenerator = function (opts) {
 	var buzzer_val = 0;
 
 	var soundData = new Array();
+	var soundDataLength = 0;
 	var soundDataFrameBytes = 0;
 
 	var lastaudio = 0;
@@ -62,6 +63,7 @@ SoundGenerator = function (opts) {
 	var lCounter = 0;
 
 	var aySoundData = new Array();
+	var aySoundDataLength = 0;
 	var soundDataAyFrameBytes = 0;
 
 	var ayRegSelected = 0;
@@ -500,8 +502,14 @@ SoundGenerator = function (opts) {
 		AY_OutNoise = (AY8912_OutputN | AY8912_Regs[AY_ENABLE]);
 	}
 
+	const rnd_count = 1024;
+	var rnd_i = 0;
+	var pseudo_rnd = new Array(rnd_count);
+	for (var i = 0; i < rnd_count; i++) {
+		pseudo_rnd[i] = Math.round(Math.random() * 510);
+	}
+	  
 	function RenderSample() {
-
 		var VolA,
 		VolB,
 		VolC,
@@ -633,7 +641,7 @@ SoundGenerator = function (opts) {
 					AY8912_CountN = AY8912_CountN - AY_NextEvent;
 			if (AY8912_CountN <= 0) {
 				//Is noise output going to change?
-				AY8912_OutputN = Math.round(Math.random() * 510);
+				AY8912_OutputN = pseudo_rnd[rnd_i = ((rnd_i + 1) % rnd_count)];
 				AY_OutNoise = (AY8912_OutputN | AY8912_Regs[AY_ENABLE]);
 				AY8912_CountN = AY8912_CountN + AY8912_PeriodN;
 			}
@@ -694,10 +702,10 @@ SoundGenerator = function (opts) {
 		var buffer = new Array(audioBufferSize);
 		var count = 0;
 		var local_skipped = 0;
-		for (var i = 0; i < buffer.length; i++) {
+		for (var i = 0; i < audioBufferSize; i++) {
 			var avg = 0;
 			var j = 0;
-			for (; j < oversampleRate && count < soundData.length; j++, count++) {
+			for (; j < oversampleRate && count < soundDataLength; j++, count++) {
 				avg += soundData[count]; // repeatedly run over array size, wtf?
 			}
 			avg = avg / (j || 1);
@@ -707,25 +715,33 @@ SoundGenerator = function (opts) {
 			buffer[i] = avg;
 		}
 
-		count = buffer.length * oversampleRate;
+		count = audioBufferSize * oversampleRate;
 
-		if (count >= soundData.length) {
-			skipped += count - soundData.length;
-			soundData = new Array();
+		if (count >= soundDataLength) {
+			skipped += count - soundDataLength;
+			soundDataLength = 0;
 		} else {
-			soundData.splice(0, count);
+			soundDataLength -= count;
+			for (var i = 0; i < soundDataLength; i++)
+			{
+				soundData[i] = soundData[i + count];
+			}
 		}
 
-		if (buffer.length >= aySoundData.length) {
-			aySoundData = new Array();
+		if (audioBufferSize >= aySoundDataLength) {
+			aySoundDataLength = 0;
 		} else {
-			aySoundData.splice(0, buffer.length);
+			aySoundDataLength -= audioBufferSize;
+			for (var i = 0; i < aySoundDataLength; i++)
+			{
+				aySoundData[i] = aySoundData[i + audioBufferSize];
+			}			
 		}
 
 		if (debugPrint) {
 			var cur_time = performance.now();
 			if (cur_time - prev_time > 5000) {
-				console.log("Sound data tail " + soundData.length + ", skipped " + skipped + ", correction " + theoretical_skipped);
+				console.log("Sound data tail " + (soundDataLength + aySoundDataLength) + ", skipped " + skipped + ", correction " + theoretical_skipped);
 				prev_time = cur_time;
 				skipped = 0;
 				theoretical_skipped = 0;
@@ -738,9 +754,12 @@ SoundGenerator = function (opts) {
 		if (!is_enabled)
 			return;
 		size = Math.floor(size);
-		var start_index = aySoundData.length;
-		aySoundData.length += size;
-		for (var i = start_index; i < aySoundData.length; i++, soundDataAyFrameBytes++, WCount++) {
+		var start_index = aySoundDataLength;
+		if (aySoundData.length < aySoundDataLength + size) {
+			aySoundData.length += Math.max(65536, size);
+		}
+		aySoundDataLength += size;
+		for (var i = start_index; i < aySoundDataLength; i++, soundDataAyFrameBytes++, WCount++) {
 			if (WCount == 25) {
 				AY8912Update_8();
 				WCount = 0;
@@ -755,20 +774,23 @@ SoundGenerator = function (opts) {
 		}
 
 		var sound_size = (currentTstates - lastaudio) * sampleRate * oversampleRate / clockSpeed;
-		self.createSoundData(sound_size, buzzer_val);
+		createSoundData(sound_size, buzzer_val);
 
 		buzzer_val = val;
 		lastaudio = currentTstates;
 	}
 
-	self.createSoundData = function (size, val) {
+	var createSoundData = function (size, val) {
 		if (!is_enabled)
 			return;
 		size = Math.floor(size);
 		if (size > 0) {
-			var start_index = soundData.length;
-			soundData.length += size;
-			soundData.fill(val, start_index);
+			var newDataLength = soundDataLength + size;
+			if (soundData.length < newDataLength) {
+				soundData.length += Math.max(65536, size);
+			}
+			soundData.fill(val, soundDataLength, newDataLength);
+			soundDataLength = newDataLength;
 			soundDataFrameBytes += size;
 		}
 	}
@@ -779,21 +801,28 @@ SoundGenerator = function (opts) {
 			pad_val = buzzer_val;
 
 		var fill_skipped = 0;
-		const protect_buffer_underrun = 0.1 * sampleRate * oversampleRate;
-		if (soundData.length < protect_buffer_underrun) {
-			fill_skipped = protect_buffer_underrun - soundData.length;
-			theoretical_skipped += fill_skipped;
+		const protect_buffer_underrun = 128 * Math.sqrt(audioBufferSize) * oversampleRate; //0.1 * sampleRate * oversampleRate; // 4 * audioBufferSize * oversampleRate
+		if (soundDataLength < protect_buffer_underrun) {
+			fill_skipped = protect_buffer_underrun - soundDataLength;
 			if (fill_skipped)
 			{
-			  var adj_fill_skipped = Math.min(fill_skipped, audioBufferSize);
-/*				if (debugPrint) {
-					console.log("fill_skipped = " + fill_skipped + ", adj_fill_skipped = " + adj_fill_skipped);
-				}*/
-				fill_skipped = adj_fill_skipped;
+				theoretical_skipped += fill_skipped;
+				fill_skipped = Math.min(fill_skipped, audioBufferSize);
+				fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;
 			}
 		}
-		fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;
-		self.createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
+		createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
+
+		fill_skipped = 0;
+		if (aySoundDataLength * oversampleRate < protect_buffer_underrun) {
+			fill_skipped = protect_buffer_underrun - aySoundDataLength * oversampleRate;
+			if (fill_skipped)
+			{
+				theoretical_skipped += fill_skipped;
+				fill_skipped = Math.min(fill_skipped, audioBufferSize);
+				fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;		
+			}
+		}
 		handleAySound(samplesPerFrame - soundDataAyFrameBytes + fill_skipped / oversampleRate);
 
 		lastaudio = 0;
@@ -804,7 +833,7 @@ SoundGenerator = function (opts) {
 			return;
 		
 		if (is_enabled) {
-			postMessage(["notifyReady", soundData.length / oversampleRate]);
+			postMessage(["notifyReady", soundDataLength / oversampleRate]);
 		}
 
 	}
