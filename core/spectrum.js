@@ -56,7 +56,6 @@ JSSpeccy.Spectrum = function(opts) {
 	var startNextFrameWithInterrupt = true;
 
 	self.runFrame = function() {
-
 		display.startFrame();
 		if (startNextFrameWithInterrupt) {
 			processor.requestInterrupt();
@@ -72,7 +71,7 @@ JSSpeccy.Spectrum = function(opts) {
 		processor.reset();
 		memory.reset();
 		sound.reset();
-    	display.reset();
+    display.reset();
 		if (controller.currentTape!=null) controller.currentTape.stopTape();
 	};
   

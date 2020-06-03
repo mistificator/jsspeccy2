@@ -105,8 +105,8 @@ JSSpeccy.UI = function(opts) {
 		hidePanels();
 		if (!controller.isRunning) {
 			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
-			urlField.val($("#links").children(":selected").attr("href"));	
 		}
+		urlField.val($("#links").children(":selected").attr("href"));	
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";

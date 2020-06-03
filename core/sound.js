@@ -48,7 +48,8 @@ SoundGenerator = function (opts) {
 	var audioBufferSize = opts.backendAudioBufferSize || 1024;
 	var samplesPerFrame = Math.floor(sampleRate * frameLength / clockSpeed); /* TODO: account for this not being an integer by generating a variable number of samples per frame */
 
-	var oversampleRate = 8;
+	const oversampleRate = 8;
+	
 	var buzzer_val = 0;
 
 	var soundData = new Array();
@@ -131,6 +132,23 @@ SoundGenerator = function (opts) {
 	AY8912_init(clockSpeed / 2, sampleRate, 8);
 
 	function AY8912_reset() {
+		buzzer_val = 0;
+
+		soundData = new Array();
+		soundDataLength = 0;
+		soundDataFrameBytes = 0;
+
+		lastaudio = 0;
+
+		frameCount = 0;
+
+		WCount = 0;
+		lCounter = 0;
+
+		aySoundData = new Array();
+		aySoundDataLength = 0;
+	  soundDataAyFrameBytes = 0;	
+	
 		AY8912_register_latch = 0;
 		AY8912_OutputA = 0;
 		AY8912_OutputB = 0;

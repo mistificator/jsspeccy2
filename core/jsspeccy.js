@@ -345,12 +345,14 @@ function JSSpeccy(container, opts) {
     cpu_frame_count = 0,
     prev_timestamp = performance.now();  
 
-  var cfps = 0;
+  var cfps = opts.cpuFpsLimit;
+	var last_cfps = cfps;
   self.getCfps = function() {
-    return cfps;
+    return last_cfps;
   };
 
 //  var nativeRequestAnimationFrame = window.requestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
+	const timer_interval = Math.ceil(1000.0 / opts.cpuFpsLimit);
   var timer_id = setInterval(
     function() {
       if (!self.isRunning) return;
@@ -358,8 +360,15 @@ function JSSpeccy(container, opts) {
       var timestamp = performance.now();
       if (cfps <= opts.cpuFpsLimit) {
         cpu_frame_count++;
-        if (timestamp - prev_timestamp > 1000){
-          cfps = 1000.0 * cpu_frame_count / (timestamp - prev_timestamp);
+        if (timestamp - prev_timestamp > 1000 - timer_interval/2) { // - timer_interval/2 is more precise
+					while (cpu_frame_count < opts.cpuFpsLimit) { // make extra frames
+						cpu_frame_count++;
+						spectrum.runFrame();
+					}
+          last_cfps = cfps = 1000.0 * cpu_frame_count / (timestamp - prev_timestamp);
+					if (opts.debugPrint) {
+						console.log("Timer ticks", cpu_frame_count, "time", (timestamp - prev_timestamp).toFixed(2), "CPU FPS", cfps.toFixed(2)); 
+					}
           prev_timestamp = timestamp;
           cpu_frame_count = 0;
         }
@@ -369,7 +378,7 @@ function JSSpeccy(container, opts) {
         cfps--;
       }
     }
-   , Math.ceil(1000.0 / opts.cpuFpsLimit));  
+   , timer_interval);
 
 	var load_on_start = "";
 	self.setLoadUrlOnStart = function(url) {
