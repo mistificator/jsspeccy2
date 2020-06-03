@@ -6,6 +6,7 @@ DIST_FILES=\
 	build\js-inflate.min.js \
 	build\wos.min.js \
 	build\zxcz.min.js \
+	build\rgb2019.min.js \
 	build\sound.min.js \
 	lib\jdataview.js \
 	lib\jquery-1.12.4.min.js \
@@ -46,6 +47,9 @@ build/wos.min.js: wos/wos.js
 
 build/zxcz.min.js: wos/zxcz.js
 	$(NPX) minify wos/zxcz.js > build/zxcz.min.js
+
+build/rgb2019.min.js: wos/rgb2019.js
+	$(NPX) minify wos/rgb2019.js > build/rgb2019.min.js
 
 build/sound.min.js: core/sound.js
 	$(NPX) minify core/sound.js > build/sound.min.js

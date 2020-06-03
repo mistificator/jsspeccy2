@@ -5,13 +5,17 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<script src="wos.js"></script>
 		<script src="zxcz.js"></script>
+		<script src="rgb2019.js"></script>
 		<script>		
 			$(document).ready(function() {
-				var wos = new WoS();
-				wos.init("#catalogue", "#letter", "#index", "#links");
-
 				var zxcz = new ZxCz();
 				zxcz.init("#catalogue", "#letter", "#index", "#links");
+
+				var rgb = new Rgb2019();
+				rgb.init("#catalogue", "#letter", "#index", "#links");
+				
+				var wos = new WoS();
+				wos.init("#catalogue", "#letter", "#index", "#links");
 			});
 		</script>
 	</head>

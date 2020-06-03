@@ -12,6 +12,7 @@
 		<script src="js-inflate.min.js"></script>
 		<script src="wos.min.js"></script>
 		<script src="zxcz.min.js"></script>
+		<script src="rgb2019.min.js"></script>
 	
 <!--		<script src="webOSTVjs-1.2.0/webOSTV.js" charset="utf-8"></script>
  		<script src="webOSTVjs-1.2.0/webOSTV-dev.js" charset="utf-8"></script>  
@@ -37,7 +38,7 @@
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
 					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
-					audioBufferSize: $.urlPar("audio_buffer") || "1024",
+					audioBufferSize: $.urlPar("audio_buffer") || 1024,
 					panelYWidth: Math.floor($(".jsspeccy .toolbar button").outerHeight() * 1.05), // wtf?
 					border: $.urlPar("border") || "1" // ZX Spectrum default is 4
 				};
@@ -49,7 +50,9 @@
 				});
 //				ui.loadPreinstalledGames();
 				var zxcz = new ZxCz();
-				zxcz.init("#catalogue", "#letter", "#index", "#links");            
+				zxcz.init("#catalogue", "#letter", "#index", "#links");   
+				var rgb = new Rgb2019();
+				rgb.init("#catalogue", "#letter", "#index", "#links");
 				var wos = new WoS();
 				wos.init("#catalogue", "#letter", "#index", "#links");            
 			});
