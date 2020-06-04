@@ -255,7 +255,6 @@
 	background-color: #606060;
 }
 
-
 @media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
     .jsspeccy #typer {
         font-size: 300%;
@@ -285,6 +284,13 @@
     .jsspeccy #links {
         width: 96px;
     }
+		.jsspeccy .checkerboard-filter-div {
+			position: absolute;
+			top: 20px;
+		}				
+		.jsspeccy .checkerboard-filter {
+			font-size: 18pt;
+		}				
 		.jsspeccy 	.pad_arrow  {
         font-size: 18pt;
         border-radius: 15px;
@@ -331,6 +337,13 @@
     .jsspeccy #links {
         width: 36px;
     }
+		.jsspeccy .checkerboard-filter-div {
+			position: absolute;
+			top: 10px;
+		}				
+		.jsspeccy .checkerboard-filter {
+			font-size: 9pt;
+		}			
     .jsspeccy 	.pad_arrow  {
         font-size: 14pt;
         border-radius: 10px;
@@ -413,6 +426,13 @@
     .jsspeccy #links {
         width: 30px;
     }
+		.jsspeccy .checkerboard-filter-div {
+			position: absolute;
+			top: 8px;
+		}				
+		.jsspeccy .checkerboard-filter {
+			font-size: 5pt;
+		}					
     .jsspeccy #jsspeccy-fps {
         font-size: 3pt;
     }
