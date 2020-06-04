@@ -12,7 +12,7 @@ JSSpeccy.UI = function(opts) {
 	$.key_timeout = 50;
 
 	var container = opts.container;
-	if (typeof(container) === 'string') {
+	if (typeof(container) === "string") {
 		container = document.getElementById(container);
 	}
 	var controller = opts.controller;
@@ -28,13 +28,13 @@ JSSpeccy.UI = function(opts) {
 		};
 	}
 
-	$(container).addClass('jsspeccy');
+	$(container).addClass("jsspeccy");
 	
 
 	/* Set up toolbar */
-	var toolbar = $('.toolbar', container);
+	var toolbar = $(".toolbar", container);
 
-	var stopStartButton = $('button.stop-start', toolbar);
+	var stopStartButton = $("button.stop-start", toolbar);
 	stopStartButton.click(function() {
 		if (controller.isRunning) {
 			controller.stop();
@@ -44,9 +44,9 @@ JSSpeccy.UI = function(opts) {
 	});
 	function refreshStopStartButton() {
 		if (controller.isRunning) {
-			stopStartButton.removeClass('start').addClass('stop');
+			stopStartButton.removeClass("start").addClass("stop");
 		} else {
-			stopStartButton.removeClass('stop').addClass('start');
+			stopStartButton.removeClass("stop").addClass("start");
 		}
 	}
 	controller.onStart.bind(refreshStopStartButton);
@@ -59,46 +59,50 @@ JSSpeccy.UI = function(opts) {
 		}
 	}, false);
 	
-	$('button.reset', toolbar).click(function() {
+	$("button.reset", toolbar).click(function() {
 		controller.reset();
+		if (!controller.isRunning) {
+			controller.setLoadUrlOnStart("");
+			controller.start();
+		}
 //		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
-	var audioButton = $('button.audio', toolbar);
+	var audioButton = $("button.audio", toolbar);
 	audioButton.click(function() {
 		controller.setAudioState(!controller.getAudioState());
 	});
 	function refreshAudioButton(audioState) {
-		audioButton.toggleClass('enabled', audioState);
+		audioButton.toggleClass("enabled", audioState);
 	}
 	controller.onChangeAudioState.bind(refreshAudioButton);
 	refreshAudioButton(controller.getAudioState());
 
-	$('button.open', toolbar).click(function() {
+	$("button.open", toolbar).click(function() {
 		controller.stop();
-		showPanel('.open-file');
+		showPanel(".open-file");
 	});
 
-	$('button.about', toolbar).click(function() {
+	$("button.about", toolbar).click(function() {
 		controller.stop();
-		showPanel('.about');
+		showPanel(".about");
 	});
 
-	$('button.joystick_keys', toolbar).click(function() {
+	$("button.joystick_keys", toolbar).click(function() {
 		controller.stop();
-		showPanel('.joystick_keys');
+		showPanel(".joystick_keys");
 	});
 	
-	$('button.pokes', toolbar).click(function() {
+	$("button.pokes", toolbar).click(function() {
 		controller.stop();
 		$("#error_text", pokesPanel).text("");
-		showPanel('.pokes');
+		showPanel(".pokes");
 	});
 
-	$('button.run', toolbar).click(function() {
+	$("button.run", toolbar).click(function() {
 		hidePanels();
 		controller.start();
-		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, 'debugPrint': opts.debugPrint});
+		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, "debugPrint": opts.debugPrint});
 	});
 	
 	$("#links").change(function() {
@@ -144,8 +148,8 @@ JSSpeccy.UI = function(opts) {
   var isLinux = (os.name == "Linux") || $.urlPar("is_linux") === "on";
 	var isSmartTV = (os.name == "webOS") || $.urlPar("is_smarttv") === "on";
 	var isMobile = (os.name == "Android") || $.urlPar("is_mobile") === "on";
-	$('button.deviceinfo', toolbar).click(function() {
-		$('.panel.information #content').html(
+	$("button.deviceinfo", toolbar).click(function() {
+		$(".panel.information #content").html(
 				"<br/>Device information" + 
 				"<p>User agent: " + navigator.userAgent + "</p>" +
 				"<p>" + fps_html + "</p>" +
@@ -155,7 +159,7 @@ JSSpeccy.UI = function(opts) {
         "<p>Platform: " + (isSmartTV ? "SmartTV" : (isMobile ? "Mobile" : (isWindows ? "Windows" : (isLinux ? "Linux" : "Unknown")))) + "</p>" +
         "<p>OS: " + os.name + " " + os.version + "</p>"
         );
-		showPanel('.information');
+		showPanel(".information");
 	});   
 
 	var isFullscreen = false;
@@ -164,7 +168,7 @@ JSSpeccy.UI = function(opts) {
 	var enableFullscreen = fullscreenContext.requestFullscreen || fullscreenContext.webkitRequestFullscreen || fullscreenContext.mozRequestFullscreen || fullscreenContext.msRequestFullscreen || function() {};	
 	var isFullscreenAvailable = !isSmartTV && $.urlPar("always_fullscreen") !== "on" && (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.webkitCancelFullScreen || document.mozFullscreenEnabled || document.msFullscreenEnabled);
 	if (isFullscreenAvailable) {
-		$('button.fullscreen', toolbar).click(function() {
+		$("button.fullscreen", toolbar).click(function() {
 			if (!isFullscreen) {
 				enableFullscreen.call(fullscreenContext);
 				isFullscreen = true;
@@ -175,22 +179,22 @@ JSSpeccy.UI = function(opts) {
 		});		
 	}
 	else {
-		$('button.fullscreen', toolbar).hide();
+		$("button.fullscreen", toolbar).hide();
 	}
 	
 	/* // remap joystick is always ok =)
   if (!isMobile && !isSmartTV && $.urlPar("joystick_keys") !== "on") {
-		$('button.joystick_keys', toolbar).hide();
+		$("button.joystick_keys", toolbar).hide();
 	}
 	*/
-	var selectModel = $('select.select-model', toolbar);
-	$('select.select-model', toolbar).hide();
+	var selectModel = $("select.select-model", toolbar);
+	$("select.select-model", toolbar).hide();
 	var modelsById = {};
 	for (var i = 0; i < JSSpeccy.Spectrum.MODELS.length; i++) {
 		var model = JSSpeccy.Spectrum.MODELS[i];
 		modelsById[model.id] = model;
 		selectModel.append(
-			$('<option></option>').text(model.name).attr({'value': model.id})
+			$("<option></option>").text(model.name).attr({"value": model.id})
 		);
 	}
 	selectModel.change(function() {
@@ -203,51 +207,72 @@ JSSpeccy.UI = function(opts) {
 	refreshModel();
 	controller.onChangeModel.bind(refreshModel);
 
-	var autoloadTapes = $('input.autoload-tapes');
-	$('input.autoload-tapes').parent().hide();
+	var autoloadTapes = $("input.autoload-tapes");
+	$("input.autoload-tapes").parent().hide();
 
+	var checkerboardFilterCheckbox = $("input.checkerboard-filter");
+	function reflectCheckerboardFilter(val) {
+		if (val) {
+			checkerboardFilterCheckbox.attr("checked", true);
+			$(container).addClass("hard-edged-pixels");
+		} else {
+			checkerboardFilterCheckbox.removeAttr("checked");
+			$(container).removeClass("hard-edged-pixels");
+		}
+	}
+	reflectCheckerboardFilter(controller.settings.checkerboardFilter.get());
+	controller.settings.checkerboardFilter.onChange.bind(reflectCheckerboardFilter);
+	checkerboardFilterCheckbox.change(function() {
+		controller.settings.checkerboardFilter.set(
+			checkerboardFilterCheckbox.is(":checked")
+		);
+	});
+	if ($.urlPar("hq2x") !== "on") {
+		$("input.checkerboard-filter").parent().hide();
+	}
+	
 	/* Set up panels */
 	var panels = [];
 
 	function showPanel(selector) {
-		$('.panel', container).hide();
-		$('.panel', container).filter(selector).show();
+		$(".panel", container).hide();
+		$(".panel", container).filter(selector).show();
 		controller.deactivateKeyboard();
 	}
 
 	function hidePanels() {
-		$('.panel', container).hide();
+		$(".panel", container).hide();
 		controller.activateKeyboard();
 	}
 
-	$('.panel button.close', container).click(function() {
+	$(".panel button.close", container).click(function() {
 		hidePanels();
 	});
 
-	var openFilePanel = $('.panel.open-file', container);
+	var openFilePanel = $(".panel.open-file", container);
 
-	var fileSelect = openFilePanel.find('input[type="file"]');
+	var fileSelect = openFilePanel.find("input[type='file']");
 	fileSelect.change(function() {
-		controller.loadLocalFile(this.files[0], {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
-		fileSelect.val('');
+		controller.loadLocalFile(this.files[0], {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
+		fileSelect.val("");
 		hidePanels();
 	});
 	if (isSmartTV && $.urlPar("load_file") !== "on") {
 		$("#load_file", container).hide();
 	}
 	
-	var urlField = openFilePanel.find('input[type="url"]');
-	openFilePanel.find('button.open-url').click(function() {
+	var urlField = openFilePanel.find("input[type='url']");
+	openFilePanel.find("button.open-url").click(function() {
 		var url = urlField.val();
-		if (url !== '') {
+		if (url !== "") {
 			hidePanels();
-			controller.loadFromUrl(url, {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
+			controller.loadFromUrl(url, {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
 		}
 	});
 	
-	var pokesPanel = $('.panel.pokes', container);
+	var pokesPanel = $(".panel.pokes", container);
 	pokesPanel.find("button.apply_pokes").click(function () {
-		var poke = pokesPanel.find('input[type="text"]');
+		var poke = pokesPanel.find("input[type='text']");
 		var str = poke.val();
 		var ok = true;
 		if (str !== "") {
@@ -277,7 +302,7 @@ JSSpeccy.UI = function(opts) {
 	});
 	
 	const app_url = new URL(document.URL);
-	const path_url = app_url.protocol + "//" + (app_url.host.length > 0 ? app_url.host + "/" : "") + app_url.pathname.substring(0, app_url.pathname.lastIndexOf('/'));
+	const path_url = app_url.protocol + "//" + (app_url.host.length > 0 ? app_url.host + "/" : "") + app_url.pathname.substring(0, app_url.pathname.lastIndexOf("/"));
 //	const downloads_path = "file:///media/internal/downloads"; 
 	const usb_path = "file://usb:0/"; // first usb
 	if (isSmartTV) {
@@ -290,10 +315,10 @@ JSSpeccy.UI = function(opts) {
   /* Preinstalled games routines */
 	var loadResource = function (url, callback) {
 		var request = new XMLHttpRequest();
-		request.addEventListener('load', function(e) {
+		request.addEventListener("load", function(e) {
 			callback(request.response);
 		});
-		request.open('GET', url);
+		request.open("GET", url);
 		request.send();
 	}
 
@@ -320,15 +345,15 @@ JSSpeccy.UI = function(opts) {
 	};
 	
   $("#preinstalled-games", toolbar).change(function() {
-    if ($("#preinstalled-games", toolbar).prop('selectedIndex') === 0) {
-      $('button.reset', toolbar).click();
+    if ($("#preinstalled-games", toolbar).prop("selectedIndex") === 0) {
+      $("button.reset", toolbar).click();
       return;
     }
     var filename = $(this).val();
     if (filename) {
       controller.loadFromUrl(
         filename,
-        {"autoload": true, 'debugPrint': opts.debugPrint}
+        {"autoload": true, "debugPrint": opts.debugPrint}
       );
 //      controller.setKeymap($(this).children(":selected").attr("id") || "");
     }
@@ -341,21 +366,21 @@ JSSpeccy.UI = function(opts) {
 	
   /* Padblock routines */
   function addKeySelect(id, code, label, initial) {
-      var opt = document.createElement('option')
+      var opt = document.createElement("option")
       opt.appendChild(document.createTextNode(label));
       opt.value = code;
       if (label == initial) opt.selected = true;
       document.getElementById(id).appendChild(opt);
   }
   function populateJoystickKeySelect(id, initial) {
-      document.getElementById(id).innerHTML = '';
-      addKeySelect(id, 38, '\u2191', initial);
-      addKeySelect(id, 40, '\u2193', initial);
-      addKeySelect(id, 37, '\u2190', initial);
-      addKeySelect(id, 39, '\u2192', initial);
-      addKeySelect(id, 32, 'Space', initial);
-      addKeySelect(id, 13, 'Enter', initial);
-      addKeySelect(id, 17, 'Symbol Shift', initial);
+      document.getElementById(id).innerHTML = "";
+      addKeySelect(id, 38, "\u2191", initial);
+      addKeySelect(id, 40, "\u2193", initial);
+      addKeySelect(id, 37, "\u2190", initial);
+      addKeySelect(id, 39, "\u2192", initial);
+      addKeySelect(id, 32, "Space", initial);
+      addKeySelect(id, 13, "Enter", initial);
+      addKeySelect(id, 17, "Symbol Shift", initial);
       for (i = 48; i < 58; i++) {
           addKeySelect(id, i, String.fromCharCode(i), initial);
       }
@@ -364,24 +389,24 @@ JSSpeccy.UI = function(opts) {
       }
   }
   $.setJoystick = function(keys) {
-      var keysarr = keys.split(',');
+      var keysarr = keys.split(",");
       up = keysarr[0];
       down = keysarr[1];
       left = keysarr[2];
       right = keysarr[3];
       fire = keysarr[4];
       action = keysarr[5];
-      populateJoystickKeySelect('select_key_up', up);
-      populateJoystickKeySelect('select_key_down', down);
-      populateJoystickKeySelect('select_key_left', left);
-      populateJoystickKeySelect('select_key_right', right);
-      populateJoystickKeySelect('select_key_fire', fire);
-      populateJoystickKeySelect('select_key_action', action);		
+      populateJoystickKeySelect("select_key_up", up);
+      populateJoystickKeySelect("select_key_down", down);
+      populateJoystickKeySelect("select_key_left", left);
+      populateJoystickKeySelect("select_key_right", right);
+      populateJoystickKeySelect("select_key_fire", fire);
+      populateJoystickKeySelect("select_key_action", action);		
 		if (isSmartTV) {
 			controller.setKeymap(keys);
   }      
   }      
-  $.setJoystick(document.getElementById('selcontrol').value); 
+  $.setJoystick(document.getElementById("selcontrol").value); 
 	$.prev_keyupdown_time = performance.now();
   $.padTouch = function(selectId,obj) {
       var select = document.getElementById(selectId);
@@ -401,7 +426,7 @@ JSSpeccy.UI = function(opts) {
   }
 
   if (!isMobile && $.urlPar("padblock") !== "on") {
-    $('.padblock', container).hide();
+    $(".padblock", container).hide();
   }
     
   /* On-screen keyboard routines */
@@ -414,8 +439,8 @@ JSSpeccy.UI = function(opts) {
 					}
           saved_keypress = document.onkeypress;
           document.onkeypress = function() { return true; }
-          saved_padblock_visibility = $('.padblock', container).is(":visible");
-          $('.padblock', container).hide();
+          saved_padblock_visibility = $(".padblock", container).is(":visible");
+          $(".padblock", container).hide();
           controller.keyboard().active = false;
           $("#typer", container).focus();
       }
@@ -454,13 +479,13 @@ JSSpeccy.UI = function(opts) {
       $("#typer", container).val("");
       document.onkeypress = saved_keypress;
       if (saved_padblock_visibility) {
-        $('.padblock', container).show();
+        $(".padblock", container).show();
       }
       controller.keyboard().active = true;
   });
 
   if (!isSmartTV && !isMobile && $.urlPar("typer") !== "on") {
-    $('#typer-div', container).hide();
+    $("#typer-div", container).hide();
   }  
   
   /* webOS virtual keyboard management */
@@ -502,13 +527,18 @@ JSSpeccy.UI = function(opts) {
 			if (opts.debugPrint) {
 				console.log("load url: ", load_url);
 			}
-			controller.loadFromUrl(load_url, {'autoload': autoloadTapes.is(':checked'), 'debugPrint': opts.debugPrint});
+			controller.loadFromUrl(load_url, {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
 		}, 0);
 	}
 
 	if (opts.debugPrint) {
 		console.log("URL keys: ", url_pars_list);
-	}	
+	}
+	else {
+		$(document).bind("contextmenu", function (e) {
+				e.preventDefault();
+		});	
+	}
 
 	if (isSmartTV) { // ignore autostart: false on SmartTV
 		setTimeout(function() {

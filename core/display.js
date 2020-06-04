@@ -7,11 +7,6 @@ JSSpeccy.Display = function(opts) {
 	var border = opts.border;
 	var cpuFpsLimit = opts.cpuFpsLimit;
 
-	var checkerboardFilterEnabled = opts.settings.checkerboardFilter.get();
-	opts.settings.checkerboardFilter.onChange.bind(function(newValue) {
-		checkerboardFilterEnabled = newValue;
-	});
-	
 	var palette = new Int32Array([
 		/* RGBA dark */
 		0x000000ff,
@@ -63,23 +58,42 @@ JSSpeccy.Display = function(opts) {
 	var CANVAS_HEIGHT = Y_COUNT + (border ? (TOP_BORDER_LINES + BOTTOM_BORDER_LINES) : 0);
 
 	var
-		vborder_cache = -1,
-		vborder_fill_count = 0,
-		vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT),
-		vattr_cache = new Uint8Array(X_COUNT * Y_COUNT),
+		vborder_cache, vborder_fill_count, vbitmap_cache,	vattr_cache,
 		video_frame_count = 0,
 		prev_timestamp = performance.now(),
 		skipped_frames = 0;
     
 	viewport.setResolution(CANVAS_WIDTH, CANVAS_HEIGHT);
-  
-	var ctx = viewport.canvas.getContext('2d');
-	var imageData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-	var pixels = new Int32Array(imageData.data.buffer);
 
-	/* for post-processing */
-	var imageData2 = ctx.createImageData(imageData);
-	var pixels2 = new Int32Array(imageData2.data.buffer);
+  self.reset = function() {
+    vborder_cache = -1;
+    vborder_fill_count = 0;
+		vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT);
+		vattr_cache = new Uint8Array(X_COUNT * Y_COUNT);
+  };
+  
+	var ctx, imageData, pixels, imageData2;
+	var orig_w = viewport.canvas.width, orig_h = viewport.canvas.height;
+	function init(filter_scale) {
+		viewport.canvas.width = orig_w * filter_scale;
+		viewport.canvas.height = orig_h * filter_scale;
+		ctx = viewport.canvas.getContext("2d");
+		imageData = ctx.createImageData(CANVAS_WIDTH, CANVAS_HEIGHT);
+		pixels = new Int32Array(imageData.data.buffer);
+
+		/* for post-processing */
+		imageData2 = ctx.createImageData(filter_scale * CANVAS_WIDTH, filter_scale * CANVAS_HEIGHT);
+		
+		self.reset();
+	}
+	
+	var checkerboardFilterEnabled = opts.settings.checkerboardFilter.get();
+	opts.settings.checkerboardFilter.onChange.bind(function(newValue) {
+		checkerboardFilterEnabled = newValue;
+		init(checkerboardFilterEnabled ? 2 : 1);
+		self.drawFullScreen();
+	});	
+	init(checkerboardFilterEnabled ? 2 : 1);
 	
 	var borderColour = 7;
 	self.setBorder = function(val) {
@@ -190,11 +204,6 @@ JSSpeccy.Display = function(opts) {
 		}
 	};
   
-  self.reset = function() {
-    vborder_cache = -1;
-    vborder_fill_count = 0;
-  };
-	
   var fps_limit = 25;
   var skipped_frames_limit = Math.ceil(cpuFpsLimit / fps_limit);
   var fps = 0;
@@ -213,7 +222,8 @@ JSSpeccy.Display = function(opts) {
   
   var putImageData = function() {
     if (checkerboardFilterEnabled) {
-      self.postProcess();
+      hqx(imageData, imageData2);
+			ctx.putImageData(imageData2, 0, 0);
     } else {
       ctx.putImageData(imageData, 0, 0);
     }      
@@ -236,50 +246,6 @@ JSSpeccy.Display = function(opts) {
 		self.startFrame();
 		while (self.nextEventTime) self.doEvent();
 		self.endFrame();
-	};
-
-	self.postProcess = function() {
-		var pix = pixels;
-		pixels2.set(pix);
-		var ofs = border ? (TOP_BORDER_LINES * CANVAS_WIDTH) + (LEFT_BORDER_CHARS << 3) : 0;
-		var skip = border ? ((LEFT_BORDER_CHARS + RIGHT_BORDER_CHARS) << 3) : 0;
-		var width = CANVAS_WIDTH;
-		var x = 0, y = 1; /* 1-pixel top/bottom margin */
-		var k0 = 0, k1 = 0, k2 = 0, k3 = 0, k4 = 0, k5 = 0, k6 = 0, k7 = 0, k8 = 0;
-		var avg0, avg1, avg2;
-		while (y++ < 191) {
-			while (x++ < 256) {
-				k0 = pix[ofs - 1]; k1 = pix[ofs]; k2 = pix[ofs + 1]; ofs += width;
-				k3 = pix[ofs - 1]; k4 = pix[ofs]; k5 = pix[ofs + 1]; ofs += width;
-				k6 = pix[ofs - 1]; k7 = pix[ofs]; k8 = pix[ofs + 1];
-				
-				var mixed = ((k4 !== k1 || k4 !== k7) && (k4 !== k3 || k4 !== k5));
-				
-				if (k4 === k0 && k4 === k2 && k4 !== k1 && k4 !== k3 && k4 !== k5) {
-					pixels2[ofs - width] = (((k4 ^ k3) & 0xfefefefe) >> 1) + (k4 & k3);
-				}
-				else if (k4 === k6 && k4 === k8 && k4 !== k3 && k4 !== k5 && k4 !== k7) {
-					pixels2[ofs - width] = (((k4 ^ k3) & 0xfefefefe) >> 1) + (k4 & k3);
-				}
-				else if (k4 === k0 && k4 === k6 && k4 !== k1 && k4 !== k3 && k4 !== k7) {
-					pixels2[ofs - width] = (((k4 ^ k1) & 0xfefefefe) >> 1) + (k4 & k1);
-				}
-				else if (k4 === k2 && k4 === k8 && k4 !== k1 && k4 !== k5 && k4 !== k7) {
-					pixels2[ofs - width] = (((k4 ^ k1) & 0xfefefefe) >> 1) + (k4 & k1);
-				}
-				else if (mixed) {
-					avg0 = (((k3 ^ k5) & 0xfefefefe) >> 1) + (k3 & k5);
-					avg1 = (((k1 ^ k7) & 0xfefefefe) >> 1) + (k1 & k7);
-					avg2 = (((avg0 ^ avg1) & 0xfefefefe) >> 1) + (avg0 & avg1);
-					avg2 = (((k4 ^ avg2) & 0xfefefefe) >> 1) + (k4 & avg2);
-					pixels2[ofs - width] = (((k4 ^ avg2) & 0xfefefefe) >> 1) + (k4 & avg2);
-				}
-				ofs -= (width + width - 1);
-			}
-			ofs += skip;
-			x = 0;
-		}
-		ctx.putImageData(imageData2, 0, 0);
 	};
 
 	return self;

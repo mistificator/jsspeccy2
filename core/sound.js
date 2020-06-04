@@ -905,7 +905,7 @@ onmessage = function(e) {
 			self.snd_gen = SoundGenerator.apply(null, msg[1]);
 			self.opts = msg[1][0];
 		}
-		else {
+		else if (self.snd_gen) {
 			var out = makeCall(msg);
 			if (out) {
 				postMessage([msg[0], out]);

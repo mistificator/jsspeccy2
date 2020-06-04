@@ -10,6 +10,7 @@
 		<script src="ui.js"></script>
 		<script src="js-unzip.min.js"></script>
 		<script src="js-inflate.min.js"></script>
+		<script src="hqx.min.js"></script>
 		<script src="wos.min.js"></script>
 		<script src="zxcz.min.js"></script>
 		<script src="rgb2019.min.js"></script>
@@ -37,6 +38,7 @@
 					applyContention: ($.urlPar("no_contention") !== "on"), // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
+					checkerboardFilter: false,
 					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
 					audioBufferSize: $.urlPar("audio_buffer") || 1024,
 					panelYWidth: Math.floor($(".jsspeccy .toolbar button").outerHeight() * 1.05), // wtf?
@@ -73,21 +75,25 @@
 						<li><button class="about" title="About webOS JSSpeccy">about</button></li>
 						<li>
 							<div>
+								<select class="catalogue" id="catalogue"></select>
+								<select class="catalogue" id="letter"></select>
+								<select class="catalogue" id="index"></select>
+								<select class="catalogue" id="links"></select>
+<!--								<select id="preinstalled-games" style="width: 100%"></select>-->
+							</div>					
+						</li>
+						<li><button class="run" title="Run game">run</button></li>
+						<li>
+							<div>
 								<label><input type="checkbox" class="autoload-tapes" checked="checked"> Autoload tapes</label>
 							</div>
 							<div>
 								<select class="select-model"></select>
 							</div>
 							<div>
-								<select class="catalogue" id="catalogue"></select>
-								<select class="catalogue" id="letter"></select>
-								<select class="catalogue" id="index"></select>
-								<select class="catalogue" id="links"></select>
-<!--								<select id="preinstalled-games" style="width: 100%"></select>-->
-							</div>
-						</li>
-						<li><button class="run" title="Run game">run</button></li>
-						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
+								<label><input type="checkbox" class="checkerboard-filter">HQ2X</label>
+							</div>	
+						</li>						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
 					</ul>			
 				</div>				
 			</div>

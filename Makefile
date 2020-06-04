@@ -4,6 +4,7 @@ DIST_FILES=\
 	build\jsspeccy-core.min.js \
 	build\js-unzip.min.js \
 	build\js-inflate.min.js \
+	build\hqx.min.js \
 	build\wos.min.js \
 	build\zxcz.min.js \
 	build\rgb2019.min.js \
@@ -19,7 +20,7 @@ NPX=call npx
 ARES_PACK=-call $(LG_WEBOS_TV_SDK_HOME)\CLI\bin\ares-package
    
 all: $(DIST_FILES)
-    $(MKDIR) build
+	$(MKDIR) build
 	$(MKDIR) dist
 	$(MKDIR) dist\OutputIPK
 	$(COPY_DST)
@@ -41,6 +42,9 @@ build/js-unzip.min.js: lib/js-unzip.js
 
 build/js-inflate.min.js: lib/js-inflate.js
 	$(NPX) minify lib/js-inflate.js > build/js-inflate.min.js
+
+build/hqx.min.js: lib/hqx.js
+	$(NPX) minify lib/hqx.js > build/hqx.min.js
 
 build/wos.min.js: wos/wos.js
 	$(NPX) minify wos/wos.js > build/wos.min.js

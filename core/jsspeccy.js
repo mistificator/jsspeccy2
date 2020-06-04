@@ -390,7 +390,6 @@ function JSSpeccy(container, opts) {
 	self.start = function() {
 		if (self.isRunning) {
 			load_on_start = "";
-			return;
 		}
 		self.isRunning = true;
 		updateViewportIcon();
