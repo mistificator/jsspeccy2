@@ -157,7 +157,7 @@ function JSSpeccy(container, opts) {
   }; 
   
 	/* == Audio == */
-	var soundBackend = JSSpeccy.SoundBackend({debugPrint: opts.debugPrint, audioBufferSize: opts.audioBufferSize});
+	var soundBackend = JSSpeccy.SoundBackend({debugPrint: opts.debugPrint, audioBufferSize: opts.audioBufferSize, equalizer: opts.equalizer, audioHiFi: opts.audioHiFi});
 	self.onChangeAudioState = Event();
 	self.getAudioState = function() {
 		return soundBackend.isEnabled;
@@ -361,7 +361,7 @@ function JSSpeccy(container, opts) {
       if (cfps <= opts.cpuFpsLimit) {
         cpu_frame_count++;
         if (timestamp - prev_timestamp > 1000 - timer_interval/2) { // - timer_interval/2 is more precise
-					while (cpu_frame_count < opts.cpuFpsLimit) { // make extra frames
+					while (cpu_frame_count < opts.cpuFpsLimit) { // make extra frames, especially for Android and webOS
 						cpu_frame_count++;
 						spectrum.runFrame();
 					}

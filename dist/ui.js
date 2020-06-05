@@ -30,6 +30,15 @@ JSSpeccy.UI = function(opts) {
 
 	$(container).addClass("jsspeccy");
 	
+	var load_url = $.urlPar("load");
+	if (load_url) {
+		load_url = decodeURI(load_url);
+		if (opts.debugPrint) {
+			console.log("load url: ", load_url);
+		}
+		controller.stop();
+		controller.setLoadUrlOnStart(load_url);
+	}	
 
 	/* Set up toolbar */
 	var toolbar = $(".toolbar", container);
@@ -101,13 +110,14 @@ JSSpeccy.UI = function(opts) {
 
 	$("button.run", toolbar).click(function() {
 		hidePanels();
+		controller.stop();
+		controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
 		controller.start();
-		controller.loadFromUrl($("#links").children(":selected").attr("href"), {"autoload": true, "debugPrint": opts.debugPrint});
 	});
 	
 	$("#links").change(function() {
 		hidePanels();
-		if (!controller.isRunning) {
+		if (!controller.isRunning && !load_url) {
 			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
 		}
 		urlField.val($("#links").children(":selected").attr("href"));	
@@ -228,7 +238,10 @@ JSSpeccy.UI = function(opts) {
 		);
 	});
 	if ($.urlPar("hq2x") !== "on") {
-		$("input.checkerboard-filter").parent().hide();
+		checkerboardFilterCheckbox.parent().hide();
+	}
+	else {
+		checkerboardFilterCheckbox.attr("checked", true);
 	}
 	
 	/* Set up panels */
@@ -266,7 +279,9 @@ JSSpeccy.UI = function(opts) {
 		var url = urlField.val();
 		if (url !== "") {
 			hidePanels();
-			controller.loadFromUrl(url, {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
+			controller.stop();
+			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
+			controller.start();
 		}
 	});
 	
@@ -520,17 +535,6 @@ JSSpeccy.UI = function(opts) {
       $("#typer", container).blur();
   };
   
-	var load_url = $.urlPar("load");
-	if (load_url) {
-	  setTimeout(function() {
-			load_url = decodeURI(load_url);
-			if (opts.debugPrint) {
-				console.log("load url: ", load_url);
-			}
-			controller.loadFromUrl(load_url, {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
-		}, 0);
-	}
-
 	if (opts.debugPrint) {
 		console.log("URL keys: ", url_pars_list);
 	}

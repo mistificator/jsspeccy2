@@ -5,15 +5,9 @@
 		<title>webOS JSSpeccy</title>
 		<link rel="stylesheet" href="jsspeccy.css">
 		<link rel="stylesheet" href="ui.css">
-		<script src="jsspeccy-core.min.js"></script>
 		<script src="jquery-1.12.4.min.js"></script>
+		<script src="jsspeccy-core.min.js"></script>
 		<script src="ui.js"></script>
-		<script src="js-unzip.min.js"></script>
-		<script src="js-inflate.min.js"></script>
-		<script src="hqx.min.js"></script>
-		<script src="wos.min.js"></script>
-		<script src="zxcz.min.js"></script>
-		<script src="rgb2019.min.js"></script>
 	
 <!--		<script src="webOSTVjs-1.2.0/webOSTV.js" charset="utf-8"></script>
  		<script src="webOSTVjs-1.2.0/webOSTV-dev.js" charset="utf-8"></script>  
@@ -38,11 +32,13 @@
 					applyContention: ($.urlPar("no_contention") !== "on"), // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
-					checkerboardFilter: false,
+					checkerboardFilter: $.urlPar("hq2x") === "on" ? true : false,
 					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
 					audioBufferSize: $.urlPar("audio_buffer") || 1024,
 					panelYWidth: Math.floor($(".jsspeccy .toolbar button").outerHeight() * 1.05), // wtf?
-					border: $.urlPar("border") || "1" // ZX Spectrum default is 4
+					border: $.urlPar("border") || "1", // ZX Spectrum default is 4
+					equalizer: (function() { var out = null; try { out = JSON.parse($.urlPar("audio_equalizer")); } catch (e) {} return out })(),
+					audioHiFi: $.urlPar("audio_hifi") === "on" ? true : false
 				};
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", opts);
 				var ui = JSSpeccy.UI({

@@ -37,9 +37,9 @@ JSSpeccy.SoundGenerator = function (opts) {
 		const count = Math.min(buffer.length, wrapper_buffer.length);
 		var i = 0;
 		for (; i < count; i++) {
-			buffer[i] = wrapper_buffer[i];
+			buffer[i] = wrapper_buffer[i] || 0;
 		}
-		const fill_val = buffer[Math.max(0, count - 1)];
+		const fill_val = buffer[Math.max(0, count - 1)] || 0;
 		for (; i < buffer.length; i++) {
 			buffer[i] = fill_val;
 		}
@@ -159,13 +159,65 @@ JSSpeccy.SoundBackend = function (opts) {
 			onAudioProcess = function (e) {
 				fillBuffer(e.outputBuffer.getChannelData(0));
 			};
+			
+			var createFilter = function (entry) {
+				var filter = audioContext.createBiquadFilter(); 
+				filter.type = "peaking"; 						// type
+				filter.frequency.value = entry[0]; 	// frequency
+				filter.Q.value = 1; 								// Q-factor
+				filter.gain.value = entry[1]; 			// gain
+				if (opts.debugPrint) {
+					console.log(filter);
+				}
+				return filter;
+			};
+
+			var createCompressor = function() {
+				var compressor = audioContext.createDynamicsCompressor();
+		    compressor.threshold.setValueAtTime(-10, audioContext.currentTime);
+				compressor.knee.setValueAtTime(2, audioContext.currentTime);
+				compressor.ratio.setValueAtTime(2, audioContext.currentTime);
+				compressor.attack.setValueAtTime(0.004, audioContext.currentTime);
+				compressor.release.setValueAtTime(0.100, audioContext.currentTime);
+				if (opts.debugPrint) {
+					console.log(compressor);
+				}
+				return compressor;
+			}
+			
+			var createSoundChain = function () {
+//				var equalizer = [[32, -3], [64, 0], [125, 3], [250, 0], [500, -3], [1000, -4.5], [2000, -1.5], [4000, 3], [8000, 4.5], [16000, 3]]; // winamp
+//				var equalizer = [[60, 0], [170, 3], [310, 0], [600, -2], [1000, -4.5], [3000, -1.5], [6000, 3], [12000, 4.5], [14000, 4.5], [16000, 3]]; // iphone
+				var equalizer = opts.equalizer || [[100, 5], [300, 2], [857, 0], [2400, 2], [6900, 5], [9000, -3], [16000, -12]];	// https://www.reddit.com/r/chiptunes/comments/2ffuzd/good_eq_settings_for_chip/
+				var filters = [audioNode];
+				if (opts.audioHiFi && equalizer.length > 0 && equalizer[0].length > 0) {
+					filters = filters.concat(equalizer.map(createFilter));
+					filters = filters.concat(createCompressor());
+					filters.reduce(function (prev, curr) {
+						prev.connect(curr);
+						return curr;
+					});
+				}
+				return filters;
+			};
+			
+			var filters = createSoundChain();
 
 			self.isEnabled = false;
+			var soundChain = function(state) {
+				if (state) {
+					audioNode.onaudioprocess = onAudioProcess;
+					filters[filters.length - 1].connect(audioContext.destination);
+				}
+				else {
+					filters[filters.length - 1].disconnect();
+					audioNode.onaudioprocess = null;
+				}
+			}
 			self.setSource = function (fillBufferCallback) {
 				fillBuffer = fillBufferCallback;
 				if (self.isEnabled) {
-					audioNode.onaudioprocess = onAudioProcess;
-					audioNode.connect(audioContext.destination);
+					soundChain(true);
 				};
 			}
 			self.setAudioState = function (state) {
@@ -173,8 +225,7 @@ JSSpeccy.SoundBackend = function (opts) {
 					/* enable */
 					self.isEnabled = true;
 					if (fillBuffer) {
-						audioNode.onaudioprocess = onAudioProcess;
-						audioNode.connect(audioContext.destination);
+						soundChain(true);
 					}
 					if (debugPrint) {
 						console.log("Sound enabled");
@@ -183,8 +234,7 @@ JSSpeccy.SoundBackend = function (opts) {
 				} else {
 					/* disable */
 					self.isEnabled = false;
-					audioNode.onaudioprocess = null;
-					audioNode.disconnect(0);
+					soundChain(false);
 					if (debugPrint) {
 						console.log("Sound disabled");
 					}

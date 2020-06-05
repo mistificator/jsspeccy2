@@ -1,39 +1,41 @@
-// Sound routines for jsspeccy
-// General sound routines and 48k buzzer emulation written by Darren Coles
-// 128k Spectrum sound routines developed from DelphiSpec emulator (credits below).
-// (c) 2013 Darren Coles
-//
-// Credits from DelphiSpec:
-//
-//  Routines for emulating the 128K Spectrum's AY-3-8912 sound generator
-//
-//  Author: James Bagg <chipmunk_uk_1@hotmail.com>
-//
-//   With minor optimisations and mods by
-//           Chris Cowley <ccowley@grok.co.uk>
-//
-//   Translation to Delphi Object Pascal by
-//           Jari Korhonen <jarit.korhonen@luukku.com>
-//
-//   Buffer underrun protection by
-//           Mist Poryvaev <mist.poryvaev@gmail.com>
-//
-//   Copyright (C)1999-2000 Grok Developments Ltd  and James Bagg
-//   http://www.grok.co.uk/      http://www.chipmunks-corner.co.uk
-//   This program is free software; you can redistribute it and/or
-//   modify it under the terms of the GNU General Public License
-//   as published by the Free Software Foundation; either version 2
-//   of the License, or (at your option) any later version.
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//
-//   You should have received a copy of the GNU General Public License
-//   along with this program; if not, write to the Free Software
-//   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-//
-// *******************************************************************************/
+/**
+ * @license Sound routines for jsspeccy
+ * General sound routines and 48k buzzer emulation written by Darren Coles
+ * 128k Spectrum sound routines developed from DelphiSpec emulator (credits below).
+ * (c) 2013 Darren Coles
+ * 
+ * Credits from DelphiSpec:
+ * 
+ *  Routines for emulating the 128K Spectrum's AY-3-8912 sound generator
+ * 
+ *  Author: James Bagg <chipmunk_uk_1@hotmail.com>
+ * 
+ *   With minor optimisations and mods by
+ *           Chris Cowley <ccowley@grok.co.uk>
+ * 
+ *   Translation to Delphi Object Pascal by
+ *           Jari Korhonen <jarit.korhonen@luukku.com>
+ * 
+ *   Buffer underrun protection by
+ *           Mist Poryvaev <mist.poryvaev@gmail.com>
+ * 
+ *   Copyright (C)1999-2000 Grok Developments Ltd  and James Bagg
+ *   http: * www.grok.co.uk/      http: * www.chipmunks-corner.co.uk
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ * 
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * *******************************************************************************
+*/
 
 SoundGenerator = function (opts) {
 	var self = {};

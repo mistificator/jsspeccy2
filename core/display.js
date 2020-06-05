@@ -78,11 +78,15 @@ JSSpeccy.Display = function(opts) {
 		viewport.canvas.width = orig_w * filter_scale;
 		viewport.canvas.height = orig_h * filter_scale;
 		ctx = viewport.canvas.getContext("2d");
+		ctx.globalAlpha = 1.0;
 		imageData = ctx.createImageData(CANVAS_WIDTH, CANVAS_HEIGHT);
 		pixels = new Int32Array(imageData.data.buffer);
+		pixels.fill(0xFF000000);
 
 		/* for post-processing */
 		imageData2 = ctx.createImageData(filter_scale * CANVAS_WIDTH, filter_scale * CANVAS_HEIGHT);
+		var pixels2 = new Int32Array(imageData2.data.buffer);
+		pixels2.fill(0xFF000000);
 		
 		self.reset();
 	}
