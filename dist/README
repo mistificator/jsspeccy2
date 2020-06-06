@@ -1,0 +1,110 @@
+===================================================================================
+webOS JSSpeccy: A ZX Spectrum emulator in pure JavaScript (primarily for LG TVs)
+===================================================================================
+
+Browser demo of current version:
+
+https://github.com/mistificator/jsspeccy2-webos/dist
+
+It's a kind of crutch but it works. To load tapes from any Internet resources you should use any of CORS-proxies (e.g. https://non-cors.herokuapp.com). For example, To play Frightmare from SpectrumComputing
+link, you should combine JSSpeccy URL, proxy URL and tape file URL, it looks that way: https://mistificator.github.io/jsspeccy2-webos/dist/?load=https://non-cors.herokuapp.com/https://archive.org/download/World_of_Spectrum_June_2017_Mirror/World%20of%20Spectrum%20June%202017%20Mirror.zip/World%20of%20Spectrum%20June%202017%20Mirror/sinclair/games/f/Frightmare128(BUGFIX).tzx.zip
+Or you could press "Open file" button in top panel of JSSpeccy and copy-paste proxied URL of Xenophobe https://non-cors.herokuapp.com/https://archive.org/download/World_of_Spectrum_June_2017_Mirror/World%20of%20Spectrum%20June%202017%20Mirror.zip/World%20of%20Spectrum%20June%202017%20Mirror/sinclair/games/x/Xenophobe.tap.zip or whatever you want to play.  
+
+
+Windows build instructions for LG TV:
+
+1. Install some make system (MSVS or GCC or whatever), cause we need to build via Makefile.
+
+2. Install Perl.
+
+3. Install npm.
+
+4. Run compile_webos.cmd
+  OR
+4.1 At project folder call:
+npm install coffee-script --save-dev
+npm install google-closure-compiler --save-dev 
+4.2. Build Makefile:
+nmake all
+(or what maker you have)
+
+5. Output in "dist" folder, open index.html to test emulator. Enjoy.
+
+
+LG TV deployment instructions:
+
+1. Install webOS SDK from LG webOS developer site.
+
+2. Activate development mode on LG TV via instructions from LG webOS developer official site.
+
+3. Install webOS JSSpeccy IPK package file on TV via webOS SDK IDE or ares-install script.
+
+4. Enjoy!
+
+
+Web deployment instructions:
+
+1. Put all files and "games" and "images" subfolders from "dist" folder to host server.
+
+2. Move your games you want to see in drop-down list to /games/ folder, modify tapes.js corresponding to games list.
+
+3. Start web-server.
+
+4. That's all.
+
+Mist Poryvaev aka @mistificator
+
+
+
+===================================================
+JSSpeccy: A ZX Spectrum emulator in pure JavaScript
+===================================================
+
+https://github.com/gasman/jsspeccy2
+
+Foreword to version 2.x
+-----------------------
+When I started this project in 2009, writing an emulator in JavaScript was a
+silly idea. Now, thanks to advances in JavaScript engines, and new APIs
+emerging from HTML5 and WebGL, it has become a significantly less silly idea,
+which means that the time is right for a more serious attempt at the job.
+
+What's new?
+-----------
+Everything, basically... it's a ground-up rewrite. In particular:
+
+* Z80 core uses typed arrays[0] where appropriate, for a healthy performance
+  boost (and significantly less faffing around with '& 0xff' everywhere to get
+  around the lack of strong typing in JavaScript)
+* More JavaScript-ish architecture - the Z80 instruction set is built up
+  through copious use of closures, rather than borrowing Fuse's Perl generator
+  script wholesale. (It's still heavily based on Fuse's Z80 core though.)
+* 128K support!
+* 99% accurate display emulation, for multicolour effects and the like
+* TZX file support (only via tape traps; custom loaders won't work)
+* Integration with the World Of Spectrum API, for instant loading of thousands
+  of software titles
+
+[0] https://developer.mozilla.org/en/javascript_typed_arrays
+
+Building
+--------
+Perl, CoffeeScript[1] and Closure Compiler[2] are required. To build:
+
+    make
+
+This will place all web-distributable files into the 'dist' folder.
+
+[1] http://jashkenas.github.com/coffee-script/
+[2] https://developers.google.com/closure/compiler/
+
+Browser support
+---------------
+Tested successfully on Chrome 32, Firefox 26 and Safari 7.0.1. Support for typed arrays and
+the PixelData API are absolutely required, and it'll almost certainly stay that
+way.
+
+Matt Westcott
+<matt@west.co.tt> - http://matt.west.co.tt/ - @gasmanic
+
+=====================

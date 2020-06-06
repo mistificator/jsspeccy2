@@ -2,8 +2,9 @@
 
 DIST_FILES=\
 	build\jsspeccy-core.min.js \
-	lib\jquery-1.12.4.min.js \
+	build\jquery-1.12.4.min.js \
 	build\sound.min.js \
+	build\ui.min.js \
 	README
 
 MKDIR=-mkdir  
@@ -62,11 +63,20 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js=lib/js-unzip.js \
 		--js=lib/js-inflate.js \
 		--js=lib/hqx.js \
-		--js=wos/wos.js \
-		--js=wos/zxcz.js \
-		--js=wos/rgb2019.js \
-		--js=wos/arch.js \
 		--js_output_file=build/jsspeccy-core.min.js
+		
+	$(NPX) google-closure-compiler \
+		--js=lib/jquery-1.12.4.js --js=lib/jquery.cookie.js \
+		--js_output_file=build/jquery-1.12.4.min.js
+
+	$(NPX) google-closure-compiler \
+		--js=ui/wos.js \
+		--js=ui/zxcz.js \
+		--js=ui/rgb2019.js \
+		--js=ui/arch.js \
+		--js=ui/ui.js \
+		--js_output_file=build/ui.min.js
+		
     $(CLEAN) .\dist\OutputIPK\*.*
     $(ARES_PACK) -o .\dist\OutputIPK -n .\dist
 

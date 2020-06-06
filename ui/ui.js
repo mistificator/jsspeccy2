@@ -1,3 +1,7 @@
+// ==ClosureCompiler==
+// @compilation_level SIMPLE_OPTIMIZATIONS
+// ==/ClosureCompiler==
+
 var url_pars_list = [];
 $.urlPar = function(key) {
 	if (!url_pars_list.includes(key)) {
