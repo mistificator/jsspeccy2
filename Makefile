@@ -65,6 +65,7 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js=wos/wos.js \
 		--js=wos/zxcz.js \
 		--js=wos/rgb2019.js \
+		--js=wos/arch.js \
 		--js_output_file=build/jsspeccy-core.min.js
     $(CLEAN) .\dist\OutputIPK\*.*
     $(ARES_PACK) -o .\dist\OutputIPK -n .\dist

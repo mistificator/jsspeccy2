@@ -6,8 +6,12 @@
 		<script src="wos.js"></script>
 		<script src="zxcz.js"></script>
 		<script src="rgb2019.js"></script>
+		<script src="arch.js"></script>
 		<script>		
 			$(document).ready(function() {
+				var arch = new Arch();
+				arch.init("#catalogue", "#letter", "#index", "#links");
+
 				var zxcz = new ZxCz();
 				zxcz.init("#catalogue", "#letter", "#index", "#links");
 
