@@ -113,7 +113,7 @@ JSSpeccy.Z80File = function(data) {
 				10: 7
 			};
 		}
-		while (offset < data.byteLength) {
+		while (offset < data.byteLength - 1) {
 			var compressedLength = file.getUint16(offset, true);
 			var isCompressed = true;
 			if (compressedLength == 0xffff) {
