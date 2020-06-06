@@ -73,6 +73,8 @@ JSSpeccy.Display = function(opts) {
 
 		hqxReset();
   };
+	hqxThreshold = 5;
+	hqxOptions = {debugPrint: opts.debugPrint};
   
 	var ctx, imageData, pixels, imageData2;
 	var orig_w = viewport.canvas.width, orig_h = viewport.canvas.height;
