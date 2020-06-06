@@ -1,5 +1,11 @@
 webOS JSSpeccy
 
+1.1 (2020-06-xx)
+* Timings accuracy strikes back. At least on PC sound sounds well indeed =)
+* Sound postprocessing and video postprocessing added (still in test mode via URL options audio_hifi=on and hq2x=on).
+* Popular catalogues of games (such as WorldOfSpectrum.org and Archive.org) integrated right into web interface.
+* Keys redefine menu, LG TV remote special buttons mapping, Android on-screen pad block are improved.
+
 1.0 (2020-05-xx)
 ================
 * Emulated Z80 performance has been heavily increased at a cost of timing accuracy. Got ~250Hz CPU frame rate on PC, so now it's hard limited to 50Hz.
