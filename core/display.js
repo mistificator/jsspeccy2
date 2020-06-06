@@ -70,6 +70,8 @@ JSSpeccy.Display = function(opts) {
     vborder_fill_count = 0;
 		vbitmap_cache = new Uint8Array(X_COUNT * Y_COUNT);
 		vattr_cache = new Uint8Array(X_COUNT * Y_COUNT);
+
+		hqxReset();
   };
   
 	var ctx, imageData, pixels, imageData2;
