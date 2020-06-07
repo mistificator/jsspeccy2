@@ -78,25 +78,32 @@
 					</ul>			
 				</div>				
 			</div>
-            <div id="jsspeccy-fps"></div>
+			<div id="jsspeccy-fps"></div>
 			<div id="typer-div"><input type="text" id="typer"></input></div>
 			<div class="panel open-file">
 				<button class="close">close</button>
 				<div id="load_file">
-					<h2>Load from disk:</h2><span class="note">TAP, TZX, SNA, Z80, ZIP files supported</span><p><input type="file" name="Tapes and snapshots" accept=".tap, .tzx, .sna, .z80, .zip"></p>
+					<h3>Load from disk:</h3><small>TAP, TZX, SNA, Z80, ZIP files supported</small><p><input type="file" name="Tapes and snapshots" accept=".tap, .tzx, .sna, .z80, .zip"></p>
 				</div> 	
 				<div id="load_url">
-					<h2>Load from web:</h2><input type="url"><button class="open-url">Open URL</button>
+					<h3>Load from web:</h3><input type="url"><button class="open-url">Open URL</button>
 				</div>
 			</div>
 			<div class="panel about">
 				<button class="close">close</button>
-				<h1 class="commentary">webOS JSSpeccy <span class="version">v. 1.1</span></h1>
-				<h2 class="commentary">a webOS ZX Spectrum emulator</h2>
-				<p>Ported to LG webOS and optimized by <a href="https://twitter.com/mistificator" target="_blank">Mist Poryvaev</a></p>					
+				<br/>
+				<p>
+				<h1>webOS JSSpeccy <span class="version">v.1.1</span></h1>
+				<h2>a webOS ZX Spectrum emulator</h2>
+				</p>
+				<p>Ported to LG webOS and optimized by <a href="https://twitter.com/mistificator" target="_blank">Mist Poryvaev</a></p>
 				<p>Based on <a href="https://github.com/gasman/jsspeccy2" target="_blank">JSSpeccy</a> by <a href="https://twitter.com/gasmanic">Matt Westcott</a> (<a href="https://jsspeccy.zxdemo.org/" target="_blank">official page</a>) and <a href="https://fuse-emulator.sourceforge.net/" target="_blank">Fuse</a> by Philip Kendall. Sound routines by Darren Coles. Icons from <a href="https://www.iconfinder.com/iconsets/eightyshades" target="_blank">Eightyshades</a> by Victor Erixon.</p>
-				<div class="licence">
-					<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>&gt;.</p>
+				<div>
+					<small>
+						<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+						<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+						<p>You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>&gt;.</p>
+					</small>
 				</div>
 			</div>
 			<div class="panel information">
@@ -192,7 +199,7 @@
 						<br/>
 						<p>Apply pokes</p>
 						<p><input type="text" placeholder="addr1,val1:addr2,val2:..."></input><button class="apply_pokes">Poke</button></p>
-						<span class="note" id="error_text"></span>
+						<span id="error_text"></span>
 						<textarea rows=40 cols=40 readonly></textarea>
 				</div>  		
 		</div>

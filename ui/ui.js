@@ -110,6 +110,8 @@ JSSpeccy.UI = function(opts) {
 		controller.stop();
 		$("#error_text", pokesPanel).text("");
 		showPanel(".pokes");
+
+		selectPokes();
 	});
 
 	$("button.run", toolbar).click(function() {
@@ -124,7 +126,7 @@ JSSpeccy.UI = function(opts) {
 		if (!controller.isRunning && !load_url) {
 			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
 		}
-		urlField.val($("#links").children(":selected").attr("href"));	
+		urlField.val($("#links").children(":selected").attr("href"));
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
@@ -319,6 +321,35 @@ JSSpeccy.UI = function(opts) {
 			hidePanels();
 		}
 	});
+	
+	function selectPokes() {
+		var pokes_textarea = $(pokesPanel.find("textarea")[0]);
+		var pokes_text = pokes_textarea.val();
+		var title = $("#index option:selected").text().toUpperCase().trim();
+		if (title.indexOf(" 1") == title.length - 2) {
+			title = title.slice(0, title.length - 2);
+		}
+		if (title.indexOf(".") > 0 && parseInt(title.slice(0, title.indexOf("."))) > 0) {
+			title = title.slice(title.indexOf(".") + 1);
+		}
+		var position = pokes_text.indexOf(title);
+		if (position < 0) {
+			if (title.indexOf(" 2") > 0) {
+				title = title.replace(" 2", " II");
+			}
+			position = pokes_text.indexOf(title);
+		}
+		if (position >= 0) {
+			if (pokes_text.indexOf(" ", position + title.length + 1) > 0) {
+				var pokes_str = pokes_text.slice(position + title.length, pokes_text.indexOf(" ", position + title.length + 1)).trim();
+				pokesPanel.find("input[type='text']").val(pokes_str);
+			}
+			pokes_textarea[0].setSelectionRange(position, position);
+			pokes_textarea.blur();
+			pokes_textarea.focus();
+			pokes_textarea[0].setSelectionRange(position, position + title.length);
+		}	
+	}
 	
 	const app_url = new URL(document.URL);
 	const path_url = app_url.protocol + "//" + (app_url.host.length > 0 ? app_url.host + "/" : "") + app_url.pathname.substring(0, app_url.pathname.lastIndexOf("/"));
@@ -544,7 +575,10 @@ JSSpeccy.UI = function(opts) {
 	}
 	else {
 		$(document).bind("contextmenu", function (e) {
+			if ($(container).find($(e.target)).length > 0 && $(e.target).is("canvas")) {
+				console.log($(container).find($(e.target)));
 				e.preventDefault();
+			}
 		});	
 	}
 

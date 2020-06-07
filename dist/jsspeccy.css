@@ -129,65 +129,24 @@
 
 .jsspeccy .panel .close {
 	position: absolute;
-	height: 20pt;
 	right: 0px;
 	top: 0px;
 }
 
-.jsspeccy .panel h1, .jsspeccy .panel h2 {
-	margin-top: 0.8em;
-	margin-bottom: 0.8em;
-}
-
-.jsspeccy .panel .note {
-	font-weight: normal;
-	font-style: italic;
-	font-size: 10pt;
-}
-
-.jsspeccy .joystick_keys select, label{
-	font-size: 16pt;	
-    word-wrap: break-word;
-    margin: 3px;
+.jsspeccy .joystick_keys li {
+  list-style-type: none;
 }
 
 .jsspeccy .joystick_keys .selcontrol {
-    width: 50%;
+	width: 50%;
 }
 
 .jsspeccy .joystick_keys .selcontrol_options {
-    width: 30%;
+	width: 30%;
 }
 
 .jsspeccy .open-file  {
 	text-align: left;   
-}
-
-.jsspeccy .about h1 {
-	font-size: 18pt;
-	margin-bottom: 0;
-}
-.jsspeccy .about h2 {
-	font-size: 12pt;
-}
-.jsspeccy .about .licence {
-	font-size: 9pt;
-}
-
-.jsspeccy .commentary {
-}
-.jsspeccy .commentary h1 {
-	background-repeat: no-repeat;
-}
-.jsspeccy .commentary .version {
-	font-size: 0.5em;
-}
-.jsspeccy .commentary h2 {
-	font-size: 12pt;
-}
-.jsspeccy .commentary small {
-	font-size: 0.8em;
-	color: #ccc;
 }
 
 .jsspeccy #jsspeccy-fps {
@@ -255,6 +214,14 @@
 	background-color: #606060;
 }
 
+select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+select::-ms-expand {
+	display: none;
+}	
+
 @media (-webkit-min-device-pixel-ratio: 0.25), (min-resolution: 24dpi) {
     .jsspeccy #typer {
         font-size: 300%;
@@ -272,6 +239,9 @@
         height: 64px;
         font-size: 18pt;
     }
+    .jsspeccy .panel, .jsspeccy .panel input, .jsspeccy .panel button, .jsspeccy .panel select, .jsspeccy .panel label {
+        font-size: 18pt;
+    }		
     .jsspeccy #catalogue {
         width: 128px;
     }
@@ -308,7 +278,10 @@
     .jsspeccy .pad_action {
         width: 120px;
         height: 120px;
-    }    
+    } 
+		small {
+			font-size: 7pt;
+		}			
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
@@ -325,6 +298,9 @@
         height: 24px;
         font-size: 9pt;
     }
+    .jsspeccy .panel, .jsspeccy .panel input, .jsspeccy .panel button, .jsspeccy .panel select, .jsspeccy .panel label {
+        font-size: 9pt;
+    }		
     .jsspeccy #catalogue {
         width: 48px;
     }
@@ -361,7 +337,10 @@
     .jsspeccy .pad_action {
         width: 90px;
         height: 90px;
-    }    
+    }  
+		small {
+			font-size: 5pt;
+		}			
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.75), (min-resolution: 168dpi) {
@@ -385,15 +364,9 @@
     .jsspeccy .pad_action {
         width: 60px;
         height: 60px;
-    }    
-		
-		select {
-			-moz-appearance: none;
-			-webkit-appearance: none;
-		}
-
-		select::-ms-expand {
-			display: none;
+    }   
+		small {
+			font-size: 4pt;
 		}		
 }
 
@@ -414,6 +387,9 @@
         height: 20px;
         font-size: 5pt;
     }
+    .jsspeccy .panel, .jsspeccy .panel input, .jsspeccy .panel button, .jsspeccy .panel select, .jsspeccy .panel label {
+        font-size: 3pt;
+    }		
     .jsspeccy #catalogue {
         width: 40px;
     }
@@ -454,14 +430,8 @@
         width: 45px;
         height: 45px;
     }    
-		
-		select {
-			-moz-appearance: none;
-			-webkit-appearance: none;
-		}
-
-		select::-ms-expand {
-			display: none;
+		small {
+			font-size: 2pt;
 		}		
 }
 
