@@ -288,7 +288,7 @@
 			position: absolute;
 			top: 20px;
 		}				
-		.jsspeccy .checkerboard-filter {
+		.jsspeccy .checkerboard-filter-div label {
 			font-size: 18pt;
 		}				
 		.jsspeccy 	.pad_arrow  {
@@ -339,9 +339,9 @@
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 10px;
+			top: 5px;
 		}				
-		.jsspeccy .checkerboard-filter {
+		.jsspeccy .checkerboard-filter-div label {
 			font-size: 9pt;
 		}			
     .jsspeccy 	.pad_arrow  {
@@ -428,9 +428,9 @@
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 8px;
+			top: 3px;
 		}				
-		.jsspeccy .checkerboard-filter {
+		.jsspeccy .checkerboard-filter-div label {
 			font-size: 5pt;
 		}					
     .jsspeccy #jsspeccy-fps {
