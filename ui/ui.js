@@ -269,12 +269,11 @@ JSSpeccy.UI = function(opts) {
 	});
 
 	var openFilePanel = $(".panel.open-file", container);
-
 	var fileSelect = openFilePanel.find("input[type='file']");
 	fileSelect.change(function() {
+		hidePanels();
 		controller.loadLocalFile(this.files[0], {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
 		fileSelect.val("");
-		hidePanels();
 	});
 	if (isSmartTV && $.urlPar("load_file") !== "on") {
 		$("#load_file", container).hide();

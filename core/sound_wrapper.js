@@ -17,7 +17,7 @@ JSSpeccy.SoundGenerator = function (opts) {
 		queue.push(msg);
 	}
 	
-	var wrapper_buffer = [];
+	var wrapper_buffer = []; 
 	var ayRegSelected = 0;
 	var AY8912_Regs = new Int32Array(16); // fake duplicate of AY8912_Regs of sound.js 
 	for (var reg of AY8912_Regs) {
@@ -33,18 +33,16 @@ JSSpeccy.SoundGenerator = function (opts) {
 		debugPrint: opts.debugPrint	
 	}]], forcedPostMessage);
 
-	var fillBuffer = function(buffer) {
-		const count = Math.min(buffer.length, wrapper_buffer.length);
-		var i = 0;
-		for (; i < count; i++) {
-			buffer[i] = wrapper_buffer[i] || 0;
+	var fillBuffer = function(channel_buffer) {
+		if (opts.debugPrint) {
+			if (wrapper_buffer.length == 0) {
+				console.log("WebAudio buffer underrun");
+			}
 		}
-		const fill_val = buffer[Math.max(0, count - 1)] || 0;
-		for (; i < buffer.length; i++) {
-			buffer[i] = fill_val;
-		}
+		if (wrapper_buffer.length > 0) {
+			channel_buffer.copyToChannel(wrapper_buffer.shift(), 0, 0);
+		}		
 		postMessage(["fillBuffer", []]);
-		wrapper_buffer = wrapper_buffer.slice(buffer.length);
 	}
 	backend.setSource(fillBuffer);
 
@@ -96,7 +94,13 @@ JSSpeccy.SoundGenerator = function (opts) {
 	snd_worker.onmessage = function(e) {
 		switch (e.data[0]) {
 			case "fillBuffer":
-				wrapper_buffer = wrapper_buffer.concat(e.data[1]);
+				while (wrapper_buffer.length > 8) {			
+					if (opts.debugPrint) {
+						console.log("WebAudio buffer overflow");
+					}				
+					wrapper_buffer.shift();
+				}
+				wrapper_buffer.push(e.data[1]);
 				break;
 			case "readSoundRegister":
 				AY8912_Regs[ayRegSelected] = e.data[1];
@@ -157,7 +161,7 @@ JSSpeccy.SoundBackend = function (opts) {
 
 		if (audioNode != null) {
 			onAudioProcess = function (e) {
-				fillBuffer(e.outputBuffer.getChannelData(0));
+				fillBuffer(e.outputBuffer);
 			};
 			
 			var createFilter = function (entry) {
@@ -241,9 +245,6 @@ JSSpeccy.SoundBackend = function (opts) {
 					return false;
 				}
 			}
-			self.notifyReady = function (dataLength) {
-				/* do nothing */
-			}
 
 			document.querySelector("*").addEventListener("click", function () {
 				audioContext.resume().then(() => {
@@ -266,10 +267,7 @@ JSSpeccy.SoundBackend = function (opts) {
 	self.setSource = function (fn) {
 		fillBuffer = fn;
 	};
-	self.notifyReady = function (dataLength) {
-		var buffer = new Float32Array(dataLength);
-		fillBuffer(buffer);
-	}
+
 	return self;
 
 }

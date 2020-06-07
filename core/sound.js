@@ -136,7 +136,6 @@ SoundGenerator = function (opts) {
 	function AY8912_reset() {
 		buzzer_val = 0;
 
-		soundData = new Array();
 		soundDataLength = 0;
 		soundDataFrameBytes = 0;
 
@@ -147,7 +146,6 @@ SoundGenerator = function (opts) {
 		WCount = 0;
 		lCounter = 0;
 
-		aySoundData = new Array();
 		aySoundDataLength = 0;
 	  soundDataAyFrameBytes = 0;	
 	
@@ -718,22 +716,30 @@ SoundGenerator = function (opts) {
 
 	var prev_time = performance.now();
 	var skipped = 0, theoretical_skipped = 0;
+	var buffer = new Float32Array(audioBufferSize);
+	buffer.fill(0);
 	self.fillBuffer = function() {
-		var buffer = new Array(audioBufferSize);
-		var count = 0;
+		var count = 0, aycount = 0;
 		var local_skipped = 0;
-		for (var i = 0; i < audioBufferSize; i++) {
+		var i = 0;
+		for (; i < audioBufferSize && aycount < aySoundDataLength; i++) {
 			var avg = 0;
 			var j = 0;
 			for (; j < oversampleRate && count < soundDataLength; j++, count++) {
-				avg += soundData[count]; // repeatedly run over array size, wtf?
+				avg += soundData[count]; 
 			}
-			avg = avg / (j || 1);
+			avg = j > 0 ? (avg / j) : 0;
 			avg = avg * 0.7;
 			avg = avg + aySoundData[i] / 2;
 
+			if (avg !== avg && opts.debugPrint) {
+				console.log("Sound worker said NaN is here: avg=", avg, ",aySoundData", aySoundData[i], ",i", i, ",aySoundDataLength", aySoundDataLength, ",aySoundData.length", aySoundData.length);
+				avg = 0;
+			}
+			
 			buffer[i] = avg;
 		}
+		buffer.fill(0, i);
 
 		count = audioBufferSize * oversampleRate;
 
