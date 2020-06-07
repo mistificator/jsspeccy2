@@ -11,6 +11,8 @@ Refactor HQ2X applicance with help of main rendering video cache.
 Test again file loading from local file system.
 Add scenes catalogue (files.scene.org, e.g. Forever15/16/17/xx).
 Refactor static top menu to pop-up menu.
+Need to fix the bug with HQ2X cache (seen clearly in Battle Command intro screen with tank).
+Add pool of non-CORS proxies.
 
 Far future.
 Add Spectrum 3+ emulation and run CP/M 3.0 in browser from original diskette image.
