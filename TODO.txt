@@ -1,0 +1,16 @@
+In order of thinking.
+
+Near future.
+Refactor sound message queue processing and optimize AY sound generation.
+Add .z80 snapshot export.
+Add "hq2x=off" URL key for Android and webOS.
+Add audio postprocessing checkbox.
+Add Yellow button on LG TV remote as menu access button.
+Discover how to disable screen off on Android for website.
+Refactor HQ2X applicance with help of main rendering video cache.
+Test again file loading from local file system.
+Add scenes catalogue (files.scene.org, e.g. Forever15/16/17/xx).
+Refactor static top menu to pop-up menu.
+
+Far future.
+Add Spectrum 3+ emulation and run CP/M 3.0 in browser from original diskette image.
