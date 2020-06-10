@@ -243,11 +243,11 @@ JSSpeccy.UI = function(opts) {
 			checkerboardFilterCheckbox.is(":checked")
 		);
 	});
-	if ($.urlPar("hq2x") !== "on") {
+	if (($.urlPar("hq2x") || "") === "") {
 		checkerboardFilterCheckbox.parent().hide();
 	}
 	else {
-		checkerboardFilterCheckbox.attr("checked", true);
+		checkerboardFilterCheckbox.attr("checked", $.urlPar("hq2x") === "on");
 	}
 	
 	/* Set up panels */

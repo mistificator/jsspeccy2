@@ -3,7 +3,7 @@ In order of thinking.
 Near future.
 Refactor sound message queue processing and optimize AY sound generation.
 Add .z80 snapshot export.
-Add "hq2x=off" URL key for Android and webOS.
+-----Add "hq2x=off" URL key for Android and webOS.
 Add audio postprocessing checkbox.
 Add Yellow button on LG TV remote as menu access button.
 Discover how to disable screen off on Android for website.
@@ -13,6 +13,7 @@ Add scenes catalogue (files.scene.org, e.g. Forever15/16/17/xx).
 Refactor static top menu to pop-up menu.
 Need to fix the bug with HQ2X cache (seen clearly in Battle Command intro screen with tank).
 Add pool of non-CORS proxies.
+Add URL updating when load snapshot with "&load=...", add copy link to clipboard when open link.
 
 Far future.
 Add Spectrum 3+ emulation and run CP/M 3.0 in browser from original diskette image.

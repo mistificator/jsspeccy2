@@ -388,7 +388,7 @@ select::-ms-expand {
         font-size: 5pt;
     }
     .jsspeccy .panel, .jsspeccy .panel input, .jsspeccy .panel button, .jsspeccy .panel select, .jsspeccy .panel label {
-        font-size: 3pt;
+        font-size: 4pt;
     }		
     .jsspeccy #catalogue {
         width: 40px;
