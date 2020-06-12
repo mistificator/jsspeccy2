@@ -3,11 +3,18 @@
 // ==/ClosureCompiler==
 
 var url_pars_list = [];
-$.urlPar = function(key) {
-	if (!url_pars_list.includes(key)) {
+$.urlPar = function(key, val) {
+	if (!val && !url_pars_list.includes(key)) {
 		url_pars_list.push(key);
 	}
-	return (new URL(document.URL)).searchParams.get(key);
+	if (val) {
+		var addr_url = new URL(document.URL);
+		addr_url.searchParams.set(key, val);
+		history.pushState({id: "homepage"}, document.title, document.URL = addr_url.toString());
+	}
+	else {
+		return (new URL(document.URL)).searchParams.get(key);
+	}
 }
 
 JSSpeccy.UI = function(opts) {
@@ -36,12 +43,12 @@ JSSpeccy.UI = function(opts) {
 	
 	var load_url = $.urlPar("load");
 	if (load_url) {
-		load_url = decodeURI(load_url);
+		load_url = decodeURI(load_url).replace(opts.corsProxy, "");
 		if (opts.debugPrint) {
 			console.log("load url: ", load_url);
 		}
 		controller.stop();
-		controller.setLoadUrlOnStart(load_url);
+		controller.setLoadUrlOnStart(opts.corsProxy + load_url);
 	}	
 
 	/* Set up toolbar */
@@ -78,6 +85,8 @@ JSSpeccy.UI = function(opts) {
 			controller.setLoadUrlOnStart("");
 			controller.start();
 		}
+		$("#catalogue").prop("selectedIndex", 0);
+		$("#catalogue").trigger("change");
 //		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
@@ -115,18 +124,25 @@ JSSpeccy.UI = function(opts) {
 	});
 
 	$("button.run", toolbar).click(function() {
+		var url = $("#links").children(":selected").attr("href").replace(opts.corsProxy, "");
 		hidePanels();
 		controller.stop();
-		controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
+		controller.setLoadUrlOnStart(opts.corsProxy + url);
 		controller.start();
+		$.urlPar("load", url);
+		load_url = null;
 	});
 	
 	$("#links").change(function() {
+		var url = $("#links").children(":selected").attr("href").replace(opts.corsProxy, "");
 		hidePanels();
-		if (!controller.isRunning && !load_url) {
-			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
+		if (!load_url) {
+			if (!controller.isRunning) {
+				controller.setLoadUrlOnStart(opts.corsProxy + url);
+			}
 		}
-		urlField.val($("#links").children(":selected").attr("href"));
+		urlField.val(url);
+		$.urlPar("load", url);
 	});
 	
 	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
@@ -243,12 +259,7 @@ JSSpeccy.UI = function(opts) {
 			checkerboardFilterCheckbox.is(":checked")
 		);
 	});
-	if (($.urlPar("hq2x") || "") === "") {
-		checkerboardFilterCheckbox.parent().hide();
-	}
-	else {
-		checkerboardFilterCheckbox.attr("checked", $.urlPar("hq2x") === "on");
-	}
+	checkerboardFilterCheckbox.attr("checked", $.urlPar("hq2x") === "on");
 	
 	/* Set up panels */
 	var panels = [];
@@ -278,6 +289,9 @@ JSSpeccy.UI = function(opts) {
 	if (isSmartTV && $.urlPar("load_file") !== "on") {
 		$("#load_file", container).hide();
 	}
+	if (isSmartTV && $.urlPar("save_file") !== "on") {
+		$("#save_file", container).hide();
+	}
 	
 	var urlField = openFilePanel.find("input[type='url']");
 	openFilePanel.find("button.open-url").click(function() {
@@ -285,8 +299,20 @@ JSSpeccy.UI = function(opts) {
 		if (url !== "") {
 			hidePanels();
 			controller.stop();
-			controller.setLoadUrlOnStart($("#links").children(":selected").attr("href"));
+			controller.setLoadUrlOnStart(opts.corsProxy + url);
 			controller.start();
+			$.urlPar("load", url);
+		}
+	});
+	openFilePanel.find("button.save-file").click(function() {
+		var filename = $("#index option:selected").text();
+		if (filename.length == 0 || filename == "-") {
+			filename = "snapshot_" + (new Date(Date.now())).toISOString().replace(/[\:\.\-\T\Z]+/g, "_"); 
+		}
+		if (filename !== "") {
+			controller.stop();
+			controller.saveZ80Snapshot(filename.replace(/[\s]+/g, "_") + ".z80");
+			hidePanels();
 		}
 	});
 	
@@ -358,7 +384,7 @@ JSSpeccy.UI = function(opts) {
 		urlField.val(usb_path);	
 	}
 	else {
-		urlField.val(path_url);	
+		urlField.val(path_url.replace(opts.corsProxy, ""));	
 	}
 
   /* Preinstalled games routines */
@@ -580,6 +606,20 @@ JSSpeccy.UI = function(opts) {
 			}
 		});	
 	}
+	
+	/*
+	if (isMobile) {
+		var noSleep = new NoSleep();
+		function enableNoSleep() {
+			noSleep.enable(); // too expensive
+			if (opts.debugPrint) {
+				console.log("NoSleep enabled");
+			}
+			document.querySelector("*").removeEventListener("click", enableNoSleep);
+		}
+		document.querySelector("*").addEventListener("click", enableNoSleep);
+	}
+	*/
 
 	if (isSmartTV) { // ignore autostart: false on SmartTV
 		setTimeout(function() {

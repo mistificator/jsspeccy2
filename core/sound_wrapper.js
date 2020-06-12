@@ -85,6 +85,9 @@ JSSpeccy.SoundGenerator = function (opts) {
 		postMessage(["readSoundRegister", []]);
 		return AY8912_Regs[ayRegSelected];
 	}
+	self.readSoundRegisters = function() {
+		return AY8912_Regs;
+	}
 	self.reset = function () {
 		wrapper_buffer = [];
 		queue = [];
@@ -246,13 +249,15 @@ JSSpeccy.SoundBackend = function (opts) {
 				}
 			}
 
-			document.querySelector("*").addEventListener("click", function () {
+			function enableAudio() {
 				audioContext.resume().then(() => {
 					if (debugPrint) {
 						console.log("Playback resumed successfully");
 					}
+					document.querySelector("*").removeEventListener("click", enableAudio);
 				});
-			});
+			}
+			document.querySelector("*").addEventListener("click", enableAudio);
 			
 			return self;
 		}

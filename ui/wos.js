@@ -7,10 +7,10 @@ String.prototype.padStart = String.prototype.padStart || function (targetLength,
 };
 */
 	
-function WoS() {
+function WoSCat(cors_proxy) {
 	var self = {};
 
-	self.cors_proxy = "https://non-cors.herokuapp.com/";
+	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
 	self.wos_base = "https://www.worldofspectrum.org";
 	self.wos_search = "/infoseekid.cgi%3Fid=";
 	self.wos_index = "/games/";
@@ -91,7 +91,7 @@ function WoS() {
 
 	var is_wos_catalogue = false;
 	self.init = function(catalogue_container, letter_container, index_container, links_container) {
-		var count = $(catalogue_container + " option", ).length;
+		var count = $(catalogue_container + " option").length;
 		$(catalogue_container).append($("<option></option>").text('TOP-100 - WorldOfSpectrum.org TOP-100'));
 		$(catalogue_container).append($("<option></option>").text('WoS All - WorldOfSpectrum.org full catalogue'));
 		

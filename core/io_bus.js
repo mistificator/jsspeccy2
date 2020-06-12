@@ -22,7 +22,10 @@ JSSpeccy.IOBus = function(opts) {
 		} else if ((addr & 0x00e0) === 0x0000) {
 			/* kempston joystick */
 			return 0;
-		} else {
+		} else if (!(addr & 0x8002)) {
+			return memory.getPaging();
+		}
+		else{
 			return 0xff;
 		}
 	};

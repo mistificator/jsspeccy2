@@ -7,19 +7,15 @@
 		<script src="zxcz.js"></script>
 		<script src="rgb2019.js"></script>
 		<script src="arch.js"></script>
+		<script src="dummy.js"></script>
 		<script>		
 			$(document).ready(function() {
-				var arch = new Arch();
-				arch.init("#catalogue", "#letter", "#index", "#links");
-
-				var zxcz = new ZxCz();
-				zxcz.init("#catalogue", "#letter", "#index", "#links");
-
-				var rgb = new Rgb2019();
-				rgb.init("#catalogue", "#letter", "#index", "#links");
-				
-				var wos = new WoS();
-				wos.init("#catalogue", "#letter", "#index", "#links");
+				var cors_proxy = "https://non-cors.herokuapp.com/";
+				(new DummyCat()).init("#catalogue", "#letter", "#index", "#links");
+				(new ArchCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
+				(new ZxCzCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
+				(new Rgb2019Cat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
+				(new WoSCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
 			});
 		</script>
 	</head>

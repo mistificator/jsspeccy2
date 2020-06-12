@@ -1,7 +1,7 @@
-function Rgb2019() {
+function Rgb2019Cat(cors_proxy) {
 	var self = {};
 	
-	self.cors_proxy = "https://non-cors.herokuapp.com/";
+	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
 	self.rgb2019_base = "https://rgb.yandex/";
 
 	var loadResource = function (url) {
@@ -31,7 +31,7 @@ function Rgb2019() {
 	
 	var is_rgb2019_catalogue = false;
 	self.init = function(catalogue_container, letter_container, index_container, links_container) {
-		var count = $(catalogue_container + " option", ).length;
+		var count = $(catalogue_container + " option").length;
 		$(catalogue_container).append($("<option></option>").text('RGB - Yandex Retro Games Battle 2019'));
 
 		$(catalogue_container).change(function() {

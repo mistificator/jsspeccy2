@@ -146,6 +146,28 @@ JSSpeccy.Spectrum = function(opts) {
 		return false; /* cancel execution of the opcode where this trap happened */
 	};
 
+	// https://stackoverflow.com/a/30832210/2010648
+	function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+	}
+	self.saveZ80Snapshot = function(filename) {
+		download(JSSpeccy.Z80SnapshotCreate(processor, memory, display, sound, opts), filename, "application/octet-stream");
+	}
+	
 	return self;
 };
 

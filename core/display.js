@@ -108,6 +108,10 @@ JSSpeccy.Display = function(opts) {
 		borderColour = val;
 	};
 	
+	self.getBorder = function() {
+		return borderColour;
+	}
+	
 	var beamX, beamY; /* X character pos and Y pixel pos of beam at next screen event,
 		relative to top left of non-border screen; negative / overlarge values are in the border */
 	

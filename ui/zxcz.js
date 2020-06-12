@@ -1,11 +1,11 @@
-function ZxCz() {
+function ZxCzCat(cors_proxy) {
 	var self = {};
 	
 	var encode = function(url) {
 		return url.split("?").join("%3F").split("&").join("%26");
 	}
 	
-	self.cors_proxy = "https://non-cors.herokuapp.com/";
+	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
 	self.zxcz_base = "https://www.zx-spectrum.cz";
 	self.zxcz_index = encode("/index.php?cat1=3&cat2=3&games_page=");
 	self.zxcz_download = "/data/games/files/";
@@ -51,7 +51,7 @@ function ZxCz() {
 	
 	var is_zxcz_catalogue = false;
 	self.init = function(catalogue_container, letter_container, index_container, links_container) {
-		var count = $(catalogue_container + " option", ).length;
+		var count = $(catalogue_container + " option").length;
 		$(catalogue_container).append($("<option></option>").text('ZXCZ - ZX-Spectrum.CZ full catalogue'));
 
 		$(catalogue_container).change(function() {

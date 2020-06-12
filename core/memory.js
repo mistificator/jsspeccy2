@@ -18,7 +18,10 @@ JSSpeccy.Memory = function(opts) {
 	for (var i = 0; i < 8; i++) {
 		ramPages[i] = MemoryPage(null, i & 0x01); /* for MODEL_128K (and implicitly 48K), odd pages are contended */
 	}
-
+	self.getRamPage = function(i) {
+		return ramPages[i];
+	}
+	
 	var romPages = {
 		'48.rom': MemoryPage(JSSpeccy.roms['48.rom']),
 		'128-0.rom': MemoryPage(JSSpeccy.roms['128-0.rom']),
@@ -76,6 +79,7 @@ JSSpeccy.Memory = function(opts) {
 	};
 
 	var pagingIsLocked = false;
+	var pagingValue = 0xff;
 	if (model === JSSpeccy.Spectrum.MODEL_128K) {
 		self.setPaging = function(val) {
 			if (pagingIsLocked) return;
@@ -85,10 +89,14 @@ JSSpeccy.Memory = function(opts) {
 			readSlots[0] = (val & 0x10) ? romPages['128-1.rom'].memory : romPages['128-0.rom'].memory;
 			screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
 			pagingIsLocked = val & 0x20;
+			pagingValue = val;
 		};
 	} else {
 		self.setPaging = function(val) {
 		};
+	}
+	self.getPaging = function(val) {
+		return pagingValue;
 	}
 	
 	self.loadFromSnapshot = function(snapshotPages) {

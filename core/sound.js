@@ -95,9 +95,6 @@ SoundGenerator = function (opts) {
 	var AY_PORTA = 14;
 	var AY_PORTB = 15;
 
-	var RegArray = new Int32Array(16);
-	var VolTableArray
-
 	var AY8912_sampleRate = 0;
 	var AY8912_register_latch = 0;
 	var AY8912_Regs = new Int32Array(16);

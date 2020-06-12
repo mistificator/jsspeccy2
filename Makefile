@@ -50,7 +50,8 @@ CORE_JS_FILES=\
 	core/tzx_file.js \
 	core/viewport.js \
 	build/z80.js \
-	core/z80_file.js
+	core/z80_file.js \
+	core/z80_create.js
 
 build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 	$(MKDIR) build
@@ -58,7 +59,7 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js=core/jsspeccy.js --js=core/display.js --js=core/io_bus.js --js=core/keyboard.js --js=core/sound_wrapper.js \
 		--js=core/memory.js --js=build/roms.js --js=build/autoloaders.js --js=core/sna_file.js --js=core/spectrum.js \
 		--js=core/tap_file.js --js=core/tzx_file.js --js=core/viewport.js --js=build/z80.js \
-		--js=core/z80_file.js \
+		--js=core/z80_file.js --js=core/z80_create.js \
 		--js=lib/jdataview.js \
 		--js=lib/js-unzip.js \
 		--js=lib/js-inflate.js \
@@ -70,10 +71,7 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js_output_file=build/jquery-1.12.4.min.js
 
 	$(NPX) google-closure-compiler \
-		--js=ui/wos.js \
-		--js=ui/zxcz.js \
-		--js=ui/rgb2019.js \
-		--js=ui/arch.js \
+		--js=ui/wos.js --js=ui/zxcz.js --js=ui/rgb2019.js --js=ui/arch.js --js=ui/dummy.js \
 		--js=ui/ui.js \
 		--js_output_file=build/ui.min.js
 		

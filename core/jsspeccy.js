@@ -314,6 +314,9 @@ function JSSpeccy(container, opts) {
 		}
 	}
 
+	self.saveZ80Snapshot = function(filename) {
+		spectrum.saveZ80Snapshot(filename);
+	}
 
 	/* == Selecting Spectrum model == */
 	self.onChangeModel = Event();

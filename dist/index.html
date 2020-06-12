@@ -10,6 +10,7 @@
 		<script src="ui.min.js"></script>
 		<script>
 			$(document).ready(function() {
+				var cors_proxy = ($.urlPar("cors_proxy") || "").length > 0 ? $.urlPar("cors_proxy") : "https://non-cors.herokuapp.com/";
 				var opts = {
 					autostart: false, // no autostart enables sound on Chrome browser
 					applyContention: ($.urlPar("no_contention") !== "on"), // contention makes sound and game speed NORMAL
@@ -27,17 +28,15 @@
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
 					controller: jsspeccy,
-					debugPrint: $.urlPar("debug_print") === "on" ? true : false
+					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
+					corsProxy: cors_proxy
 				});
 //				ui.loadPreinstalledGames();
-				var zxcz = new ZxCz();
-				zxcz.init("#catalogue", "#letter", "#index", "#links");   
-				var rgb = new Rgb2019();
-				rgb.init("#catalogue", "#letter", "#index", "#links");
-				var wos = new WoS();
-				wos.init("#catalogue", "#letter", "#index", "#links");            
-				var arch = new Arch();
-				arch.init("#catalogue", "#letter", "#index", "#links");   
+				(new DummyCat()).init("#catalogue", "#letter", "#index", "#links");
+				(new ZxCzCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
+				(new Rgb2019Cat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
+				(new WoSCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links"); 
+				(new ArchCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
 			});
 		</script>
 	</head>
@@ -73,7 +72,7 @@
 							</div>
 							<div class="checkerboard-filter-div">
 								<label><input type="checkbox" class="checkerboard-filter">HQ2X</label>
-							</div>	
+							</div>
 						</li>						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
 					</ul>			
 				</div>				
@@ -84,6 +83,9 @@
 				<button class="close">close</button>
 				<div id="load_file">
 					<h3>Load from disk:</h3><small>TAP, TZX, SNA, Z80, ZIP files supported</small><p><input type="file" name="Tapes and snapshots" accept=".tap, .tzx, .sna, .z80, .zip"></p>
+				</div> 	
+				<div id="save_file">
+					<button class="save-file">Save file</button>
 				</div> 	
 				<div id="load_url">
 					<h3>Load from web:</h3><input type="url"><button class="open-url">Open URL</button>
