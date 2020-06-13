@@ -90,6 +90,20 @@ JSSpeccy.UI = function(opts) {
 //		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
+	var toolbar_full = true;
+	$("button.menu", toolbar).click(function() {
+		if (toolbar_full) {
+			$("li", toolbar).not(":first").hide();
+			$(".toolbar-div").width($(".toolbar-div").height());
+		}
+		else {
+			$(".toolbar-div").width("100%");
+			$("li", toolbar).not(":first").show();
+		}
+		toolbar_full = !toolbar_full;
+	});
+	$("button.menu", toolbar).trigger("click");
+	
 	var audioButton = $("button.audio", toolbar);
 	audioButton.click(function() {
 		controller.setAudioState(!controller.getAudioState());

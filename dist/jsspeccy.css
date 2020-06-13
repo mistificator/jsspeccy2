@@ -27,6 +27,10 @@
 
 .jsspeccy .toolbar-div {
 	clear:both;   
+  position: fixed;
+  width: 100%;
+	top: 0px;
+	left: 0px;
 }
 .jsspeccy .toolbar {
     margin: 0px;
@@ -34,14 +38,11 @@
 	overflow: hidden;
 	background-color: #445;
 	list-style-type: none;
+	opacity: 0.8;
 }
 .jsspeccy .toolbar li {
 	float: left;
 	padding-right: 1px;    
-}
-
-.jsspeccy .toolbar button {
-    margin: 0px;
 }
 
 .jsspeccy .toolbar .reset {
@@ -50,6 +51,7 @@
 }
 
 .jsspeccy .toolbar button {
+	margin: 0px;
 	text-indent: -5000px;
 	direction: ltr;
 	background-position: center center;
@@ -74,6 +76,9 @@
 	color: white;
 }
 
+.jsspeccy .menu {
+	background-image: url(images/48x48_menu.png);
+}
 .jsspeccy .toolbar .stop {
 	background-image: url(images/48x48_player_pause.png);
 }
@@ -171,15 +176,15 @@
 
 .jsspeccy #typer {
 	text-align: center;
-    width: 20%;
+	width: 20%;
 	border: 2px solid gray;
 	background-color: transparent;
-    background-image: url(images/keyboard.jpg);
-    background-size: 100% 100%;
-    background-position: center center;
+	background-image: url(images/keyboard.jpg);
+	background-size: 100% 100%;
+	background-position: center center;
 	background-repeat: no-repeat;
-    color: white; 
-    caret-color: transparent; /* cursor invisible */
+	color: white; 
+	caret-color: transparent; /* cursor invisible */
 }
 
 .jsspeccy .padblock {

@@ -19,7 +19,7 @@
 					checkerboardFilter: $.urlPar("hq2x") === "on" ? true : false,
 					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
 					audioBufferSize: $.urlPar("audio_buffer") || 1024,
-					panelYWidth: Math.floor($(".jsspeccy .toolbar button").outerHeight() * 1.05), // wtf?
+					panelYWidth: 0, 
 					border: $.urlPar("border") || "1", // ZX Spectrum default is 4
 					equalizer: (function() { var out = null; try { out = JSON.parse($.urlPar("audio_equalizer")); } catch (e) {} return out })(),
 					audioHiFi: $.urlPar("audio_hifi") === "on" ? true : false
@@ -42,41 +42,41 @@
 	</head>
 	<body>
 		<div class="jsspeccy" id="jsspeccy">
-			<div id="jsspeccy-viewport">
-				<div class= "toolbar-div">
-					<ul class="toolbar">
-						<li><button class="stop-start" title="Stop / start">stop / start</button></li>
-						<li><button class="audio" title="Audio on/off">audio on/off</button></li>
-						<li><button class="open" title="Open file">open file</button></li>
-						<li><button class="joystick_keys" title="Redefine joystick">redefine joystick</button></li>
-						<li><button class="pokes" title="Apply pokes">apply pokes</button></li>
-						<li><button class="fullscreen" title="Toggle fullscreen">fullscreen</button></li>
-						<li><button class="deviceinfo" title="Show device info">device info</button></li>
-						<li><button class="about" title="About webOS JSSpeccy">about</button></li>
-						<li>
-							<div>
-								<select class="catalogue" id="catalogue"></select>
-								<select class="catalogue" id="letter"></select>
-								<select class="catalogue" id="index"></select>
-								<select class="catalogue" id="links"></select>
+			<div id="jsspeccy-viewport"></div>
+			<div class= "toolbar-div">
+				<ul class="toolbar">
+					<li><button class="menu" title="Menu">menu</button></li>
+					<li><button class="stop-start" title="Stop / start">stop / start</button></li>
+					<li><button class="audio" title="Audio on/off">audio on/off</button></li>
+					<li><button class="open" title="Open file">open file</button></li>
+					<li><button class="joystick_keys" title="Redefine joystick">redefine joystick</button></li>
+					<li><button class="pokes" title="Apply pokes">apply pokes</button></li>
+					<li><button class="fullscreen" title="Toggle fullscreen">fullscreen</button></li>
+					<li><button class="deviceinfo" title="Show device info">device info</button></li>
+					<li><button class="about" title="About webOS JSSpeccy">about</button></li>
+					<li>
+						<div>
+							<select class="catalogue" id="catalogue"></select>
+							<select class="catalogue" id="letter"></select>
+							<select class="catalogue" id="index"></select>
+							<select class="catalogue" id="links"></select>
 <!--								<select id="preinstalled-games" style="width: 100%"></select>-->
-							</div>					
-						</li>
-						<li><button class="run" title="Run game">run</button></li>
-						<li>
-							<div>
-								<label><input type="checkbox" class="autoload-tapes" checked="checked"> Autoload tapes</label>
-							</div>
-							<div>
-								<select class="select-model"></select>
-							</div>
-							<div class="checkerboard-filter-div">
-								<label><input type="checkbox" class="checkerboard-filter">HQ2X</label>
-							</div>
-						</li>						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
-					</ul>			
-				</div>				
-			</div>
+						</div>					
+					</li>
+					<li><button class="run" title="Run game">run</button></li>
+					<li>
+						<div>
+							<label><input type="checkbox" class="autoload-tapes" checked="checked"> Autoload tapes</label>
+						</div>
+						<div>
+							<select class="select-model"></select>
+						</div>
+						<div class="checkerboard-filter-div">
+							<label><input type="checkbox" class="checkerboard-filter">HQ2X</label>
+						</div>
+					</li>						<li><button class="reset" title="Reset the Spectrum">reset</button></li>
+				</ul>			
+			</div>			
 			<div id="jsspeccy-fps"></div>
 			<div id="typer-div"><input type="text" id="typer"></input></div>
 			<div class="panel open-file">

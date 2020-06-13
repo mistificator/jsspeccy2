@@ -109,6 +109,7 @@ function JSSpeccy(container, opts) {
 		container: container,
 		panelXWidth: opts.panelXWidth,
 		panelYWidth: opts.panelYWidth,
+		debugPrint: opts.debugPrint,
 		onClickIcon: function() {self.start();}
 	});
 
