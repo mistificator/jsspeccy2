@@ -218,6 +218,9 @@ JSSpeccy.UI = function(opts) {
 			if (!isFullscreen) {
 				enableFullscreen.call(fullscreenContext);
 				isFullscreen = true;
+				if (toolbar_full) {
+					$("button.menu", toolbar).trigger("click");
+				}
 			} else {
 				disableFullscreen.call(document); 
 				isFullscreen = false;

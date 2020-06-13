@@ -21,3 +21,4 @@ ______________
 Far future.
 ______________
 Add Spectrum 3+ emulation and run CP/M 3.0 in browser from original diskette image.
+Add RS-232 support.
