@@ -32,11 +32,12 @@
 					corsProxy: cors_proxy
 				});
 //				ui.loadPreinstalledGames();
-				(new DummyCat()).init("#catalogue", "#letter", "#index", "#links");
-				(new ZxCzCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
-				(new Rgb2019Cat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
-				(new WoSCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links"); 
-				(new ArchCat(cors_proxy)).init("#catalogue", "#letter", "#index", "#links");
+				var cat_containers = ["#catalogue", "#letter", "#index", "#links"];
+				(new DummyCat()).init(...cat_containers);
+				(new ZxCzCat(cors_proxy)).init(...cat_containers);
+				(new Rgb2019Cat(cors_proxy)).init(...cat_containers);
+				(new WoSCat(cors_proxy)).init(...cat_containers); 
+				(new ArchCat(cors_proxy)).init(...cat_containers);
 			});
 		</script>
 	</head>

@@ -300,6 +300,7 @@ JSSpeccy.UI = function(opts) {
 	var fileSelect = openFilePanel.find("input[type='file']");
 	fileSelect.change(function() {
 		hidePanels();
+		controller.stop();
 		controller.loadLocalFile(this.files[0], {"autoload": autoloadTapes.is(":checked"), "debugPrint": opts.debugPrint});
 		fileSelect.val("");
 	});

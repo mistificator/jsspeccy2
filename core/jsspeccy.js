@@ -208,6 +208,7 @@ function JSSpeccy(container, opts) {
 
 		/* trigger XHR */
 		request.open('GET', url, true);
+		request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 		request.responseType = "blob";
 		self.isDownloading = true;
 		updateViewportIcon();
