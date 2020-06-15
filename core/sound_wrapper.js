@@ -108,8 +108,6 @@ JSSpeccy.SoundGenerator = function (opts) {
 			case "readSoundRegister":
 				AY8912_Regs[ayRegSelected] = e.data[1];
 				break;
-			case "notifyReady":
-				break;
 		};
 	}
 	
@@ -131,9 +129,6 @@ JSSpeccy.SoundBackend = function (opts) {
 	setAudioState(state): if state == true, enable audio; if state == false, disable.
 	Return new state (may not match the passed in state - e.g. if sound is unavailable,
 	will always return false)
-	notifyReady(dataLength): tell the backend that there is dataLength samples of audio data
-	ready to be received via the callback we set with setSource. Ignored for event-based
-	backends (= Web Audio) that trigger the callback whenever they feel like it...
 	 */
 
 	self.sampleRate = 44100;

@@ -54,18 +54,16 @@ SoundGenerator = function (opts) {
 	
 	var buzzer_val = 0;
 
-	var soundData = new Array();
+	var soundData = new Float32Array(sampleRate * oversampleRate); // 1 sec buffer
 	var soundDataLength = 0;
 	var soundDataFrameBytes = 0;
 
 	var lastaudio = 0;
 
-	var frameCount = 0;
-
 	var WCount = 0;
 	var lCounter = 0;
 
-	var aySoundData = new Array();
+	var aySoundData = new Float32Array(sampleRate); // 1 sec buffer
 	var aySoundDataLength = 0;
 	var soundDataAyFrameBytes = 0;
 
@@ -138,11 +136,9 @@ SoundGenerator = function (opts) {
 
 		lastaudio = 0;
 
-		frameCount = 0;
-
 		WCount = 0;
 		lCounter = 0;
-
+		
 		aySoundDataLength = 0;
 	  soundDataAyFrameBytes = 0;	
 	
@@ -777,29 +773,33 @@ SoundGenerator = function (opts) {
 		if (!is_enabled)
 			return;
 		size = Math.floor(size);
-		var start_index = aySoundDataLength;
-		if (aySoundData.length < aySoundDataLength + size) {
-			aySoundData.length += Math.max(65536, size);
-		}
-		aySoundDataLength += size;
-		for (var i = start_index; i < aySoundDataLength; i++, soundDataAyFrameBytes++, WCount++) {
-			if (WCount == 25) {
-				AY8912Update_8();
-				WCount = 0;
+		if (size > 0) {
+			const newDataLength = aySoundDataLength + size;
+			if (aySoundData.length >= newDataLength) {
+				for (var i = aySoundDataLength; i < newDataLength; i++, WCount++) {
+					if (WCount == 25) {
+						AY8912Update_8();
+						WCount = 0;
+					}
+					aySoundData[i] = RenderSample();
+				}
+				aySoundDataLength = newDataLength;
+				soundDataAyFrameBytes += size;
 			}
-			aySoundData[i] = RenderSample();
+			else {
+				if (opts.debugPrint) {
+					console.log("aySoundData.length", aySoundData.length, "aySoundDataLength + size", newDataLength);
+					console.log("skip aySoundData");
+				}			
+				aySoundDataLength = 0; // skip
+			}
 		}
 	}
 
+	const buzzer_step = sampleRate * oversampleRate / clockSpeed;
 	self.updateBuzzer = function (val, currentTstates) {
-		if (val == 0) {
-			val = -1;
-		}
-
-		var sound_size = (currentTstates - lastaudio) * sampleRate * oversampleRate / clockSpeed;
-		createSoundData(sound_size, buzzer_val);
-
-		buzzer_val = val;
+		createSoundData((currentTstates - lastaudio) * buzzer_step, buzzer_val);
+		buzzer_val = val <= 0 ? -1 : 1;
 		lastaudio = currentTstates;
 	}
 
@@ -808,21 +808,24 @@ SoundGenerator = function (opts) {
 			return;
 		size = Math.floor(size);
 		if (size > 0) {
-			var newDataLength = soundDataLength + size;
-			if (soundData.length < newDataLength) {
-				soundData.length += Math.max(65536, size);
+			const newDataLength = soundDataLength + size;
+			if (soundData.length >= newDataLength) {
+				soundData.fill(val, soundDataLength, newDataLength);
+				soundDataLength = newDataLength;
+				soundDataFrameBytes += size;
 			}
-			soundData.fill(val, soundDataLength, newDataLength);
-			soundDataLength = newDataLength;
-			soundDataFrameBytes += size;
+			else {
+				if (opts.debugPrint) {
+					console.log("soundData.length", soundData.length, "soundDataLength + size", newDataLength);
+					console.log("skip soundData");
+				}
+				soundDataLength = 0; // skip
+				return;
+			}
 		}
 	}
 
 	self.endFrame = function () {
-		var pad_val = 0;
-		if (lastaudio)
-			pad_val = buzzer_val;
-
 		var fill_skipped = 0;
 		const protect_buffer_underrun = 128 * Math.sqrt(audioBufferSize) * oversampleRate; //0.1 * sampleRate * oversampleRate; // 4 * audioBufferSize * oversampleRate
 		if (soundDataLength < protect_buffer_underrun) {
@@ -834,7 +837,14 @@ SoundGenerator = function (opts) {
 				fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;
 			}
 		}
-		createSoundData(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped, pad_val);
+
+		const snd_pad_count = Math.floor(samplesPerFrame * oversampleRate - soundDataFrameBytes + fill_skipped);
+		if (snd_pad_count > 0) {
+			var pad_val = 0;
+			if (lastaudio)
+				pad_val = buzzer_val;
+			createSoundData(snd_pad_count, pad_val);
+		}
 
 		fill_skipped = 0;
 		if (aySoundDataLength * oversampleRate < protect_buffer_underrun) {
@@ -846,19 +856,15 @@ SoundGenerator = function (opts) {
 				fill_skipped = Math.floor(fill_skipped / oversampleRate) * oversampleRate;		
 			}
 		}
-		handleAySound(samplesPerFrame - soundDataAyFrameBytes + fill_skipped / oversampleRate);
+		const ay_pad_count = Math.floor(samplesPerFrame - soundDataAyFrameBytes + fill_skipped / oversampleRate);
+		if (ay_pad_count > 0) {
+			handleAySound(ay_pad_count);
+		}
 
 		lastaudio = 0;
 		lastAyAudio = 0;
 		soundDataFrameBytes = 0;
 		soundDataAyFrameBytes = 0;
-		if (frameCount++ < 2)
-			return;
-		
-		if (is_enabled) {
-			postMessage(["notifyReady", soundDataLength / oversampleRate]);
-		}
-
 	}
 
 	self.selectSoundRegister = function (reg) {
@@ -866,12 +872,8 @@ SoundGenerator = function (opts) {
 	}
 
 	self.writeSoundRegister = function (val, currentTstates) {
-
-		var sound_size = (currentTstates - lastAyAudio) * sampleRate / clockSpeed;
-		handleAySound(sound_size);
-
+		handleAySound((currentTstates - lastAyAudio) * sampleRate / clockSpeed);
 		lastAyAudio = currentTstates;
-
 		AYWriteReg(ayRegSelected, val);
 	}
 
@@ -891,30 +893,28 @@ SoundGenerator = function (opts) {
 	return self;
 };
 
-onmessage = function(e) {
-	if (self.opts && self.opts.debugPrint) {
-		var time = performance.now();
-		self.commands_count = (self.commands_count || 0) + e.data.length; 
-		self.prev_time = self.prev_time || time;
-		if (time - self.prev_time > 5000) {
-			console.log("Sound worker received ", self.commands_count, " AY8912 commands, ", (1000.0 * self.commands_count / (time - self.prev_time)).toFixed(2), " commands per sec");
-			self.prev_time = time;
-			self.commands_count = 0;
-		}
-	}
+self.onmessage = function(e) {
 	for (var msg of e.data) {
-		var makeCall = function(msg) {
-			return self.snd_gen[msg[0]].apply(null, msg[1]);
-		}
-		if (msg[0] === "SoundGenerator") {		
+		if (msg[0] === "SoundGenerator") {
 			self.snd_gen = SoundGenerator.apply(null, msg[1]);
 			self.opts = msg[1][0];
 		}
 		else if (self.snd_gen) {
-			var out = makeCall(msg);
+			var out = self.snd_gen[msg[0]].apply(null, msg[1]);
 			if (out) {
-				postMessage([msg[0], out]);
+				self.postMessage([msg[0], out]);
 			}
 		}		
+	}
+	if (!(self.opts && self.opts.debugPrint)) {
+		return;
+	}
+	var time = performance.now();
+	self.commands_count = (self.commands_count || 0) + e.data.length; 
+	self.prev_time = self.prev_time || time;
+	if (time - self.prev_time > 5000) {
+		console.log("Sound worker received ", self.commands_count, " AY8912 commands, ", (1000.0 * self.commands_count / (time - self.prev_time)).toFixed(2), " commands per sec");
+		self.prev_time = time;
+		self.commands_count = 0;
 	}
 }
