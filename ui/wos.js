@@ -12,9 +12,8 @@ function WoSCat(cors_proxy) {
 
 	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
 	self.wos_base = "https://www.worldofspectrum.org";
-	self.wos_search = "/infoseekid.cgi%3Fid=";
-	self.wos_index = "/games/";
-	self.wos_top100 = "/bestgames.html";
+	self.wos_csv = "/software/software_export?";
+	self.wos_index = "/archive/software/games/";
 	
 	var loadResource = function (url) {
 		return new Promise((resolve, reject) => {
@@ -27,32 +26,37 @@ function WoSCat(cors_proxy) {
 		});
 	}
 	
+	var csv;
+	self.getCSV = async function() {
+		var csv_str = await loadResource(self.cors_proxy + self.wos_base + self.wos_csv);
+		var out = {};
+		var newline_index = 0, next_newline_index = csv_str.indexOf("\n", newline_index + 1);
+		newline_index = next_newline_index; next_newline_index = csv_str.indexOf("\n", newline_index + 1); // skip horizontal header
+		while (next_newline_index > 0) {
+			var line = csv_str.substring(newline_index + 1, next_newline_index).trim();
+			var splitted_line = line.split(",", 4);
+			if (splitted_line[2] && splitted_line[3]) {
+				out["\"" + splitted_line[2].replace(/['"]+/g, "") + "\""] = splitted_line[3];
+			}
+			newline_index = next_newline_index;
+			next_newline_index = csv_str.indexOf("\n", newline_index + 1);
+		} 
+		var sorted_out = {};
+		Object.keys(out).sort().forEach(function(key) {
+			sorted_out[key] = out[key];
+		});		
+		console.log(sorted_out);
+		return new Promise((resolve) => { resolve(sorted_out); });
+	}
+	
 	self.getIndex = async function(letter) {
-		if (letter == "#") {
-			letter = "1";
-		}
-		var str = letter != "-" ? await loadResource(self.cors_proxy + self.wos_base + self.wos_index + letter.toLowerCase() + ".html") : await loadResource(self.cors_proxy + self.wos_base + self.wos_top100);
-		var html = $.parseHTML(str);
 		var out = [];
-		if (letter != "-") {
-			$("pre", html).each(function(i, el) {
-				var n = 0;
-				for (var a of $("a", el)) {
-					out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).split("?").join("%3F")});
-				}
-			});
-		}
-		else {
-			$("table", html).each(function(i, el) {
-				var score_label = $("tr:contains('Score')", el);
-				if (score_label.length) {
-					var n = 0;
-					for (var a of $("a", el)) {
-						out.push({title: (++n).toString() + "." + $(a).text(), catalogue_url: self.cors_proxy + self.wos_base + ($(a).attr("href")).split("?").join("%3F")});
-					}
-				}
-			});
-		}
+		var n = 0;
+		Object.keys(csv).forEach(function(key) {
+			if (key.charAt(1).toUpperCase() == letter) {
+				out.push({title: (++n).toString() + "." + key.replace(/['"]+/g, ""), catalogue_url: self.cors_proxy + self.wos_base + self.wos_index + csv[key]});
+			}
+		});
 		return new Promise((resolve) => { resolve(out); });
 	}
 	
@@ -60,32 +64,29 @@ function WoSCat(cors_proxy) {
 		var str = await loadResource(catalogue_url);
 		var html = $.parseHTML(str);	
 		var tapes_links = [];
-		$("table", html).each(function(i, el) {
-			var filename_label = $("tr:contains('Filename')", el);
-			if (filename_label.length) {			
-				var index = $("td:contains('Filename')", filename_label).index();
-				for (var tr of filename_label.siblings()) {
-					var href = $("a", $("td:eq(" + index + ")", tr)).attr("href");
-					if (!href) {
-						continue;
-					}
-					var href_parts = href.split(".");
-					var ext = href_parts.pop().toUpperCase();
-					if (ext == "ZIP") {
-						ext = href_parts.pop().toUpperCase();
-					}
-					if (ext != "TZX" && ext != "TAP" && ext != "Z80" && ext != "SNA") {
-						continue;
-					}
-					if (ext == "TAP") {
-						tapes_links.unshift(self.cors_proxy + self.wos_base + href);
-					}
-					else {
-						tapes_links.push(self.cors_proxy + self.wos_base + href);
-					}
-				}
-				return false; // break
+		var table = $("h3:hidden", html).first().siblings("table").first(); // wtf?
+		$("tr", table).each(function(i, el) {
+			if (i == 0) {
+				return true;
 			}
+			var href = $("a", $("td:eq(1)", el)).attr("href");
+			if (!href) {
+				return true;
+			}
+			var href_parts = href.split(".");
+			var ext = href_parts.pop().toUpperCase();
+			if (ext == "ZIP") {
+				ext = href_parts.pop().toUpperCase();
+			}
+			if (ext != "TZX" && ext != "TAP" && ext != "Z80" && ext != "SNA") {
+				return true;
+			}
+			if (ext == "TAP") {
+				tapes_links.unshift(self.cors_proxy + href);
+			}
+			else {
+				tapes_links.push(self.cors_proxy + href);
+			}			
 		});
 		return new Promise((resolve) => { resolve(tapes_links); });
 	}
@@ -93,26 +94,23 @@ function WoSCat(cors_proxy) {
 	var is_wos_catalogue = false;
 	self.init = function(catalogue_container, letter_container, index_container, links_container) {
 		var count = $(catalogue_container + " option").length;
-		$(catalogue_container).append($("<option></option>").text('TOP-100 - WorldOfSpectrum.org TOP-100'));
 		$(catalogue_container).append($("<option></option>").text('WoS All - WorldOfSpectrum.org full catalogue'));
-		
 		$(catalogue_container).change(function() {
 			is_wos_catalogue = false;
 			switch ($(catalogue_container + " option:selected").index() - count) {
-				case 0: // top-100
-					is_wos_catalogue = true;
-					$(letter_container).empty();
-					$(letter_container).append($("<option></option>").text('-'));
-					$(letter_container).trigger("change");
-					break;
-				case 1: // full catalogue
+				case 0: // full catalogue
 					is_wos_catalogue = true;
 					$(letter_container).empty();
 					for (var c = ("A").charCodeAt(0); c <= ("Z").charCodeAt(0); c++) {
 						$(letter_container).append($("<option></option>").text(String.fromCharCode(c)));
 					}
-					$(letter_container).append($("<option></option>").text('#'));
-					$(letter_container).trigger("change");
+					for (var c = ("0").charCodeAt(0); c <= ("9").charCodeAt(0); c++) {
+						$(letter_container).append($("<option></option>").text(String.fromCharCode(c)));
+					}
+					self.getCSV().then(function(out) {
+						csv = out;
+						$(letter_container).trigger("change");
+					});
 					break;
 			}
 		});		
