@@ -87,7 +87,6 @@ JSSpeccy.UI = function(opts) {
 		}
 		$("#catalogue").prop("selectedIndex", 0);
 		$("#catalogue").trigger("change");
-//		$("#preinstalled-games", toolbar).prop("selectedIndex", 0);
 	});
 
 	var toolbar_full = true;
@@ -405,7 +404,7 @@ JSSpeccy.UI = function(opts) {
 		urlField.val(path_url.replace(opts.corsProxy, ""));	
 	}
 
-  /* Preinstalled games routines */
+  /* Pokes */
 	var loadResource = function (url, callback) {
 		var request = new XMLHttpRequest();
 		request.addEventListener("load", function(e) {
@@ -414,45 +413,7 @@ JSSpeccy.UI = function(opts) {
 		request.open("GET", url);
 		request.send();
 	}
-
-	/*
-	var addSelectEntry = function(data) {		
-		var tapes = eval("(function() { return " + data + ";})()");
-		for (var [key, value] of Object.entries(tapes)) {
-			$("#preinstalled-games", toolbar)
-					.append($("<option></option>")
-                    .attr("value", Object.keys(value)[0])
-                    .attr("id", isSmartTV ? Object.values(value)[0] : "")
-                    .text(key)); 
-		}	
-	};
-	
-	self.loadPreinstalledGames = function() {
-		(function() {
-			$("#preinstalled-games", container)
-			.empty()
-			.append($("<option></option>")
-	        .text("PLAY NOW")); 
-		})();
-		loadResource("tapes.js?" + performance.now(), addSelectEntry);
-	};
-	
-  $("#preinstalled-games", toolbar).change(function() {
-    if ($("#preinstalled-games", toolbar).prop("selectedIndex") === 0) {
-      $("button.reset", toolbar).click();
-      return;
-    }
-    var filename = $(this).val();
-    if (filename) {
-      controller.loadFromUrl(
-        filename,
-        {"autoload": true, "debugPrint": opts.debugPrint}
-      );
-//      controller.setKeymap($(this).children(":selected").attr("id") || "");
-    }
-  });
-	*/
-  
+ 
 	loadResource("zx_spectrum_pokes.txt", function(text) {
 		pokesPanel.find("textarea").val(text);
 	});
@@ -625,25 +586,18 @@ JSSpeccy.UI = function(opts) {
 		});	
 	}
 	
-	/*
-	if (isMobile) {
-		var noSleep = new NoSleep();
-		function enableNoSleep() {
-			noSleep.enable(); // too expensive
-			if (opts.debugPrint) {
-				console.log("NoSleep enabled");
-			}
-			document.querySelector("*").removeEventListener("click", enableNoSleep);
-		}
-		document.querySelector("*").addEventListener("click", enableNoSleep);
-	}
-	*/
-
 	if (isSmartTV) { // ignore autostart: false on SmartTV
 		setTimeout(function() {
 			controller.start();
 		}, 0);
 	}
+	
+	var cat_containers = ["#catalogue", "#letter", "#index", "#links"];
+	(new DummyCat()).init(...cat_containers);
+	(new ZxCzCat(opts.cors_proxy)).init(...cat_containers);
+	(new Rgb2019Cat(opts.cors_proxy)).init(...cat_containers);
+	(new WoSCat(opts.cors_proxy)).init(...cat_containers); 
+	(new ArchCat(opts.cors_proxy)).init(...cat_containers);	
 	
 	return self;
 };

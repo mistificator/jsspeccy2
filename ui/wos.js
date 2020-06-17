@@ -14,6 +14,7 @@ function WoSCat(cors_proxy) {
 	self.wos_base = "https://www.worldofspectrum.org";
 	self.wos_csv = "/software/software_export?";
 	self.wos_index = "/archive/software/games/";
+	self.wos_storage = "WoS_CSV";
 	
 	var loadResource = function (url) {
 		return new Promise((resolve, reject) => {
@@ -26,7 +27,7 @@ function WoSCat(cors_proxy) {
 		});
 	}
 	
-	var csv;
+	var csv_index = JSON.parse(localStorage.getItem(self.wos_storage));
 	self.getCSV = async function() {
 		var csv_str = await loadResource(self.cors_proxy + self.wos_base + self.wos_csv);
 		var out = {};
@@ -36,7 +37,9 @@ function WoSCat(cors_proxy) {
 			var line = csv_str.substring(newline_index + 1, next_newline_index).trim();
 			var splitted_line = line.split(",", 4);
 			if (splitted_line[2] && splitted_line[3]) {
-				out["\"" + splitted_line[2].replace(/['"]+/g, "") + "\""] = splitted_line[3];
+				var str_no_quotes = splitted_line[2].replace(/['"]+/g, "");
+				str_no_quotes = str_no_quotes.replace(/^./, str_no_quotes.charAt(0).toUpperCase());
+				out["\"" + str_no_quotes + "\""] = splitted_line[3];
 			}
 			newline_index = next_newline_index;
 			next_newline_index = csv_str.indexOf("\n", newline_index + 1);
@@ -45,16 +48,18 @@ function WoSCat(cors_proxy) {
 		Object.keys(out).sort().forEach(function(key) {
 			sorted_out[key] = out[key];
 		});		
-		console.log(sorted_out);
 		return new Promise((resolve) => { resolve(sorted_out); });
 	}
 	
 	self.getIndex = async function(letter) {
 		var out = [];
 		var n = 0;
-		Object.keys(csv).forEach(function(key) {
+		Object.keys(csv_index).forEach(function(key) {
 			if (key.charAt(1).toUpperCase() == letter) {
-				out.push({title: (++n).toString() + "." + key.replace(/['"]+/g, ""), catalogue_url: self.cors_proxy + self.wos_base + self.wos_index + csv[key]});
+				out.push({
+					title: (++n).toString() + "." + key.replace(/['"]+/g, ""), 
+					catalogue_url: self.cors_proxy + self.wos_base + self.wos_index + csv_index[key]
+				});
 			}
 		});
 		return new Promise((resolve) => { resolve(out); });
@@ -94,7 +99,7 @@ function WoSCat(cors_proxy) {
 	var is_wos_catalogue = false;
 	self.init = function(catalogue_container, letter_container, index_container, links_container) {
 		var count = $(catalogue_container + " option").length;
-		$(catalogue_container).append($("<option></option>").text('WoS All - WorldOfSpectrum.org full catalogue'));
+		$(catalogue_container).append($("<option></option>").text('WoS - WorldOfSpectrum.org full catalogue'));
 		$(catalogue_container).change(function() {
 			is_wos_catalogue = false;
 			switch ($(catalogue_container + " option:selected").index() - count) {
@@ -107,10 +112,19 @@ function WoSCat(cors_proxy) {
 					for (var c = ("0").charCodeAt(0); c <= ("9").charCodeAt(0); c++) {
 						$(letter_container).append($("<option></option>").text(String.fromCharCode(c)));
 					}
-					self.getCSV().then(function(out) {
-						csv = out;
-						$(letter_container).trigger("change");
+					var csv_index_empty = !csv_index;
+					self.getCSV().then(function(out) { // always update or create csv_index
+						if (out) {
+							localStorage.setItem(self.wos_storage, JSON.stringify(out)); // update csv_index in local storage
+							if (csv_index_empty) {
+								csv_index = out; // create csv_index
+								$(letter_container).trigger("change");
+							}
+						}
 					});
+					if (!csv_index_empty) { // use current csv_index from local storage
+						$(letter_container).trigger("change");
+					}
 					break;
 			}
 		});		
