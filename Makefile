@@ -1,10 +1,10 @@
 .PHONY: all
 
 DIST_FILES=\
-	build\jsspeccy-core.min.js \
 	build\jquery-1.12.4.min.js \
 	build\sound.min.js \
 	build\ui.min.js \
+	build\jsspeccy-core.min.js \
 	README
 
 MKDIR=-mkdir  
@@ -18,6 +18,8 @@ all: $(DIST_FILES)
 	$(MKDIR) dist
 	$(MKDIR) dist\OutputIPK
 	$(COPY_DST)
+    $(CLEAN) .\dist\OutputIPK\*.*
+    $(ARES_PACK) -o .\dist\OutputIPK -n .\dist
 
 build/roms.js: bin2js.pl roms/*
 	$(MKDIR) build
@@ -32,8 +34,22 @@ build/z80.js: core/z80.coffee
 	$(NPX) coffee -c -o build/ core/z80.coffee
 
 build/sound.min.js: core/sound.js
+	$(MKDIR) build
 	$(NPX) minify core/sound.js > build/sound.min.js
 	
+build/ui.min.js: ui/*	
+	$(MKDIR) build
+	$(NPX) google-closure-compiler \
+		--js=ui/wos.js --js=ui/zxcz.js --js=ui/rgb2019.js --js=ui/arch.js --js=ui/dummy.js \
+		--js=ui/ui.js \
+		--js_output_file=build/ui.min.js
+		
+build/jquery-1.12.4.min.js: lib/*		
+	$(MKDIR) build
+	$(NPX) google-closure-compiler \
+		--js=lib/jquery-1.12.4.js --js=lib/jquery.cookie.js \
+		--js_output_file=build/jquery-1.12.4.min.js	
+		
 CORE_JS_FILES=\
 	core/jsspeccy.js \
 	core/display.js \
@@ -65,18 +81,6 @@ build/jsspeccy-core.min.js: $(CORE_JS_FILES)
 		--js=lib/js-inflate.js \
 		--js=lib/hqx.js \
 		--js_output_file=build/jsspeccy-core.min.js
-		
-	$(NPX) google-closure-compiler \
-		--js=lib/jquery-1.12.4.js --js=lib/jquery.cookie.js \
-		--js_output_file=build/jquery-1.12.4.min.js
-
-	$(NPX) google-closure-compiler \
-		--js=ui/wos.js --js=ui/zxcz.js --js=ui/rgb2019.js --js=ui/arch.js --js=ui/dummy.js \
-		--js=ui/ui.js \
-		--js_output_file=build/ui.min.js
-		
-    $(CLEAN) .\dist\OutputIPK\*.*
-    $(ARES_PACK) -o .\dist\OutputIPK -n .\dist
 
 .PHONY: clean
 clean:

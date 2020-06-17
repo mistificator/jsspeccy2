@@ -10,7 +10,6 @@
 		<script src="ui.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				var cors_proxy = ($.urlPar("cors_proxy") || "").length > 0 ? $.urlPar("cors_proxy") : "https://non-cors.herokuapp.com/";
 				var opts = {
 					autostart: false, // no autostart enables sound on Chrome browser
 					applyContention: ($.urlPar("no_contention") !== "on"), // contention makes sound and game speed NORMAL
@@ -25,19 +24,13 @@
 					audioHiFi: $.urlPar("audio_hifi") === "on" ? true : false
 				};
 				var jsspeccy = JSSpeccy("jsspeccy-viewport", opts);
+				var cors_proxy = ($.urlPar("cors_proxy") || "").length > 0 ? $.urlPar("cors_proxy") : "https://non-cors.herokuapp.com/";
 				var ui = JSSpeccy.UI({
 					container: "jsspeccy",
 					controller: jsspeccy,
-					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
+					debugPrint: opts.debugPrint,
 					corsProxy: cors_proxy
 				});
-//				ui.loadPreinstalledGames();
-				var cat_containers = ["#catalogue", "#letter", "#index", "#links"];
-				(new DummyCat()).init(...cat_containers);
-				(new ZxCzCat(cors_proxy)).init(...cat_containers);
-				(new Rgb2019Cat(cors_proxy)).init(...cat_containers);
-				(new WoSCat(cors_proxy)).init(...cat_containers); 
-				(new ArchCat(cors_proxy)).init(...cat_containers);
 			});
 		</script>
 	</head>
@@ -61,7 +54,6 @@
 							<select class="catalogue" id="letter"></select>
 							<select class="catalogue" id="index"></select>
 							<select class="catalogue" id="links"></select>
-<!--								<select id="preinstalled-games" style="width: 100%"></select>-->
 						</div>					
 					</li>
 					<li><button class="run" title="Run game">run</button></li>
