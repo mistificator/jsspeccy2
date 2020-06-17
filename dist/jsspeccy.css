@@ -261,7 +261,7 @@ select::-ms-expand {
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 20px;
+			top: 0px;
 		}				
 		.jsspeccy .checkerboard-filter-div label {
 			font-size: 18pt;
@@ -320,7 +320,7 @@ select::-ms-expand {
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 5px;
+			top: 0px;
 		}				
 		.jsspeccy .checkerboard-filter-div label {
 			font-size: 9pt;
@@ -409,10 +409,10 @@ select::-ms-expand {
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 3px;
+			top: 0px;
 		}				
 		.jsspeccy .checkerboard-filter-div label {
-			font-size: 5pt;
+			font-size: 4pt;
 		}					
     .jsspeccy #jsspeccy-fps {
         font-size: 3pt;

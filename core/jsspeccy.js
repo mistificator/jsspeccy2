@@ -168,7 +168,10 @@ function JSSpeccy(container, opts) {
 		var newState = soundBackend.setAudioState(requestedState);
 		if (originalState != newState) self.onChangeAudioState.trigger(newState);
 	};
-
+	self.setAudioHiFi = function(state) {
+		soundBackend.setHiFi(state);
+	}
+	
 	/* == Snapshot / Tape file handling == */
 	self.loadLocalFile = function(file, opts) {
 		var reader = new FileReader();

@@ -6,7 +6,7 @@ ______________
 Refactor sound message queue processing and optimize AY sound generation.
 +++++Add .z80 snapshot export.
 +++++Add "hq2x=off" URL key for Android and webOS.
-Add audio postprocessing checkbox.
++++++Add audio postprocessing checkbox.
 Add Yellow button on LG TV remote as menu access button.
 -----Discover how to disable screen off on Android for website. * NoSleep.js is too expensive, invisible <video> is a too dirty hack
 Refactor HQ2X applicance with help of main rendering video cache.

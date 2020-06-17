@@ -277,6 +277,14 @@ JSSpeccy.UI = function(opts) {
 	});
 	checkerboardFilterCheckbox.attr("checked", $.urlPar("hq2x") === "on");
 	
+	var audioHiFiCheckbox = $("input.audio-hifi");
+	audioHiFiCheckbox.change(function() {
+		controller.setAudioHiFi(
+			audioHiFiCheckbox.is(":checked")
+		);
+	});
+	audioHiFiCheckbox.attr("checked", $.urlPar("audio_hifi") === "on");	
+	
 	/* Set up panels */
 	var panels = [];
 

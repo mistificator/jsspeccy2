@@ -119,6 +119,7 @@ JSSpeccy.SoundBackend = function (opts) {
 	
 	opts = opts || {};
 	var debugPrint = opts.debugPrint;
+	var hifi = opts.audioHiFi;
 	var buffer_size = self.audioBufferSize = Number.parseInt(new String(opts.audioBufferSize || 1024));
 
 	/* Regardless of the underlying implementation, an instance of SoundBackend exposes the API:
@@ -176,7 +177,7 @@ JSSpeccy.SoundBackend = function (opts) {
 
 			var createCompressor = function() {
 				var compressor = audioContext.createDynamicsCompressor();
-		    compressor.threshold.setValueAtTime(-10, audioContext.currentTime);
+				compressor.threshold.setValueAtTime(-10, audioContext.currentTime);
 				compressor.knee.setValueAtTime(2, audioContext.currentTime);
 				compressor.ratio.setValueAtTime(2, audioContext.currentTime);
 				compressor.attack.setValueAtTime(0.004, audioContext.currentTime);
@@ -192,7 +193,7 @@ JSSpeccy.SoundBackend = function (opts) {
 //				var equalizer = [[60, 0], [170, 3], [310, 0], [600, -2], [1000, -4.5], [3000, -1.5], [6000, 3], [12000, 4.5], [14000, 4.5], [16000, 3]]; // iphone
 				var equalizer = opts.equalizer || [[100, 5], [300, 2], [857, 0], [2400, 2], [6900, 5], [9000, -3], [16000, -12]];	// https://www.reddit.com/r/chiptunes/comments/2ffuzd/good_eq_settings_for_chip/
 				var filters = [audioNode];
-				if (opts.audioHiFi && equalizer.length > 0 && equalizer[0].length > 0) {
+				if (hifi && equalizer.length > 0 && equalizer[0].length > 0) {
 					filters = filters.concat(equalizer.map(createFilter));
 					filters = filters.concat(createCompressor());
 					filters.reduce(function (prev, curr) {
@@ -241,6 +242,20 @@ JSSpeccy.SoundBackend = function (opts) {
 						console.log("Sound disabled");
 					}
 					return false;
+				}
+			}
+			self.setHiFi = function (state) {
+				if (hifi == state) {
+					return;
+				}
+				hifi = state;
+				var saved_state = self.isEnabled;
+				if (self.isEnabled) {
+					self.setAudioState(false);
+				}
+				createSoundChain();
+				if (saved_state) {
+					self.setAudioState(true);
 				}
 			}
 
