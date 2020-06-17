@@ -94,10 +94,12 @@ JSSpeccy.UI = function(opts) {
 		if (toolbar_full) {
 			$("li", toolbar).not(":first").hide();
 			$(".toolbar-div").width($(".toolbar-div").height());
+			$("#jsspeccy-fps", container).show();
 		}
 		else {
 			$(".toolbar-div").width("100%");
 			$("li", toolbar).not(":first").show();
+			$("#jsspeccy-fps", container).hide();
 		}
 		toolbar_full = !toolbar_full;
 	});
@@ -158,9 +160,6 @@ JSSpeccy.UI = function(opts) {
 		$.urlPar("load", url);
 	});
 	
-	var fps_html = "<div>Video FPS: <span class=\"fps\">0.0</span></div><div>CPU FPS: <span class=\"cfps\">0.0</span></div>";
-	$("#jsspeccy-fps", container).html(fps_html);
-	
   function checkUserAgent() {
     var ua = navigator.userAgent.toLowerCase(), os = {},
     android = ua.match(/(android)\s+([\d.]+)/),
@@ -197,7 +196,7 @@ JSSpeccy.UI = function(opts) {
 		$(".panel.information #content").html(
 				"<br/>Device information" + 
 				"<p>User agent: " + navigator.userAgent + "</p>" +
-				"<p>" + fps_html + "</p>" +
+				"<p>" + $("#jsspeccy-fps", container).html() + "</p>" +
 				"<p>Screen size: " + window.screen.width + "x" + window.screen.height + "<br/>" +
 				"Device pixel ratio: " + window.devicePixelRatio + "</p>" +
 				"<p>URL: " + document.URL + "</p>" + 

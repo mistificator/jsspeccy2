@@ -35,11 +35,13 @@ function WoSCat(cors_proxy) {
 		newline_index = next_newline_index; next_newline_index = csv_str.indexOf("\n", newline_index + 1); // skip horizontal header
 		while (next_newline_index > 0) {
 			var line = csv_str.substring(newline_index + 1, next_newline_index).trim();
-			var splitted_line = line.split(",", 4);
-			if (splitted_line[2] && splitted_line[3]) {
-				var str_no_quotes = splitted_line[2].replace(/['"]+/g, "");
-				str_no_quotes = str_no_quotes.replace(/^./, str_no_quotes.charAt(0).toUpperCase());
-				out["\"" + str_no_quotes + "\""] = splitted_line[3];
+			var splitted_line = line.split(",");
+			if (splitted_line[7] && splitted_line[7].toLowerCase() === "available") {
+				if (splitted_line[2] && splitted_line[3]) {
+					var str_no_quotes = splitted_line[2].replace(/['"]+/g, "");
+					str_no_quotes = str_no_quotes.replace(/^./, str_no_quotes.charAt(0).toUpperCase());
+					out["\"" + str_no_quotes + "\""] = splitted_line[3];
+				}
 			}
 			newline_index = next_newline_index;
 			next_newline_index = csv_str.indexOf("\n", newline_index + 1);
