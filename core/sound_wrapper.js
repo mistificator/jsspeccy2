@@ -24,15 +24,18 @@ JSSpeccy.SoundGenerator = function (opts) {
 		reg = 0;
 	}
 	
-	postMessage(["SoundGenerator", 
-	[{
-		model: opts.model,
-		backendSampleRate: backend.sampleRate,
-		backendEnabled: backend.isEnabled,
-		backendAudioBufferSize: backend.audioBufferSize,
-		debugPrint: opts.debugPrint	
-	}]], forcedPostMessage);
-
+	var requestSoundGenerator = function() {
+		postMessage(["SoundGenerator", 
+		[{
+			model: opts.model,
+			backendSampleRate: backend.sampleRate,
+			backendEnabled: backend.isEnabled,
+			backendAudioBufferSize: backend.audioBufferSize,
+			debugPrint: opts.debugPrint	
+		}]], forcedPostMessage);
+	}
+	requestSoundGenerator();
+	
 	var fillBuffer = function(channel_buffer) {
 		if (opts.debugPrint) {
 			if (wrapper_buffer.length == 0) {
@@ -107,6 +110,9 @@ JSSpeccy.SoundGenerator = function (opts) {
 				break;
 			case "readSoundRegister":
 				AY8912_Regs[ayRegSelected] = e.data[1];
+				break;
+			case "requestSoundGenerator":
+				requestSoundGenerator();
 				break;
 		};
 	}
@@ -253,7 +259,7 @@ JSSpeccy.SoundBackend = function (opts) {
 				if (self.isEnabled) {
 					self.setAudioState(false);
 				}
-				createSoundChain();
+				filters = createSoundChain();
 				if (saved_state) {
 					self.setAudioState(true);
 				}

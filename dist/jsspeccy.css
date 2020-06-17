@@ -59,15 +59,6 @@
     background-size: contain;
 }
 
-/*
-.jsspeccy #preinstalled-games {    
-	background-image: url(images/48x48_package_games_arcade.png);
-	background-repeat: no-repeat;
-	background-position: left center;	
-    background-size: contain;
-}
-*/
-
 .jsspeccy #catalogue, .jsspeccy #letter, .jsspeccy #index  { 
     margin-right:-12px;
  }
@@ -235,11 +226,6 @@ select::-ms-expand {
         width: 64px;
         height: 64px;
     }
-/*    .jsspeccy #preinstalled-games {
-        height: 64px;
-        font-size: 18pt;
-        padding-left: 64px;
-    }*/
     .jsspeccy .catalogue {
         height: 64px;
         font-size: 18pt;
@@ -261,7 +247,7 @@ select::-ms-expand {
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 0px;
+			top: 16px;
 		}				
 		.jsspeccy .checkerboard-filter-div label {
 			font-size: 18pt;
@@ -294,11 +280,6 @@ select::-ms-expand {
         width: 24px;
         height: 24px;
     }
-/*    .jsspeccy #preinstalled-games {
-        height: 24px;
-        font-size: 9pt;
-        padding-left: 24px;
-    }    */
     .jsspeccy .catalogue {
         height: 24px;
         font-size: 9pt;
@@ -320,7 +301,7 @@ select::-ms-expand {
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 0px;
+			top: 4px;
 		}				
 		.jsspeccy .checkerboard-filter-div label {
 			font-size: 9pt;
@@ -383,11 +364,6 @@ select::-ms-expand {
         width: 20px;
         height: 20px;
     }
-/*    .jsspeccy #preinstalled-games {
-        height: 20px;
-        font-size: 5pt;
-        padding-left: 20px;
-    }    */
     .jsspeccy .catalogue {
         height: 20px;
         font-size: 5pt;
@@ -409,7 +385,7 @@ select::-ms-expand {
     }
 		.jsspeccy .checkerboard-filter-div {
 			position: absolute;
-			top: 0px;
+			top: 2px;
 		}				
 		.jsspeccy .checkerboard-filter-div label {
 			font-size: 4pt;

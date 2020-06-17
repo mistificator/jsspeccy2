@@ -904,7 +904,10 @@ self.onmessage = function(e) {
 			if (out) {
 				self.postMessage([msg[0], out]);
 			}
-		}		
+		}
+		else {
+			self.postMessage(["requestSoundGenerator", null]);
+		}
 	}
 	if (!(self.opts && self.opts.debugPrint)) {
 		return;
