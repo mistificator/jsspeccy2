@@ -558,13 +558,20 @@ JSSpeccy.UI = function(opts) {
       }
     });  
     document.addEventListener("keydown", function(e) {
-      console.log(e.key + " " + e.keyCode);
-      if (e.keyCode == controller.keyboard().TV_Blue) {// LG remote blue button
-        $("#typer", container).click();
-      }
-      if (e.keyCode == controller.keyboard().TV_Back) {// LG remote back button
-        $("#typer", container).blur();
-      }
+			if (opts.debugPrint) {
+				console.log(e.key + " " + e.keyCode);
+			}
+			switch (e.keyCode) {
+				case controller.keyboard().TV_Yellow: // LG remote yellow button
+					$("button.menu", toolbar).trigger("click");
+					break;
+				case controller.keyboard().TV_Blue: // LG remote blue button
+					$("#typer", container).click();
+					break;
+				case controller.keyboard().TV_Back: // LG remote back button
+					$("#typer", container).blur();
+					break;
+			}
     });  
   }
   
@@ -601,10 +608,10 @@ JSSpeccy.UI = function(opts) {
 	
 	var cat_containers = ["#catalogue", "#letter", "#index", "#links"];
 	(new DummyCat()).init(...cat_containers);
-	(new ZxCzCat(opts.cors_proxy)).init(...cat_containers);
-	(new Rgb2019Cat(opts.cors_proxy)).init(...cat_containers);
-	(new WoSCat(opts.cors_proxy)).init(...cat_containers); 
-	(new ArchCat(opts.cors_proxy)).init(...cat_containers);	
+	(new ZxCzCat(opts.corsProxy)).init(...cat_containers);
+	(new Rgb2019Cat(opts.corsProxy)).init(...cat_containers);
+	(new ArchCat(opts.corsProxy)).init(...cat_containers);
+	(new WoSCat(opts.corsProxy)).init(...cat_containers); 
 	
 	return self;
 };

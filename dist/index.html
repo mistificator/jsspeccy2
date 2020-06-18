@@ -163,31 +163,29 @@
 						<p>Redefine joystick</p>
 						<select id="selcontrol" onchange="$.setJoystick(document.getElementById('selcontrol').value)">
 								<option value="&#x2191;,&#x2193;,&#x2190;,&#x2192;,0,Enter" selected="">CURSOR</option>
-								<option value="Q,A,O,P,M,Q">Q,A,O,P,M</option>                    
 								<option value="Q,A,O,P,M,Space">Q,A,O,P,M,Space</option>                    
-								<option value="N,M,Z,X,Symbol Shift,N">N,M,Z,X,Symbol</option>                    
-								<option value="7,6,5,8,0,7">PROTEK</option>
-								<option value="4,3,1,2,5,4">INTERFACE 1</option>                  
-								<option value="9,8,6,7,0,9">INTERFACE 2</option>
+								<option value="7,6,5,8,0,0">PROTEK</option>
+								<option value="4,3,1,2,5,5">SINCLAIR 1</option>                  
+								<option value="9,8,6,7,0,0">SINCLAIR 2</option>
 						</select>                
 						<ul>
 								<li>  
-										<div><label for='select_key_up'>&uarr;</label><select id='select_key_up' class="selcontrol_options"></select></div>
+										<div><label style="opacity: 0;">■</label><label for='select_key_up'>&uarr;</label><select id='select_key_up' class="selcontrol_options"></select></div>
 								</li>
 								<li>          
-										<div><label for='select_key_down'>&darr;</label><select id='select_key_down' class="selcontrol_options"></select></div>
+										<div><label style="opacity: 0;">■</label><label for='select_key_down'>&darr;</label><select id='select_key_down' class="selcontrol_options"></select></div>
 								</li>
 								<li>
-										<div><label for='select_key_left'>&larr;</label><select id='select_key_left' class="selcontrol_options"></select></div>
+										<div><label style="opacity: 0;">■</label><label for='select_key_left'>&larr;</label><select id='select_key_left' class="selcontrol_options"></select></div>
 								</li>
 								<li>                   
-										<div><label for='select_key_right'>&rarr;</label><select id='select_key_right' class="selcontrol_options"></select></div>
+										<div><label style="opacity: 0;">■</label><label for='select_key_right'>&rarr;</label><select id='select_key_right' class="selcontrol_options"></select></div>
 								</li>
 								<li>
-										<div><label for='select_key_fire'>A</label><select id='select_key_fire' class="selcontrol_options"></select></div>
+										<div><label style="color: green;">■</label><label for='select_key_fire'>A</label><select id='select_key_fire' class="selcontrol_options"></select></div>
 								</li>
 								<li>
-										<div><label for='select_key_action'>B</label><select id='select_key_action' class="selcontrol_options"></select></div>
+										<div><label style="color: red;">■</label><label for='select_key_action'>B</label><select id='select_key_action' class="selcontrol_options"></select></div>
 								</li>
 						</ul>
 				</div>   

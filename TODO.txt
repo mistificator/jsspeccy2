@@ -7,7 +7,7 @@ Refactor sound message queue processing and optimize AY sound generation.
 +++++Add .z80 snapshot export.
 +++++Add "hq2x=off" URL key for Android and webOS.
 +++++Add audio postprocessing checkbox.
-Add Yellow button on LG TV remote as menu access button.
++++++Add Yellow button on LG TV remote as menu access button.
 -----Discover how to disable screen off on Android for website. * NoSleep.js is too expensive, invisible <video> is a too dirty hack
 Refactor HQ2X applicance with help of main rendering video cache.
 +++++Test again file loading from local file system (seems it breaks audio backend). * Bug fixed
@@ -16,6 +16,7 @@ Refactor HQ2X applicance with help of main rendering video cache.
 Need to fix the bug with HQ2X cache (seen clearly in Battle Command intro screen with tank).
 -----Add pool of non-CORS proxies. +++++URL key "cors_proxy" added.
 +++++Add URL updating when load snapshot with "&load=...", -----add copy link to clipboard when open link.
+Map Kempston joystick and Kempston mouse to emulated ZX Spectrum.
 
 ______________
 Far future.
