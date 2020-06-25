@@ -1,7 +1,7 @@
 function Rgb2019Cat(cors_proxy) {
 	var self = {};
 	
-	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
+	self.cors_proxy = cors_proxy || "https://cors-free.herokuapp.com/";
 	self.rgb2019_base = "https://rgb.yandex/";
 
 	var loadResource = function (url) {

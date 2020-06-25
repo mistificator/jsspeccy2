@@ -1,7 +1,7 @@
 function ArchCat(cors_proxy) {
 	var self = {};
 
-	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
+	self.cors_proxy = cors_proxy || "https://cors-free.herokuapp.com/";
 	self.arch_base = "https://archive.org";
 	self.arch_search = "/advancedsearch.php?fl%5B%5D=identifier&fl%5B%5D=title&sort%5B%5D=titleSorter+asc&rows=100000&page=1&output=json&q=mediatype%3Asoftware+identifier%3Azx_";
 	self.arch_download = "/download/";

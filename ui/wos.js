@@ -10,7 +10,7 @@ String.prototype.padStart = String.prototype.padStart || function (targetLength,
 function WoSCat(cors_proxy) {
 	var self = {};
 
-	self.cors_proxy = cors_proxy || "https://non-cors.herokuapp.com/";
+	self.cors_proxy = cors_proxy || "https://cors-free.herokuapp.com/";
 	self.wos_base = "https://www.worldofspectrum.org";
 	self.wos_csv = "/software/software_export?";
 	self.wos_index = "/archive/software/games/";
