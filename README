@@ -4,11 +4,8 @@ webOS JSSpeccy: A ZX Spectrum emulator in pure JavaScript (primarily for LG TVs)
 
 Browser demo of current version:
 
-https://github.com/mistificator/jsspeccy2-webos/dist
+https://mistificator.github.io/jsspeccy2-webos/dist/
 
-It's a kind of crutch but it works. To load tapes from any Internet resources you should use any of CORS-proxies (e.g. https://non-cors.herokuapp.com). For example, To play Frightmare from SpectrumComputing
-link, you should combine JSSpeccy URL, proxy URL and tape file URL, it looks that way: https://mistificator.github.io/jsspeccy2-webos/dist/?load=https://non-cors.herokuapp.com/https://archive.org/download/World_of_Spectrum_June_2017_Mirror/World%20of%20Spectrum%20June%202017%20Mirror.zip/World%20of%20Spectrum%20June%202017%20Mirror/sinclair/games/f/Frightmare128(BUGFIX).tzx.zip
-Or you could press "Open file" button in top panel of JSSpeccy and copy-paste proxied URL of Xenophobe https://non-cors.herokuapp.com/https://archive.org/download/World_of_Spectrum_June_2017_Mirror/World%20of%20Spectrum%20June%202017%20Mirror.zip/World%20of%20Spectrum%20June%202017%20Mirror/sinclair/games/x/Xenophobe.tap.zip or whatever you want to play.  
 
 
 Windows build instructions for LG TV:
