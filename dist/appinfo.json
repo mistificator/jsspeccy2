@@ -3,10 +3,10 @@
     "largeIcon": "largeIcon.png",
     "icon": "icon.png",
     "main": "webos.html",
-    "requiredMemory": 200,
+    "requiredMemory":200,
     "id": "com.jsspeccy.app",
     "title": "webOS JSSpeccy",
     "type": "web",
-    "version": "1.1.0",
-    "disableBackHistoryAPI": true
+    "version": "1.1.1",
+    "disableBackHistoryAPI":true
 }

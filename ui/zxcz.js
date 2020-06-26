@@ -2,12 +2,12 @@ function ZxCzCat(cors_proxy) {
 	var self = {};
 	
 	var encode = function(url) {
-		return url.split("?").join("%3F").split("&").join("%26");
+		return url; //url.split("?").join("%3F").split("&").join("%26");
 	}
 	
 	self.cors_proxy = cors_proxy || "https://cors-free.herokuapp.com/";
 	self.zxcz_base = "https://www.zx-spectrum.cz";
-	self.zxcz_index = /*encode*/("/index.php?cat1=3&cat2=3&games_page=");
+	self.zxcz_index = encode("/index.php?cat1=3&cat2=3&games_page=");
 	self.zxcz_download = "/data/games/files/";
 
 	var loadResource = function (url) {
