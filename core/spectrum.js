@@ -212,7 +212,21 @@ JSSpeccy.Spectrum.MODEL_128K = {
 };
 JSSpeccy.buildContentionTables(JSSpeccy.Spectrum.MODEL_128K);
 
+// https://worldofspectrum.org/faq/reference/128kreference.htm#Plus3
+JSSpeccy.Spectrum.MODEL_PLUS3 = {
+	id: 'Plus3',
+	name: 'Spectrum +3',
+	tapeAutoloader: 'tape_128.z80',
+	tstatesUntilOrigin: 14362,
+	tstatesPerScanline: 228,
+	frameLength: 70908,
+	clockSpeed: 3546900,
+	contentionPattern: [1,0,7,6,5,4,3,2]
+};
+JSSpeccy.buildContentionTables(JSSpeccy.Spectrum.MODEL_PLUS3);
+
 JSSpeccy.Spectrum.MODELS = [
 	JSSpeccy.Spectrum.MODEL_48K,
-	JSSpeccy.Spectrum.MODEL_128K
+	JSSpeccy.Spectrum.MODEL_128K,
+	JSSpeccy.Spectrum.MODEL_PLUS3
 ];

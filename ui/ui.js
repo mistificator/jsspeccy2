@@ -235,7 +235,6 @@ JSSpeccy.UI = function(opts) {
 	}
 	*/
 	var selectModel = $("select.select-model", toolbar);
-	$("select.select-model", toolbar).hide();
 	var modelsById = {};
 	for (var i = 0; i < JSSpeccy.Spectrum.MODELS.length; i++) {
 		var model = JSSpeccy.Spectrum.MODELS[i];

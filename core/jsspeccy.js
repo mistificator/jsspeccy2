@@ -344,7 +344,7 @@ function JSSpeccy(container, opts) {
 			currentModel = newModel;
 			self.onChangeModel.trigger(newModel);
 			if (opts.debugPrint) {
-				console.log("model is " + (currentModel == JSSpeccy.Spectrum.MODEL_128K ? "128k" : (currentModel == JSSpeccy.Spectrum.MODEL_48K ? "48k" : "unknown")));
+				console.log("model is " + (currentModel == JSSpeccy.Spectrum.MODEL_PLUS3 ? "+3" : currentModel == JSSpeccy.Spectrum.MODEL_128K ? "128k" : (currentModel == JSSpeccy.Spectrum.MODEL_48K ? "48k" : "unknown")));
 			}
 		}
 	};

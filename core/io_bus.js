@@ -22,21 +22,25 @@ JSSpeccy.IOBus = function(opts) {
 		} else if ((addr & 0x00e0) === 0x0000) {
 			/* kempston joystick */
 			return 0;
-		} else if (!(addr & 0x8002)) {
+		} else if (addr == 0x7FFD) { 
 			return memory.getPaging();
+		} else if (addr == 0x1FFD) { 
+			return memory.getPaging2();
 		}
 		else{
 			return 0xff;
 		}
 	};
 	self.write = function(addr, val, tstates) {
-		if (!(addr & 0x01)) {
+		if (!(addr & 0x01)) { 
 			display.setBorder(val & 0x07);
-
 			sound.updateBuzzer((val & 16) >> 4, tstates);
 		}
-		if (!(addr & 0x8002)) {
-			memory.setPaging(val);
+		if (addr == 0x7FFD) { 
+			memory.setPaging(val, memory.getPaging2());
+		}	
+		if (addr == 0x1FFD) { 
+			memory.setPaging(memory.getPaging(), val);
 		}
 		
 		if ((addr & 0xc002) == 0xc000) {

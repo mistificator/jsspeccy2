@@ -15,9 +15,17 @@ JSSpeccy.Memory = function(opts) {
 	}
 	
 	var ramPages = [];
-	for (var i = 0; i < 8; i++) {
-		ramPages[i] = MemoryPage(null, i & 0x01); /* for MODEL_128K (and implicitly 48K), odd pages are contended */
+	if (model == JSSpeccy.Spectrum.MODEL_48K || model == JSSpeccy.Spectrum.MODEL_128K) {
+		for (var i = 0; i < 8; i++) {
+			ramPages[i] = MemoryPage(null, i & 0x01); /* for MODEL_128K (and implicitly 48K), odd pages are contended */
+		}
 	}
+	else {
+		for (var i = 0; i < 8; i++) {
+			ramPages[i] = MemoryPage(null, i >= 4); 
+		}
+	}
+	
 	self.getRamPage = function(i) {
 		return ramPages[i];
 	}
@@ -25,13 +33,19 @@ JSSpeccy.Memory = function(opts) {
 	var romPages = {
 		'48.rom': MemoryPage(JSSpeccy.roms['48.rom']),
 		'128-0.rom': MemoryPage(JSSpeccy.roms['128-0.rom']),
-		'128-1.rom': MemoryPage(JSSpeccy.roms['128-1.rom'])
+		'128-1.rom': MemoryPage(JSSpeccy.roms['128-1.rom']),
+		'plus3-0.rom': MemoryPage(JSSpeccy.roms['plus3-0.rom']),
+		'plus3-1.rom': MemoryPage(JSSpeccy.roms['plus3-1.rom']),
+		'plus3-2.rom': MemoryPage(JSSpeccy.roms['plus3-2.rom']),
+		'plus3-3.rom': MemoryPage(JSSpeccy.roms['plus3-3.rom'])
 	};
 
 	var scratch = MemoryPage();
 	
 	var readSlots = [
-		model === JSSpeccy.Spectrum.MODEL_48K ? romPages['48.rom'].memory : romPages['128-0.rom'].memory,
+		model === JSSpeccy.Spectrum.MODEL_48K ? romPages['48.rom'].memory : 
+		model === JSSpeccy.Spectrum.MODEL_128K ? romPages['128-0.rom'].memory :
+			romPages['plus3-0.rom'].memory,
 		ramPages[5].memory,
 		ramPages[2].memory,
 		ramPages[0].memory
@@ -79,24 +93,66 @@ JSSpeccy.Memory = function(opts) {
 	};
 
 	var pagingIsLocked = false;
-	var pagingValue = 0xff;
+	var pagingValue = 0;
+	var pagingValue2 = 0;
 	if (model === JSSpeccy.Spectrum.MODEL_128K) {
-		self.setPaging = function(val) {
+		self.setPaging = function(val, val2) {
 			if (pagingIsLocked) return;
-			var highMemoryPage = ramPages[val & 0x07];
-			readSlots[3] = writeSlots[3] = highMemoryPage.memory;
-			contentionBySlot[3] = highMemoryPage.contentionTable;
 			readSlots[0] = (val & 0x10) ? romPages['128-1.rom'].memory : romPages['128-0.rom'].memory;
-			screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
+			contentionBySlot[0] = noContentionTable;
+			readSlots[1] = writeSlots[1] = screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
+			contentionBySlot[1] = (val & 0x08) ? ramPages[7].contentionTable : ramPages[5].contentionTable;
+			readSlots[2] = writeSlots[2] = ramPages[2].memory;
+			contentionBySlot[2] = ramPages[2].contentionTable;
+			readSlots[3] = writeSlots[3] = ramPages[val & 0x07].memory;
+			contentionBySlot[3] = ramPages[val & 0x07].contentionTable;
 			pagingIsLocked = val & 0x20;
 			pagingValue = val;
 		};
-	} else {
-		self.setPaging = function(val) {
+	}
+	else
+	if (model === JSSpeccy.Spectrum.MODEL_PLUS3) {
+		self.setPaging = function(val, val2) {
+			console.log("setPaging", val, val2);
+			if (pagingIsLocked) return;
+			if ((val2 & 0x01) == 0) {
+				console.log("setPaging", (val & 0x10) ? ((val2 & 0x04) ? 'plus3-3.rom' : 'plus3-1.rom') 
+					: ((val2 & 0x04) ? 'plus3-2.rom' : 'plus3-0.rom'));
+				readSlots[0] = (val & 0x10) ? ((val2 & 0x04) ? romPages['plus3-3.rom'].memory : romPages['plus3-1.rom'].memory) 
+					: ((val2 & 0x04) ? romPages['plus3-2.rom'].memory : romPages['plus3-0.rom'].memory);
+				contentionBySlot[0] = noContentionTable;
+				readSlots[1] = writeSlots[1] = screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
+				contentionBySlot[1] = (val & 0x08) ? ramPages[7].contentionTable : ramPages[5].contentionTable;
+				readSlots[2] = writeSlots[2] = ramPages[2].memory;
+				contentionBySlot[2] = ramPages[2].contentionTable;
+				readSlots[3] = writeSlots[3] = ramPages[val & 0x07].memory;
+				contentionBySlot[3] = ramPages[val & 0x07].contentionTable;
+				pagingIsLocked = val & 0x20;
+			}
+			else {
+				const page = (val2 >> 1) & 0x03;
+				readSlots[0] = page == 0 ? ramPages[0].memory : ramPages[4].memory;
+				contentionBySlot[0] = page == 0 ? ramPages[0].contentionTable : ramPages[4].contentionTable;
+				readSlots[1] = page == 0 ? ramPages[1].memory : page == 3 ? screenPage = ramPages[7].memory : screenPage = ramPages[5].memory;
+				contentionBySlot[1] = page == 0 ? ramPages[1].contentionTable : page == 3 ? ramPages[7].contentionTable : ramPages[5].contentionTable;
+				readSlots[2] = page == 0 ? ramPages[2].memory : ramPages[6].memory;
+				contentionBySlot[2] = page == 0 ? ramPages[2].contentionTable : ramPages[6].contentionTable;
+				readSlots[3] = page == 1 ? ramPages[7].memory : ramPages[3].memory;
+				contentionBySlot[3] = page == 1 ? ramPages[7].contentionTable : ramPages[3].contentionTable;
+			}
+			pagingValue = val;
+			pagingValue2 = val2;
+		};
+	} 
+	else {
+		self.setPaging = function(val, val2) {
 		};
 	}
 	self.getPaging = function(val) {
 		return pagingValue;
+	}
+	self.getPaging2 = function(val) {
+		return pagingValue2;
 	}
 	
 	self.loadFromSnapshot = function(snapshotPages) {
@@ -111,7 +167,7 @@ JSSpeccy.Memory = function(opts) {
 
 	self.reset = function() {
 		pagingIsLocked = false;
-		self.setPaging(0);
+		self.setPaging(0, 0);
 	};
 
 	return self;
