@@ -10,6 +10,7 @@ JSSpeccy.IOBus = function(opts) {
 	var controller = opts.controller;
 	
 	var glKeyPortMask = 0xbf;
+	var motor = 0;
 	
 	self.read = function(addr) {
 		if ((addr & 0x0001) === 0x0000) {
@@ -22,25 +23,40 @@ JSSpeccy.IOBus = function(opts) {
 		} else if ((addr & 0x00e0) === 0x0000) {
 			/* kempston joystick */
 			return 0;
-		} else if (addr == 0x7FFD) { 
-			return memory.getPaging();
-		} else if (addr == 0x1FFD) { 
-			return memory.getPaging2();
-		}
-		else{
+		}  else if (addr == 0x2FFD) {
+			const val = 0xFF; // 0xff - M: , 0x80 - A: M:
+			console.log("iobus FDC 0x2ffd read", val.toString(16));
+			return val;
+		}	
+		else {
+			console.log("iobus read", addr.toString(16));
 			return 0xff;
 		}
 	};
 	self.write = function(addr, val, tstates) {
 		if (!(addr & 0x01)) { 
-			display.setBorder(val & 0x07);
-			sound.updateBuzzer((val & 16) >> 4, tstates);
+			const border = val & 0x07;
+			display.setBorder(border);
+			const buzzer = (val & 16) >> 4;
+			sound.updateBuzzer(buzzer, tstates);
+			console.log("border", border, "buzzer", buzzer);
 		}
 		if (addr == 0x7FFD) { 
-			memory.setPaging(val, memory.getPaging2());
+			memory.setPaging(val & 0x1F, memory.getPaging2());
 		}	
-		if (addr == 0x1FFD) { 
-			memory.setPaging(memory.getPaging(), val);
+		else if (addr == 0x1FFD) { 
+			memory.setPaging(memory.getPaging(), val & 0x07);
+			const _motor = (val & 0x08) >> 3;
+			if (motor != _motor) {
+				motor = _motor;
+				console.log("iobus FDC motor", motor);
+			}
+		}
+		else if (addr == 0x3FFD) {
+			console.log("iobus FDC 0x3ffd write", val.toString(16));
+		}
+		else {
+			console.log("iobus write", addr.toString(16));
 		}
 		
 		if ((addr & 0xc002) == 0xc000) {
@@ -52,7 +68,6 @@ JSSpeccy.IOBus = function(opts) {
 			/* AY chip - data write */
 			sound.writeSoundRegister(val, tstates);
 		}
-		
 	};
 
 	self.isULAPort = function(addr) {

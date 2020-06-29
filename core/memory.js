@@ -75,7 +75,7 @@ JSSpeccy.Memory = function(opts) {
     if (addr_14 != prev_addr_14) {
       prev_slot = contentionBySlot[prev_addr_14 = addr_14];
     }
-  	return prev_slot[tstate < contentionTableLength ? tstate : tstate % contentionTableLength];
+  	return prev_slot[tstate % contentionTableLength];
 	};
 
 	self.read = function(addr) {
@@ -93,12 +93,14 @@ JSSpeccy.Memory = function(opts) {
 	};
 
 	var pagingIsLocked = false;
-	var pagingValue = 0;
-	var pagingValue2 = 0;
+	var pagingValue = 0x00;
+	var pagingValue2 = 0x00;
 	if (model === JSSpeccy.Spectrum.MODEL_128K) {
 		self.setPaging = function(val, val2) {
 			if (pagingIsLocked) return;
-			readSlots[0] = (val & 0x10) ? romPages['128-1.rom'].memory : romPages['128-0.rom'].memory;
+			const rom_page = ((val & 0x10) >> 4);
+			const rom_name = "128-" + rom_page + ".rom";
+			readSlots[0] = romPages[rom_name].memory;
 			contentionBySlot[0] = noContentionTable;
 			readSlots[1] = writeSlots[1] = screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
 			contentionBySlot[1] = (val & 0x08) ? ramPages[7].contentionTable : ramPages[5].contentionTable;
@@ -114,12 +116,15 @@ JSSpeccy.Memory = function(opts) {
 	if (model === JSSpeccy.Spectrum.MODEL_PLUS3) {
 		self.setPaging = function(val, val2) {
 			console.log("setPaging", val, val2);
-			if (pagingIsLocked) return;
+			if (pagingIsLocked) {
+				console.log("paging is locked!");
+				return;
+			}
 			if ((val2 & 0x01) == 0) {
-				console.log("setPaging", (val & 0x10) ? ((val2 & 0x04) ? 'plus3-3.rom' : 'plus3-1.rom') 
-					: ((val2 & 0x04) ? 'plus3-2.rom' : 'plus3-0.rom'));
-				readSlots[0] = (val & 0x10) ? ((val2 & 0x04) ? romPages['plus3-3.rom'].memory : romPages['plus3-1.rom'].memory) 
-					: ((val2 & 0x04) ? romPages['plus3-2.rom'].memory : romPages['plus3-0.rom'].memory);
+				const rom_page = ((val & 0x10) >> 4) | ((val2 & 0x04) >> 1);
+				const rom_name = "plus3-" + rom_page + ".rom";
+				console.log("setPaging", rom_name);
+				readSlots[0] = romPages[rom_name].memory;
 				contentionBySlot[0] = noContentionTable;
 				readSlots[1] = writeSlots[1] = screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
 				contentionBySlot[1] = (val & 0x08) ? ramPages[7].contentionTable : ramPages[5].contentionTable;
@@ -130,6 +135,7 @@ JSSpeccy.Memory = function(opts) {
 				pagingIsLocked = val & 0x20;
 			}
 			else {
+				console.log("setPaging NO ROM");
 				const page = (val2 >> 1) & 0x03;
 				readSlots[0] = page == 0 ? ramPages[0].memory : ramPages[4].memory;
 				contentionBySlot[0] = page == 0 ? ramPages[0].contentionTable : ramPages[4].contentionTable;
