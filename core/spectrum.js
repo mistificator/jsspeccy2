@@ -12,7 +12,8 @@ JSSpeccy.Spectrum = function(opts) {
 	var debugPrint = opts.debugPrint;
 
 	var memory = JSSpeccy.Memory({
-		model: model
+		model: model,
+		debugPrint: debugPrint
 	});
 
 	var display = JSSpeccy.Display({
@@ -38,7 +39,8 @@ JSSpeccy.Spectrum = function(opts) {
 		memory: memory,
 		sound: sound,
 		controller: controller,
-		contentionTable: model.contentionTable
+		contentionTable: model.contentionTable,
+		debugPrint: debugPrint
 	});
 
 	var processor = JSSpeccy.Z80({
@@ -46,7 +48,9 @@ JSSpeccy.Spectrum = function(opts) {
 		ioBus: ioBus,
 		display: display,
 		controller: controller,
-		collectOpcodesStats: opts.collectOpcodesStats	});
+		collectOpcodesStats: opts.collectOpcodesStats,
+		debugPrint: debugPrint
+	});
 
 		self.poke = function(addr, val) {
 			memory.write(addr, val);

@@ -116,7 +116,7 @@
 				display: {},
 				memory: memory,
 				ioBus: ioBus
-			});
+			});/*
 			memory.oncontend = function(addr) {
 				dump(('     ' + z80.getTstates()).substr(-5) + ' MC ' + hexWord(addr));
 			}
@@ -135,7 +135,8 @@
 			ioBus.oncontend = function(addr) {
 				dump(('     ' + z80.getTstates()).substr(-5) + ' PC ' + hexWord(addr));
 			}
-
+			*/
+			
 			function runTests() {
 				testInput = document.getElementById('test_in').value;
 				testInputLines = testInput.split(/\n/);
@@ -156,14 +157,14 @@
 					var hl_ = parseInt(mainRegs[7], 16); z80.setHL_(hl_);
 					var ix = parseInt(mainRegs[8], 16); z80.setIX(ix);
 					var iy = parseInt(mainRegs[9], 16); z80.setIY(iy);
-					z80.setSP(parseInt(mainRegs[10], 16));
+					var sp = parseInt(mainRegs[10], 16); z80.setSP(sp);
 					z80.setPC(parseInt(mainRegs[11], 16));
 					var otherRegs = readLine().split(/\s+/); /* I R IFF1 IFF2 IM <halted> <tstates> */
-					z80.setI(parseInt(otherRegs[0], 16));
+					var i_ = parseInt(otherRegs[0], 16); z80.setI(i_);
 					z80.setR(parseInt(otherRegs[1], 16));
-					z80.setIFF1(parseInt(otherRegs[2], 16));
-					z80.setIFF2(parseInt(otherRegs[3], 16));
-					z80.setIM(parseInt(otherRegs[4], 16));
+					var iff1 = parseInt(otherRegs[2], 16); z80.setIFF1(iff1);
+					var iff2 = parseInt(otherRegs[3], 16); z80.setIFF2(iff2);
+					var im = parseInt(otherRegs[4], 16); z80.setIM(im);
 					z80.setHalted(otherRegs[5] == '1');
 					var runTime = parseInt(otherRegs[6]);
 
@@ -202,7 +203,7 @@
 					dump(
 						hexByte(z80.getI()) + ' ' + hexByte(z80.getR()) + ' '
 						+ z80.getIFF1() + ' ' + z80.getIFF2() + ' ' + z80.getIM() + ' ' + (z80.getHalted() ? '1' : '0') + ' ' + z80.getTstates()
-					)
+					);
 					/* dump memory state */
 					memory.dump();
 					dump('');

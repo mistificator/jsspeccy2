@@ -115,15 +115,21 @@ JSSpeccy.Memory = function(opts) {
 	else
 	if (model === JSSpeccy.Spectrum.MODEL_PLUS3) {
 		self.setPaging = function(val, val2) {
-			console.log("setPaging", val, val2);
+			if (opts.debugPrint) {
+				console.log("setPaging", val, "(" + (val & 0x7) + "),", val2);
+			}
 			if (pagingIsLocked) {
-				console.log("paging is locked!");
+				if (opts.debugPrint) {
+					console.log("paging is locked!");
+				}
 				return;
 			}
 			if ((val2 & 0x01) == 0) {
 				const rom_page = ((val & 0x10) >> 4) | ((val2 & 0x04) >> 1);
 				const rom_name = "plus3-" + rom_page + ".rom";
-				console.log("setPaging", rom_name);
+				if (opts.debugPrint) {
+					console.log("setPaging", rom_name);
+				}
 				readSlots[0] = romPages[rom_name].memory;
 				contentionBySlot[0] = noContentionTable;
 				readSlots[1] = writeSlots[1] = screenPage = (val & 0x08) ? ramPages[7].memory : ramPages[5].memory;
@@ -135,7 +141,9 @@ JSSpeccy.Memory = function(opts) {
 				pagingIsLocked = val & 0x20;
 			}
 			else {
-				console.log("setPaging NO ROM");
+				if (opts.debugPrint) {
+					console.log("setPaging NO ROM");
+				}
 				const page = (val2 >> 1) & 0x03;
 				readSlots[0] = page == 0 ? ramPages[0].memory : ramPages[4].memory;
 				contentionBySlot[0] = page == 0 ? ramPages[0].contentionTable : ramPages[4].contentionTable;

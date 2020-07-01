@@ -103,6 +103,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		var ioBus = opts.ioBus;
 		var display = opts.display;
 		var controller = opts.controller;
+		var debugPrint = opts.debugPrint;
 		
 		var tmp_addr;
 
@@ -527,7 +528,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			var val = READMEM(regPairs[#{rpPC}]++);
 			var port = (regs[#{rA}] << 8) | val;
 			CONTEND_PORT_EARLY(port);
-			regs[#{rA}] = ioBus.read(port);
+			regs[#{rA}] = ioBus.read(port) & 0xFF;
 			CONTEND_PORT_LATE(port);
 		"""
 
@@ -536,7 +537,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"""
 			var port = regPairs[#{rpBC}];
 			CONTEND_PORT_EARLY(port);
-			var result = ioBus.read(port);
+			var result = ioBus.read(port) & 0xFF;
 			CONTEND_PORT_LATE(port);
 			regs[#{rF}] = (regs[#{rF}] & #{FLAG_C}) | sz53pTable[result];
 		"""
@@ -545,7 +546,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"""
 			var port = regPairs[#{rpBC}];
 			CONTEND_PORT_EARLY(port);
-			regs[#{r}] = ioBus.read(port);
+			regs[#{r}] = ioBus.read(port) & 0xFF;
 			CONTEND_PORT_LATE(port);
 			regs[#{rF}] = (regs[#{rF}] & #{FLAG_C}) | sz53pTable[regs[#{r}]];
 		"""
@@ -572,7 +573,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"""
 			CONTEND_READ_NO_MREQ(regPairs[#{rpIR}], 1);
 			CONTEND_PORT_EARLY(regPairs[#{rpBC}]);
-			var initemp = ioBus.read(regPairs[#{rpBC}]);
+			var initemp = ioBus.read(regPairs[#{rpBC}]) & 0xFF;
 			CONTEND_PORT_LATE(regPairs[#{rpBC}]);
 			WRITEMEM(regPairs[#{rpHL}], initemp);
 			regs[#{rB}]--;
@@ -1162,14 +1163,15 @@ window.JSSpeccy.buildZ80 = (opts) ->
 				case #{i}:
 					#{trapCode.join("\n")}
  					#{runString}
-				break;
+					return true;
 			"""
 		"""
 			switch (opcode) {
 				#{clauses.join('')}
 				default:
 					var addr = regPairs[#{rpPC}] - 1;
-					throw("Unimplemented opcode " + opcode + " in page #{runStringTable[0x100]} - PC = " + addr);
+					console.log("Unimplemented opcode 0x" + opcode.toString(16).toUpperCase() + " in page #{runStringTable['0x100']} - PC = " + addr.toString(16).toUpperCase());
+					return false;
 			}
 		"""
     
@@ -1185,12 +1187,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x07": RLC "A"         # RLC A
 		"0x08": RRC "B"         # RRC B
 		"0x09": RRC "C"         # RRC C
-		"0x0a": RRC "D"         # RRC D
-		"0x0b": RRC "E"         # RRC E
-		"0x0c": RRC "H"         # RRC H
-		"0x0d": RRC "L"         # RRC L
-		"0x0e": RRC "(HL)"         # RRC (HL)
-		"0x0f": RRC "A"         # RRC A
+		"0x0A": RRC "D"         # RRC D
+		"0x0B": RRC "E"         # RRC E
+		"0x0C": RRC "H"         # RRC H
+		"0x0D": RRC "L"         # RRC L
+		"0x0E": RRC "(HL)"         # RRC (HL)
+		"0x0F": RRC "A"         # RRC A
 		"0x10": RL 'B'         # RL B
 		"0x11": RL 'C'         # RL C
 		"0x12": RL 'D'         # RL D
@@ -1201,12 +1203,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x17": RL 'A'         # RL A
 		"0x18": RR 'B'         # RR B
 		"0x19": RR 'C'         # RR C
-		"0x1a": RR 'D'         # RR D
-		"0x1b": RR 'E'         # RR E
-		"0x1c": RR 'H'         # RR H
-		"0x1d": RR 'L'         # RR L
-		"0x1e": RR '(HL)'         # RR (HL)
-		"0x1f": RR 'A'         # RR A
+		"0x1A": RR 'D'         # RR D
+		"0x1B": RR 'E'         # RR E
+		"0x1C": RR 'H'         # RR H
+		"0x1D": RR 'L'         # RR L
+		"0x1E": RR '(HL)'         # RR (HL)
+		"0x1F": RR 'A'         # RR A
 		"0x20": SLA 'B'         # SLA B
 		"0x21": SLA 'C'         # SLA C
 		"0x22": SLA 'D'         # SLA D
@@ -1217,12 +1219,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x27": SLA 'A'         # SLA A
 		"0x28": SRA 'B'         # SRA B
 		"0x29": SRA 'C'         # SRA C
-		"0x2a": SRA 'D'         # SRA D
-		"0x2b": SRA 'E'         # SRA E
-		"0x2c": SRA 'H'         # SRA H
-		"0x2d": SRA 'L'         # SRA L
-		"0x2e": SRA '(HL)'         # SRA (HL)
-		"0x2f": SRA 'A'         # SRA A
+		"0x2A": SRA 'D'         # SRA D
+		"0x2B": SRA 'E'         # SRA E
+		"0x2C": SRA 'H'         # SRA H
+		"0x2D": SRA 'L'         # SRA L
+		"0x2E": SRA '(HL)'         # SRA (HL)
+		"0x2F": SRA 'A'         # SRA A
 		"0x30": SLL 'B'         # SLL B
 		"0x31": SLL 'C'         # SLL C
 		"0x32": SLL 'D'         # SLL D
@@ -1233,12 +1235,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x37": SLL 'A'         # SLL A
 		"0x38": SRL 'B'         # SRL B
 		"0x39": SRL 'C'         # SRL C
-		"0x3a": SRL 'D'         # SRL D
-		"0x3b": SRL 'E'         # SRL E
-		"0x3c": SRL 'H'         # SRL H
-		"0x3d": SRL 'L'         # SRL L
-		"0x3e": SRL '(HL)'         # SRL (HL)
-		"0x3f": SRL 'A'         # SRL A
+		"0x3A": SRL 'D'         # SRL D
+		"0x3B": SRL 'E'         # SRL E
+		"0x3C": SRL 'H'         # SRL H
+		"0x3D": SRL 'L'         # SRL L
+		"0x3E": SRL '(HL)'         # SRL (HL)
+		"0x3F": SRL 'A'         # SRL A
 		"0x40": BIT_N_R(0, rB)        # BIT 0,B
 		"0x41": BIT_N_R(0, rC)        # BIT 0,C
 		"0x42": BIT_N_R(0, rD)        # BIT 0,D
@@ -1431,7 +1433,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0xFD": SET 7, 'L'         # SET 7,L
 		"0xFE": SET 7, '(HL)'         # SET 7,(HL)
 		"0xFF": SET 7, 'A'         # SET 7,A
-		"0x100": 'cb'
+		"0x100": 'CB'
 	}
 
 	# Generate the opcode runner lookup table for either the DDCB or FDCB set
@@ -1709,7 +1711,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			"0xFD": LDBITOP('L', SET, 7, rp)        # LD L,SET 7,(IX+dd)
 			"0xFE": SET 7, "(#{rpn}+nn)"         # SET 7,(IX+nn)
 			"0xFF": LDBITOP('A', SET, 7, rp)        # LD A,SET 7,(IX+dd)
-			"0x100": 'ddcb'
+			"0x100": 'DDCB'
 		}
 
 	OPCODE_RUN_STRINGS_DDCB = generateddfdcbOpcodeSet('DDCB')
@@ -1738,7 +1740,8 @@ window.JSSpeccy.buildZ80 = (opts) ->
 # prefetch stage 1     
 			"0xF9": LD_RR_RR(rpSP, rp)         # LD SP,IX
 
-# usual calls      
+# usual calls     
+			"0x00": NOP()         # NOP
 			"0x09": ADD_RR_RR(rp, rpBC)         # ADD IX,BC
 			
 			"0x19": ADD_RR_RR(rp, rpDE)         # ADD IX,DE
@@ -1853,7 +1856,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 			
 			"0xFD": SHIFT('FD')         # shift code
 			
-			"0x100": 'dd'
+			"0x100": 'DD'
 		}
 
 	OPCODE_RUN_STRINGS_DD = generateddfdOpcodeSet('DD')
@@ -1938,15 +1941,15 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0xAA": IND()         # IND
 		"0xAB": OUTD()        # OUTD
 		
-		"0xb1": CPIR()         # CPIR
+		"0xB1": CPIR()         # CPIR
 		"0xB2": INIR()         # INIR
 		"0xB3": OTIR()         # OTIR
 		
-		"0xb9": CPDR()         # CPDR
+		"0xB9": CPDR()         # CPDR
 		"0xBA": INDR()         # INDR
 		"0xBB": OTDR()         # OTDR
 		
-		"0x100": 'ed'
+		"0x100": 'ED'
 	}
 
 	OPCODE_RUN_STRINGS_FD = generateddfdOpcodeSet('FD')
@@ -1955,7 +1958,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 # prefetch stage 1  
 		"0x76": HALT()         # HALT
 		"0x77": LD_iRRi_R(rpHL, rA)         # LD (HL),A
-		"0x7e": LD_R_iRRi(rA, rpHL)         # LD A,(HL)
+		"0x7E": LD_R_iRRi(rA, rpHL)         # LD A,(HL)
 		"0xA7": AND_A "A"         # AND A,A    
 		"0xAF": XOR_A "A"         # XOR A
 		"0xB7": OR_A "A"         # OR A
@@ -2061,12 +2064,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x47": LD_R_R(rB, rA)         # LD B,A
 		"0x48": LD_R_R(rC, rB)         # LD C,B
 		"0x49": LD_R_R(rC, rC)         # LD C,C
-		"0x4a": LD_R_R(rC, rD)         # LD C,D
-		"0x4b": LD_R_R(rC, rE)         # LD C,E
-		"0x4c": LD_R_R(rC, rH)         # LD C,H
-		"0x4d": LD_R_R(rC, rL)         # LD C,L
-		"0x4e": LD_R_iRRi(rC, rpHL)         # LD C,(HL)
-		"0x4f": LD_R_R(rC, rA)         # LD C,A
+		"0x4A": LD_R_R(rC, rD)         # LD C,D
+		"0x4B": LD_R_R(rC, rE)         # LD C,E
+		"0x4C": LD_R_R(rC, rH)         # LD C,H
+		"0x4D": LD_R_R(rC, rL)         # LD C,L
+		"0x4E": LD_R_iRRi(rC, rpHL)         # LD C,(HL)
+		"0x4F": LD_R_R(rC, rA)         # LD C,A
 		"0x50": LD_R_R(rD, rB)         # LD D,B
 		"0x51": LD_R_R(rD, rC)         # LD D,C
 		"0x52": LD_R_R(rD, rD)         # LD D,D
@@ -2077,12 +2080,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x57": LD_R_R(rD, rA)         # LD D,A
 		"0x58": LD_R_R(rE, rB)         # LD E,B
 		"0x59": LD_R_R(rE, rC)         # LD E,C
-		"0x5a": LD_R_R(rE, rD)         # LD E,D
-		"0x5b": LD_R_R(rE, rE)         # LD E,E
-		"0x5c": LD_R_R(rE, rH)         # LD E,H
-		"0x5d": LD_R_R(rE, rL)         # LD E,L
-		"0x5e": LD_R_iRRi(rE, rpHL)         # LD E,(HL)
-		"0x5f": LD_R_R(rE, rA)         # LD E,A
+		"0x5A": LD_R_R(rE, rD)         # LD E,D
+		"0x5B": LD_R_R(rE, rE)         # LD E,E
+		"0x5C": LD_R_R(rE, rH)         # LD E,H
+		"0x5D": LD_R_R(rE, rL)         # LD E,L
+		"0x5E": LD_R_iRRi(rE, rpHL)         # LD E,(HL)
+		"0x5F": LD_R_R(rE, rA)         # LD E,A
 		"0x60": LD_R_R(rH, rB)         # LD H,B
 		"0x61": LD_R_R(rH, rC)         # LD H,C
 		"0x62": LD_R_R(rH, rD)         # LD H,D
@@ -2093,12 +2096,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x67": LD_R_R(rH, rA)         # LD H,A
 		"0x68": LD_R_R(rL, rB)         # LD L,B
 		"0x69": LD_R_R(rL, rC)         # LD L,C
-		"0x6a": LD_R_R(rL, rD)         # LD L,D
-		"0x6b": LD_R_R(rL, rE)         # LD L,E
-		"0x6c": LD_R_R(rL, rH)         # LD L,H
-		"0x6d": LD_R_R(rL, rL)         # LD L,L
-		"0x6e": LD_R_iRRi(rL, rpHL)         # LD L,(HL)
-		"0x6f": LD_R_R(rL, rA)         # LD L,A
+		"0x6A": LD_R_R(rL, rD)         # LD L,D
+		"0x6B": LD_R_R(rL, rE)         # LD L,E
+		"0x6C": LD_R_R(rL, rH)         # LD L,H
+		"0x6D": LD_R_R(rL, rL)         # LD L,L
+		"0x6E": LD_R_iRRi(rL, rpHL)         # LD L,(HL)
+		"0x6F": LD_R_R(rL, rA)         # LD L,A
 		"0x70": LD_iRRi_R(rpHL, rB)         # LD (HL),B
 		"0x71": LD_iRRi_R(rpHL, rC)         # LD (HL),C
 		"0x72": LD_iRRi_R(rpHL, rD)         # LD (HL),D
@@ -2109,12 +2112,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 
 		"0x78": LD_R_R(rA, rB)         # LD A,B
 		"0x79": LD_R_R(rA, rC)         # LD A,C
-		"0x7a": LD_R_R(rA, rD)         # LD A,D
-		"0x7b": LD_R_R(rA, rE)         # LD A,E
-		"0x7c": LD_R_R(rA, rH)         # LD A,H
-		"0x7d": LD_R_R(rA, rL)         # LD A,L
+		"0x7A": LD_R_R(rA, rD)         # LD A,D
+		"0x7B": LD_R_R(rA, rE)         # LD A,E
+		"0x7C": LD_R_R(rA, rH)         # LD A,H
+		"0x7D": LD_R_R(rA, rL)         # LD A,L
 
-		"0x7f": LD_R_R(rA, rA)         # LD A,A
+		"0x7F": LD_R_R(rA, rA)         # LD A,A
 		"0x80": ADD_A "B"         # ADD A,B
 		"0x81": ADD_A "C"         # ADD A,C
 		"0x82": ADD_A "D"         # ADD A,D
@@ -2125,12 +2128,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x87": ADD_A "A"         # ADD A,A
 		"0x88": ADC_A "B"         # ADC A,B
 		"0x89": ADC_A "C"         # ADC A,C
-		"0x8a": ADC_A "D"         # ADC A,D
-		"0x8b": ADC_A "E"         # ADC A,E
-		"0x8c": ADC_A "H"         # ADC A,H
-		"0x8d": ADC_A "L"         # ADC A,L
-		"0x8e": ADC_A "(HL)"         # ADC A,(HL)
-		"0x8f": ADC_A "A"         # ADC A,A
+		"0x8A": ADC_A "D"         # ADC A,D
+		"0x8B": ADC_A "E"         # ADC A,E
+		"0x8C": ADC_A "H"         # ADC A,H
+		"0x8D": ADC_A "L"         # ADC A,L
+		"0x8E": ADC_A "(HL)"         # ADC A,(HL)
+		"0x8F": ADC_A "A"         # ADC A,A
 		"0x90": SUB_A "B"         # SUB A,B
 		"0x91": SUB_A "C"         # SUB A,C
 		"0x92": SUB_A "D"         # SUB A,D
@@ -2141,19 +2144,19 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0x97": SUB_A "A"         # SUB A,A
 		"0x98": SBC_A "B"         # SBC A,B
 		"0x99": SBC_A "C"         # SBC A,C
-		"0x9a": SBC_A "D"         # SBC A,D
-		"0x9b": SBC_A "E"         # SBC A,E
-		"0x9c": SBC_A "H"         # SBC A,H
-		"0x9d": SBC_A "L"         # SBC A,L
-		"0x9e": SBC_A "(HL)"         # SBC A,(HL)
-		"0x9f": SBC_A "A"         # SBC A,A
-		"0xa0": AND_A "B"         # AND A,B
-		"0xa1": AND_A "C"         # AND A,C
-		"0xa2": AND_A "D"         # AND A,D
-		"0xa3": AND_A "E"         # AND A,E
-		"0xa4": AND_A "H"         # AND A,H
-		"0xa5": AND_A "L"         # AND A,L
-		"0xa6": AND_A "(HL)"         # AND A,(HL)
+		"0x9A": SBC_A "D"         # SBC A,D
+		"0x9B": SBC_A "E"         # SBC A,E
+		"0x9C": SBC_A "H"         # SBC A,H
+		"0x9D": SBC_A "L"         # SBC A,L
+		"0x9E": SBC_A "(HL)"         # SBC A,(HL)
+		"0x9F": SBC_A "A"         # SBC A,A
+		"0xA0": AND_A "B"         # AND A,B
+		"0xA1": AND_A "C"         # AND A,C
+		"0xA2": AND_A "D"         # AND A,D
+		"0xA3": AND_A "E"         # AND A,E
+		"0xA4": AND_A "H"         # AND A,H
+		"0xA5": AND_A "L"         # AND A,L
+		"0xA6": AND_A "(HL)"         # AND A,(HL)
 
 		"0xA8": XOR_A "B"         # XOR B
 		"0xA9": XOR_A "C"         # XOR C
@@ -2163,22 +2166,22 @@ window.JSSpeccy.buildZ80 = (opts) ->
 		"0xAD": XOR_A "L"         # XOR L
 		"0xAE": XOR_A "(HL)"         # XOR (HL)
 
-		"0xb0": OR_A "B"         # OR B
-		"0xb1": OR_A "C"         # OR C
-		"0xb2": OR_A "D"         # OR D
-		"0xb3": OR_A "E"         # OR E
-		"0xb4": OR_A "H"         # OR H
-		"0xb5": OR_A "L"         # OR L
-		"0xb6": OR_A "(HL)"         # OR (HL)
+		"0xB0": OR_A "B"         # OR B
+		"0xB1": OR_A "C"         # OR C
+		"0xB2": OR_A "D"         # OR D
+		"0xB3": OR_A "E"         # OR E
+		"0xB4": OR_A "H"         # OR H
+		"0xB5": OR_A "L"         # OR L
+		"0xB6": OR_A "(HL)"         # OR (HL)
 
-		"0xb8": CP_A "B"         # CP B
-		"0xb9": CP_A "C"         # CP C
-		"0xba": CP_A "D"         # CP D
-		"0xbb": CP_A "E"         # CP E
-		"0xbc": CP_A "H"         # CP H
-		"0xbd": CP_A "L"         # CP L
-		"0xbe": CP_A "(HL)"         # CP (HL)
-		"0xbf": CP_A "A"         # CP A
+		"0xB8": CP_A "B"         # CP B
+		"0xB9": CP_A "C"         # CP C
+		"0xBA": CP_A "D"         # CP D
+		"0xBB": CP_A "E"         # CP E
+		"0xBC": CP_A "H"         # CP H
+		"0xBD": CP_A "L"         # CP L
+		"0xBE": CP_A "(HL)"         # CP (HL)
+		"0xBF": CP_A "A"         # CP A
 		"0xC0": RET_C(FLAG_Z, false)         # RET NZ
 		"0xC1": POP_RR(rpBC)         # POP BC
 		"0xC2": JP_C_NN(FLAG_Z, false)         # JP NZ,nnnn
@@ -2242,7 +2245,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
 
 
 		"0xFF": RST(0x0038)         # RST 0x38
-		"0x100": 0
+		"0x100": ''
 	}
 
 
@@ -2335,9 +2338,10 @@ window.JSSpeccy.buildZ80 = (opts) ->
         #{opcodeSwitch(OPCODE_RUN_STRINGS_FDCB)}
       }      
       
+			var prev_pc = 0, prev_sp = 0;
 			self.runFrame = function(frameLength) {
 				var lastOpcodePrefix, offset, opcode;       
-				while (tstates < frameLength /*|| opcodePrefix*/) {
+				while (tstates < frameLength || opcodePrefix) {
 					if (interruptible && interruptPending) {
 						z80Interrupt();
 						interruptPending = false;
@@ -2345,10 +2349,24 @@ window.JSSpeccy.buildZ80 = (opts) ->
 					interruptible = true; /* unless overridden by opcode */
 					lastOpcodePrefix = opcodePrefix;
 					opcodePrefix = '';
+
+					if (debugPrint) {
+						var prev_opcode = memory.read(prev_pc);
+						if (regPairs[#{rpPC}] == 0) {
+							console.log("addr=0x" + regPairs[#{rpPC}].toString(16) + ", prev pc=0x" + prev_pc.toString(16) + " prev opcode=0x" + prev_opcode.toString(16));
+							if (prev_opcode == 0xC9) { // ret 
+								console.log("  prev sp=0x" + prev_sp.toString(16));
+							}
+						}
+						prev_pc = regPairs[#{rpPC}];
+						prev_sp = regPairs[#{rpSP}];
+					}
+
           if (lastOpcodePrefix != 'DDCB' && lastOpcodePrefix != 'FDCB') {
             CONTEND_READ(regPairs[#{rpPC}], 4);
             opcode = memory.read(regPairs[#{rpPC}]++);
             regs[#{rR}] = ((regs[#{rR}] + 1) & 0x7f) | (regs[#{rR}] & 0x80);
+						var rc = true;
             switch (lastOpcodePrefix) {
               case '':
                 runNoPrefixOpcode(opcode);
@@ -2357,17 +2375,20 @@ window.JSSpeccy.buildZ80 = (opts) ->
                 runCbPrefixOpcode(opcode);
                 break;
               case 'DD':
-                runDdPrefixOpcode(opcode);
+                rc = runDdPrefixOpcode(opcode);
                 break;
               case 'ED':
-                runEdPrefixOpcode(opcode);
+                rc = runEdPrefixOpcode(opcode);
                 break;
               case 'FD':
-                runFdPrefixOpcode(opcode);
+                rc = runFdPrefixOpcode(opcode);
                 break;
               default:
                 throw("Unknown opcode prefix: " + lastOpcodePrefix);
-            }            
+            }
+						if (!rc) {
+							runNoPrefixOpcode(opcode);
+						}
           }
           else {
             offset = READMEM(regPairs[#{rpPC}]++);
@@ -2380,12 +2401,12 @@ window.JSSpeccy.buildZ80 = (opts) ->
             else
               runFdCbPrefixOpcode(opcode, offset);
           }
-          if (opts.collectOpcodesStats && !opcodePrefix) {
+          if (debugPrint && opts.collectOpcodesStats && !opcodePrefix) {
             opcodes_raw.push(lastOpcodePrefix + opcode.toString(16).toUpperCase());
           }
 				}
 				while (display.nextEventTime != null && display.nextEventTime < tstates) display.doEvent();
-        if (opts.collectOpcodesStats) {
+        if (debugPrint && opts.collectOpcodesStats) {
           if (opcode_stat_count >= opcode_stat_frames) {        
             var map = new Map();
             for (var opcode of opcodes_raw) {

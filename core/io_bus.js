@@ -11,6 +11,7 @@ JSSpeccy.IOBus = function(opts) {
 	
 	var glKeyPortMask = 0xbf;
 	var motor = 0;
+	var port3ffd = 0xff;
 	
 	self.read = function(addr) {
 		if ((addr & 0x0001) === 0x0000) {
@@ -23,13 +24,22 @@ JSSpeccy.IOBus = function(opts) {
 		} else if ((addr & 0x00e0) === 0x0000) {
 			/* kempston joystick */
 			return 0;
-		}  else if (addr == 0x2FFD) {
+		} else if (addr == 0x2FFD) {
 			const val = 0xFF; // 0xff - M: , 0x80 - A: M:
-			console.log("iobus FDC 0x2ffd read", val.toString(16));
+			if (opts.debugPrint) {
+				console.log("iobus FDC 0x2ffd read", val.toString(16));
+			}
 			return val;
-		}	
-		else {
-			console.log("iobus read", addr.toString(16));
+		} else if (addr == 0x3FFD) {
+			const val = port3ffd; 
+			if (opts.debugPrint) {
+				console.log("iobus FDC 0x3ffd read", val.toString(16));
+			}
+			return val;
+		}	else {
+			if (opts.debugPrint) {
+				console.log("iobus read", addr.toString(16));
+			}
 			return 0xff;
 		}
 	};
@@ -39,34 +49,32 @@ JSSpeccy.IOBus = function(opts) {
 			display.setBorder(border);
 			const buzzer = (val & 16) >> 4;
 			sound.updateBuzzer(buzzer, tstates);
-			console.log("border", border, "buzzer", buzzer);
-		}
-		if (addr == 0x7FFD) { 
-			memory.setPaging(val & 0x1F, memory.getPaging2());
-		}	
-		else if (addr == 0x1FFD) { 
-			memory.setPaging(memory.getPaging(), val & 0x07);
+		} else if (addr == 0x7FFD) { 
+			memory.setPaging(val, memory.getPaging2());
+		}	else if (addr == 0x1FFD) { 
+			memory.setPaging(memory.getPaging(), val);
 			const _motor = (val & 0x08) >> 3;
 			if (motor != _motor) {
 				motor = _motor;
-				console.log("iobus FDC motor", motor);
+				if (opts.debugPrint) {
+					console.log("iobus FDC motor", motor);
+				}
 			}
-		}
-		else if (addr == 0x3FFD) {
-			console.log("iobus FDC 0x3ffd write", val.toString(16));
-		}
-		else {
-			console.log("iobus write", addr.toString(16));
-		}
-		
-		if ((addr & 0xc002) == 0xc000) {
+		} else if (addr == 0x3FFD) {
+			port3ffd = val;
+			if (opts.debugPrint) {
+				console.log("iobus FDC 0x3ffd write", val.toString(16));
+			}
+		} else if ((addr & 0xc002) == 0xc000) {
 			/* AY chip - register select */
 			sound.selectSoundRegister( val & 0xF );
-		}
-		
-		if ((addr & 0xc002) == 0x8000) {
+		} else if ((addr & 0xc002) == 0x8000) {
 			/* AY chip - data write */
 			sound.writeSoundRegister(val, tstates);
+		} else {
+			if (opts.debugPrint) {
+				console.log("iobus write", addr.toString(16));
+			}
 		}
 	};
 
