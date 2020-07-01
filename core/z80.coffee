@@ -2337,7 +2337,7 @@ window.JSSpeccy.buildZ80 = (opts) ->
       
 			self.runFrame = function(frameLength) {
 				var lastOpcodePrefix, offset, opcode;       
-				while (tstates < frameLength /*|| opcodePrefix*/) {
+				while (tstates < frameLength || opcodePrefix) {
 					if (interruptible && interruptPending) {
 						z80Interrupt();
 						interruptPending = false;
