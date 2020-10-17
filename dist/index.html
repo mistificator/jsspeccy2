@@ -15,6 +15,7 @@
 					applyContention: ($.urlPar("no_contention") !== "on"), // contention makes sound and game speed NORMAL
 					collectOpcodesStats: false,                   
 					cpuFpsLimit: 50,
+					videoFpsLimit: $.urlPar("video_fps") === "50" ? 50 : 25,
 					checkerboardFilter: $.urlPar("hq2x") === "on" ? true : false,
 					debugPrint: $.urlPar("debug_print") === "on" ? true : false,
 					audioBufferSize: $.urlPar("audio_buffer") || 1024,

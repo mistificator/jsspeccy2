@@ -1,6 +1,7 @@
 JSSpeccy.IOBus = function(opts) {
 	var self = {};
 	
+	var model = opts.model;
 	var keyboard = opts.keyboard;
 	var display = opts.display;
 	var memory = opts.memory;
@@ -14,23 +15,24 @@ JSSpeccy.IOBus = function(opts) {
 	var port3ffd = 0xff;
 	
 	self.read = function(addr) {
-		if ((addr & 0x0001) === 0x0000) {
+	// https://worldofspectrum.org/faq/reference/ports.htm
+		if ((addr & 0x0001) === 0x0000) { // 0xFE
 			var earBit = 0;//
 			if (controller.currentTape!=null && controller.currentTape.getEarBit!=null) earBit = controller.currentTape.getEarBit();
 			return (keyboard.poll(addr) & glKeyPortMask) | earBit;
-		} else if ((addr & 0xc002) == 0xc000) {
+		} else if ((addr & 0xc002) === 0xc000) { 
 			/* AY chip */
 			return sound.readSoundRegister();
 		} else if ((addr & 0x00e0) === 0x0000) {
 			/* kempston joystick */
 			return 0;
-		} else if (addr == 0x2FFD) {
+		} else if ((addr & 0xf002) === 0x2000) {
 			const val = 0xFF; // 0xff - M: , 0x80 - A: M:
 			if (opts.debugPrint) {
 				console.log("iobus FDC 0x2ffd read", val.toString(16));
 			}
 			return val;
-		} else if (addr == 0x3FFD) {
+		} else if ((addr & 0xf002) === 0x3000) {
 			const val = port3ffd; 
 			if (opts.debugPrint) {
 				console.log("iobus FDC 0x3ffd read", val.toString(16));
@@ -49,26 +51,28 @@ JSSpeccy.IOBus = function(opts) {
 			display.setBorder(border);
 			const buzzer = (val & 16) >> 4;
 			sound.updateBuzzer(buzzer, tstates);
-		} else if (addr == 0x7FFD) { 
+		} else if (((addr & 0xc002) === 0x4000 && model === JSSpeccy.Spectrum.MODEL_PLUS3) || ((addr & 0x8002) === 0x0000 && model === JSSpeccy.Spectrum.MODEL_128K)) { 
 			memory.setPaging(val, memory.getPaging2());
-		}	else if (addr == 0x1FFD) { 
+		}	else if ((addr & 0xf002) === 0x1000 ) { 
 			memory.setPaging(memory.getPaging(), val);
-			const _motor = (val & 0x08) >> 3;
-			if (motor != _motor) {
-				motor = _motor;
-				if (opts.debugPrint) {
-					console.log("iobus FDC motor", motor);
+			if (model === JSSpeccy.Spectrum.MODEL_PLUS3) {
+				const _motor = (val & 0x08) >> 3;
+				if (motor != _motor) {
+					motor = _motor;
+					if (opts.debugPrint) {
+						console.log("iobus FDC motor", motor);
+					}
 				}
 			}
-		} else if (addr == 0x3FFD) {
+		} else if ((addr & 0xf002) === 0x3000) {
 			port3ffd = val;
 			if (opts.debugPrint) {
 				console.log("iobus FDC 0x3ffd write", val.toString(16));
 			}
-		} else if ((addr & 0xc002) == 0xc000) {
+		} else if ((addr & 0xc002) === 0xc000) {
 			/* AY chip - register select */
-			sound.selectSoundRegister( val & 0xF );
-		} else if ((addr & 0xc002) == 0x8000) {
+			sound.selectSoundRegister( val & 0x0F );
+		} else if ((addr & 0xc002) === 0x8000) {
 			/* AY chip - data write */
 			sound.writeSoundRegister(val, tstates);
 		} else {

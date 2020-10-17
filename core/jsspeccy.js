@@ -339,6 +339,7 @@ function JSSpeccy(container, opts) {
 				border: ('border' in opts) ? opts.border : 4,
 				collectOpcodesStats: opts.collectOpcodesStats,
 				cpuFpsLimit: opts.cpuFpsLimit,
+				videoFpsLimit: opts.videoFpsLimit,
 				debugPrint: opts.debugPrint
 			});
 			currentModel = newModel;

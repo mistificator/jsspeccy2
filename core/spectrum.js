@@ -22,6 +22,7 @@ JSSpeccy.Spectrum = function(opts) {
 		model: model,
 		border: opts.border,
 		cpuFpsLimit: opts.cpuFpsLimit,
+		videoFpsLimit: opts.videoFpsLimit,
 		settings: {
 			'checkerboardFilter': controller.settings.checkerboardFilter
 		}
@@ -34,6 +35,7 @@ JSSpeccy.Spectrum = function(opts) {
 	});
 
 	var ioBus = JSSpeccy.IOBus({
+		model: model,
 		keyboard: keyboard,
 		display: display,
 		memory: memory,

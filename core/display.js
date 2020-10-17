@@ -5,7 +5,8 @@ JSSpeccy.Display = function(opts) {
 	var memory = opts.memory;
 	var model = opts.model || JSSpeccy.Spectrum.MODEL_128K;
 	var border = opts.border;
-	var cpuFpsLimit = opts.cpuFpsLimit;
+	var cpuFpsLimit = opts.cpuFpsLimit || 50;
+  var fps_limit = opts.videoFpsLimit || 25;
 
 	var palette = new Int32Array([
 		/* RGBA dark */
@@ -216,7 +217,6 @@ JSSpeccy.Display = function(opts) {
 		}
 	};
   
-  var fps_limit = 25;
   var skipped_frames_limit = Math.ceil(cpuFpsLimit / fps_limit);
   var fps = 0;
   self.getFps = function() {
